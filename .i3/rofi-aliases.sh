@@ -1,1 +1,0 @@
-/.config/i3/rofi-aliases.sh
