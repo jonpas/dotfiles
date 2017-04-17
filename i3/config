@@ -221,9 +221,9 @@ bindsym $mod+Ctrl+l exec --no-startup-id ~/.config/i3/lock.sh
 for_window [window_role="About"]                floating enable
 for_window [window_role="Preferences"]          floating enable
 for_window [window_role="pop-up"]               floating enable
-for_window [title="Volume Control"]             floating enable
-for_window [title="Steam - Update News"]        floating enable
-for_window [title="Friends" class="Steam"]      floating enable
-for_window [title="Music Player" class="Steam"] floating enable
-for_window [title="Chat" class="Steam"]         floating enable
-for_window [title="wlc-x11" class="wlc-x11"]    floating enable
+#for_window [title="Volume Control"]             floating enable
+#for_window [title="Steam - Update News"]        floating enable
+#for_window [title="Friends" class="Steam"]      floating enable
+#for_window [title="Music Player" class="Steam"] floating enable
+#for_window [title="Chat" class="Steam"]         floating enable
+#for_window [title="wlc-x11" class="wlc-x11"]    floating enable
