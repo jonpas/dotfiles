@@ -215,7 +215,7 @@ exec --no-startup-id setxkbmap -layout si
 # Wallpaper
 #exec --no-startup-id feh --bg-fill ~/Pictures/current_wallpaper
 
-#bindsym $mod+Ctrl+l exec --no-startup-id ~/.config/i3/lock.sh
+bindsym $mod+Ctrl+l exec --no-startup-id ~/.config/i3/lock.sh
 
 # Window Settings
 for_window [window_role="About"]                floating enable
