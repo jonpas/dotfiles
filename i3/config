@@ -206,14 +206,14 @@ smart_gaps on
 smart_borders on
 
 # Applets
-#exec --no-startup-id nm-applet
+exec --no-startup-id nm-applet
 
 # Startup stuff
 exec --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id setxkbmap -layout si
 
 # Wallpaper
-#exec --no-startup-id feh --bg-fill ~/Pictures/current_wallpaper
+exec --no-startup-id feh --bg-fill ~/Pictures/current_wallpaper
 
 bindsym $mod+Ctrl+l exec --no-startup-id ~/.config/i3/lock.sh
 
