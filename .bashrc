@@ -18,7 +18,7 @@ alias ll='ls -alF --block-size=M --color=auto --group-directories-first'
 alias la='ls -A'
 alias l='ls -CF'
 
-alias sysinfo='echo "" && neofetch && echo "" && colors'
+alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
 
 if [ -f ~/.bash_aliases ]; then
