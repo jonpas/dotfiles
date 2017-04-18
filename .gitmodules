@@ -1,15 +1,18 @@
+[submodule ".vim/bundle/fugitive"]
+	path = .vim/bundle/fugitive
+	url = https://github.com/tpope/vim-fugitive
 [submodule ".vim/bundle/airline"]
 	path = .vim/bundle/airline
-	url = https://github.com/vim-airline/vim-airline.git
+	url = https://github.com/vim-airline/vim-airline
 [submodule ".vim/bundle/gundo"]
 	path = .vim/bundle/gundo
 	url = https://github.com/sjl/gundo.vim
 [submodule ".vim/bundle/nerdtree"]
 	path = .vim/bundle/nerdtree
-	url = https://github.com/scrooloose/nerdtree.git
+	url = https://github.com/scrooloose/nerdtree
 [submodule ".vim/bundle/sqf"]
 	path = .vim/bundle/sqf
-	url = https://github.com/KoffeinFlummi/vim-sqf.git
+	url = https://github.com/KoffeinFlummi/vim-sqf
 [submodule ".vim/bundle/supertab"]
 	path = .vim/bundle/supertab
 	url = https://github.com/ervandew/supertab
