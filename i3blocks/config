@@ -19,6 +19,12 @@ border=#689d6a
 [cpu_temp]
 border=#a89984
 
+[ethernet]
+border=#458588
+
+[wifi]
+border=#458588
+
 [battery]
 border=#8ec07c
 
