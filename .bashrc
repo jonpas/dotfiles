@@ -25,5 +25,9 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+GIT_PS1_SHOWDIRTYSTATE=auto
+GIT_PS1_SHOWSTASHSTATE=auto
+GIT_PS1_SHOWUNTRACKEDFILES=auto
+GIT_PS1_SHOWUPSTREAM=auto
 source /usr/share/git/completion/git-prompt.sh
 PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
