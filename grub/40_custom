@@ -13,4 +13,3 @@ menuentry "System restart" {
 	echo "System rebooting..."
 	reboot
 }
-
