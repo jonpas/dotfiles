@@ -24,3 +24,6 @@ alias weather='curl http://wttr.in/Lenart'
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+source /usr/share/git/completion/git-prompt.sh
+PS1='[\u@\h \W$(__git_ps1 " (%s)")]\$ '
