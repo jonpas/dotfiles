@@ -110,6 +110,10 @@ let g:airline#themes#custom#palette.visual = airline#themes#generate_color_map(s
 let g:airline#themes#custom#palette.visual_modified = g:airline#themes#custom#palette.normal_modified
 let g:airline#themes#custom#palette.inactive = airline#themes#generate_color_map(s:N2, s:N2, s:N3)
 
+" Markdnwon Preview
+let vim_markdown_preview_github = 1
+let vim_markdown_preview_use_xdg_open = 1
+
 " HexMode
 " ex command for toggling hex mode - define mapping if desired
 command -bar Hexmode call ToggleHex()

@@ -35,3 +35,6 @@
 [submodule ".vim/bundle/nerdtree-tabs"]
 	path = .vim/bundle/nerdtree-tabs
 	url = https://github.com/jistr/vim-nerdtree-tabs
+[submodule ".vim/bundle/markdown-preview"]
+	path = .vim/bundle/markdown-preview
+	url = https://github.com/JamshedVesuna/vim-markdown-preview
