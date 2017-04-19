@@ -27,7 +27,6 @@ border=#8ec07c
 
 [volume]
 label=
-command=amixer get Master | grep -E -o '[0-9]{1,3}?%' | head -1
 interval=10
 signal=3
 border=#83a598

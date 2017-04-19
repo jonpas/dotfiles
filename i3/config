@@ -185,18 +185,10 @@ client.focused_inactive #323232 #333333 #ebdbb2 #323232
 client.urgent           #cc241d #383a3b #fb4934 #383a3b
 
 # Function Keys
-#bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 5                       && pkill -RTMIN+1 i3blocks
-#bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5                       && pkill -RTMIN+1 i3blocks
-#bindsym XF86KbdBrightnessUp   exec --no-startup-id kbdlight up 5                           && pkill -RTMIN+2 i3blocks
-#bindsym XF86KbdBrightnessDown exec --no-startup-id kbdlight down 5                         && pkill -RTMIN+2 i3blocks
-#bindsym XF86AudioRaiseVolume  exec --no-startup-id amixer -D "dmixer" -q set Master 5%+    && pkill -RTMIN+3 i3blocks
-#bindsym XF86AudioLowerVolume  exec --no-startup-id amixer -D "dmixer" -q set Master 5%-    && pkill -RTMIN+3 i3blocks
-#bindsym XF86AudioMute         exec --no-startup-id amixer -D "dmixer" -q set Master toggle && pkill -RTMIN+3 i3blocks
-#bindsym XF86AudioStop         exec --no-startup-id playerctl stop                          && pkill -RTMIN+4 i3blocks
-#bindsym XF86AudioPause        exec --no-startup-id playerctl play-pause                    && pkill -RTMIN+4 i3blocks
-#bindsym XF86AudioPlay         exec --no-startup-id playerctl play-pause                    && pkill -RTMIN+4 i3blocks
-#bindsym XF86AudioPrev         exec --no-startup-id playerctl previous                      && pkill -RTMIN+4 i3blocks
-#bindsym XF86AudioNext         exec --no-startup-id playerctl next                          && pkill -RTMIN+4 i3blocks
+bindsym XF86AudioRaiseVolume  exec --no-startup-id amixer -q set Master 5%+    && pkill -RTMIN+3 i3blocks
+bindsym XF86AudioLowerVolume  exec --no-startup-id amixer -q set Master 5%-    && pkill -RTMIN+3 i3blocks
+bindsym XF86AudioMute         exec --no-startup-id amixer -q set Master toggle && pkill -RTMIN+3 i3blocks
+#bindsym XF86Launch1 # ThinkVantage button
 
 # Borders & Gaps
 new_window pixel 2
