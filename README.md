@@ -17,16 +17,16 @@ $ git submodule update
 ### Symbolic Links:
 
 ```
-/home/jonpas/ && /root/
+~/ && /root/
     - .Xresources
     - .bashrc
     - .vimrc
     - .xinitrc
-/etc/
-    - NetworkManager/*
-    - grub.d/*
 ~/.config/
     - i3*
     - i3blocks* 
+/etc/
+    - NetworkManager/*
+    - grub.d/*
 ```
-_Note: `*` folder symlinked, `/*` all files in folder symlinked_
+_Note: `*` folder symlinked, `/*` all files in folder symlinked._
