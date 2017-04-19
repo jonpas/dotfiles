@@ -26,7 +26,6 @@ border=#458588
 border=#8ec07c
 
 [volume]
-label=
 interval=10
 signal=3
 border=#83a598
