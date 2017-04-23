@@ -38,3 +38,6 @@
 [submodule ".vim/bundle/markdown-preview"]
 	path = .vim/bundle/markdown-preview
 	url = https://github.com/JamshedVesuna/vim-markdown-preview
+[submodule ".vim/bundle/editorconfig"]
+	path = .vim/bundle/editorconfig
+	url = https://github.com/editorconfig/editorconfig-vim
