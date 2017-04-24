@@ -21,6 +21,11 @@ alias l='ls -CF'
 alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
 
+# Jump to path aliases
+alias jS='cd ~/data/School'
+alias jSTasks='cd ~/Data/School/FERI-Tasks/UNI-1-2'
+alias jWS='cd /mnt/winE/School/FERI-RIT-UNI'
+
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi

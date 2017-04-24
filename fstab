@@ -1,0 +1,19 @@
+# 
+# /etc/fstab: static file system information
+#
+# <file system>	<dir>	<type>	<options>	<dump>	<pass>
+# /dev/sda8
+UUID=b2704279-9943-49b1-899e-95f6fe27e7f4	/	ext4	rw,relatime,data=ordered	0	1
+
+# /dev/sda7
+UUID=effe572f-341b-4738-9af1-16593aea6a5d	none	swap	defaults	0	0
+
+## Windows (via ntfs-3g)
+# /dev/sda2
+UUID=785A2D085A2CC4AA	/mnt/winC	ntfs-3g	defaults	0	0
+
+# /dev/sda5
+UUID=58DA7ECADA7EA442	/mnt/winD	ntfs-3g	defaults	0	0
+
+# /dev/sda6
+UUID=C4D0A8B7D0A8B15A	/mnt/winE	ntfs-3g	defaults	0	0

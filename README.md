@@ -26,6 +26,7 @@ $ git submodule update
     - i3*
     - i3blocks* 
 /etc/
+    - fstab
     - NetworkManager/*
     - grub.d/*
 ```
