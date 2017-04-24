@@ -16,7 +16,7 @@ if [ -n "$address" ]; then
     echo " $address ($ssid)"
     echo " $ssid"
     echo "#b8bb26"
-    echo 0
+    exit 0
 fi
 
 # Down
