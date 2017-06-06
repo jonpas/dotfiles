@@ -23,11 +23,13 @@ $ git submodule update
     - .vimrc
     - .xinitrc
 ~/.config/
+    - dunst*
     - i3*
-    - i3blocks* 
+    - i3blocks*
+    - imgur-screenshot!
 /etc/
     - fstab
     - NetworkManager/*
     - grub.d/*
 ```
-_Note: `*` folder symlinked, `/*` all files in folder symlinked._
+_Note: `*` folder symlinked, `/*` all files in folder symlinked, `!` not symlinked (sensitive information)._

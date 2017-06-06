@@ -204,6 +204,9 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id setxkbmap -layout si
 
+# Notifications
+exec --no-startup-id dunst
+
 # Wallpaper
 exec --no-startup-id feh --bg-fill ~/Pictures/current_wallpaper
 
