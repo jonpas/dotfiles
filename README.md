@@ -20,10 +20,12 @@ $ git submodule update
 ~/ && /root/
     - .Xresources
     - .bashrc
+    - .gtkrc-2.0
     - .vimrc
     - .xinitrc
 ~/.config/
     - dunst*
+    - gtk-3.0/*
     - i3*
     - i3blocks*
     - imgur-screenshot!
