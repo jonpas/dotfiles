@@ -22,7 +22,7 @@ alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
 
 # Jump to path aliases
-alias jS='cd ~/data/School'
+alias jS='cd ~/Data/School'
 alias jSTasks='cd ~/Data/School/FERI-Tasks/UNI-1-2'
 alias jWS='cd /mnt/winE/School/FERI-RIT-UNI'
 
