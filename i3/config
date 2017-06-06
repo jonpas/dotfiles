@@ -207,7 +207,12 @@ exec --no-startup-id setxkbmap -layout si
 # Wallpaper
 exec --no-startup-id feh --bg-fill ~/Pictures/current_wallpaper
 
+# Lock keybind
 bindsym $mod+Ctrl+l exec --no-startup-id ~/.config/i3/lock.sh
+
+# imgur-screenshot keybind
+bindsym --release Print exec --no-startup-id imgur-screenshot # Click for window
+bindsym --release Ctrl+Print exec --no-startup-id imgur-screenshot -f
 
 # Window Settings
 for_window [window_role="About"]                floating enable
