@@ -10,6 +10,11 @@ border_bottom=3
 interval=120
 border=#cc241d
 
+[backlight]
+interval=once
+signal=1
+border=#d79921
+
 [cpu]
 border=#b16286
 
@@ -26,7 +31,7 @@ border=#458588
 border=#8ec07c
 
 [volume]
-interval=10
+interval=once
 signal=3
 border=#83a598
 
