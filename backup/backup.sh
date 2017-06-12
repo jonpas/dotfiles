@@ -2,17 +2,15 @@
 # Full system backup
 
 # Backup destination
-backdest=/opt/backup
+backdest=/backups
 
 # Exclude file location
 exclude_file="./backup-exc.txt"
 
 # Labels for backup name
-pc=${HOSTNAME}
 distro=$(cat /etc/*-release | grep "ID=" | awk -F"=" '{print $2}')
-type=full
-date=$(date "+%F")
-backupfile="$backdest/$pc-$distro-$type-$date.tar.gz"
+date=$(date +%Y%m%dT%H%M%S)
+backupfile="$backdest/fsbackup_$(hostname)_${distro}_${date}.tar.gz"
 
 # Check if running as root
 if [ "$EUID" -ne 0 ]; then
@@ -37,8 +35,14 @@ if [ $continue == "n" ]; then
 fi
 
 if [ $executeback = "y" ]; then
+    mkdir -p /backups
+
     # -p and --xattrs store all permissions and extended attributes.
     # Without both of these, many programs will stop working!
-    # Remove verbose (-v) flag to speed up the process on slower terminals.
-    tar -X $exclude_file --xattrs -czpvf $backupfile /
+    # Verbose (-v) flag slows the process on slower terminals
+    if [ "$1" = "-v" ]; then
+        tar -X $exclude_file --xattrs -czpvf $backupfile /
+    else
+        tar -X $exclude_file --xattrs -czpf $backupfile /
+    fi
 fi

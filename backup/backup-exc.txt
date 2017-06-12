@@ -1,5 +1,5 @@
 # Not old backups
-/opt/backup/*
+/backups
 
 # Not mounted filesystems and devices
 /mnt
@@ -25,3 +25,8 @@
 /var/lock
 /var/run
 /var/spool
+
+# Not various user folders
+*/.local/share/Steam
+*/.PlayOnLinux
+*/VirtualBox\ VMs
