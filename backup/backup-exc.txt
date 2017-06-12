@@ -1,0 +1,27 @@
+# Not old backups
+/opt/backup/*
+
+# Not mounted filesystems and devices
+/mnt
+/media
+
+# Not system folders
+/boot
+/dev
+/proc
+/sys
+
+# Not log files
+/var/log
+
+# Not temporary files
+/tmp/*
+
+# Not caches
+/var/cache
+*/.cache
+
+# Not misc folders
+/var/lock
+/var/run
+/var/spool
