@@ -14,7 +14,7 @@ $ git submodule init
 $ git submodule update
 ```
 
-### Symbolic Links:
+### Config Locations:
 
 ```
 ~/ && /root/
@@ -32,6 +32,5 @@ $ git submodule update
 /etc/
     - fstab
     - NetworkManager/*
-    - grub.d/*
 ```
 _Note: `*` folder symlinked, `/*` all files in folder symlinked, `!` not symlinked (sensitive information)._
