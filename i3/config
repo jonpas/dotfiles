@@ -217,7 +217,6 @@ bindsym $mod+Ctrl+l exec --no-startup-id ~/.config/i3/lock.sh
 
 # imgur-screenshot keybind
 bindsym --release Ctrl+Print exec --no-startup-id imgur-screenshot # Click for window
-bindsym --release Alt+Print exec --no-startup-id imgur-screenshot -w # Selected window
 
 # Window Settings
 for_window [window_role="About"]                floating enable
