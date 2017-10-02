@@ -23,7 +23,7 @@ alias weather='curl http://wttr.in/Lenart'
 
 # Jump to path aliases
 alias jS='cd ~/Data/School'
-alias jSTasks='cd ~/Data/School/FERI-Tasks/UNI-1-2'
+alias jSTasks='cd ~/Data/School/FERI-Tasks/UNI-2-1'
 alias jWS='cd /mnt/winE/School/FERI-RIT-UNI'
 alias jPS='cd /mnt/pcwin/School/FERI-RIT-UNI'
 
