@@ -215,8 +215,10 @@ exec --no-startup-id feh --bg-fill ~/Pictures/current_wallpaper
 # Lock keybind
 bindsym $mod+Ctrl+l exec --no-startup-id ~/.config/i3/lock.sh
 
+# Screenshot keybind
+bindsym --release Print exec --no-startup-id escrotum
 # imgur-screenshot keybind
-bindsym --release Ctrl+Print exec --no-startup-id imgur-screenshot # Click for window
+bindsym --release Ctrl+Print exec --no-startup-id imgur-screenshot # Click for window (using escrotum)
 
 # Window Settings
 for_window [window_role="About"]                floating enable
