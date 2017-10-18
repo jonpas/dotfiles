@@ -194,8 +194,8 @@ bindsym XF86AudioMute         exec --no-startup-id amixer -q set Master toggle &
 
 # Borders & Gaps
 new_window pixel 2
-gaps inner 10
-gaps outer 4
+gaps inner 5
+gaps outer 2
 smart_gaps on
 smart_borders on
 
