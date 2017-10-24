@@ -199,10 +199,8 @@ gaps outer 2
 smart_gaps on
 smart_borders on
 
-# Applets
-exec --no-startup-id nm-applet
-
 # Startup stuff
+exec --no-startup-id nm-applet
 exec --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id setxkbmap -layout si
 

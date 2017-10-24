@@ -33,10 +33,11 @@ border=#458588
 border=#458588
 
 [battery]
+interval=30
 border=#8ec07c
 
 [volume]
-interval=once
+interval=10
 signal=3
 border=#83a598
 

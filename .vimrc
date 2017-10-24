@@ -24,7 +24,7 @@ set tabstop=8
 set shiftwidth=4
 set softtabstop=4
 set autoindent
-autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
+" autocmd FileType make set noexpandtab shiftwidth=8 softtabstop=0
 
 " Code Folding
 set foldmethod=indent

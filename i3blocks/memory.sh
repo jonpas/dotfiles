@@ -1,6 +1,6 @@
 #!/bin/bash
 
-usage=$(free | grep Mem | awk '{print int($3/$2 * 100)}')
+usage=$(free | grep Mem | awk '{print 100 - int($7/$2 * 100)}')
 
 echo " $usage%"
 
