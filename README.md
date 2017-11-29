@@ -31,6 +31,7 @@ $ git submodule update
     - imgur-screenshot!
 /etc/
     - fstab
+    - modprob.d/*
     - NetworkManager/*
 ```
 _Note: `*` folder symlinked, `/*` all files in folder symlinked, `!` not symlinked (sensitive information)._
