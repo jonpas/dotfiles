@@ -21,6 +21,7 @@ $ git submodule update
     - .Xresources
     - .bashrc
     - .gtkrc-2.0
+    - .prompt.py
     - .vimrc
     - .xinitrc
 ~/.config/
