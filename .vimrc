@@ -62,6 +62,9 @@ set smartcase
 " NERDTree
 let NERDTreeIgnore = ["\.pyc$", "\.o$", "\.class$", "\.rcg$", "\.rcl$"]
 
+" Syntax Highlighting
+au BufRead,BufNewFile *.asm set filetype=nasm
+
 " Keybinds
 set pastetoggle=<F2>
 nnoremap <CR> :let @/ = ""<CR>:<BACKSPACE><CR>
