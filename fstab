@@ -10,10 +10,10 @@ UUID=effe572f-341b-4738-9af1-16593aea6a5d	none	swap	defaults	0	0
 
 ## Windows (via ntfs-3g)
 # /dev/sda2
-UUID=785A2D085A2CC4AA	/mnt/winC	ntfs-3g	defaults,ro	0	0
+UUID=785A2D085A2CC4AA	/mnt/winC	ntfs-3g	defaults,nofail,ro	0	0
 
 # /dev/sda5
-UUID=58DA7ECADA7EA442	/mnt/winD	ntfs-3g	defaults,ro	0	0
+UUID=58DA7ECADA7EA442	/mnt/winD	ntfs-3g	defaults,nofail,ro	0	0
 
 # /dev/sda6
-UUID=C4D0A8B7D0A8B15A	/mnt/winE	ntfs-3g	defaults	0	0
+UUID=C4D0A8B7D0A8B15A	/mnt/winE	ntfs-3g	defaults,nofail	0	0
