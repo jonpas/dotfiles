@@ -29,7 +29,7 @@ function __prompt_command() {
 
 # Jump to path aliases
 alias jS='cd ~/Data/School'
-alias jSTasks='cd ~/Data/School/FERI-Tasks/UNI-2-1'
+alias jSTasks='cd ~/Data/School/FERI-Tasks/UNI-2-2'
 alias jSProj='cd ~/Data/School/FERI-Projects'
 alias jWS='cd /mnt/winE/School/FERI-RIT-UNI'
 alias jPS='cd /mnt/pcwin/School/FERI-RIT-UNI'
