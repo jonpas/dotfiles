@@ -129,7 +129,11 @@ def segment_git():
 def segment_path():
     global colors
 
-    path = os.getcwd()
+    try:
+        path = os.getcwd()
+    except FileNotFoundError:
+        return "No directory"
+
     home = os.environ["HOME"]
 
     if path[:len(home)] == home:
