@@ -242,12 +242,14 @@ smart_borders on
 # Keyboard
 exec --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id setxkbmap -layout si
-# Network Manager applet
-exec --no-startup-id nm-applet
 # Notifications
 exec --no-startup-id dunst
+# Network Manager applet
+exec --no-startup-id nm-applet
 # Multiple monitors manager
 exec --no-startup-id mons -a
+# USB automounter
+exec --no-startup-id udiskie -s
 
 # Wallpaper
 exec --no-startup-id $set_wallpaper
