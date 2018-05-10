@@ -3,7 +3,7 @@
 stat=$(acpi -b | awk '{print $3}')
 charge=$(acpi -b | awk '{print $4}' | cut -d % -f 1)
 
-if [[ $stat == "Unknown," ]] || [[ $stat == "Full," ]]; then
+if [[ $stat == "Charging," ]] || [[ $stat == "Full," ]]; then
     echo " $charge%"
     exit 0
 fi
