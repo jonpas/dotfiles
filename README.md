@@ -18,7 +18,7 @@ $ git submodule update
 
 ```
 ~/ && /root/
-    - .vimrc*
+    - .vim*
     - .Xresources
     - .bashrc
     - .gtkrc-2.0
@@ -35,7 +35,11 @@ $ git submodule update
     - fstab(-hostname)
     - modprobe.d/*
     - NetworkManager/*
+    - default/*
+    - X11/xorg.conf.d/*
+    - mkinitcpio.conf (PT-VM)
 ```
 _Notes:
 - `*` folder symlinked, `/*` all files in folder symlinked, `!` not symlinked (sensitive information).
-- `(-hostname)` for splitting different files for different machines._
+- _`(-hostname)` for splitting different files for different machines._
+- _`(PT-VM)` for PCI passthrough Virtual Machine setup._
