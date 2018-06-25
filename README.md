@@ -18,6 +18,7 @@ $ git submodule update
 
 ```
 ~/ && /root/
+    - .vimrc*
     - .Xresources
     - .bashrc
     - .gtkrc-2.0
@@ -31,8 +32,10 @@ $ git submodule update
     - i3blocks*
     - imgur-screenshot!
 /etc/
-    - fstab
+    - fstab(-hostname)
     - modprobe.d/*
     - NetworkManager/*
 ```
-_Note: `*` folder symlinked, `/*` all files in folder symlinked, `!` not symlinked (sensitive information)._
+_Notes:
+- `*` folder symlinked, `/*` all files in folder symlinked, `!` not symlinked (sensitive information).
+- `(-hostname)` for splitting different files for different machines._
