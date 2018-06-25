@@ -34,6 +34,7 @@ $ git submodule update
 /etc/
     - fstab(-hostname)
     - modprobe.d/*
+        - vfio.conf (PT-VM)
     - NetworkManager/*
     - default/*
     - X11/xorg.conf.d/*
