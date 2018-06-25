@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [ $(hostname) != "ancient" ]; then
+    echo ""
+    echo ""
+    echo ""
+    exit 1
+fi
+
 stat=$(acpi -b | awk '{print $3}')
 charge=$(acpi -b | awk '{print $4}' | cut -d % -f 1)
 

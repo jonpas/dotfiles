@@ -1,5 +1,12 @@
 #!/bin/bash
 
+if [ $(hostname) != "ancient" ]; then
+    echo ""
+    echo ""
+    echo ""
+    exit 1
+fi
+
 sleep 0.1 # Wait for hardware to actually apply values
 
 actual_brightness=$(cat /sys/class/backlight/acpi_video0/actual_brightness)

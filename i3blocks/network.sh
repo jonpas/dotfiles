@@ -1,7 +1,12 @@
 #!/bin/bash
 
 # Ethernet
-address=$(ip addr show enp0s25 | grep -Po 'inet \K[\d.]+')
+eth_interface=enp3s0
+if [ $(hostname) != "loki" ]; then
+    eth_interface=enp0s25
+fi
+
+address=$(ip addr show $eth_interface | grep -Po 'inet \K[\d.]+')
 if [ -n "$address" ]; then
     echo " $address"
     echo " $address"
