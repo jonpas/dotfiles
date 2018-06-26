@@ -241,8 +241,7 @@ smart_borders on
 
 # Keyboard
 exec --no-startup-id xrdb ~/.Xresources
-exec --no-startup-id setxkbmap -layout si
-exec --no-startup-id xmodmap -e "keycode 200 = Pause"
+exec --no-startup-id ~/.config/i3/keyboard.sh
 # Notifications
 exec --no-startup-id dunst
 # Network Manager applet
