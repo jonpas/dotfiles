@@ -5,9 +5,9 @@ ENABLE_HUGEPAGES=false
 MEMORY="8G"
 
 # DEVICE PASSTHROUGH
-#if [ "$ENABLE_PASSTHROUGH" = true ]; then
-#    ./bind.sh
-#fi
+if [ "$ENABLE_PASSTHROUGH" = true ]; then
+    ./bind.sh
+fi
 
 if [ "$ENABLE_HUGEPAGES" = true ]; then
     echo 4200 > /proc/sys/vm/nr_hugepages
