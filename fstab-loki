@@ -11,9 +11,9 @@ UUID=7B60-DC67      	/boot     	vfat      	rw,relatime,fmask=0022,dmask=0022,cod
 # /dev/sda2
 UUID=014c2d32-86e5-40d1-ab42-bdc3eff20a77	none      	swap      	defaults,pri=-2	0 0
 
-## Windows (via ntfs-3g)
-# /dev/sdb3
-UUID=44F09275F0926CC4	/home/jonpas/Games	ntfs-3g	defaults,nofail	0	0
+# /dev/sdb1
+UUID=95d68f31-ce2c-46fd-bd3d-fcfa65c3dc7a	/home/jonpas/Data	ext4	defaults,nofail	0	0
 
+## Windows (via ntfs-3g)
 # /dev/sdc1
 UUID=F2D00070D0003D7B	/home/jonpas/Storage	ntfs-3g	defaults,nofail	0	0

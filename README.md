@@ -35,13 +35,14 @@ $ git submodule update
     - fstab(-hostname)
     - modprobe.d/*
         - vfio.conf (PT-VM)
+        - nvidia.conf (PT-VM)
     - NetworkManager/*
     - default/*
     - X11/xorg.conf.d/*
     - mkinitcpio.conf (PT-VM)
     - synergy.conf (Server)
 ```
-_Notes:
-- `*` folder symlinked, `/*` all files in folder symlinked, `!` not symlinked (sensitive information).
+_Notes:_
+- _`*` folder symlinked, `/*` all files in folder symlinked, `!` not symlinked (sensitive information)._
 - _`(-hostname)` for splitting different files for different machines._
 - _`(PT-VM)` for PCI passthrough Virtual Machine setup._
