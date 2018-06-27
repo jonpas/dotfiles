@@ -1,6 +1,7 @@
 #!/bin/bash
 
 ENABLE_PASSTHROUGH=true
+ENABLE_QEMU_VGA=false
 ENABLE_HUGEPAGES=false
 MEMORY="8G"
 
@@ -29,15 +30,16 @@ if [ "$ENABLE_HUGEPAGES" = true ]; then
     OPTS+=" -mem-path /dev/hugepages_qemu"
 fi
 
-OPTS+=" -bios /usr/share/qemu/bios.bin"
-OPTS+=" -boot menu=on"
+OPTS+=" -drive if=pflash,format=raw,readonly,file=/usr/share/ovmf/x64/OVMF_CODE.fd"
+OPTS+=" -drive if=pflash,format=raw,file=/home/jonpas/images/vm/OVMF_VARS-win10-ovmf.fd"
 
 OPTS+=" -device virtio-scsi-pci"
-OPTS+=" -drive file=/home/jonpas/images/vm/win10.qcow2,format=qcow2,index=0,media=disk,if=virtio"
+OPTS+=" -drive file=/home/jonpas/images/vm/win10-ovmf.qcow2,format=qcow2,index=0,media=disk,if=virtio"
 OPTS+=" -drive file=/home/jonpas/Data/images/vm/data.qcow2,format=qcow2,index=1,media=disk,if=virtio"
 OPTS+=" -drive file=/home/jonpas/Data/images/windows10.iso,index=2,media=cdrom"
 OPTS+=" -drive file=/home/jonpas/Data/images/virtio-win.iso,index=3,media=cdrom"
 
+OPTS+=" -net none"
 OPTS+=" -net nic"
 OPTS+=" -net user"
 #OPTS+=" -net user,smb=/home/jonpas/Storage/"
@@ -48,9 +50,10 @@ if [ "$ENABLE_PASSTHROUGH" = true ]; then
     OPTS+=" -device vfio-pci,host=01:00.1,bus=root.1,addr=00.1"
 fi
 
-#if [ "$ENABLE_PASSTHROUGH" = true ]; then
-#    OPTS+=" -vga none"
-#fi
+
+if [ "$ENABLE_QEMU_VGA" = true ]; then
+    OPTS+=" -vga none"
+fi
 
 OPTS+=" -soundhw ac97"
 
