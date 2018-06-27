@@ -51,7 +51,7 @@ if [ "$ENABLE_PASSTHROUGH" = true ]; then
 fi
 
 
-if [ "$ENABLE_QEMU_VGA" = true ]; then
+if [ "$ENABLE_QEMU_VGA" = false ]; then
     OPTS+=" -vga none"
 fi
 
