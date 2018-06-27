@@ -1,6 +1,8 @@
 #!/bin/bash
 
-volume=$(amixer get Master | grep -E -o '[0-9]{1,3}?%' | head -c -2)
+# Take first in case of multiple channels and strip the percentage sign
+volume=($(amixer get Master | grep -E -o '[0-9]{1,3}?%'))
+volume=$(echo ${volume[0]} | head -c -2)
 
 if [ $(amixer get Master | tail -c -5 | head -c -2) == "off" ]; then
     echo " $volume%"

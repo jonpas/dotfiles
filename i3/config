@@ -239,6 +239,8 @@ gaps outer 2
 smart_gaps on
 smart_borders on
 
+# Monitor
+exec --no-startup-id ~/.config/i3/monitor.sh
 # Keyboard
 exec --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id ~/.config/i3/keyboard.sh
@@ -273,3 +275,4 @@ for_window [title="Steam - Update News"]        floating enable
 for_window [title="Friends" class="Steam"]      floating enable
 for_window [title="Music Player" class="Steam"] floating enable
 for_window [title="Chat" class="Steam"]         floating enable
+for_window [title="Steam Guard" class="Steam"]  floating enable
