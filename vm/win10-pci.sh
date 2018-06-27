@@ -5,9 +5,30 @@ ENABLE_QEMU_VGA=false
 ENABLE_HUGEPAGES=false
 MEMORY="8G"
 
+rebind() {
+    dev="$1"
+    driver="$2"
+    vendor=$(cat /sys/bus/pci/devices/$dev/vendor)
+    device=$(cat /sys/bus/pci/devices/$dev/device)
+
+    # Unbind
+    if [ -e /sys/bus/pci/devices/$dev/driver ]; then
+        echo $dev > /sys/bus/pci/devices/$dev/driver/unbind
+    fi
+    
+    # Bind
+    if [ "$driver" = "vfio-pci" ]; then
+        echo $vendor $device > /sys/bus/pci/drivers/$driver/new_id
+    else
+        echo $dev > /sys/bus/pci/drivers/$driver/bind
+    fi
+}
+
 # DEVICE PASSTHROUGH
 if [ "$ENABLE_PASSTHROUGH" = true ]; then
-    ./bind.sh
+    rebind 0000:01:00.0 vfio-pci # GPU
+    rebind 0000:01:00.1 vfio-pci # GPU Audio
+    rebind 0000:06:00.0 vfio-pci # PCIe USB Card
 fi
 
 if [ "$ENABLE_HUGEPAGES" = true ]; then
@@ -48,8 +69,9 @@ if [ "$ENABLE_PASSTHROUGH" = true ]; then
     OPTS+=" -device ioh3420,bus=pcie.0,addr=1c.0,multifunction=on,port=1,chassis=1,id=root.1"
     OPTS+=" -device vfio-pci,host=01:00.0,bus=root.1,addr=00.0,multifunction=on,x-vga=on"
     OPTS+=" -device vfio-pci,host=01:00.1,bus=root.1,addr=00.1"
-fi
 
+    OPTS+=" -device vfio-pci,host=06:00.0,bus=root.1"
+fi
 
 if [ "$ENABLE_QEMU_VGA" = false ]; then
     OPTS+=" -vga none"
@@ -57,12 +79,14 @@ fi
 
 OPTS+=" -soundhw ac97"
 
-#OPTS+=" -usb -device usb-tablet"
-
 qemu-system-x86_64 $OPTS
 
 if [ "$ENABLE_HUGEPAGES" = true ]; then
     echo 50 > /proc/sys/vm/nr_hugepages
+fi
+
+if [ "$ENABLE_PASSTHROUGH" = true ]; then
+    rebind 0000:06:00.0 xhci_hcd
 fi
 
 exit 0

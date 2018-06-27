@@ -272,8 +272,6 @@ for_window [window_role="pop-up"]               floating enable
 for_window [title="Volume Control"]             floating enable
 for_window [title="Library" class="Firefox"]    floating enable
 for_window [title="Steam - Update News"]        floating enable
-for_window [title="Friends" class="Steam"]      floating enable
 for_window [title="Music Player" class="Steam"] floating enable
 for_window [title="Chat" class="Steam"]         floating enable
 for_window [title="Steam Guard" class="Steam"]  floating enable
-for_window [title="Steam - News" class="Steam"] floating enable
