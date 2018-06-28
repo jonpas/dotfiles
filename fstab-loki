@@ -16,4 +16,4 @@ UUID=95d68f31-ce2c-46fd-bd3d-fcfa65c3dc7a	/home/jonpas/Data	ext4	rw,relatime,dat
 
 ## Windows (via ntfs-3g)
 # /dev/sdc1
-UUID=F2D00070D0003D7B	/home/jonpas/Storage	ntfs-3g	defaults,nofail	0	0
+UUID=F2D00070D0003D7B	/home/jonpas/Storage	ntfs-3g	uid=1000,gid=1000,dmask=022,fmask=133,nofail	0	0
