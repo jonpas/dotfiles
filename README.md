@@ -41,6 +41,7 @@ $ git submodule update
     - X11/xorg.conf.d/*
     - mkinitcpio.conf (PT-VM)
     - synergy.conf (Server)
+    - samba/*
 ```
 _Notes:_
 - _`*` folder symlinked, `/*` all files in folder symlinked, `!` not symlinked (sensitive information)._
