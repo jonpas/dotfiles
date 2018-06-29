@@ -45,4 +45,4 @@ None
 _Notes:_
 - _`*` folder symlinked, `/*` all files in folder symlinked, `!` copied (sensitive information)._
 - _`(-hostname)` for splitting different files for different machines._
-- _`(VFIO)` for PCI passthrough Virtual Machine setup (~ partially for VFIO)._
+- _`(VFIO)` for PCI passthrough Virtual Machine setup (`~` partially for VFIO)._
