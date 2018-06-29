@@ -32,18 +32,17 @@ $ git submodule update
     - i3blocks*
     - imgur-screenshot!
 /etc/
-    - fstab(-hostname)
-    - modprobe.d/*
-        - vfio.conf (PT-VM)
-        - nvidia.conf (PT-VM)
     - NetworkManager/*
-    - default/*
     - X11/xorg.conf.d/*
-    - mkinitcpio.conf (PT-VM)
-    - synergy.conf (Server)
-    - samba/*
+    - default/* (~VFIO)
+    - modprobe.d/* (~VFIO)
+    - fstab(-hostname)
+    - mkinitcpio.conf (VFIO)
+    - synergy.conf (~VFIO)
+None
+    - vm (VFIO)
 ```
 _Notes:_
-- _`*` folder symlinked, `/*` all files in folder symlinked, `!` not symlinked (sensitive information)._
+- _`*` folder symlinked, `/*` all files in folder symlinked, `!` copied (sensitive information)._
 - _`(-hostname)` for splitting different files for different machines._
-- _`(PT-VM)` for PCI passthrough Virtual Machine setup._
+- _`(VFIO)` for PCI passthrough Virtual Machine setup (~ partially for VFIO)._

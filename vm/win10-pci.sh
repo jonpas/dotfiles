@@ -78,13 +78,13 @@ OPTS+=" -drive if=pflash,format=raw,file=/home/jonpas/images/vm/OVMF_VARS-win10-
 # Drives
 OPTS+=" -device virtio-scsi-pci"
 OPTS+=" -drive file=/home/jonpas/images/vm/win10-ovmf.qcow2,format=qcow2,index=0,media=disk,if=virtio"
-#OPTS+=" -drive file=/home/jonpas/Data/images/vm/data.qcow2,format=qcow2,index=1,media=disk,if=virtio"
-#OPTS+=" -drive file=/home/jonpas/Data/images/windows10.iso,index=2,media=cdrom"
-#OPTS+=" -drive file=/home/jonpas/Data/images/virtio-win.iso,index=3,media=cdrom"
+OPTS+=" -drive file=/home/jonpas/Data/images/vm/data.qcow2,format=qcow2,index=1,media=disk,if=virtio"
+OPTS+=" -drive file=/home/jonpas/Data/images/windows10.iso,index=2,media=cdrom"
+OPTS+=" -drive file=/home/jonpas/Data/images/virtio-win.iso,index=3,media=cdrom"
 
 # Network
 OPTS+=" -net none"
-OPTS+=" -net nic,model=virtio"
+OPTS+=" -net nic" #,model=virtio" # virtio causes connection drop after a while
 OPTS+=" -net user,smb=/home/jonpas/Storage/"
 
 # Pass-Through
@@ -116,10 +116,12 @@ if [ "$ENABLE_PASSTHROUGH_USB_DEVICES" = true ]; then
     OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb687" # ThrustMaster TWCS Throttle
     OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb677" # Thrustmaster T150 FFB Wheel (ID 1 - Linux reads it as either ID)
     OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb65d" # Thrustmaster T150 FFB Wheel (ID 2 - Linux reads it as either ID)
+
+    OPTS+=" -usb -device usb-host,vendorid=0x0458,productid=0x0154" # KYE Systems Bluetooth Mouse
 fi
 
 # Sound
-OPTS+=" -soundhw ac97"
+OPTS+=" -soundhw hda"
 
 
 # VM START
