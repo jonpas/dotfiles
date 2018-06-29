@@ -1,10 +1,11 @@
 #!/bin/bash
 
 ENABLE_PASSTHROUGH_GPU=true
-ENABLE_PASSTHROUGH_USB_DEVICES=true
+ENABLE_PASSTHROUGH_MOUSEKEYBOARD=false # Configuration or latency-free (will disable it in case of crash)
 ENABLE_PASSTHROUGH_USB_CONTROLLER=false
-ENABLE_PASSTHROUGH_MOUSEKEYBOARD=false
-ENABLE_QEMU_GPU=false
+ENABLE_PASSTHROUGH_USB_DEVICES=false # Only if controller not passed
+ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
+ENABLE_QEMU_GPU=false # Integrated QEMU GPU
 ENABLE_HUGEPAGES=false
 MEMORY="10G"
 
@@ -35,23 +36,6 @@ rebind() {
 }
 
 
-# VM PREINIT
-# Pass-Through Driver Assignment
-if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
-    rebind 0000:01:00.0 vfio-pci # GPU
-    rebind 0000:01:00.1 vfio-pci # GPU Audio
-fi
-
-if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
-    rebind 0000:06:00.0 vfio-pci # PCIe USB Card
-fi
-
-# Memory
-if [ "$ENABLE_HUGEPAGES" = true ]; then
-    echo 4200 > /proc/sys/vm/nr_hugepages
-fi
-
-
 # VM INIT
 OPTS=""
 
@@ -68,6 +52,7 @@ OPTS+=" -smp 4,sockets=1,cores=4,threads=1"
 # RAM
 OPTS+=" -m $MEMORY"
 if [ "$ENABLE_HUGEPAGES" = true ]; then
+    echo 4200 > /proc/sys/vm/nr_hugepages
     OPTS+=" -mem-path /dev/hugepages_qemu"
 fi
 
@@ -87,15 +72,14 @@ OPTS+=" -net none"
 OPTS+=" -net nic" #,model=virtio" # virtio causes connection drop after a while
 OPTS+=" -net user,smb=/home/jonpas/Storage/"
 
-# Pass-Through
+# GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
-    OPTS+=" -device ioh3420,bus=pcie.0,addr=1c.0,multifunction=on,port=1,chassis=1,id=root.1"
+    OPTS+=" -device ioh3420,bus=pcie.0,addr=1c.0,multifunction=on,port=1,chassis=1,id=root.1
+"
+    rebind 0000:01:00.0 vfio-pci # GPU
     OPTS+=" -device vfio-pci,host=01:00.0,bus=root.1,addr=00.0,multifunction=on,x-vga=on"
+    rebind 0000:01:00.1 vfio-pci # GPU Audio
     OPTS+=" -device vfio-pci,host=01:00.1,bus=root.1,addr=00.1"
-fi
-
-if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
-    OPTS+=" -device vfio-pci,host=06:00.0,bus=root.1"
 fi
 
 if [ "$ENABLE_QEMU_GPU" = false ]; then
@@ -104,9 +88,16 @@ else
     OPTS+=" -usb -device usb-tablet" # Prevent mouse grabbing on QEMU VGA
 fi
 
+# Mouse & Keyboard
 if [ "$ENABLE_PASSTHROUGH_MOUSEKEYBOARD" = true ]; then
     OPTS+=" -usb -device usb-host,vendorid=0x046d,productid=0xc332" # Logitech G502 Mouse
     OPTS+=" -usb -device usb-host,vendorid=0x046d,productid=0xc24d" # Logitech G710 Keyboard
+fi
+
+# USB
+if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
+    rebind 0000:06:00.0 vfio-pci # PCIe USB Card
+    OPTS+=" -device vfio-pci,host=06:00.0,bus=root.1"
 fi
 
 if [ "$ENABLE_PASSTHROUGH_USB_DEVICES" = true ]; then
@@ -114,14 +105,19 @@ if [ "$ENABLE_PASSTHROUGH_USB_DEVICES" = true ]; then
     OPTS+=" -usb -device usb-host,vendorid=0x0810,productid=0x0003" # Trust USB Gamepad
     OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb10a" # ThurstMaster T.16000M Joystick
     OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb687" # ThrustMaster TWCS Throttle
-    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb677" # Thrustmaster T150 FFB Wheel (ID 1 - Linux reads it as either ID)
-    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb65d" # Thrustmaster T150 FFB Wheel (ID 2 - Linux reads it as either ID)
+    #OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb677" # Thrustmaster T150 FFB Wheel (ID 1 - Linux reads it as either ID)
+    #OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb65d" # Thrustmaster T150 FFB Wheel (ID 2 - Linux reads it as either ID)
 
     OPTS+=" -usb -device usb-host,vendorid=0x0458,productid=0x0154" # KYE Systems Bluetooth Mouse
 fi
 
 # Sound
-OPTS+=" -soundhw hda"
+if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
+    rebind 0000:00:1b.0 vfio-pci # Audio
+    OPTS+=" -device vfio-pci,host=00:1b.0,bus=root.1,addr=00.3"
+else
+    OPTS+=" -soundhw hda" # hda for qemu-patched, ac97 otherwise
+fi
 
 
 # VM START
@@ -134,14 +130,19 @@ if [ "$ENABLE_HUGEPAGES" = true ]; then
     echo 50 > /proc/sys/vm/nr_hugepages
 fi
 
-# Pass-Through Driver Assignment
+# Mouse & Keyboard
+if [ "$ENABLE_PASSTHROUGH_MOUSEKEYBOARD" = true ];then
+    ../i3/keyboard.sh # Keyboard layout gets reset on return from pass-through
+fi
+
+# USB
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
     rebind 0000:06:00.0 xhci_hcd # PCIe USB Card
 fi
 
-# Other
-if [ "$ENABLE_PASSTHROUGH_MOUSEKEYBOARD" = true ];then
-    ../i3/keyboard.sh # Keyboard layout gets reset on return from pass-through
+# Sound
+if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
+    rebind 0000:00:1b.0 snd_hda_intel # Audio
 fi
 
 exit 0
