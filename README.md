@@ -31,6 +31,7 @@ $ git submodule update
     - i3*
     - i3blocks*
     - imgur-screenshot!
+    - ranger/*
 /etc/
     - NetworkManager/*
     - X11/xorg.conf.d/*
