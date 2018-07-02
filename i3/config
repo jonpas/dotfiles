@@ -262,6 +262,9 @@ exec --no-startup-id $set_wallpaper
 # Lock keybind
 bindsym $mod+Ctrl+l exec --no-startup-id ~/.config/i3/lock.sh
 
+# Mount location keybind (195 = G710 'G1' key)
+bindcode 195 exec i3-sensible-terminal -cd "/run/media/$(whoami)"
+
 # Screenshot keybind
 bindsym --release Print exec --no-startup-id escrotum
 # imgur-screenshot keybind
