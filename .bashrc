@@ -16,8 +16,6 @@ alias l='ls -CF'
 alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
 
-alias ranger='ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
-
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
