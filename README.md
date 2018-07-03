@@ -28,6 +28,7 @@ $ git submodule update
 ~/.config/
     - dunst*
     - gtk-3.0/*
+    - gsimplecal*
     - i3*
     - i3blocks*
     - imgur-screenshot!

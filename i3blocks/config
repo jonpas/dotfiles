@@ -42,6 +42,6 @@ signal=3
 border=#83a598
 
 [time]
-command=date '+ %Y-%m-%d  %H:%M'
+command=date '+ %Y-%m-%d  %H:%M'; [[ -z "${BLOCK_BUTTON}" ]] || gsimplecal &
 interval=5
 border=#fabd2f
