@@ -283,3 +283,4 @@ for_window [title="Steam - Update News"]        floating enable
 for_window [title="Music Player" class="Steam"] floating enable
 for_window [title="Chat" class="Steam"]         floating enable
 for_window [title="Steam Guard" class="Steam"]  floating enable
+for_window [class="TeamSpeak 3"]                floating enable
