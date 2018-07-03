@@ -37,6 +37,7 @@ $ git submodule update
     - NetworkManager/*
     - X11/xorg.conf.d/*
     - default/* (~VFIO)
+    - grub.d/*
     - modprobe.d/* (~VFIO)
     - fstab(-hostname)
     - mkinitcpio.conf (VFIO)
