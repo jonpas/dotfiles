@@ -3,7 +3,8 @@
 ENABLE_PASSTHROUGH_GPU=true
 ENABLE_PASSTHROUGH_MOUSEKEYBOARD=false # Configuration or latency-free (will disable it in case of crash)
 ENABLE_PASSTHROUGH_USB_CONTROLLER=false
-ENABLE_PASSTHROUGH_USB_DEVICES=false # Only if controller not passed
+ENABLE_PASSTHROUGH_USB_DEVICES=true # Joystick, Throttle, Gamepad (only if controller not passed)
+ENABLE_PASSTHROUGH_WHEEL=false # Separate from other USB devices
 ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_QEMU_GPU=false # Integrated QEMU GPU
 ENABLE_HUGEPAGES=false
@@ -44,10 +45,14 @@ OPTS=""
 # General
 OPTS+=" -enable-kvm"
 OPTS+=" -M q35"
+OPTS+=" -rtc base=localtime" # Windows uses localtime
 
 # CPU
 OPTS+=" -cpu host,kvm=off,hv_vendor_id=0123456789ab,hv_time,hv_relaxed,hv_vapic,hv_spinlocks=0x1fff"
 OPTS+=" -smp 4,sockets=1,cores=4,threads=1"
+for i in $(seq 0 3); do
+    OPTS+=" -vcpu vcpunum=$i,affinity=$i" # Pin virtual CPU cores to actual CPU cores (qemu-patched)
+done
 
 # RAM
 OPTS+=" -m $MEMORY"
@@ -88,10 +93,12 @@ else
     OPTS+=" -usb -device usb-tablet" # Prevent mouse grabbing on QEMU VGA
 fi
 
-# Mouse & Keyboard
+# Mouse & Keyboard (pass one always in case of lock-ups or network issues)
 if [ "$ENABLE_PASSTHROUGH_MOUSEKEYBOARD" = true ]; then
     OPTS+=" -usb -device usb-host,vendorid=0x046d,productid=0xc332" # Logitech G502 Mouse
     OPTS+=" -usb -device usb-host,vendorid=0x046d,productid=0xc24d" # Logitech G710 Keyboard
+else
+    OPTS+=" -usb -device usb-host,vendorid=0x0458,productid=0x0154" # KYE Systems Bluetooth Mouse
 fi
 
 # USB
@@ -105,10 +112,11 @@ if [ "$ENABLE_PASSTHROUGH_USB_DEVICES" = true ]; then
     OPTS+=" -usb -device usb-host,vendorid=0x0810,productid=0x0003" # Trust USB Gamepad
     OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb10a" # ThurstMaster T.16000M Joystick
     OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb687" # ThrustMaster TWCS Throttle
-    #OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb677" # Thrustmaster T150 FFB Wheel (ID 1 - Linux reads it as either ID)
-    #OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb65d" # Thrustmaster T150 FFB Wheel (ID 2 - Linux reads it as either ID)
+fi
 
-    OPTS+=" -usb -device usb-host,vendorid=0x0458,productid=0x0154" # KYE Systems Bluetooth Mouse
+if [ "$ENABLE_PASSTHROUGH_WHEEL" = true ]; then
+    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb677" # Thrustmaster T150 FFB Wheel (ID 1 - Linux reads it as either ID)
+    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb65d" # Thrustmaster T150 FFB Wheel (ID 2 - Linux reads it as either ID)
 fi
 
 # Sound
