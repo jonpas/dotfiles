@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Must be owned by root!
 
 if [ $(hostname) = "ancient" ] && [ "$CONNECTION_UUID" = "71f4b399-576b-3081-b528-a0eb5b7992f0" ]; then
@@ -9,7 +9,7 @@ if [ $(hostname) = "ancient" ] && [ "$CONNECTION_UUID" = "71f4b399-576b-3081-b52
                 sleep 3;
             done
 
-            su jonpas -c "synergyc -d WARNING --enable-crypto loki"
+            su jonpas -c "synergyc -d WARNING loki"
             ;;
         down)
             pkill -x synergyc
