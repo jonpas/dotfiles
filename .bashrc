@@ -1,4 +1,5 @@
 export TERM=xterm-256color
+export TERMINAL=termite
 export EDITOR=vim
 
 alias ls='ls --color=auto'

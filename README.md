@@ -33,6 +33,7 @@ $ git submodule update
     - i3blocks*
     - imgur-screenshot!
     - ranger/*
+    - termite*
     - udiskie*
 /etc/
     - NetworkManager/*
