@@ -1,6 +1,6 @@
 #!/bin/bash
 
-usage=$(mpstat 1 1 | awk '/^Average/ {print int(100-$NF)}')
+usage=$(mpstat 1 1 | awk '$13 ~ /[0-9.]+/ {print int(100-$13)}')
 
 echo " $usage%"
 
