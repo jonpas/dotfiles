@@ -99,7 +99,7 @@ bindsym $mod+Shift+s sticky toggle
 bindsym $mod+a focus parent
 
 # focus the child container
-#bindsym $mod+d focus child
+bindsym $mod+Shift+a focus child
 
 # workspaces
 set $ws1 "1  "
@@ -112,6 +112,9 @@ set $ws7 "7  "
 set $ws8 "8  "
 set $ws9 "9  "
 set $ws10 "10  "
+
+# workspace monitors (if available)
+workspace $ws1 output VGA1
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1

@@ -1,4 +1,6 @@
 #!/bin/bash
 
-pkill -x synergys
-synergys -d WARNING # No SSL due to connection issues
+if [ $(hostname) = "loki" ]; then
+    pkill -x synergys
+    synergys -d WARNING # No SSL due to connection issues
+fi
