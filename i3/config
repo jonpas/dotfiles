@@ -11,6 +11,7 @@
 
 # Common programs
 set $set_wallpaper feh --bg-fill ~/Pictures/current_wallpaper
+set $restart_synergy . ~/.config/i3/synergy.sh
 
 # Alias Alt key
 set $alt Mod1
@@ -186,14 +187,14 @@ bindsym $mod+r mode "$resize"
 # external screen management
 set $display_layout  :  ,  ,  ,  , [d]uplicate, [m]irror, [s]econd-only, [o]ff
 mode "$display_layout" {
-    bindsym Left  mode "default" exec mons -e left   && $set_wallpaper
-    bindsym Down  mode "default" exec mons -e bottom && $set_wallpaper
-    bindsym Up    mode "default" exec mons -e top    && $set_wallpaper
-    bindsym Right mode "default" exec mons -e right  && $set_wallpaper
-    bindsym d mode "default" exec mons -d && $set_wallpaper
-    bindsym m mode "default" exec mons -m && $set_wallpaper
-    bindsym s mode "default" exec mons -s && $set_wallpaper
-    bindsym o mode "default" exec mons -o && $set_wallpaper
+    bindsym Left  mode "default" exec mons -e left   && $set_wallpaper && $restart_synergy
+    bindsym Down  mode "default" exec mons -e bottom && $set_wallpaper && $restart_synergy
+    bindsym Up    mode "default" exec mons -e top    && $set_wallpaper && $restart_synergy
+    bindsym Right mode "default" exec mons -e right  && $set_wallpaper && $restart_synergy
+    bindsym d mode "default" exec mons -d && $set_wallpaper && $restart_synergy
+    bindsym m mode "default" exec mons -m && $set_wallpaper && $restart_synergy
+    bindsym s mode "default" exec mons -s && $set_wallpaper && $restart_synergy
+    bindsym o mode "default" exec mons -o && $set_wallpaper && $restart_synergy
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
