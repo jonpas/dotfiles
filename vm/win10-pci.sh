@@ -8,7 +8,7 @@ ENABLE_PASSTHROUGH_WHEEL=false # Separate from other USB devices
 ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_QEMU_GPU=false # Integrated QEMU GPU
 ENABLE_HUGEPAGES=false
-MEMORY="10G"
+MEMORY="8G"
 
 
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
@@ -75,7 +75,7 @@ OPTS+=" -drive file=/home/jonpas/Data/images/virtio-win.iso,index=3,media=cdrom"
 # Network
 OPTS+=" -net none"
 OPTS+=" -net nic" #,model=virtio" # virtio causes connection drop after a while
-OPTS+=" -net user,smb=/home/jonpas/Storage/"
+OPTS+=" -net user" #,smb=/home/jonpas/Storage/"
 
 # GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then

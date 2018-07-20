@@ -21,6 +21,10 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+if [ -f ~/.git-completion.bash ]; then
+    . ~/.git-completion.bash
+fi
+
 export PROMPT_COMMAND=__prompt_command
 function __prompt_command() {
     export ERR=$?
