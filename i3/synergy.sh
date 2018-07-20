@@ -5,7 +5,7 @@ if [ $(hostname) = "loki" ]; then
 
     # Change Synergy configuration for VM in the center
     if [ "$vm" = "center" ]; then
-        config_vm_center=$(cat ~/.config/i3/synergy-vm-center.conf)
+        config_vm_center=$(cat ~/dotfiles/synergy-vm-center.conf)
         perl -i.bak -0777pe "s/section: links\n(.+?)\nend/$config_vm_center/s" ~/dotfiles/synergy.conf
     fi
 
