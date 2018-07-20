@@ -196,7 +196,7 @@ mode "$display_layout" {
     bindsym Right mode "default" exec mons -e right  && $set_wallpaper && $restart_synergy
     bindsym d mode "default" exec mons -d && $set_wallpaper && $restart_synergy
     bindsym m mode "default" exec mons -m && $set_wallpaper && $restart_synergy
-    bindsym s mode "default" exec mons -s && $set_wallpaper && $restart_synergy
+    bindsym s mode "default" exec mons -s && $set_wallpaper && $restart_synergy center
     bindsym o mode "default" exec mons -o && $set_wallpaper && $restart_synergy
 
     bindsym Return mode "default"
