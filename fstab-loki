@@ -9,7 +9,7 @@ UUID=4adb0027-be9a-4089-86e3-1fbf78158204	/         	ext4      	rw,relatime,data
 UUID=7B60-DC67      	/boot     	vfat      	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
 
 # /dev/sda2
-UUID=014c2d32-86e5-40d1-ab42-bdc3eff20a77	none      	swap      	defaults,pri=-2	0 0
+UUID=014c2d32-86e5-40d1-ab42-bdc3eff20a77	none      	swap      	defaults	0 0
 
 # /dev/sdb1
 UUID=95d68f31-ce2c-46fd-bd3d-fcfa65c3dc7a	/home/jonpas/Data	ext4	rw,relatime,data=ordered,nofail	0	0

@@ -190,14 +190,14 @@ bindsym $mod+r mode "$resize"
 # external screen management
 set $display_layout  :  ,  ,  ,  , [d]uplicate, [m]irror, [s]econd-only, [o]ff
 mode "$display_layout" {
-    bindsym Left  mode "default" exec mons -e left   && $set_wallpaper && $restart_synergy
-    bindsym Down  mode "default" exec mons -e bottom && $set_wallpaper && $restart_synergy
-    bindsym Up    mode "default" exec mons -e top    && $set_wallpaper && $restart_synergy
-    bindsym Right mode "default" exec mons -e right  && $set_wallpaper && $restart_synergy
-    bindsym d mode "default" exec mons -d && $set_wallpaper && $restart_synergy
-    bindsym m mode "default" exec mons -m && $set_wallpaper && $restart_synergy
-    bindsym s mode "default" exec mons -s && $set_wallpaper && $restart_synergy center
-    bindsym o mode "default" exec mons -o && $set_wallpaper && $restart_synergy
+    bindsym Left  mode "default" exec mons -e left --primary HDMI2   && $set_wallpaper && $restart_synergy
+    bindsym Down  mode "default" exec mons -e bottom --primary HDMI2 && $set_wallpaper && $restart_synergy
+    bindsym Up    mode "default" exec mons -e top --primary HDMI2    && $set_wallpaper && $restart_synergy
+    bindsym Right mode "default" exec mons -e right --primary HDMI2  && $set_wallpaper && $restart_synergy
+    bindsym d mode "default" exec mons -d --primary HDMI2 && $set_wallpaper && $restart_synergy
+    bindsym m mode "default" exec mons -m --primary HDMI2 && $set_wallpaper && $restart_synergy
+    bindsym s mode "default" exec mons -s --primary VGA1  && $set_wallpaper && $restart_synergy center
+    bindsym o mode "default" exec mons -o --primary HDMI2 && $set_wallpaper && $restart_synergy
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
