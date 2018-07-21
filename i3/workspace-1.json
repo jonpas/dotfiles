@@ -1,0 +1,80 @@
+// vim:ts=4:sw=4:et
+{
+    // splitv split container with 2 children
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.62,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "pixel",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 502,
+               "width": 1081,
+               "x": 1928,
+               "y": 31
+            },
+            "name": "Slack",
+            "percent": 0.5,
+            "swallows": [
+               {
+                 "class": "^Slack$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            // splith split container with 1 children
+            "border": "pixel",
+            "floating": "auto_off",
+            "layout": "splith",
+            "percent": 0.5,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 1041,
+                       "width": 948,
+                       "x": 964,
+                       "y": 31
+                    },
+                    "name": "Discord",
+                    "percent": 1,
+                    "swallows": [
+                       {
+                           "class": "^discord$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        }
+    ]
+}
+
+{
+    "border": "pixel",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 362,
+       "width": 574,
+       "x": 0,
+       "y": 0
+    },
+    "name": "termite - htop",
+    "percent": 0.38,
+    "swallows": [
+       {
+           "class": "^Termite$"
+       }
+    ],
+    "type": "con"
+}
+
