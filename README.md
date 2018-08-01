@@ -1,7 +1,7 @@
 dotfiles
 ========
 
-Dotfiles for Arch Linux with i3, vim, rofi, urxvt...
+Dotfiles for Arch Linux with i3, vim, rofi, termite...
 
 
 ### Vim Packages:
