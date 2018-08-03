@@ -130,6 +130,7 @@ let g:airline#themes#custom#palette.inactive = airline#themes#generate_color_map
 " Markdown Preview
 let vim_markdown_preview_github = 1
 let vim_markdown_preview_use_xdg_open = 1
+let vim_markdown_preview_hotkey = '<C-m>'
 
 " HexMode
 " ex command for toggling hex mode - define mapping if desired
