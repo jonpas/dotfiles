@@ -6,13 +6,18 @@ Dotfiles for Arch Linux with i3, vim, rofi, termite...
 
 ### Program Packages/Plugins/Scripts:
 
-Vim: `.vim/bundle/`
-WeeChat: `.weechat/python/autoload/` (scripts symlinked from submodules)
+- Vim: `.vim/bundle/`
+- WeeChat: `.weechat/python/autoload/` (scripts symlinked from submodules)
 
 Download all:
 ```
 $ git submodule init
 $ git submodule update
+```
+
+Update all:
+```
+$ git submodule update --recursive --remote
 ```
 
 
