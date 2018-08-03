@@ -47,3 +47,12 @@
 [submodule ".vim/bundle/dispatch"]
 	path = .vim/bundle/dispatch
 	url = https://github.com/tpope/vim-dispatch
+[submodule ".weechat/python/autoload/wee-slack"]
+	path = .weechat/python/autoload/wee-slack
+	url = https://github.com/wee-slack/wee-slack
+[submodule ".weechat/python/autoload/weemoji"]
+	path = .weechat/python/autoload/weemoji
+	url = https://github.com/kattrali/weemoji
+[submodule ".weechat/python/autoload/weechat-notify-send"]
+	path = .weechat/python/autoload/weechat-notify-send
+	url = https://github.com/s3rvac/weechat-notify-send

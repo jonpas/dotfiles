@@ -19,6 +19,7 @@ $ git submodule update
 ```
 ~/ && /root/
     - .vim*
+    - .weechat/*
     - .Xresources
     - .bashrc
     - .gtkrc-2.0
