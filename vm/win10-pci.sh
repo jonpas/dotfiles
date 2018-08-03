@@ -25,7 +25,7 @@ rebind() {
     if [ -e /sys/bus/pci/devices/$dev/driver ]; then
         echo $dev > /sys/bus/pci/devices/$dev/driver/unbind
     fi
-    
+
     # Bind
     if [ "$driver" = "vfio-pci" ]; then
         vendor=$(cat /sys/bus/pci/devices/$dev/vendor)
