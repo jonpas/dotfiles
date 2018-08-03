@@ -4,15 +4,17 @@ dotfiles
 Dotfiles for Arch Linux with i3, vim, rofi, termite...
 
 
-### Vim Packages:
+### Program Packages/Plugins/Scripts:
 
-Location: `.vim/bundle/`
+Vim: `.vim/bundle/`
+WeeChat: `.weechat/python/autoload/` (scripts symlinked from submodules)
 
 Download all:
 ```
 $ git submodule init
 $ git submodule update
 ```
+
 
 ### Config Locations:
 
