@@ -34,8 +34,19 @@ function __prompt_command() {
 }
 
 # Jump to path aliases
-alias jS='cd ~/Data/School'
-alias jSTasks='cd ~/Data/School/FERI-Tasks/UNI-2-2'
-alias jSProj='cd ~/Data/School/FERI-Projects'
-alias jWS='cd /mnt/winE/School/FERI-RIT-UNI'
-alias jPS='cd /mnt/pcwin/School/FERI-RIT-UNI'
+if [ $(hostname) = "ancient" ]; then
+    alias jS='cd ~/Data/School'
+    alias jSTasks='cd ~/Data/School/FERI-Tasks/UNI-3-1'
+    alias jSProj='cd ~/Data/School/FERI-Projects'
+    alias jWS='cd /mnt/winE/School/FERI-RIT-UNI'
+    alias jPS='cd /mnt/pcwin/School/FERI-RIT-UNI'
+fi
+
+if [ $(hostname) = "loki" ]; then
+    alias jS='cd ~/Work/School'
+    alias jSTasks='cd ~/Work/School/FERI-Tasks/UNI-3-1'
+    alias jSProj='cd ~/Work/School/FERI-Projects'
+    alias jWS='cd ~/Work/School/FERI-RIT-UNI'
+    alias jPS='cd ~/Work/School/FERI-RIT-UNI'
+    alias jArma='cd ~/Work/Arma\ 3'
+fi
