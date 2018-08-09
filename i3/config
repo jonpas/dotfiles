@@ -115,6 +115,15 @@ set $ws10 "10  "
 
 # workspace monitors (if available)
 workspace $ws1 output VGA1
+workspace $ws2 output HDMI2
+workspace $ws3 output HDMI2
+workspace $ws4 output HDMI2
+workspace $ws5 output HDMI2
+workspace $ws6 output HDMI2
+workspace $ws7 output HDMI2
+workspace $ws8 output HDMI2
+workspace $ws9 output HDMI2
+workspace $ws10 output HDMI2
 
 # switch to workspace
 bindsym $mod+1 workspace $ws1
