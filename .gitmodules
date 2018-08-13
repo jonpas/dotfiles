@@ -56,3 +56,6 @@
 [submodule ".weechat/python/autoload/weechat-notify-send"]
 	path = .weechat/python/autoload/weechat-notify-send
 	url = https://github.com/s3rvac/weechat-notify-send
+[submodule ".vim/bundle/xml"]
+	path = .vim/bundle/xml
+	url = https://github.com/othree/xml.vim.git
