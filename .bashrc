@@ -16,6 +16,7 @@ alias l='ls -CF'
 
 alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
+alias primusrun="vblank_mode=0 primusrun" # Disable VSYNC on Primusrun (Bumblebee)
 
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
