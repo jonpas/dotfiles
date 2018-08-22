@@ -156,4 +156,10 @@ if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
     rebind 0000:00:1b.0 snd_hda_intel # Audio
 fi
 
+# GPU
+if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
+    rebind 0000:01:00.0 nvidia # GPU
+    rebind 0000:01:00.1 snd_hda_intel # GPU Audio
+fi
+
 exit 0
