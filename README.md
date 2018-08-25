@@ -35,9 +35,9 @@ $ git submodule update --recursive --remote
     - .xinitrc
 ~/.config/
     - dunst*
-    - gtk-3.0/*
     - gsimplecal*
-    - i3*
+    - gtk-3.0/*
+    - i3* (~VFIO)
     - i3blocks*
     - imgur-screenshot!
     - ranger/*
@@ -45,17 +45,23 @@ $ git submodule update --recursive --remote
     - udiskie*
 /etc/
     - NetworkManager/*
+    - X11/* (~VFIO)
     - X11/xorg.conf.d/*
     - default/* (~VFIO)
     - grub.d/*
     - modprobe.d/* (~VFIO)
+    - samba/* (~VFIO)
     - fstab(-hostname)
     - mkinitcpio.conf (VFIO)
+    - slim.conf
     - synergy.conf (~VFIO)
 None
+    - backup (BAK)
     - vm (VFIO)
+    - synergy-vm-center.conf (VFIO)
 ```
 _Notes:_
 - _`*` folder symlinked, `/*` all files in folder symlinked, `!` copied (sensitive information)._
 - _`(-hostname)` for splitting different files for different machines._
-- _`(VFIO)` for PCI passthrough Virtual Machine setup (`~` partially for VFIO)._
+- _`(BAK)` for backup tools._
+- _`(VFIO)` for PCI passthrough Virtual Machine setup (`~` for partially VFIO)._
