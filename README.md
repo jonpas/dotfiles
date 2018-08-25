@@ -32,7 +32,7 @@ $ git submodule update --recursive --remote
     - .gtkrc-2.0
     - .prompt.py
     - .vimrc
-    - .xinitrc
+    - .xinitrc (~VFIO)
 ~/.config/
     - dunst*
     - gsimplecal*
@@ -40,6 +40,7 @@ $ git submodule update --recursive --remote
     - i3* (~VFIO)
     - i3blocks*
     - imgur-screenshot!
+    - pacman.d/hooks*
     - ranger/*
     - termite*
     - udiskie*

@@ -8,7 +8,7 @@ ENABLE_PASSTHROUGH_WHEEL=false # Separate from other USB devices
 ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_QEMU_GPU=false # Integrated QEMU GPU
 ENABLE_HUGEPAGES=false
-MEMORY="8G"
+MEMORY="10G"
 
 
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
@@ -142,7 +142,7 @@ if [ "$ENABLE_HUGEPAGES" = true ]; then
 fi
 
 # Mouse & Keyboard
-if [ "$ENABLE_PASSTHROUGH_MOUSEKEYBOARD" = true ];then
+if [ "$ENABLE_PASSTHROUGH_MOUSEKEYBOARD" = true ]; then
     ../i3/keyboard.sh # Keyboard layout gets reset on return from pass-through
 fi
 
