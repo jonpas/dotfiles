@@ -1,3 +1,3 @@
 #!/bin/bash
 
-i3-sensible-terminal -e ranger "$@"
+i3-sensible-terminal -e "ranger '$@'"
