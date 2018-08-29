@@ -74,7 +74,7 @@ OPTS+=" -drive file=/home/jonpas/Data/images/virtio-win.iso,index=3,media=cdrom"
 
 # Network
 OPTS+=" -net none"
-OPTS+=" -net nic,model=virtio" # virtio causes connection drop after a while
+OPTS+=" -net nic,model=virtio" # 'virtio' may cause connection drop after a while if misconfigured on host
 OPTS+=" -net user" #,smb=/home/jonpas/Storage/"
 
 # GPU
