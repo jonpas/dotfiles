@@ -44,7 +44,7 @@ OPTS=""
 
 # General
 OPTS+=" -enable-kvm"
-OPTS+=" -M q35"
+OPTS+=" -M pc-q35-3.0" # 'pc-q35-3.0' for qemu-patched 3.0+,'q35' otherwise
 OPTS+=" -rtc base=localtime" # Windows uses localtime
 
 # CPU
@@ -74,7 +74,7 @@ OPTS+=" -drive file=/home/jonpas/Data/images/virtio-win.iso,index=3,media=cdrom"
 
 # Network
 OPTS+=" -net none"
-OPTS+=" -net nic" #,model=virtio" # virtio causes connection drop after a while
+OPTS+=" -net nic,model=virtio" # virtio causes connection drop after a while
 OPTS+=" -net user" #,smb=/home/jonpas/Storage/"
 
 # GPU
@@ -127,7 +127,7 @@ if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
     rebind 0000:00:1b.0 vfio-pci # Audio
     OPTS+=" -device vfio-pci,host=00:1b.0,bus=root.1,addr=00.3"
 else
-    OPTS+=" -soundhw hda" # hda for qemu-patched, ac97 otherwise
+    OPTS+=" -soundhw hda" # 'hda' for qemu-patched, 'ac97' otherwise
 fi
 
 
