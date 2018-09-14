@@ -4,7 +4,7 @@ ENABLE_PASSTHROUGH_GPU=true
 ENABLE_PASSTHROUGH_MOUSEKEYBOARD=false # Configuration or latency-free (will disable it in case of crash)
 ENABLE_PASSTHROUGH_USB_CONTROLLER=false
 ENABLE_PASSTHROUGH_USB_DEVICES=true # Joystick, Throttle, Gamepad (only if controller not passed)
-ENABLE_PASSTHROUGH_WHEEL=false # Separate from other USB devices
+ENABLE_PASSTHROUGH_WHEEL=true # Separate from other USB devices
 ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_QEMU_GPU=false # Integrated QEMU GPU
 ENABLE_HUGEPAGES=false
@@ -74,7 +74,7 @@ OPTS+=" -drive file=/home/jonpas/Data/images/virtio-win.iso,index=3,media=cdrom"
 
 # Network
 OPTS+=" -net none"
-OPTS+=" -net nic,model=virtio" # 'virtio' may cause connection drop after a while if misconfigured on host
+OPTS+=" -net nic" #,model=virtio" # 'virtio' may cause connection drop after a while if misconfigured on host
 OPTS+=" -net user" #,smb=/home/jonpas/Storage/"
 
 # GPU
