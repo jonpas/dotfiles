@@ -277,7 +277,7 @@ exec --no-startup-id $set_wallpaper
 bindsym $mod+Ctrl+l exec --no-startup-id ~/.config/i3/lock.sh
 
 # Mount location keybind (195 = G710 'G1' key)
-bindcode 195 exec i3-sensible-terminal -cd "/run/media/$(whoami)"
+bindcode 195 exec i3-sensible-terminal -d "/run/media/$(whoami)"
 # Calculator keybind (196 = G710 'G2' key)
 bindcode 196 exec i3-sensible-terminal -e bc
 
