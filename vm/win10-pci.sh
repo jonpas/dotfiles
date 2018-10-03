@@ -4,11 +4,11 @@ ENABLE_PASSTHROUGH_GPU=true
 ENABLE_PASSTHROUGH_MOUSEKEYBOARD=false # Configuration or latency-free (will disable it in case of crash)
 ENABLE_PASSTHROUGH_USB_CONTROLLER=false
 ENABLE_PASSTHROUGH_USB_DEVICES=true # Joystick, Throttle, Gamepad (only if controller not passed)
-ENABLE_PASSTHROUGH_WHEEL=true # Separate from other USB devices
+ENABLE_PASSTHROUGH_WHEEL=false # Separate from other USB devices
 ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_QEMU_GPU=false # Integrated QEMU GPU
 ENABLE_HUGEPAGES=false
-MEMORY="10G"
+MEMORY="16G"
 
 
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
@@ -57,7 +57,7 @@ done
 # RAM
 OPTS+=" -m $MEMORY"
 if [ "$ENABLE_HUGEPAGES" = true ]; then
-    echo 4200 > /proc/sys/vm/nr_hugepages
+    echo 8400 > /proc/sys/vm/nr_hugepages
     OPTS+=" -mem-path /dev/hugepages_qemu"
 fi
 

@@ -45,8 +45,8 @@ fi
 
 if [ $(hostname) = "loki" ]; then
     alias jS='cd ~/Work/School'
-    alias jSTasks='cd ~/Work/School/FERI-Tasks/UNI-3-1'
-    alias jSProj='cd ~/Work/School/FERI-Projects'
+    alias jSTasks='cd ~/Work/School/FERI-RIT-UNI/Tasks/UNI-3-1'
+    alias jSProj='cd ~/Work/School/FERI-RIT-UNI/Projects'
     alias jWS='cd ~/Work/School/FERI-RIT-UNI'
     alias jPS='cd ~/Work/School/FERI-RIT-UNI'
     alias jArma='cd ~/Work/Arma\ 3'
