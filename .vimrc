@@ -86,6 +86,7 @@ nnoremap <F6> :NERDTreeTabsFind<CR>
 nnoremap <F7> :tabp<CR>
 nnoremap <F8> :tabn<CR>
 map <F9> <C-w>gf
+nnoremap gb :make<CR> <bar> :cwindow<CR>
 nnoremap <F12> :tabe ~/.vimrc<CR>
 nnoremap <Left> :cprev<CR>
 nnoremap <Right> :cnext<CR>
@@ -128,7 +129,7 @@ let g:airline#themes#custom#palette.visual_modified = g:airline#themes#custom#pa
 let g:airline#themes#custom#palette.inactive = airline#themes#generate_color_map(s:N2, s:N2, s:N3)
 
 " clang_complete
-let g:clang_library_path='/usr/lib/libclang.so'
+let g:clang_library_path = '/usr/lib/libclang.so'
 
 " Markdown Preview
 let vim_markdown_preview_github = 1
