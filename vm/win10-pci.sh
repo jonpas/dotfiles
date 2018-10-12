@@ -44,7 +44,7 @@ OPTS=""
 
 # General
 OPTS+=" -enable-kvm"
-OPTS+=" -M pc-q35-3.0" # 'pc-q35-3.0' for qemu-patched 3.0+,'q35' otherwise
+OPTS+=" -M pc-q35-3.0" # 'pc-q35-3.0' for qemu-patched 3.0+, 'q35' for qemu <3.0
 OPTS+=" -rtc base=localtime" # Windows uses localtime
 
 # CPU
@@ -79,8 +79,8 @@ OPTS+=" -net user" #,smb=/home/jonpas/Storage/"
 
 # GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
-    OPTS+=" -device ioh3420,bus=pcie.0,addr=1c.0,multifunction=on,port=1,chassis=1,id=root.1
-"
+    OPTS+=" -device ioh3420,bus=pcie.0,addr=1c.0,multifunction=on,port=1,chassis=1,id=root.1"
+
     rebind 0000:01:00.0 vfio-pci # GPU
     OPTS+=" -device vfio-pci,host=01:00.0,bus=root.1,addr=00.0,multifunction=on,x-vga=on"
     rebind 0000:01:00.1 vfio-pci # GPU Audio
