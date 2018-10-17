@@ -74,15 +74,15 @@ OPTS+=" -drive file=/home/jonpas/Data/images/virtio-win.iso,index=3,media=cdrom"
 
 # Network
 OPTS+=" -net none"
-OPTS+=" -net nic" #,model=virtio" # 'virtio' may cause connection drop after a while if misconfigured on host
+OPTS+=" -net nic,model=virtio" # 'virtio' may cause connection drop after a while without 'fix_virtio' patch (in qemu-patched)
 OPTS+=" -net user" #,smb=/home/jonpas/Storage/"
 
 # GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
-    OPTS+=" -device ioh3420,bus=pcie.0,addr=1c.0,multifunction=on,port=1,chassis=1,id=root.1"
+    OPTS+=" -device ioh3420,bus=pcie.0,chassis=0,slot=0,id=root.1"
 
     rebind 0000:01:00.0 vfio-pci # GPU
-    OPTS+=" -device vfio-pci,host=01:00.0,bus=root.1,addr=00.0,multifunction=on,x-vga=on"
+    OPTS+=" -device vfio-pci,host=01:00.0,bus=root.1,addr=00.0,multifunction=on"
     rebind 0000:01:00.1 vfio-pci # GPU Audio
     OPTS+=" -device vfio-pci,host=01:00.1,bus=root.1,addr=00.1"
 fi
