@@ -7,7 +7,7 @@ ENABLE_PASSTHROUGH_USB_DEVICES=true # Joystick, Throttle, Gamepad (only if contr
 ENABLE_PASSTHROUGH_WHEEL=false # Separate from other USB devices
 ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_QEMU_GPU=false # Integrated QEMU GPU
-ENABLE_HUGEPAGES=false
+ENABLE_HUGEPAGES=true
 MEMORY="16G"
 
 
@@ -58,7 +58,7 @@ done
 OPTS+=" -m $MEMORY"
 if [ "$ENABLE_HUGEPAGES" = true ]; then
     echo 8400 > /proc/sys/vm/nr_hugepages
-    OPTS+=" -mem-path /dev/hugepages_qemu"
+    OPTS+=" -mem-path /dev/hugepages"
 fi
 
 # UEFI/BIOS
@@ -138,7 +138,7 @@ qemu-system-x86_64 $OPTS
 # VM DEINIT
 # Memory
 if [ "$ENABLE_HUGEPAGES" = true ]; then
-    echo 50 > /proc/sys/vm/nr_hugepages
+    echo 0 > /proc/sys/vm/nr_hugepages
 fi
 
 # Mouse & Keyboard
