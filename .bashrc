@@ -18,6 +18,8 @@ alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
 alias primusrun="vblank_mode=0 primusrun" # Disable VSYNC on Primusrun (Bumblebee)
 
+alias cleandisk="sudo bleachbit --clean system.cache system.localizations system.trash system.tmp && sudo cacheclean 1"
+
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
