@@ -30,3 +30,8 @@
 */.local/share/Steam
 */.PlayOnLinux
 */VirtualBox\ VMs
+*/images
+*/Data
+*/Games
+*/Work
+*/Storage
