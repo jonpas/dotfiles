@@ -9,6 +9,7 @@ if [ $(hostname) = "loki" ]; then
     # Auto-start programs on workspace 1
     i3-msg "workspace 1  ; append_layout ~/.config/i3/workspace-1.json"
     termite -e htop &
-    slack &
+    termite -e "watch progress -q" &
+    #slack &
     discord &
 fi
