@@ -16,17 +16,18 @@ alias l='ls -CF'
 
 alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
+
 alias primusrun="vblank_mode=0 primusrun" # Disable VSYNC on Primusrun (Bumblebee)
+alias git=hub # GitHub git wrapper
 
-alias cleandisk="sudo bleachbit --clean system.cache system.trash system.tmp && yay -Sc && paccache -rk1"
+alias cleandisk="yay -Sc && paccache -rk1"
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f /usr/share/bash-completion/completions/git ]; then
+    . /usr/share/bash-completion/completions/git
 fi
 
-# Git completions from https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
-if [ -f ~/.git-completion.bash ]; then
-    . ~/.git-completion.bash
+if [ -f /usr/share/bash-completion/completions/hub ]; then
+    . /usr/share/bash-completion/completions/hub
 fi
 
 export PROMPT_COMMAND=__prompt_command
