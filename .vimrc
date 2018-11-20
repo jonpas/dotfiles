@@ -71,6 +71,9 @@ set ignorecase
 set smartcase
 set rtp+=/usr/bin/fzf
 
+" Fugitive
+set diffopt+=vertical
+
 " NERDTree
 let NERDTreeIgnore = ["\.pyc$", "\.o$", "\.class$", "\.rcg$", "\.rcl$"]
 
@@ -135,6 +138,7 @@ let g:clang_library_path = '/usr/lib/libclang.so'
 let vim_markdown_preview_github = 1
 let vim_markdown_preview_use_xdg_open = 1
 let vim_markdown_preview_hotkey = '<C-m>'
+
 
 " HexMode
 " ex command for toggling hex mode - define mapping if desired

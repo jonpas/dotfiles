@@ -79,12 +79,14 @@ OPTS+=" -net user" #,smb=/home/jonpas/Storage/"
 
 # GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
-    OPTS+=" -device ioh3420,bus=pcie.0,chassis=0,slot=0,id=root.1"
+    OPTS+=" -device pcie-root-port,chassis=0,bus=pcie.0,slot=0,id=root1"
+    OPTS+=" -set device.root1.speed=8"
+    OPTS+=" -set device.root1.width=16"
 
     rebind 0000:01:00.0 vfio-pci # GPU
-    OPTS+=" -device vfio-pci,host=01:00.0,bus=root.1,addr=00.0,multifunction=on"
+    OPTS+=" -device vfio-pci,host=01:00.0,bus=root1,addr=00.0,multifunction=on"
     rebind 0000:01:00.1 vfio-pci # GPU Audio
-    OPTS+=" -device vfio-pci,host=01:00.1,bus=root.1,addr=00.1"
+    OPTS+=" -device vfio-pci,host=01:00.1,bus=root1,addr=00.1"
 fi
 
 if [ "$ENABLE_QEMU_GPU" = false ]; then
