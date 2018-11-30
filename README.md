@@ -32,7 +32,7 @@ $ git submodule update --recursive --remote
     - .gtkrc-2.0
     - .prompt.py
     - .vimrc
-    - .xinitrc (~VFIO) (#TODO Fix nvidia-modprobe running on odin)
+    - .xinitrc (~VFIO)
 ~/.config/
     - dunst*
     - gsimplecal*

@@ -1,4 +1,7 @@
 #!/bin/sh
 
-nvidia-modprobe &
+if [ $(hostname) = "odin" ]; then
+    nvidia-modprobe &
+fi
+
 exec i3
