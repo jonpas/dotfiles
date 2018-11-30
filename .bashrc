@@ -47,7 +47,7 @@ if [ $(hostname) = "ancient" ]; then
     alias jArma='cd ~/Data/Arma\ 3'
 fi
 
-if [ $(hostname) = "loki" ]; then
+if [ $(hostname) = "loki" ] || [ $(hostname) = "odin" ]; then
     alias jS='cd ~/Work/School'
     alias jSTasks='cd ~/Work/School/FERI-RIT-UNI/Tasks/UNI-3-1'
     alias jSProj='cd ~/Work/School/FERI-RIT-UNI/Projects'

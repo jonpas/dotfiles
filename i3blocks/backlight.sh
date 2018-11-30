@@ -1,16 +1,22 @@
 #!/bin/bash
 
-if [ $(hostname) != "ancient" ]; then
+if [ $(hostname) = "loki" ]; then
     echo ""
     echo ""
     echo ""
     exit 1
 fi
 
+if [ $(hostname) = "ancient" ]; then
+    class=acpi_video0
+else
+    class=intel_backlight
+fi
+
 sleep 0.1 # Wait for hardware to actually apply values
 
-actual_brightness=$(cat /sys/class/backlight/acpi_video0/actual_brightness)
-max_brightness=$(cat /sys/class/backlight/acpi_video0/max_brightness)
+actual_brightness=$(cat /sys/class/backlight/$class/actual_brightness)
+max_brightness=$(cat /sys/class/backlight/$class/max_brightness)
 
 brightness=$(($actual_brightness * 100 / $max_brightness))
 

@@ -250,6 +250,11 @@ bindsym XF86MonBrightnessDown exec pkill -RTMIN+1 i3blocks # Actual brightness c
 bindsym XF86AudioRaiseVolume  exec --no-startup-id amixer -q set Master 5%+    && pkill -RTMIN+3 i3blocks
 bindsym XF86AudioLowerVolume  exec --no-startup-id amixer -q set Master 5%-    && pkill -RTMIN+3 i3blocks
 bindsym XF86AudioMute         exec --no-startup-id amixer -q set Master toggle && pkill -RTMIN+3 i3blocks
+bindsym XF86AudioStop         exec --no-startup-id playerctl stop
+bindsym XF86AudioPause        exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPlay         exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPrev         exec --no-startup-id playerctl previous
+bindsym XF86AudioNext         exec --no-startup-id playerctl next
 #bindsym XF86Launch1 # ThinkVantage button
 
 # Borders & Gaps

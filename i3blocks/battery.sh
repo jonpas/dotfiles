@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ $(hostname) != "ancient" ]; then
+if [ $(hostname) = "loki" ]; then
     echo ""
     echo ""
     echo ""

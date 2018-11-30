@@ -12,4 +12,9 @@ if [ $(hostname) = "loki" ]; then
     termite -e "watch progress -q" &
     #slack &
     discord &
+elif [ $(hostname) = "odin" ]; then
+    # Fix issue with wrong (huge) scaling on startup,
+    # even though xrandr still reports 1x1
+    xrandr --output LVDS-1 --scale 2x2
+    xrandr --output LVDS-1 --scale 1x1
 fi
