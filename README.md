@@ -32,7 +32,7 @@ $ git submodule update --recursive --remote
     - .gtkrc-2.0
     - .prompt.py
     - .vimrc
-    - .xinitrc (~VFIO)
+    - .xinitrc (~VFIO) (#TODO Fix nvidia-modprobe running on odin)
 ~/.config/
     - dunst*
     - gsimplecal*
@@ -40,22 +40,24 @@ $ git submodule update --recursive --remote
     - i3* (~VFIO)
     - i3blocks*
     - imgur-screenshot!
-    - pacman.d/hooks*
     - ranger/*
     - termite*
     - udiskie*
 /etc/
-    - NetworkManager/*
-    - X11/* (~VFIO)
+    - NetworkManager/dispatcher.d/*
+    - X11/* (VFIO)
     - X11/xorg.conf.d/*
     - default/* (~VFIO)
     - grub.d/*
-    - modprobe.d/* (~VFIO)
+    - modprobe.d/*
+    - pacman.d/hooks* (Nvidia)
     - samba/* (~VFIO)
     - fstab(-hostname)
+    - locale.conf
     - mkinitcpio.conf (VFIO)
     - slim.conf
     - synergy.conf (~VFIO)
+    - vconsole.conf
 None
     - backup (BAK)
     - vm (VFIO)
@@ -66,3 +68,4 @@ _Notes:_
 - _`(-hostname)` for splitting different files for different machines._
 - _`(BAK)` for backup tools._
 - _`(VFIO)` for PCI passthrough Virtual Machine setup (`~` for partially VFIO)._
+- _`(Nvidia)` for Nvidia GPUs._
