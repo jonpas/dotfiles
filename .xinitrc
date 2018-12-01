@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ $(hostname) = "odin" ]; then
+if [ $(hostname) = "loki" ]; then
     nvidia-modprobe &
 fi
 

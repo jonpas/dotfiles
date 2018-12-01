@@ -1,13 +1,7 @@
 #!/bin/bash
 # Must be owned by root!
 
-con_uuid_odin="803105d7-5b6f-3b65-bdb6-5566b2d07a96"
-
-if [ $(hostname) = "loki" ]; then
-    exit 0
-fi
-
-if [ "$CONNECTION_UUID" != "$con_uuid_odin" ]; then
+if [ $(hostname) != "odin" ] && [ "$CONNECTION_UUID" != "803105d7-5b6f-3b65-bdb6-5566b2d07a96" ]; then
     exit 0
 fi
 
