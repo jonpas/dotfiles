@@ -255,7 +255,8 @@ bindsym XF86AudioPause        exec --no-startup-id playerctl play-pause
 bindsym XF86AudioPlay         exec --no-startup-id playerctl play-pause
 bindsym XF86AudioPrev         exec --no-startup-id playerctl previous
 bindsym XF86AudioNext         exec --no-startup-id playerctl next
-#bindsym XF86Launch1 # ThinkVantage button
+bindsym XF86Launch1           exec i3-sensible-terminal -d "/run/media/$(whoami)" # ThinkVantage button on ThinkPad
+bindsym $mod+XF86Launch1      exec i3-sensible-terminal -e bc
 
 # Borders & Gaps
 new_window pixel 2
