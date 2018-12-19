@@ -5,13 +5,11 @@ if [ $(hostname) = "loki" ]; then
 
     # Synergy gets confused with multiple monitors, so restart it
     . ~/.config/i3/synergy.sh
-
-    # Auto-start programs on workspace 1
-    i3-msg "workspace 1  ; append_layout ~/.config/i3/workspace-1.json"
-    termite -e htop &
-    termite -e "watch progress -q" &
-    #slack &
-    discord &
-elif [ $(hostname) = "odin" ]; then
-    xrandr --output LVDS1 --mode 1600x900
 fi
+
+# Auto-start programs on workspace 1
+i3-msg "workspace 1  ; append_layout ~/.config/i3/workspace-1.json"
+termite -e htop &
+termite -e "watch progress -q" &
+#slack &
+discord &
