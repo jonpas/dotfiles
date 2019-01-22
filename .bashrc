@@ -17,7 +17,8 @@ alias l='ls -CF'
 alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
 
-alias primusrun="vblank_mode=0 primusrun" # Disable VSYNC on Primusrun (Bumblebee)
+# primusrun (Bumblebee) - disable VSYNC, enable primus_vk layer
+alias primusrun="ENABLE_PRIMUS_LAYER=1 vblank_mode=0 primusrun"
 alias git=lab # GitLab and GitHub git wrapper
 
 alias cleandisk="yay -Sc && paccache -rk1"
