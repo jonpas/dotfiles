@@ -15,8 +15,8 @@ usage() {
     echo "Windows 10 GPU-Passthrough VM Start script."
     echo "[-h] help"
     echo "[-p <true/false>] use huge pages"
-    echo "[-w <true/false>] passthrough wheel"
-    echo "[-a <true/false>] passthrough audio"
+    echo "[-w <true/false>] pass-through wheel"
+    echo "[-a <true/false>] pass-through audio"
     echo "[-m <gigabytes>] memory"
     exit 1
 }
@@ -27,7 +27,7 @@ while getopts 'hp:w:a:m:' flag; do
         p) ENABLE_HUGEPAGES=${OPTARG} ;;
         w) ENABLE_PASSTHROUGH_WHEEL=${OPTARG} ;;
         a) ENABLE_PASSTHROUGH_AUDIO=${OPTARG} ;;
-        m) MEMORY="${OPTARG}" ;;
+        m) MEMORY="${OPTARG}G" ;;
         *) usage ;;
     esac
 done
@@ -36,6 +36,11 @@ if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
     echo "USB Device Pass-Through disabled! Controller being passed."
     ENABLE_PASSTHROUGH_USB_DEVICES=false
 fi
+
+echo "Huge-pages: $ENABLE_HUGEPAGES"
+echo "Pass-Through Wheel: $ENABLE_PASSTHROUGH_WHEEL"
+echo "Pass-Through Audio: $ENABLE_PASSTHROUGH_AUDIO"
+echo "Memory: $MEMORY"
 
 
 # Rebind helper
