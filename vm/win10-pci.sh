@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# Arguments
 ENABLE_PASSTHROUGH_GPU=true
 ENABLE_PASSTHROUGH_MOUSEKEYBOARD=false # Configuration or latency-free (will disable it in case of crash)
 ENABLE_PASSTHROUGH_USB_CONTROLLER=false
@@ -10,6 +11,26 @@ ENABLE_QEMU_GPU=false # Integrated QEMU GPU
 ENABLE_HUGEPAGES=true
 MEMORY="16G"
 
+usage() {
+    echo "Windows 10 GPU-Passthrough VM Start script."
+    echo "[-h] help"
+    echo "[-p <true/false>] use huge pages"
+    echo "[-w <true/false>] passthrough wheel"
+    echo "[-a <true/false>] passthrough audio"
+    echo "[-m <gigabytes>] memory"
+    exit 1
+}
+
+while getopts 'hp:w:a:m:' flag; do
+    case "${flag}" in
+        h) usage ;;
+        p) ENABLE_HUGEPAGES=${OPTARG} ;;
+        w) ENABLE_PASSTHROUGH_WHEEL=${OPTARG} ;;
+        a) ENABLE_PASSTHROUGH_AUDIO=${OPTARG} ;;
+        m) MEMORY="${OPTARG}" ;;
+        *) usage ;;
+    esac
+done
 
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
     echo "USB Device Pass-Through disabled! Controller being passed."
@@ -17,6 +38,7 @@ if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
 fi
 
 
+# Rebind helper
 rebind() {
     dev="$1"
     driver="$2"
