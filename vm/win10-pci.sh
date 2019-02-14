@@ -84,6 +84,10 @@ done
 # RAM
 OPTS+=" -m $MEMORY"
 if [ "$ENABLE_HUGEPAGES" = true ]; then
+    # Clear cached memory to allow reserving (save cached data to disk and drop caches)
+    sync ; echo 3 > /proc/sys/vm/drop_caches
+
+    # 8400 2MB pages = 16GB+
     echo 8400 > /proc/sys/vm/nr_hugepages
     OPTS+=" -mem-path /dev/hugepages"
 fi
@@ -123,6 +127,8 @@ else
 fi
 
 # Mouse & Keyboard (pass one always in case of lock-ups or network issues)
+OPTS+=" -device virtio-mouse-pci"
+OPTS+=" -device virtio-keyboard-pci"
 if [ "$ENABLE_PASSTHROUGH_MOUSEKEYBOARD" = true ]; then
     OPTS+=" -usb -device usb-host,vendorid=0x046d,productid=0xc332" # Logitech G502 Mouse
     OPTS+=" -usb -device usb-host,vendorid=0x046d,productid=0xc24d" # Logitech G710 Keyboard
