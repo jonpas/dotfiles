@@ -11,8 +11,8 @@ fi
 # Sleep between terminal programs to assure correct slot is taken (same terminal)
 i3-msg "workspace 1  ; append_layout ~/.config/i3/workspace-1.json"
 
-termite -e htop & sleep 0.25
-termite -e 'watch progress -q' & sleep 0.25
-termite -e 'watch grep \"cpu MHz\" /proc/cpuinfo' &
+i3-sensible-terminal -e htop & sleep 0.25
+i3-sensible-terminal -e 'watch progress -q' & sleep 0.25
+i3-sensible-terminal -e 'watch grep \"cpu MHz\" /proc/cpuinfo' &
 slack &
 discord &
