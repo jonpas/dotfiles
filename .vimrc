@@ -55,6 +55,7 @@ set noswapfile
 set mouse=a
 set scrolloff=2
 set backspace=indent,eol,start
+set ttymouse=sgr " Vim does not recognize Alacritty as SGR-supported terminal
 
 " Layout
 autocmd FileType css ColorHighlight
