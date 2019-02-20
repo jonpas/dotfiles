@@ -124,11 +124,11 @@
                "x": 0,
                "y": 0
             },
-            "name": "termite - htop",
+            "name": "terminal - htop",
             "percent": 0.8,
             "swallows": [
                {
-                "class": "^Termite$"
+                "class": "^Alacritty$"
                }
             ],
             "type": "con"
@@ -151,11 +151,11 @@
                        "x": 0,
                        "y": 0
                     },
-                    "name": "termite - watch progress",
+                    "name": "terminal - watch progress",
                     "percent": 0.65,
                     "swallows": [
                        {
-                        "class": "^Termite$"
+                        "class": "^Alacritty$"
                        }
                     ],
                     "type": "con"
@@ -170,11 +170,11 @@
                        "x": 0,
                        "y": 0
                     },
-                    "name": "termite - watch cpu freq",
+                    "name": "terminal - watch cpu freq",
                     "percent": 0.35,
                     "swallows": [
                        {
-                        "class": "^Termite$"
+                        "class": "^Alacritty$"
                        }
                     ],
                     "type": "con"
