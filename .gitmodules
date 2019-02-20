@@ -65,3 +65,6 @@
 [submodule ".vim/bundle/rust"]
 	path = .vim/bundle/rust
 	url = https://github.com/rust-lang/rust.vim
+[submodule ".vim/bundle/devicons"]
+	path = .vim/bundle/devicons
+	url = https://github.com/ryanoasis/vim-devicons
