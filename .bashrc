@@ -1,4 +1,4 @@
-export TERMINAL=alacritty
+export TERMINAL=termite #alacritty https://github.com/tomaka/winit/issues/705
 export EDITOR=vim
 
 alias ls='ls --color=auto'

@@ -1,7 +1,7 @@
 dotfiles
 ========
 
-Dotfiles for Arch Linux with i3, vim, rofi, alacritty... and VFIO.
+Dotfiles for Arch Linux with i3, vim, rofi, termite... and VFIO.
 
 
 ### Program Packages/Plugins/Scripts:
@@ -41,8 +41,8 @@ $ git submodule update --recursive --remote
     - i3blocks*
     - imgur-screenshot!
     - ranger/*
-    - termite* (unused)
-    - alacritty*
+    - termite*
+    - alacritty* (unused https://github.com/tomaka/winit/issues/705)
     - udiskie*
 /etc/
     - NetworkManager/dispatcher.d/*

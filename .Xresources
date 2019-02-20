@@ -11,7 +11,8 @@ rofi.color-active:                   #282828,#ebdbb2,#353535,#ff9800,#282828
 rofi.color-window:                   #282828,#ff9800
 
 ! Behaviour
-rofi.terminal:                       alacritty
+!rofi.terminal:                       alacritty https://github.com/tomaka/winit/issues/705
+rofi.terminal:                       termite
 rofi.levenshtein-sort:               true
 rofi.fuzzy:                          true
 rofi.kb-cancel:                      Escape,Control+c
