@@ -12,6 +12,11 @@ env:
   # available, otherwise `xterm-256color` is used.
   TERM: xterm-256color # alacritty TERM bugged (ref. https://github.com/jwilm/alacritty/issues/919)
 
+  # WINI_HIDPI_FACTOR variable
+  #
+  # Set DPI/DPR scale to 1.0 to display correct size on different monitors
+  WINIT_HIDPI_FACTOR: 1.0
+
 window:
   # Window dimensions (changes require restart)
   #
