@@ -59,9 +59,6 @@
 [submodule ".vim/bundle/xml"]
 	path = .vim/bundle/xml
 	url = https://github.com/othree/xml.vim
-[submodule ".vim/bundle/clang_complete"]
-	path = .vim/bundle/clang_complete
-	url = https://github.com/rip-rip/clang_complete
 [submodule ".vim/bundle/rust"]
 	path = .vim/bundle/rust
 	url = https://github.com/rust-lang/rust.vim
