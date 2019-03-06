@@ -9,6 +9,7 @@ ENABLE_PASSTHROUGH_WHEEL=true # Separate from other USB devices
 ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_QEMU_GPU=false # Integrated QEMU GPU
 ENABLE_HUGEPAGES=true
+ENABLE_LOOKINGGLASS=false
 MEMORY="16G"
 
 usage() {
@@ -18,6 +19,7 @@ usage() {
     echo "[-w <true/false>] pass-through wheel"
     echo "[-a <true/false>] pass-through audio"
     echo "[-m <gigabytes>] memory"
+    echo "[-g <true/false>] use Looking Glass"
     exit 1
 }
 
@@ -28,6 +30,7 @@ while getopts 'hp:w:a:m:' flag; do
         w) ENABLE_PASSTHROUGH_WHEEL=${OPTARG} ;;
         a) ENABLE_PASSTHROUGH_AUDIO=${OPTARG} ;;
         m) MEMORY="${OPTARG}G" ;;
+        g) ENABLE_LOOKINGGLASS=${OPTARG} ;;
         *) usage ;;
     esac
 done
@@ -41,6 +44,7 @@ echo "Huge-pages: $ENABLE_HUGEPAGES"
 echo "Pass-Through Wheel: $ENABLE_PASSTHROUGH_WHEEL"
 echo "Pass-Through Audio: $ENABLE_PASSTHROUGH_AUDIO"
 echo "Memory: $MEMORY"
+echo "Looking Glass: $ENABLE_LOOKINGGLASS"
 
 
 # Rebind helper
@@ -124,6 +128,21 @@ if [ "$ENABLE_QEMU_GPU" = false ]; then
     OPTS+=" -vga none" # Disable QEMU GPU
 else
     OPTS+=" -usb -device usb-tablet" # Prevent mouse grabbing on QEMU VGA
+fi
+
+if [ "$ENABLE_LOOKINGGLASS" = true ]; then
+    OPTS+=" -device ivshmem-plain,memdev=ivshmem,bus=pcie.0"
+    OPTS+=" -object memory-backend-file,id=ivshmem,share=on,mem-path=/dev/shm/looking-glass,size=32M"
+    OPTS+=" -spice port=5900,addr=127.0.0.1,disable-ticketing"
+
+    # Create shared memory
+    if [ -f /dev/shm/looking-glass ]; then
+        rm /dev/shm/looking-glass
+    fi
+
+    touch /dev/shm/looking-glass
+    chown jonpas:jonpas /dev/shm/looking-glass
+    chmod 660 /dev/shm/looking-glass
 fi
 
 # Mouse & Keyboard (pass one always in case of lock-ups or network issues)
