@@ -25,7 +25,6 @@ border=#689d6a
 border=#a89984
 
 [bandwidth]
-command=~/.config/i3blocks/$BLOCK_NAME.sh -i " " -o " "
 interval=1
 border=#458588
 
