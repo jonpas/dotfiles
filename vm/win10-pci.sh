@@ -23,7 +23,7 @@ usage() {
     exit 1
 }
 
-while getopts 'hp:w:a:m:' flag; do
+while getopts 'hp:w:a:m:g:' flag; do
     case "${flag}" in
         h) usage ;;
         p) ENABLE_HUGEPAGES=${OPTARG} ;;
