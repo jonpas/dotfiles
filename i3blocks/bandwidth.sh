@@ -54,9 +54,6 @@ echo "${time} ${rx} ${tx}" > "${path}"
 old=(${old//;/ })
 time_diff=$(( $time - ${old[0]} ))
 
-# Sanity check - positive amount of time passed
-[[ "${time_diff}" -gt 0 ]] || exit
-
 # Calculate bytes transferred, and their rate in byte/s
 rx_diff=$(( $rx - ${old[1]} ))
 tx_diff=$(( $tx - ${old[2]} ))
@@ -67,19 +64,16 @@ tx_rate=$(( $tx_diff / $time_diff ))
 # If the value is larger than 1024^2 = 1048576, display MiB/s instead
 
 # Incoming
-echo -n " "
-rx_kib=$(( $rx_rate >> 10 ))
+rx_bw=$(( $rx_rate >> 10 ))K
 if hash bc 2>/dev/null && [[ "$rx_rate" -gt 1048576 ]]; then
-    printf '%sM' "`echo "scale=1; $rx_kib / 1024" | bc`"
-else
-    echo -n "${rx_kib}K"
+    printf -v rx_bw '%sM' "`echo "scale=1; $rx_bw / 1024" | bc`"
 fi
 
 # Outgoing
-echo -n "  "
-tx_kib=$(( $tx_rate >> 10 ))
+tx_bw=$(( $tx_rate >> 10 ))K
 if hash bc 2>/dev/null && [[ "$tx_rate" -gt 1048576 ]]; then
-    printf '%sM' "`echo "scale=1; $tx_kib / 1024" | bc`"
-else
-    echo -n "${tx_kib}K"
+    printf -v tx_bw '%sM' "`echo "scale=1; $tx_bw / 1024" | bc`"
 fi
+
+echo " ${rx_bw}  ${tx_bw}"
+echo " ${rx_bw}  ${tx_bw}"
