@@ -17,11 +17,19 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Use the device used for the default route
-interface=$(ip route | awk '/^default/ {print $5}')
+# Use the devices used for the default route and check which one is up
+interfaces=$(ip route | awk '/^default/ {print $5}')
+interface=""
+
+for intf in $interfaces; do
+    if [ -e "/sys/class/net/${intf}/operstate" ] && [ $(cat /sys/class/net/${intf}/operstate) = "up" ]; then
+        interface=$intf
+        break
+    fi
+done
 
 # No connection
-if ! [ -e "/sys/class/net/${interface}/operstate" ] || ! [ "`cat /sys/class/net/${interface}/operstate`" = "up" ]; then
+if [ -z "$interface" ]; then
     echo "     "
     echo "     "
     echo "#fb4934"
@@ -41,7 +49,7 @@ time=$(date +%s)
 # Write current data if file does not exist
 # Do not exit, would cause problems if this file is
 # sourced instead of executed as another process
-if ! [[ -f "${path}" ]]; then
+if ! [ -f "${path}" ]; then
     echo "${time} ${rx} ${tx}" > "${path}"
     chmod 0666 "${path}"
 fi
