@@ -74,13 +74,13 @@ tx_rate=$(( $tx_diff / $time_diff ))
 # Incoming
 rx_bw=$(( $rx_rate >> 10 ))K
 if hash bc 2>/dev/null && [[ "$rx_rate" -gt 1048576 ]]; then
-    printf -v rx_bw '%sM' "`echo "scale=1; $rx_bw / 1024" | bc`"
+    printf -v rx_bw "%sM" $(echo "scale=1; $rx_bw / 1024" | bc)
 fi
 
 # Outgoing
 tx_bw=$(( $tx_rate >> 10 ))K
 if hash bc 2>/dev/null && [[ "$tx_rate" -gt 1048576 ]]; then
-    printf -v tx_bw '%sM' "`echo "scale=1; $tx_bw / 1024" | bc`"
+    printf -v tx_bw "%sM" $(echo "scale=1; $tx_bw / 1024" | bc)
 fi
 
 echo " ${rx_bw}  ${tx_bw}"
