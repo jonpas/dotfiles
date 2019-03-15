@@ -81,9 +81,11 @@ OPTS+=" -rtc base=localtime" # Windows uses localtime
 # CPU
 OPTS+=" -cpu host,kvm=off,hv_vendor_id=0123456789ab,hv_time,hv_relaxed,hv_vapic,hv_spinlocks=0x1fff"
 OPTS+=" -smp 4,sockets=1,cores=4,threads=1"
-for i in $(seq 0 3); do
-    OPTS+=" -vcpu vcpunum=$i,affinity=$i" # Pin virtual CPU cores to actual CPU cores (qemu-patched)
-done
+
+# CPU Pinning - disabled, actually slower when pinning all cores, but latency is probably a bit higher
+#for i in $(seq 0 3); do
+#    OPTS+=" -vcpu vcpunum=$i,affinity=$i" # Pin virtual CPU cores to actual CPU cores (qemu-patched)
+#done
 
 # RAM
 OPTS+=" -m $MEMORY"
