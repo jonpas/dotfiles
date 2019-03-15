@@ -1,10 +1,7 @@
 #!/bin/bash
 
 if [ $(hostname) = "loki" ]; then
-    echo ""
-    echo ""
-    echo ""
-    exit 1
+    exit 0
 fi
 
 sleep 0.1 # Wait for hardware to actually apply values
