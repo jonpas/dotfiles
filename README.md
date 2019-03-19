@@ -29,6 +29,7 @@ $ git submodule update --recursive --remote
     - .weechat/*
     - .Xresources
     - .bashrc
+    - .drirc (iGPU-Intel)
     - .gtkrc-2.0
     - .prompt.py
     - .vimrc
@@ -51,7 +52,7 @@ $ git submodule update --recursive --remote
     - default/* (~VFIO)
     - grub.d/*
     - modprobe.d/*
-    - pacman.d/hooks* (Nvidia)
+    - pacman.d/hooks* (GPU-Nvidia)
     - samba/* (~VFIO)
     - fstab(-hostname)
     - locale.conf
@@ -69,4 +70,5 @@ _Notes:_
 - _`(-hostname)` for splitting different files for different machines._
 - _`(BAK)` for backup tools._
 - _`(VFIO)` for PCI passthrough Virtual Machine setup (`~` for partially VFIO)._
-- _`(Nvidia)` for Nvidia GPUs._
+- _`(GPU-Nvidia)` for Nvidia GPUs._
+- _`(iGPU-Intel)` for Intel iGPUs._
