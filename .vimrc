@@ -101,6 +101,13 @@ if has("nvim")
     tnoremap <Esc> <C-\><C-n>
 endif
 
+" Ex commands
+" Simplify saving and closing when shift held for too long
+command WQ wq
+command Wq wq
+command W w
+command Q q
+
 " Airline
 let g:airline_left_sep = ""
 let g:airline_right_sep = ""
