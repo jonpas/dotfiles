@@ -79,7 +79,7 @@ OPTS+=" -M pc-q35-3.0" # 'pc-q35-3.0' for qemu-patched 3.0+, 'q35' for qemu <3.0
 OPTS+=" -rtc base=localtime" # Windows uses localtime
 
 # CPU
-OPTS+=" -cpu host,kvm=off,hv_vendor_id=0123456789ab,hv_time,hv_relaxed,hv_vapic,hv_spinlocks=0x1fff"
+OPTS+=" -cpu host,migratable=no,+invtsc,kvm=off,hv_vendor_id=0123456789ab,hv_time,hv_relaxed,hv_vapic,hv_spinlocks=0x1fff"
 OPTS+=" -smp 4,sockets=1,cores=4,threads=1"
 
 # CPU Pinning - disabled, actually slower when pinning all cores, but latency is probably a bit higher
