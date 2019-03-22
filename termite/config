@@ -1,5 +1,6 @@
 [options]
 font = Fantasque Sans Mono Regular 10
+scrollback_lines = -1  # Infinite
 
 [colors]
 foreground = #ebdbb2
