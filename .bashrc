@@ -37,6 +37,9 @@ function __prompt_command() {
     PS1=$(~/.prompt.py --left)
 }
 
+# Disable dotnet telemetry
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+
 # Jump to path aliases
 alias jS='cd ~/Work/School'
 alias jST='cd ~/Work/School/FERI-RIT-UNI/Tasks/UNI-3-2'
