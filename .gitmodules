@@ -65,3 +65,6 @@
 [submodule ".vim/bundle/devicons"]
 	path = .vim/bundle/devicons
 	url = https://github.com/ryanoasis/vim-devicons
+[submodule ".vim/bundle/toml"]
+	path = .vim/bundle/toml
+	url = https://github.com/cespare/vim-toml
