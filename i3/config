@@ -278,6 +278,8 @@ exec --no-startup-id nm-applet
 exec --no-startup-id mons -a
 # USB automounter
 exec --no-startup-id udiskie -s
+# Screenshot
+exec --no-startup-id flameshot
 
 # Wallpaper
 exec --no-startup-id $set_wallpaper
@@ -290,11 +292,8 @@ bindcode 192 exec i3-sensible-terminal -d "/run/media/$(whoami)"
 # Calculator keybind (196 = G710 'G2' key)
 bindcode 193 exec i3-sensible-terminal -e bc
 
-# Screenshot keybind
-bindsym --release Print exec --no-startup-id escrotum
-# imgur-screenshot keybind
-bindsym --release Ctrl+Print exec --no-startup-id imgur-screenshot # Click for window (using escrotum)
-bindsym --release $mod+Print exec --no-startup-id imgur-screenshot -f
+# Screenshot (flameshot) keybind
+bindsym Print exec --no-startup-id flameshot gui
 
 # Window Settings
 for_window [class="(?i)gsimplecal"]             floating enable, move position mouse, move down $bar_height px

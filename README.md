@@ -40,10 +40,9 @@ $ git submodule update --recursive --remote
     - gtk-3.0/*
     - i3* (~VFIO)
     - i3blocks*
-    - imgur-screenshot!
     - ranger/*
     - termite*
-    - alacritty* (unused https://github.com/tomaka/winit/issues/705)
+    - alacritty* (unused - https://github.com/tomaka/winit/issues/705)
     - udiskie*
 /etc/
     - NetworkManager/dispatcher.d/*
