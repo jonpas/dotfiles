@@ -10,7 +10,7 @@ ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_QEMU_GPU=false # Integrated QEMU GPU
 ENABLE_HUGEPAGES=true
 ENABLE_LOOKINGGLASS=false
-MEMORY="16G"
+MEMORY="16"
 
 usage() {
     echo "Windows 10 GPU-Passthrough VM Start script."
@@ -29,7 +29,7 @@ while getopts 'hp:w:a:m:g:' flag; do
         p) ENABLE_HUGEPAGES=${OPTARG} ;;
         w) ENABLE_PASSTHROUGH_WHEEL=${OPTARG} ;;
         a) ENABLE_PASSTHROUGH_AUDIO=${OPTARG} ;;
-        m) MEMORY="${OPTARG}G" ;;
+        m) MEMORY=${OPTARG} ;;
         g) ENABLE_LOOKINGGLASS=${OPTARG} ;;
         *) usage ;;
     esac
@@ -43,7 +43,7 @@ fi
 echo "Huge-pages: $ENABLE_HUGEPAGES"
 echo "Pass-Through Wheel: $ENABLE_PASSTHROUGH_WHEEL"
 echo "Pass-Through Audio: $ENABLE_PASSTHROUGH_AUDIO"
-echo "Memory: $MEMORY"
+echo "Memory: ${MEMORY}G"
 echo "Looking Glass: $ENABLE_LOOKINGGLASS"
 
 
@@ -77,6 +77,7 @@ OPTS=""
 OPTS+=" -enable-kvm"
 OPTS+=" -M pc-q35-3.0" # 'pc-q35-3.0' for qemu-patched 3.0+, 'q35' for qemu <3.0
 OPTS+=" -rtc base=localtime" # Windows uses localtime
+OPTS+=" -monitor stdio"
 
 # CPU
 OPTS+=" -cpu host,migratable=no,+invtsc,kvm=off,hv_vendor_id=0123456789ab,hv_time,hv_relaxed,hv_vapic,hv_spinlocks=0x1fff"
@@ -88,14 +89,21 @@ OPTS+=" -smp 4,sockets=1,cores=4,threads=1"
 #done
 
 # RAM
-OPTS+=" -m $MEMORY"
+OPTS+=" -m ${MEMORY}G"
 if [ "$ENABLE_HUGEPAGES" = true ]; then
     # Clear cached memory to allow reserving (save cached data to disk and drop caches)
     sync ; echo 3 > /proc/sys/vm/drop_caches
 
+    # Make sure we can allocate enough memory
+    if [ $(free --giga | awk '/Mem:/ { print $4 }') -le $MEMORY ]; then
+        echo "Error! Not enough free memory!"
+        exit 2
+    fi
+
     # 8400 2MB pages = 16GB+
     echo 8400 > /proc/sys/vm/nr_hugepages
     OPTS+=" -mem-path /dev/hugepages"
+    OPTS+=" -mem-prealloc"
 fi
 
 # UEFI/BIOS
