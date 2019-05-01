@@ -33,8 +33,8 @@ fi
 export PROMPT_COMMAND=__prompt_command
 function __prompt_command() {
     export ERR=$?
-    ~/.prompt.py --right
-    PS1=$(~/.prompt.py --left)
+    ~/.cargo/bin/prompt-rs --right
+    PS1=$(~/.cargo/bin/prompt-rs --left)
 }
 
 # Disable dotnet telemetry
