@@ -18,17 +18,19 @@ usage() {
     echo "[-p <true/false>] use huge pages"
     echo "[-w <true/false>] pass-through wheel"
     echo "[-a <true/false>] pass-through audio"
+    echo "[-k <true/false>] pass-through mouse/keyboard"
     echo "[-m <gigabytes>] memory"
     echo "[-g <true/false>] use Looking Glass"
     exit 1
 }
 
-while getopts 'hp:w:a:m:g:' flag; do
+while getopts 'hp:w:a:k:m:g:' flag; do
     case "${flag}" in
         h) usage ;;
         p) ENABLE_HUGEPAGES=${OPTARG} ;;
         w) ENABLE_PASSTHROUGH_WHEEL=${OPTARG} ;;
         a) ENABLE_PASSTHROUGH_AUDIO=${OPTARG} ;;
+        k) ENABLE_PASSTHROUGH_MOUSEKEYBOARD=${OPTARG} ;;
         m) MEMORY=${OPTARG} ;;
         g) ENABLE_LOOKINGGLASS=${OPTARG} ;;
         *) usage ;;
@@ -43,6 +45,7 @@ fi
 echo "Huge-pages: $ENABLE_HUGEPAGES"
 echo "Pass-Through Wheel: $ENABLE_PASSTHROUGH_WHEEL"
 echo "Pass-Through Audio: $ENABLE_PASSTHROUGH_AUDIO"
+echo "Pass-Through Mouse/Keyboard: $ENABLE_PASSTHROUGH_MOUSEKEYBOARD"
 echo "Memory: ${MEMORY}G"
 echo "Looking Glass: $ENABLE_LOOKINGGLASS"
 
