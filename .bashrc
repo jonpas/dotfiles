@@ -15,6 +15,7 @@ alias l='ls -CF'
 
 alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
+alias vm='sudo ~/dotfiles/vm/win10-pci.sh'
 
 alias git=hub # GitHub git wrapper
 

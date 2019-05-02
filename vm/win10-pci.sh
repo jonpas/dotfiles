@@ -5,11 +5,11 @@ ENABLE_PASSTHROUGH_GPU=true
 ENABLE_PASSTHROUGH_MOUSEKEYBOARD=false # Configuration or latency-free (will disable it in case of crash)
 ENABLE_PASSTHROUGH_USB_CONTROLLER=false
 ENABLE_PASSTHROUGH_USB_DEVICES=true # Only if controller not passed
-ENABLE_PASSTHROUGH_WHEEL=true # Separate from other USB devices
+ENABLE_PASSTHROUGH_WHEEL=false # Separate from other USB devices
 ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_QEMU_GPU=false # Integrated QEMU GPU
 ENABLE_HUGEPAGES=true
-ENABLE_LOOKINGGLASS=false
+ENABLE_LOOKINGGLASS=true
 MEMORY="16"
 
 usage() {
