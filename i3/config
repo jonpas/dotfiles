@@ -265,8 +265,6 @@ bindsym XF86AudioNext         exec --no-startup-id playerctl next
 bindsym XF86Launch1           exec i3-sensible-terminal -d "/run/media/$(whoami)" # ThinkVantage button on ThinkPad
 bindsym $mod+XF86Launch1      exec i3-sensible-terminal -e bc
 
-# Scroll Lock LED (xmodmap actually toggles it and breaks i3 $mod keys)
-bindsym Scroll_Lock exec --no-startup-id ~/.config/i3/scroll-lock.sh
 # Lock keybind
 bindsym $mod+Ctrl+l exec --no-startup-id ~/.config/i3/lock.sh
 # Screenshot (flameshot) keybind
