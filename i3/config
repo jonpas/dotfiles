@@ -244,6 +244,13 @@ client.unfocused        #323232 #323232 #ebdbb2 #323232
 client.focused_inactive #323232 #333333 #ebdbb2 #323232
 client.urgent           #cc241d #383a3b #fb4934 #383a3b
 
+# Borders & Gaps
+new_window pixel 2
+gaps inner 5
+gaps outer 2
+smart_gaps on
+smart_borders on
+
 # Function Keys
 bindsym XF86MonBrightnessUp   exec pkill -RTMIN+1 i3blocks # Actual brightness controlled by hardware
 bindsym XF86MonBrightnessDown exec pkill -RTMIN+1 i3blocks # Actual brightness controlled by hardware
@@ -258,12 +265,17 @@ bindsym XF86AudioNext         exec --no-startup-id playerctl next
 bindsym XF86Launch1           exec i3-sensible-terminal -d "/run/media/$(whoami)" # ThinkVantage button on ThinkPad
 bindsym $mod+XF86Launch1      exec i3-sensible-terminal -e bc
 
-# Borders & Gaps
-new_window pixel 2
-gaps inner 5
-gaps outer 2
-smart_gaps on
-smart_borders on
+# Scroll Lock LED (xmodmap actually toggles it and breaks i3 $mod keys)
+bindsym Scroll_Lock exec --no-startup-id ~/.config/i3/scroll-lock.sh
+# Lock keybind
+bindsym $mod+Ctrl+l exec --no-startup-id ~/.config/i3/lock.sh
+# Screenshot (flameshot) keybind
+bindsym Print exec --no-startup-id flameshot gui
+
+# Mount location keybind (195 = G710 'G1' key)
+bindcode 192 exec i3-sensible-terminal -d "/run/media/$(whoami)"
+# Calculator keybind (196 = G710 'G2' key)
+bindcode 193 exec i3-sensible-terminal -e bc
 
 # Monitor
 exec --no-startup-id ~/.config/i3/monitor.sh
@@ -280,20 +292,8 @@ exec --no-startup-id mons -a
 exec --no-startup-id udiskie -s
 # Screenshot
 exec --no-startup-id flameshot
-
 # Wallpaper
 exec --no-startup-id $set_wallpaper
-
-# Lock keybind
-bindsym $mod+Ctrl+l exec --no-startup-id ~/.config/i3/lock.sh
-
-# Mount location keybind (195 = G710 'G1' key)
-bindcode 192 exec i3-sensible-terminal -d "/run/media/$(whoami)"
-# Calculator keybind (196 = G710 'G2' key)
-bindcode 193 exec i3-sensible-terminal -e bc
-
-# Screenshot (flameshot) keybind
-bindsym Print exec --no-startup-id flameshot gui
 
 # Window Settings
 for_window [class="(?i)gsimplecal"]             floating enable, move position mouse, move down $bar_height px

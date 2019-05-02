@@ -55,6 +55,7 @@ $ git submodule update --recursive --remote
     - samba/* (~VFIO)
     - fstab(-hostname)
     - locale.conf
+    - looking-glass.conf (VFIO)
     - mkinitcpio.conf (VFIO)
     - slim.conf
     - synergy.conf (~VFIO)
