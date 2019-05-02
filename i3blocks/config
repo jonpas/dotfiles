@@ -10,6 +10,10 @@ border_bottom=3
 interval=120
 border=#cc241d
 
+[vm]
+interval=5
+border=#a9a9a9
+
 [backlight]
 interval=once
 signal=1
