@@ -196,6 +196,10 @@ if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
     OPTS+=" -device vfio-pci,host=00:1b.0,bus=root.1,addr=00.3"
 else
     OPTS+=" -soundhw hda" # 'hda' for qemu-patched, 'ac97' otherwise
+
+    # Manually set pulseaudio, Spice unsets it
+    export QEMU_AUDIO_DRV=pa
+    export QEMU_PA_SERVER=/run/user/1000/pulse/native
 fi
 
 
