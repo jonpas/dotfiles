@@ -49,6 +49,9 @@ echo "Pass-Through Audio: $ENABLE_PASSTHROUGH_AUDIO"
 echo "Pass-Through Mouse/Keyboard: $ENABLE_PASSTHROUGH_MOUSEKEYBOARD"
 echo "Memory: ${MEMORY}G"
 echo "Looking Glass: $ENABLE_LOOKINGGLASS"
+if [ "$ENABLE_LOOKINGGLASS" = true ]; then
+    echo "Spice Unix Socket: $LG_SPICE_UNIX_SOCKET"
+fi
 
 
 # Rebind helper
@@ -158,9 +161,18 @@ if [ "$ENABLE_LOOKINGGLASS" = true ]; then
     chmod 660 /dev/shm/looking-glass
 
     # Spice connection
-    if [ "$LG_SPICE_UNIX_SOCKET" = true]; then
+    if [ "$LG_SPICE_UNIX_SOCKET" = true ]; then
         OPTS+=" -spice gl=on,unix,addr=/run/user/1000/spice.sock,disable-ticketing" # Unix socket
-        chown jonpas:jonpas /run/user/1000/spice.sock
+
+        # Set owner of Unix socket file (remove if exists, wait to be created by QEMU, change owner)
+        if [ -S /run/user/1000/spice.sock ]; then
+            rm /run/user/1000/spice.sock
+        fi
+        while [ ! -S /run/user/1000/spice.sock ]; do
+            sleep 1
+        done &&
+        chown jonpas:jonpas /run/user/1000/spice.sock &&
+        echo "Spice socket owner changed" &
     else
         OPTS+=" -spice port=5900,addr=127.0.0.1,disable-ticketing" # TCP
     fi
