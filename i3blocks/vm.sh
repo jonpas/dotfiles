@@ -28,6 +28,8 @@ if [ "$gpu_drv" == "vfio-pci" ] && [ "$aud_drv" == "vfio-pci" ]; then
 elif [ "$gpu_drv" != "nvidia" ] || [ "$aud_drv" != "snd_hda_intel" ]; then
     gpu+="NONE"
     color="#fb4934"
+else
+    gpu+="HOST"
 fi
 
 echo "$vm $gpu"
