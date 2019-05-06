@@ -10,6 +10,7 @@ ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_QEMU_GPU=false # Integrated QEMU GPU
 ENABLE_HUGEPAGES=true
 ENABLE_LOOKINGGLASS=true
+LG_SPICE_UNIX_SOCKET=true
 MEMORY="16"
 
 usage() {
@@ -146,7 +147,6 @@ fi
 if [ "$ENABLE_LOOKINGGLASS" = true ]; then
     OPTS+=" -device ivshmem-plain,memdev=ivshmem,bus=pcie.0"
     OPTS+=" -object memory-backend-file,id=ivshmem,share=on,mem-path=/dev/shm/looking-glass,size=32M"
-    OPTS+=" -spice port=5900,addr=127.0.0.1,disable-ticketing"
 
     # Create shared memory
     if [ -f /dev/shm/looking-glass ]; then
@@ -156,6 +156,19 @@ if [ "$ENABLE_LOOKINGGLASS" = true ]; then
     touch /dev/shm/looking-glass
     chown jonpas:jonpas /dev/shm/looking-glass
     chmod 660 /dev/shm/looking-glass
+
+    # Spice connection
+    if [ "$LG_SPICE_UNIX_SOCKET" = true]; then
+        OPTS+=" -spice gl=on,unix,addr=/run/user/1000/spice.sock,disable-ticketing" # Unix socket
+        chown jonpas:jonpas /run/user/1000/spice.sock
+    else
+        OPTS+=" -spice port=5900,addr=127.0.0.1,disable-ticketing" # TCP
+    fi
+
+    # Spice Agent (clipboard)
+    OPTS+=" -device virtio-serial"
+    OPTS+=" -chardev spicevmc,id=vdagent,debug=0,name=vdagent"
+    OPTS+=" -device virtserialport,chardev=vdagent,name=com.redhat.spice.0"
 fi
 
 # Mouse & Keyboard (pass one always in case of lock-ups or network issues)
