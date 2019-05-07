@@ -38,7 +38,7 @@ font pango:Fantasque Sans Mono 10
 floating_modifier $mod
 
 # Disable mouse focus
-focus_follows_mouse yes
+focus_follows_mouse no
 
 # Disable mouse warping (cursor moves to center of screen when focus is switched to different output)
 mouse_warping none
