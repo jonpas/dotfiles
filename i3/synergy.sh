@@ -17,4 +17,10 @@ if [ $(hostname) = "loki" ]; then
         rm ~/dotfiles/synergy.conf
         mv ~/dotfiles/synergy.conf.bak ~/dotfiles/synergy.conf
     fi
+
+    # Enable keyboard repeat
+    xset r on
+
+    # Disable Scroll Lock LED (locked to screen indicator)
+    xset -led 3
 fi

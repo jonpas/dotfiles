@@ -4,18 +4,14 @@ if [ $(hostname) != "loki" ]; then
     exit 0
 fi
 
-vm=" "
+vm="  "
 gpu=" "
 color="#a9a9a9"
 
-# Win10 VM (+ Scroll Lock LED)
+# Win10 VM
 if [ $(pgrep "win10-pci") ]; then
     vm+=" "
     color="#d3d3d3"
-    xset led 3
-else
-    vm+=" "
-    xset -led 3
 fi
 
 # GPU Pass-Through
