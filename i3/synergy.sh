@@ -11,6 +11,11 @@ if [ $(hostname) = "loki" ]; then
 
     systemctl --user restart synergys
 
+    # Wait for service to start again (before restoring configuration)
+    until systemctl --user is-active --quiet synergys; do
+        sleep 0.1
+    done
+
     # Restore Synergy configuration
     if [ "$vm" = "center" ]; then
         rm ~/dotfiles/synergy.conf
