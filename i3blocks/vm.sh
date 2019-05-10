@@ -30,6 +30,14 @@ else
     gpu+="HOST"
 fi
 
+# Synergy (Scroll Lock LED as locked to screen indicator)
+last_state_log=$(journalctl --user -eu synergys -g "locked" | tail -n 1)
+if grep --quiet " locked" <<< $last_state_log; then
+    xset led 3
+else
+    xset -led 3
+fi
+
 echo "$vm $gpu"
 echo "$vm $gpu"
 echo $color

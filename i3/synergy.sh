@@ -9,18 +9,11 @@ if [ $(hostname) = "loki" ]; then
         perl -i.bak -0777pe "s/section: links\n(.+?)\nend/$config_vm_center/s" ~/dotfiles/synergy.conf
     fi
 
-    pkill -x synergys
-    synergys -d WARNING # No SSL due to connection issues
+    systemctl --user restart synergys
 
     # Restore Synergy configuration
     if [ "$vm" = "center" ]; then
         rm ~/dotfiles/synergy.conf
         mv ~/dotfiles/synergy.conf.bak ~/dotfiles/synergy.conf
     fi
-
-    # Enable keyboard repeat
-    xset r on
-
-    # Disable Scroll Lock LED (locked to screen indicator)
-    xset -led 3
 fi

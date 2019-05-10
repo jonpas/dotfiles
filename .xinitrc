@@ -10,7 +10,11 @@ fi
 
 # User programs
 if [ $(hostname) = "loki" ]; then
+    # Load Nvidia driver (for later binding)
     nvidia-modprobe &
+
+    # Enable keyboard repeat (better Synergy compatibility)
+    xset r on
 elif [ $(hostname) = "odin" ]; then
     xrandr --output LVDS1 --mode 1600x900 &
 fi

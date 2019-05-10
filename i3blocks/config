@@ -11,7 +11,7 @@ interval=120
 border=#cc241d
 
 [vm]
-interval=5
+interval=1
 border=#a9a9a9
 
 [backlight]

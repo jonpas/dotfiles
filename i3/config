@@ -269,8 +269,6 @@ bindsym $mod+XF86Launch1      exec i3-sensible-terminal -e bc
 bindsym $mod+Ctrl+l exec --no-startup-id ~/.config/i3/lock.sh
 # Screenshot (flameshot)
 bindsym Ctrl+Print exec --no-startup-id flameshot gui
-# Synergy lock to screen + Scroll Lock LED indicator (128 = G710 'G6' key)
-bindsym --release F19 exec --no-startup-id ~/.config/i3/synergy-lock.sh
 
 # Mount location (195 = G710 'G1' key)
 bindcode 192 exec i3-sensible-terminal -d "/run/media/$(whoami)"
