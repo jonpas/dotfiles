@@ -98,8 +98,10 @@ OPTS+=" -smp 4,sockets=1,cores=4,threads=1"
 # RAM
 OPTS+=" -m ${MEMORY}G"
 if [ "$ENABLE_HUGEPAGES" = true ]; then
-    # Clear cached memory to allow reserving (save cached data to disk and drop caches)
-    sync ; echo 3 > /proc/sys/vm/drop_caches
+    # Clear cached memory to allow reserving
+    sync # Save cached data to disk
+    echo 3 > /proc/sys/vm/drop_caches # Drop all caches to free reserved memory
+    echo 1 > /proc/sys/vm/compact_memory # Compact into contingous blocks
 
     # Make sure we can allocate enough memory
     if [ $(free --giga | awk '/Mem:/ { print $4 }') -le $MEMORY ]; then
