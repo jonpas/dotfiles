@@ -32,8 +32,11 @@ fi
 export PROMPT_COMMAND=__prompt_command
 function __prompt_command() {
     export ERR=$?
+
     ~/.cargo/bin/prompt-rs --right
     PS1=$(~/.cargo/bin/prompt-rs --left)
+
+    echo -ne "\033]0;$TERMINAL: $(pwd) \007"
 }
 
 # Disable dotnet telemetry
