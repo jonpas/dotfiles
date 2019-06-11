@@ -1,7 +1,11 @@
 #!/bin/bash
 
-updates=$(($(checkupdates | wc -l) + $(yay -Pu | wc -l)))
-[[ "$updates" = "0" ]] && exit 0
+$(yay -Syq)  # Sync package databases
+updates=$(yay -Pn)  # Get number of updates
+
+if [ "$updates" = "0" ]; then
+    exit 0
+fi
 
 echo " $updates"
 echo " $updates"
