@@ -82,7 +82,7 @@ OPTS=""
 
 # General
 OPTS+=" -enable-kvm"
-OPTS+=" -M pc-q35-3.0" # 'pc-q35-3.0' for qemu-patched 3.0+, 'q35' for qemu <3.0
+OPTS+=" -machine type=q35,kernel_irqchip=on" # 'kernel_irqchip=on' for qemu >=4.0
 OPTS+=" -rtc base=localtime" # Windows uses localtime
 OPTS+=" -monitor stdio"
 
@@ -128,14 +128,12 @@ OPTS+=" -drive file=/home/jonpas/Data/images/virtio-win.iso,index=3,media=cdrom"
 
 # Network
 OPTS+=" -net none"
-OPTS+=" -net nic,model=virtio" # 'virtio' may cause connection drop after a while without 'fix_virtio' patch (in qemu-patched)
+OPTS+=" -net nic,model=virtio" # 'virtio' may cause connection drop after a while without 'fix_virtio' patch (in qemu >=4.0)
 OPTS+=" -net user" #,smb=/home/jonpas/Storage/"
 
 # GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
     OPTS+=" -device pcie-root-port,chassis=0,bus=pcie.0,slot=0,id=root1"
-    OPTS+=" -set device.root1.speed=8"
-    OPTS+=" -set device.root1.width=16"
 
     rebind 0000:01:00.0 vfio-pci # GPU
     OPTS+=" -device vfio-pci,host=01:00.0,bus=root1,addr=00.0,multifunction=on"
@@ -222,11 +220,8 @@ if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
     rebind 0000:00:1b.0 vfio-pci # Audio
     OPTS+=" -device vfio-pci,host=00:1b.0,bus=root.1,addr=00.3"
 else
-    OPTS+=" -soundhw hda" # 'hda' for qemu-patched, 'ac97' otherwise
-
-    # Manually set pulseaudio, Spice unsets it
-    export QEMU_AUDIO_DRV=pa
-    export QEMU_PA_SERVER=/run/user/1000/pulse/native
+    OPTS+=" -soundhw hda" # 'hda' for qemu >=4.0, 'ac97' otherwise
+    OPTS+=" -audiodev pa,id=pa1,server=/run/user/1000/pulse/native" # Pulseaudio
 fi
 
 
