@@ -1,6 +1,6 @@
 #!/bin/bash
 
-usage=$(mpstat 1 | head -4 | tail -1 | awk '{print int(100-$12)}')
+usage=$(mpstat 1 | head -4 | tail -1 | awk '{print int(100-$12+0.5)}')
 
 echo " $usage%"
 

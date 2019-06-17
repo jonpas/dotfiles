@@ -226,8 +226,8 @@ fi
 
 
 # VM START
+pkill -RTMIN+3 i3blocks
 qemu-system-x86_64 $OPTS
-
 
 # VM DEINIT
 # Memory
@@ -256,4 +256,5 @@ if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
     rebind 0000:01:00.1 snd_hda_intel # GPU Audio
 fi
 
+pkill -RTMIN+3 i3blocks
 exit 0

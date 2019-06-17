@@ -7,11 +7,12 @@ border_right=0
 border_bottom=3
 
 [updates]
-interval=120
+interval=600
 border=#cc241d
 
 [vm]
 interval=1
+signal=3
 border=#a9a9a9
 
 [backlight]
@@ -39,8 +40,8 @@ interval=30
 border=#8ec07c
 
 [volume]
-interval=10
-signal=3
+interval=60
+signal=2
 border=#83a598
 
 [time]

@@ -4,6 +4,8 @@ if [ $(hostname) != "loki" ]; then
     exit 0
 fi
 
+sleep 1 # Wait for signalling process a bit
+
 vm=" "
 gpu=" "
 color="#a9a9a9"
@@ -33,9 +35,9 @@ fi
 # Synergy (Scroll Lock LED as locked to screen indicator)
 last_state_log=$(journalctl --user -eu synergys -g "locked" | tail -n 1)
 if grep --quiet " locked" <<< $last_state_log; then
-    xset led 3
+    xset led named "Scroll Lock"
 else
-    xset -led 3
+    xset -led named "Scroll Lock"
 fi
 
 echo "$vm $gpu"
