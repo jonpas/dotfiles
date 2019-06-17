@@ -5,9 +5,11 @@ let mapleader=","
 call pathogen#infect()
 call pathogen#helptags()
 filetype plugin on
+runtime ftplugin/man.vim
 
 " Style (color list: http://jonasjacek.github.io/colors/)
 syntax on
+set synmaxcol=500
 set background=dark
 colorscheme gruvbox
 set cursorline
@@ -64,6 +66,21 @@ set laststatus=2
 set equalalways
 let g:gitgutter_max_signs = 3000
 set tabpagemax=100
+au VimResized * exe "normal! \<c-w>="
+
+" Splits
+set splitright
+set diffopt+=vertical
+silent! set splitvertical
+if v:errmsg != ''
+  cabbrev split vert split
+  cabbrev hsplit split
+  cabbrev help vert help
+  noremap <C-w>] :vert botright wincmd ]<CR>
+  noremap <C-w><C-]> :vert botright wincmd ]<CR>
+else
+  cabbrev hsplit hor split
+endif
 
 " Searching
 set hlsearch
@@ -71,6 +88,8 @@ set incsearch
 set ignorecase
 set smartcase
 set rtp+=/usr/bin/fzf
+let g:ackprg = "ag --vimgrep --smart-case"
+cnoreabbrev ag Ack
 
 " Fugitive
 set diffopt+=vertical
@@ -89,7 +108,7 @@ nnoremap <F5> :NERDTreeTabsToggle<CR>
 nnoremap <F6> :NERDTreeTabsFind<CR>
 nnoremap <F7> :tabp<CR>
 nnoremap <F8> :tabn<CR>
-map <F9> <C-w>gf
+map <F9> :set path += "."<CR><C-w>gf
 nnoremap gb :make<CR> <bar> :cwindow<CR>
 nnoremap <F12> :tabe ~/.vimrc<CR>
 nnoremap <Left> :cprev<CR>
@@ -191,10 +210,6 @@ function ToggleHex()
     let &readonly=l:oldreadonly
     let &modifiable=l:oldmodifiable
 endfunction
-
-" Ag
-let g:ackprg = "ag --vimgrep --smart-case"
-cnoreabbrev ag Ack
 
 " Save su-owned file as user
 cmap w!! %!sudo tee > /dev/null %
