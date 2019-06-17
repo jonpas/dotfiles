@@ -9,7 +9,7 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias ll='ls -alF --block-size=M --color=auto --group-directories-first'
+alias ll='ls -alhF --color=auto --group-directories-first'
 alias la='ls -A'
 alias l='ls -CF'
 
