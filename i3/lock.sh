@@ -1,9 +1,12 @@
 #!/bin/bash
 
+target=$(xrandr | tr "," "\n" | sed -n '2p' | tail -c +10)
+targetX=$(awk '{print $1}' <<< $target)
+targetY=$(awk '{print $3}' <<< $target)
+
+resizeX=$(( $targetX / 20 ))
+resizeY=$(( $targetY / 20 ))
+
 scrot -q 1 /tmp/screenshot.jpg
-if [ $(hostname) = "odin" ]; then
-    convert /tmp/screenshot.jpg -resize 80x45 -scale 1600x900 /tmp/screenshotblur.png
-else
-    convert /tmp/screenshot.jpg -resize 200x130 -scale 3600x1080 /tmp/screenshotblur.png
-fi
+convert /tmp/screenshot.jpg -resize ${resizeX}x${resizeY} -scale ${targetX}x${targetY} /tmp/screenshotblur.png
 i3lock -i /tmp/screenshotblur.png

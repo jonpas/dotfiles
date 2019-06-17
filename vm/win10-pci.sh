@@ -229,6 +229,7 @@ fi
 pkill -RTMIN+3 i3blocks
 qemu-system-x86_64 $OPTS
 
+
 # VM DEINIT
 # Memory
 if [ "$ENABLE_HUGEPAGES" = true ]; then
