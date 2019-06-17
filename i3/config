@@ -236,21 +236,22 @@ bar {
         separator  #00000000
 
         #                  border  backgr. text
-        focused_workspace  #fabd2f #fabd2f #323232
+        focused_workspace  #fabd2f #fabd2f #282828
         active_workspace   #d79921 #5f676a #d79921
-        inactive_workspace #323232 #323232 #d79921
+        inactive_workspace #282828 #282828 #d79921
         urgent_workspace   #cc241d #fb4934 #ffffff
     }
 }
 
 # class                 border  backgr. text    indicator
-client.focused          #d79921 #d79921 #323232 #fabd2f
-client.unfocused        #323232 #323232 #ebdbb2 #323232
-client.focused_inactive #323232 #333333 #ebdbb2 #323232
+client.focused          #d79921 #d79921 #282828 #fabd2f
+client.unfocused        #282828 #282828 #ebdbb2 #282828
+client.focused_inactive #d79921 #282828 #ebdbb2 #282828
 client.urgent           #cc241d #383a3b #fb4934 #383a3b
 
 # Borders & Gaps
 new_window pixel 2
+for_window [class="^.*"] border pixel 2
 gaps inner 5
 gaps outer 2
 smart_gaps on
