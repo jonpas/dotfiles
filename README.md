@@ -35,6 +35,7 @@ $ git submodule update --recursive --remote
     - .vimrc
     - .xinitrc (~VFIO)
 ~/.config/
+    - alacritty* (unused - https://github.com/tomaka/winit/issues/705)
     - dunst*
     - gsimplecal*
     - gtk-3.0/*
@@ -42,8 +43,8 @@ $ git submodule update --recursive --remote
     - i3blocks*
     - ranger/*
     - termite*
-    - alacritty* (unused - https://github.com/tomaka/winit/issues/705)
     - udiskie*
+    - yay*
 /etc/
     - NetworkManager/dispatcher.d/*
     - X11/* (VFIO)
