@@ -10,7 +10,7 @@
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
 # Common programs
-set $set_wallpaper feh --bg-fill ~/Pictures/current_wallpaper
+set $set_wallpaper ~/.fehbg
 set $restart_synergy . ~/.config/i3/synergy.sh
 
 # Alias Alt key
