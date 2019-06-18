@@ -13,26 +13,29 @@ if [[ $stat == "Charging," ]] || [[ $stat == "Full," ]]; then
 fi
 
 remaining=$(acpi -b | awk '{print $5}' | head -c 5)
+if [ ! -z "$remaining" ]; then
+    remaining=" ($remaining)"
+fi
 
 if [ $charge -ge 80 ]; then
-    echo " $charge% ($remaining)"
+    echo " $charge%$remaining"
     exit 0
 fi
 
 if [ $charge -ge 60 ]; then
-    echo " $charge% ($remaining)"
+    echo " $charge%$remaining"
     exit 0
 fi
 
 if [ $charge -ge 40 ]; then
-    echo " $charge% ($remaining)"
+    echo " $charge%$remaining"
     exit 0
 fi
 
 if [ $charge -ge 20 ]; then
-    echo " $charge% ($remaining)"
+    echo " $charge%$remaining"
     exit 0
 fi
 
-echo " $charge% ($remaining)"
+echo " $charge%$remaining"
 exit 33
