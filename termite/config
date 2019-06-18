@@ -1,5 +1,5 @@
 [options]
-font = Fantasque Sans Mono Regular 10
+font = FantasqueSansMono Nerd Font Mono 10
 scrollback_lines = -1  # Infinite
 
 [colors]
