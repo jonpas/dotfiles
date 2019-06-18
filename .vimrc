@@ -13,6 +13,7 @@ set synmaxcol=500
 set background=dark
 colorscheme gruvbox
 set cursorline
+set lazyredraw
 
 " Whitespace
 set listchars=tab:>·,trail:~
@@ -82,6 +83,9 @@ else
   cabbrev hsplit hor split
 endif
 
+" Sessions
+let g:session_autosave = "no"
+
 " Searching
 set hlsearch
 set incsearch
@@ -127,37 +131,6 @@ command Wq wq
 command W w
 command Q q
 
-" Airline
-let g:airline_left_sep = ""
-let g:airline_right_sep = ""
-
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#tab_min_count = 2
-let g:airline#extensions#tabline#show_buffers = 0
-
-let g:airline_theme = 'custom'
-let g:airline#themes#custom#palette = {}
-let s:N1 = [ '#005f00' , '#aeee00' , 22  , 154 ]
-let s:N2 = [ '#a8a8a8' , '#45413b' , 248 , 238 ]
-let s:N3 = [ '#8a8a8a' , '#242321' , 245 , 235 ]
-let s:I1 = [ '#005f5f' , '#ffffff' , 23  , 15  ]
-let s:I2 = [ '#00d7ff' , '#0087af' , 45  , 31  ]
-let s:I3 = [ '#00d7ff' , '#005f87' , 45  , 24  ]
-let s:R1 = [ '#ffffff' , '#d70000' , 15  , 160 ]
-let s:V1 = [ '#d75f00' , '#ffaf00' , 166 , 214 ]
-let s:M  = [ '#ff8700', 208 ]
-let g:airline#themes#custom#palette.normal = airline#themes#generate_color_map(s:N1, s:N2, s:N3)
-let g:airline#themes#custom#palette.normal_modified = {
-    \ 'airline_c': [ s:M[0], s:N3[1], s:M[1], s:N3[3], '' ] }
-let g:airline#themes#custom#palette.insert = airline#themes#generate_color_map(s:I1, s:I2, s:I3)
-let g:airline#themes#custom#palette.insert_modified = {
-    \ 'airline_c': [ s:M[0], s:I3[1], s:M[1], s:I3[3], '' ] }
-let g:airline#themes#custom#palette.replace = airline#themes#generate_color_map(s:R1, s:N2, s:N3)
-let g:airline#themes#custom#palette.replace_modified = g:airline#themes#custom#palette.normal_modified
-let g:airline#themes#custom#palette.visual = airline#themes#generate_color_map(s:V1, s:N2, s:N3)
-let g:airline#themes#custom#palette.visual_modified = g:airline#themes#custom#palette.normal_modified
-let g:airline#themes#custom#palette.inactive = airline#themes#generate_color_map(s:N2, s:N2, s:N3)
-
 " clang_complete
 let g:clang_library_path = '/usr/lib/libclang.so'
 
@@ -166,6 +139,23 @@ let vim_markdown_preview_github = 1
 let vim_markdown_preview_use_xdg_open = 1
 let vim_markdown_preview_hotkey = '<C-m>'
 
+" Lightline
+let g:lightline = {
+    \ 'active': {
+    \   'left': [ [ 'mode', 'paste' ],
+    \             [ 'readonly', 'relativepath', 'modified' ] ]
+    \ },
+    \ 'colorscheme': 'default',
+    \ 'separator': { 'left': "\ue0b8", 'right': "\ue0ba" },
+    \ 'subseparator': { 'left': "\ue0b9", 'right': "\ue0bb" },
+    \ 'tabline_separator': { 'left': "\ue0bc", 'right': "\ue0be" },
+    \ 'tabline_subseparator': { 'left': "\ue0bb", 'right': "\ue0ba" },
+    \ }
+
+let g:lightline#colorscheme#default#palette.normal.right[0] = g:lightline#colorscheme#default#palette.normal.left[0]
+let g:lightline#colorscheme#default#palette.tabline.middle[0] = g:lightline#colorscheme#default#palette.normal.middle[0]
+let g:lightline#colorscheme#default#palette.tabline.left[0] = g:lightline#colorscheme#default#palette.normal.left[1]
+let g:lightline#colorscheme#default#palette.tabline.tabsel[0] = g:lightline#colorscheme#default#palette.normal.left[0]
 
 " HexMode
 " ex command for toggling hex mode - define mapping if desired
