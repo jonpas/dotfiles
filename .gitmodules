@@ -68,3 +68,10 @@
 [submodule ".vim/bundle/toml"]
 	path = .vim/bundle/toml
 	url = https://github.com/cespare/vim-toml
+[submodule "lib/prompt.rs"]
+	path = lib/prompt.rs
+	url = https://github.com/KoffeinFlummi/prompt.rs
+[submodule "lib/i3status-rust"]
+	path = lib/i3status-rust
+	url = https://github.com/jonpas/i3status-rust
+	branch = jonpas

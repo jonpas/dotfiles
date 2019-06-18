@@ -4,8 +4,9 @@ dotfiles
 Dotfiles for Arch Linux with i3, vim, rofi, termite... and VFIO.
 
 
-### Program Packages/Plugins/Scripts:
+### Programs/Packages/Plugins/Scripts:
 
+- Programs: `lib/`
 - Vim: `.vim/bundle/`
 - WeeChat: `.weechat/python/autoload/` (scripts symlinked from submodules)
 
@@ -63,6 +64,7 @@ $ git submodule update --recursive --remote
     - vconsole.conf
 None
     - backup (BAK)
+    - lib
     - vm (VFIO)
     - synergy-vm-center.conf (VFIO)
 ```
