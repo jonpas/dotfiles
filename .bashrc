@@ -43,12 +43,11 @@ function __prompt_command() {
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 # Jump to path aliases
-alias jS='cd ~/Work/School'
+alias jL='cd ~/Work/Linux'
+alias jS='cd ~/Work/School/FERI-RIT-UNI'
 alias jST='cd ~/Work/School/FERI-RIT-UNI/Tasks/UNI-3-2'
 alias jSD='cd ~/Work/School/FERI-RIT-UNI/Data-3-2'
 alias jSP='cd ~/Work/School/FERI-RIT-UNI/Projects'
-alias jWS='cd ~/Work/School/FERI-RIT-UNI'
-alias jPS='cd ~/Work/School/FERI-RIT-UNI'
 alias jA3='cd ~/Work/Arma\ 3'
 alias jA3M='cd ~/Work/Arma\ 3/Mods'
 alias jA3T='cd ~/Work/Arma\ 3/Tools'
