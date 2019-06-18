@@ -250,8 +250,8 @@ client.focused_inactive #d79921 #282828 #ebdbb2 #282828
 client.urgent           #cc241d #383a3b #fb4934 #383a3b
 
 # Borders & Gaps
-new_window pixel 1
-gaps inner 4
+new_window pixel 2
+gaps inner 5
 gaps outer 0
 smart_gaps on
 smart_borders on
