@@ -13,6 +13,8 @@ alias ll='ls -alhF --color=auto --group-directories-first'
 alias la='ls -A'
 alias l='ls -CF'
 
+alias fd="fd --hidden"
+
 alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
 alias vm='sudo ~/dotfiles/vm/win10-pci.sh'
@@ -33,14 +35,16 @@ export PROMPT_COMMAND=__prompt_command
 function __prompt_command() {
     export ERR=$?
 
-    ~/.cargo/bin/prompt-rs --right
-    PS1=$(~/.cargo/bin/prompt-rs --left)
+    prompt-rs --right
+    PS1=$(prompt-rs --left)
 
     echo -ne "\033]0;$TERMINAL: $(pwd) \007"
 }
 
 # Disable dotnet telemetry
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
+
+PATH=$PATH:~/.cargo/bin
 
 # Jump to path aliases
 alias jL='cd ~/Work/Linux'
