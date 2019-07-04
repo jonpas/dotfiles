@@ -109,8 +109,10 @@ if [ "$ENABLE_HUGEPAGES" = true ]; then
         exit 2
     fi
 
-    # 8400 2MB pages = 16GB+
-    echo 8400 > /proc/sys/vm/nr_hugepages
+    # 8400 2MB pages = 16GB (+ overhead = multiplier 50)
+    hugepages=$(( ${MEMORY} * 1050 / 2 ))
+    echo "Huge Pages: ${hugepages}"
+    echo $hugepages > /proc/sys/vm/nr_hugepages
     OPTS+=" -mem-path /dev/hugepages"
     OPTS+=" -mem-prealloc"
 fi
