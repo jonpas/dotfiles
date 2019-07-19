@@ -8,52 +8,23 @@
     "type": "con",
     "nodes": [
         {
-            // splith split container with 2 children
             "border": "pixel",
+            "current_border_width": 2,
             "floating": "auto_off",
-            "layout": "splith",
+            "geometry": {
+               "height": 300,
+               "width": 1664,
+               "x": 1928,
+               "y": 797
+            },
+            "name": "Slack",
             "percent": 0.5,
-            "type": "con",
-            "nodes": [
-                {
-                    "border": "pixel",
-                    "current_border_width": 2,
-                    "floating": "auto_off",
-                    "geometry": {
-                       "height": 300,
-                       "width": 1664,
-                       "x": 1928,
-                       "y": 797
-                    },
-                    "name": "Slack",
-                    "percent": 0.5,
-                    "swallows": [
-                       {
-                        "class": "^Slack$"
-                       }
-                    ],
-                    "type": "con"
-                },
-                {
-                    "border": "pixel",
-                    "current_border_width": 2,
-                    "floating": "auto_off",
-                    "geometry": {
-                       "height": 362,
-                       "width": 574,
-                       "x": 0,
-                       "y": 0
-                    },
-                    "name": "Slack - Startup Workaround",
-                    "percent": 0.5,
-                    "swallows": [
-                       {
-                        "class": "^Slack$"
-                       }
-                    ],
-                    "type": "con"
-                }
-            ]
+            "swallows": [
+               {
+                "class": "^Slack$"
+               }
+            ],
+            "type": "con"
         },
         {
             // splith split container with 2 children
