@@ -20,8 +20,10 @@ alias weather='curl http://wttr.in/Lenart'
 alias vm='sudo ~/dotfiles/vm/win10-pci.sh'
 
 alias git=hub # GitHub git wrapper
-
 alias cleandisk="yay -Sc && paccache -rk1"
+
+# Bind fg for switching between vim and terminal (C-z / C-a)
+bind -x '"\C-a":"fg"'
 
 if [ -f /usr/share/bash-completion/completions/git ]; then
     . /usr/share/bash-completion/completions/git
