@@ -44,12 +44,6 @@ function __prompt_command() {
     echo -ne "\033]0;$TERMINAL: $(pwd) \007"
 }
 
-# VTE (termite) open terminal in the current directory
-if [[ $TERM == xterm-termite ]]; then
-    . /etc/profile.d/vte.sh
-    __prompt_command
-fi
-
 # Disable dotnet telemetry
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
