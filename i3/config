@@ -43,8 +43,10 @@ focus_follows_mouse no
 # Disable mouse warping (cursor moves to center of screen when focus is switched to different output)
 mouse_warping none
 
+# start a terminal
+bindsym $mod+Return exec i3-sensible-terminal
 # start a terminal (in current working directory)
-bindsym $mod+Return exec i3-sensible-terminal -d "$(xcwd)"
+bindsym $mod+Shift+Return exec i3-sensible-terminal -d "$(xcwd)"
 
 # kill focused window
 bindsym $mod+Shift+q kill
