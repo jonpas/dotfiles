@@ -9,7 +9,8 @@
 	url = https://github.com/scrooloose/nerdtree
 [submodule ".vim/bundle/sqf"]
 	path = .vim/bundle/sqf
-	url = https://github.com/KoffeinFlummi/vim-sqf
+	url = https://github.com/jonpas/vim-sqf-syntax
+	branch = c-like
 [submodule ".vim/bundle/supertab"]
 	path = .vim/bundle/supertab
 	url = https://github.com/ervandew/supertab
@@ -18,7 +19,8 @@
 	url = https://github.com/airblade/vim-gitgutter
 [submodule ".vim/bundle/gruvbox"]
 	path = .vim/bundle/gruvbox
-	url = https://github.com/morhetz/gruvbox
+	url = https://github.com/jonpas/gruvbox
+	branch = jonpas
 [submodule ".vim/bundle/tabular"]
 	path = .vim/bundle/tabular
 	url = https://github.com/godlygeek/tabular

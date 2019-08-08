@@ -13,7 +13,7 @@ Dotfiles for Arch Linux with i3, vim, rofi, termite... and VFIO.
 Download all:
 ```
 $ git submodule init
-$ git submodule update
+$ git submodule update --remote
 ```
 
 Update all:
