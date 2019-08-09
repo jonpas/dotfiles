@@ -54,7 +54,7 @@ if [ "$ENABLE_LOOKINGGLASS" = true ]; then
 fi
 
 
-# Rebind helper
+# Helpers
 rebind() {
     dev="$1"
     driver="$2"
@@ -71,6 +71,19 @@ rebind() {
         echo $vendor $device > /sys/bus/pci/drivers/$driver/new_id
     else
         echo $dev > /sys/bus/pci/drivers/$driver/bind
+    fi
+}
+
+start_lookingglass_helpers() {
+    # Looking Glass client
+    if [ ! $(pgrep "looking-glass") ]; then
+        looking-glass-client &
+    fi
+
+    # VM Switcher
+    if [ ! $(pgrep -f "$(dirname $0)/vm-switch.py") ]; then
+        sleep 5 && # Wait for things to initialize to prevent threading errors
+        $(dirname $0)/vm-switch.py &
     fi
 }
 
@@ -174,9 +187,11 @@ if [ "$ENABLE_LOOKINGGLASS" = true ]; then
             sleep 1
         done &&
         chown jonpas:jonpas /run/user/1000/spice.sock &&
-        echo "Spice socket owner changed" &
+        echo "Spice socket owner changed" &&
+        start_lookingglass_helpers &
     else
         OPTS+=" -spice port=5900,addr=127.0.0.1,disable-ticketing" # TCP
+        start_lookingglass_helpers
     fi
 
     # Spice Agent (clipboard)
@@ -257,6 +272,13 @@ fi
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
     rebind 0000:01:00.0 nvidia # GPU
     rebind 0000:01:00.1 snd_hda_intel # GPU Audio
+
+    if [ "$ENABLE_LOOKINGGLASS" = true ]; then
+        # VM Switcher close
+        if [ $(pgrep -f "$(dirname $0)/vm-switch.py") ]; then
+            kill $(pgrep -f "$(dirname $0)/vm-switch.py")
+        fi
+    fi
 fi
 
 pkill -RTMIN+3 i3blocks
