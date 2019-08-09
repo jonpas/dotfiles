@@ -276,7 +276,7 @@ if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
     if [ "$ENABLE_LOOKINGGLASS" = true ]; then
         # VM Switcher close
         if [ $(pgrep -f "$(dirname $0)/vm-switch.py") ]; then
-            kill $(pgrep -f "$(dirname $0)/vm-switch.py")
+            kill -SIGINT $(pgrep -f "$(dirname $0)/vm-switch.py")
         fi
     fi
 fi
