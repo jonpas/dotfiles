@@ -25,7 +25,7 @@ KEY_SWITCH = 188  # scancode 188 = F18
 KEY_SYNERGY_CAPTURE = 187  # scancode 187 = F17
 KEY_SYNERGY_RELEASE = 186  # scancode 186 = F16
 
-i3 = i3ipc.Connection()
+i3 = i3ipc.Connection(auto_reconnect=True)
 last_window = None
 
 
@@ -59,6 +59,8 @@ def switch():
         lg_window.command("focus; fullscreen enable")
         keyboard.press_and_release(KEY_SYNERGY_CAPTURE)
 
+
+print("Waiting for switch ...")
 
 # Wait for key to be pressed and call switch synchronously to be able to wait
 # for required processes to do their job
