@@ -76,12 +76,12 @@ rebind() {
 
 start_lookingglass_helpers() {
     # Looking Glass client
-    if [ ! $(pgrep "looking-glass") ]; then
+    if ! pgrep "looking-glass" > /dev/null; then
         looking-glass-client &
     fi
 
     # VM Switcher
-    if [ ! $(pgrep -f "$(dirname $0)/vm-switch.py") ]; then
+    if ! pgrep -f "$(dirname $0)/vm-switch.py" > /dev/null; then
         sleep 5 && # Wait for things to initialize to prevent threading errors
         $(dirname $0)/vm-switch.py &
     fi
@@ -275,7 +275,7 @@ if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
 
     if [ "$ENABLE_LOOKINGGLASS" = true ]; then
         # VM Switcher close
-        if [ $(pgrep -f "$(dirname $0)/vm-switch.py") ]; then
+        if pgrep -f "$(dirname $0)/vm-switch.py" > /dev/null; then
             kill -SIGINT $(pgrep -f "$(dirname $0)/vm-switch.py")
         fi
     fi

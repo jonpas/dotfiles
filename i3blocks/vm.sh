@@ -11,7 +11,7 @@ gpu=" "
 color="#a9a9a9"
 
 # Win10 VM
-if [ $(pgrep "win10-pci") ]; then
+if pgrep "win10-pci" > /dev/null; then
     vm+=" "
     color="#d3d3d3"
 else
