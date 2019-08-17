@@ -15,8 +15,6 @@ if [ $(hostname) = "loki" ]; then
 
     # Enable keyboard repeat (better Synergy compatibility)
     xset r on
-elif [ $(hostname) = "odin" ]; then
-    xrandr --output LVDS1 --mode 1600x900 &
 fi
 
 exec i3
