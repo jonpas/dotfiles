@@ -1,3 +1,7 @@
+if [ -z "$DISPLAY" -a $XDG_VTNR -eq 1 ]; then
+    startx && exit
+fi
+
 export TERMINAL=termite #alacritty https://github.com/tomaka/winit/issues/705
 export EDITOR=vim
 
