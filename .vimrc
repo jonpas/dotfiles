@@ -1,5 +1,3 @@
-set encoding=utf-8
-set nocompatible
 let mapleader=","
 
 " Plugins
@@ -11,6 +9,10 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
+" base
+Plug 'tpope/vim-sensible'
+Plug 'editorconfig/editorconfig-vim'
+
 " style
 Plug 'jonpas/gruvbox', { 'branch': 'jonpas' }
 Plug 'itchyny/lightline.vim'
@@ -18,7 +20,6 @@ Plug 'chrisbra/Colorizer'
 Plug 'ryanoasis/vim-devicons'
 
 " utility
-Plug 'editorconfig/editorconfig-vim'
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -31,26 +32,26 @@ Plug 'sjl/gundo.vim'
 Plug 'airblade/vim-gitgutter'
 
 " language
-Plug 'JamshedVesuna/vim-markdown-preview', { 'for': 'markdown' }
 Plug 'jonpas/vim-sqf-syntax', { 'branch': 'c-like' }
 Plug 'othree/xml.vim'
 Plug 'rust-lang/rust.vim'
 Plug 'cespare/vim-toml'
 Plug 'chrisbra/csv.vim'
 
+" language utility
+Plug 'JamshedVesuna/vim-markdown-preview', { 'for': 'markdown' }
+
 call plug#end()
 
 runtime ftplugin/man.vim
 
 " Style (color list: http://jonasjacek.github.io/colors/)
-set synmaxcol=500
 set background=dark
 colorscheme gruvbox
 set cursorline
 set lazyredraw
 
 " Whitespace
-set listchars=tab:>·,trail:~
 set list
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
@@ -70,7 +71,6 @@ set expandtab
 set tabstop=8
 set shiftwidth=4
 set softtabstop=4
-set autoindent
 autocmd FileType make set expandtab ts=4 sts=4 sw=4
 
 " Code Folding
@@ -83,24 +83,16 @@ set wrap
 set linebreak
 set showbreak=…
 
-" Disable swap files (that's what git is for)
-set updatetime=500
-set nobackup
-set noswapfile
+" Backup
+set updatetime=750
 
 " Navigation
 set mouse=a
-set scrolloff=2
-set backspace=indent,eol,start
 set ttymouse=sgr " Vim does not recognize Alacritty as SGR-supported terminal
 
 " Layout
 autocmd FileType css ColorHighlight
 set number relativenumber
-set laststatus=2
-set equalalways
-let g:gitgutter_max_signs = 3000
-set tabpagemax=100
 au VimResized * exe "normal! \<c-w>="
 
 " Splits
@@ -108,26 +100,20 @@ set splitright
 set diffopt+=vertical
 silent! set splitvertical
 if v:errmsg != ''
-  cabbrev split vert split
-  cabbrev hsplit split
-  cabbrev help vert help
-  noremap <C-w>] :vert botright wincmd ]<CR>
-  noremap <C-w><C-]> :vert botright wincmd ]<CR>
+    cabbrev split vert split
+    cabbrev hsplit split
+    cabbrev help vert help
+    noremap <C-w>] :vert botright wincmd ]<CR>
+    noremap <C-w><C-]> :vert botright wincmd ]<CR>
 else
-  cabbrev hsplit hor split
+    cabbrev hsplit hor split
 endif
-
-" Sessions
-let g:session_autosave = "no"
 
 " Searching
 set hlsearch
-set incsearch
 set ignorecase
 set smartcase
 set rtp+=/usr/bin/fzf
-let g:ackprg = "ag --vimgrep --smart-case"
-cnoreabbrev ag Ack
 
 " Fugitive
 set diffopt+=vertical
@@ -139,6 +125,7 @@ let NERDTreeIgnore = ["\.pyc$", "\.o$", "\.class$", "\.rcg$", "\.rcl$"]
 au BufRead,BufNewFile *.asm set filetype=nasm
 
 " Keybinds
+set showcmd
 set pastetoggle=<F2>
 nnoremap <CR> :let @/ = ""<CR>:<BACKSPACE><CR>
 nnoremap <F4> :GundoToggle<CR>
@@ -152,14 +139,15 @@ nnoremap <F12> :tabe ~/.vimrc<CR>
 nnoremap <Left> :cprev<CR>
 nnoremap <Right> :cnext<CR>
 nnoremap <Space> za
-vmap <C-C> "+y
+map <leader>y "+y
+map <leader>p "+p
 
 if has("nvim")
     tnoremap <Esc> <C-\><C-n>
 endif
 
 " Ex commands
-" Simplify saving and closing when shift held for too long
+" simplify saving and closing when shift held for too long
 command WQ wq
 command Wq wq
 command W w
