@@ -22,6 +22,7 @@ $ git submodule update --recursive --remote
 ### Vim Plugins
 
 Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`.
+- Errors on first run are expected - vim-plug has to be installed (automatic through `.vimrc`).
 
 ## Config Locations
 
