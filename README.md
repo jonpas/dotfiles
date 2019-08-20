@@ -3,6 +3,8 @@ dotfiles
 
 Dotfiles for Arch Linux with i3, vim, rofi, termite... and VFIO.
 
+## Programs
+
 ### Submodules
 
 - Programs: `lib/`
@@ -17,11 +19,11 @@ $ git submodule update --remote
 $ git submodule update --recursive --remote
 ```
 
-#### Vim Plugins
+### Vim Plugins
 
 Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`.
 
-### Config Locations:
+## Config Locations
 
 ```sh
 ~/ && /root/
