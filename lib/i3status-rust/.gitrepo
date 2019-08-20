@@ -1,0 +1,13 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/jonpas/i3status-rust
+	branch = jonpas
+	commit = 339b7cd4f8e4a1f78c67be3953e69468164dc51a
+	parent = 7d7517edeb055efca8a35c0d701bf59da8eec74c
+	method = merge
+	update = auto
+	cmdver = 0.4.1
