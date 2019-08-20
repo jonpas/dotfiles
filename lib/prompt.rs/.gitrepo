@@ -1,0 +1,13 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/KoffeinFlummi/prompt.rs
+	branch = master
+	commit = 82936a56503c8b84a779f22987c5ad912e3ad5c5
+	parent = 87f43c2c3c564c243a78c82dc6c64929f4231db8
+	method = merge
+	update = auto
+	cmdver = 0.4.1
