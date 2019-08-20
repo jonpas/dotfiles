@@ -2,13 +2,47 @@ set encoding=utf-8
 set nocompatible
 let mapleader=","
 
-call pathogen#infect()
-call pathogen#helptags()
-filetype plugin on
+" Plugins
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync
+endif
+
+call plug#begin('~/.vim/plugged')
+
+" style
+Plug 'jonpas/gruvbox', { 'branch': 'jonpas' }
+Plug 'itchyny/lightline.vim'
+Plug 'chrisbra/Colorizer'
+Plug 'ryanoasis/vim-devicons'
+
+" utility
+Plug 'editorconfig/editorconfig-vim'
+Plug 'scrooloose/nerdtree'
+Plug 'jistr/vim-nerdtree-tabs'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ervandew/supertab'
+Plug 'godlygeek/tabular'
+
+" git
+Plug 'tpope/vim-fugitive'
+Plug 'sjl/gundo.vim'
+Plug 'airblade/vim-gitgutter'
+
+" language
+Plug 'JamshedVesuna/vim-markdown-preview', { 'for': 'markdown' }
+Plug 'jonpas/vim-sqf-syntax', { 'branch': 'c-like' }
+Plug 'othree/xml.vim'
+Plug 'rust-lang/rust.vim'
+Plug 'cespare/vim-toml'
+Plug 'chrisbra/csv.vim'
+
+call plug#end()
+
 runtime ftplugin/man.vim
 
 " Style (color list: http://jonasjacek.github.io/colors/)
-syntax on
 set synmaxcol=500
 set background=dark
 colorscheme gruvbox
@@ -140,18 +174,7 @@ let vim_markdown_preview_use_xdg_open = 1
 let vim_markdown_preview_hotkey = '<C-m>'
 
 " Lightline
-let g:lightline = {
-    \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'readonly', 'relativepath', 'modified' ] ]
-    \ },
-    \ 'colorscheme': 'default',
-    \ 'separator': { 'left': "\ue0b8", 'right': "\ue0ba" },
-    \ 'subseparator': { 'left': "\ue0b9", 'right': "\ue0bb" },
-    \ 'tabline_separator': { 'left': "\ue0bc", 'right': "\ue0be" },
-    \ 'tabline_subseparator': { 'left': "\ue0bb", 'right': "\ue0ba" },
-    \ }
-
+" tabline same colors as statusline
 let g:lightline#colorscheme#default#palette.normal.right[0] = g:lightline#colorscheme#default#palette.normal.left[0]
 let g:lightline#colorscheme#default#palette.tabline.middle[0] = g:lightline#colorscheme#default#palette.normal.middle[0]
 let g:lightline#colorscheme#default#palette.tabline.left[0] = g:lightline#colorscheme#default#palette.normal.left[1]

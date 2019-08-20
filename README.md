@@ -3,28 +3,27 @@ dotfiles
 
 Dotfiles for Arch Linux with i3, vim, rofi, termite... and VFIO.
 
-
-### Programs/Packages/Plugins/Scripts:
+### Submodules
 
 - Programs: `lib/`
-- Vim: `.vim/bundle/`
 - WeeChat: `.weechat/python/autoload/` (scripts symlinked from submodules)
 
-Download all:
-```
+```sh
+# Download
 $ git submodule init
 $ git submodule update --remote
-```
 
-Update all:
-```
+# Update
 $ git submodule update --recursive --remote
 ```
 
+#### Vim Plugins
+
+Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`.
 
 ### Config Locations:
 
-```
+```sh
 ~/ && /root/
     - .vim*
     - .weechat/*
