@@ -26,7 +26,6 @@ Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`.
 ```sh
 ~/ && /root/
     - .vim*
-    - .weechat/*
     - .Xresources
     - .bashrc
     - .drirc (iGPU-Intel)
