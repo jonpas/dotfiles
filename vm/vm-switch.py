@@ -66,7 +66,7 @@ print("Waiting for switch ...")
 # for required processes to do their job
 try:
     while True:
-        keyboard.wait(KEY_SWITCH, switch)
+        keyboard.wait(KEY_SWITCH)
         switch()
 except KeyboardInterrupt:
     pass
