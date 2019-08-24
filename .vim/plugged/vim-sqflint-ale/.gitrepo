@@ -1,0 +1,13 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/git-commands/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/jonpas/vim-sqflint-ale
+	branch = master
+	commit = 27a8f2f78124847776264d67794c150a9d02bfd0
+	parent = 353d09f484e6bf57b90dd67c3260a29862fe989a
+	method = merge
+	update = auto
+	cmdver = 0.4.1
