@@ -1,3 +1,0 @@
-# Repository/Project Name
-
-Base project description...
