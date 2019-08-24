@@ -6,8 +6,8 @@
 [subrepo]
 	remote = https://github.com/jonpas/vim-sqflint-ale
 	branch = master
-	commit = 976e1dc2bd693624c1f120e353394940749315d6
-	parent = 1dc2d9ce21f40e648d64cb5c5cfe44a79a58dbaf
+	commit = b4da6a0e706b74a214589c7d46b2a50f95ff2006
+	parent = 2b48ad252513f8265dbfa85c32883a2a7ccf225e
 	method = merge
 	update = auto
 	cmdver = 0.4.1
