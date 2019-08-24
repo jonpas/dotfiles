@@ -11,7 +11,7 @@ Vim plugin providing [sqflint](https://github.com/LordGolias/sqf) linter for [AL
 
 ### Plugin
 
-Install using a method your choice.
+Install using a method of your choice.
 
 **[vim-plug](https://github.com/junegunn/vim-plug):**
 ```viml
