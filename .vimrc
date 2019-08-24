@@ -42,6 +42,11 @@ Plug 'chrisbra/csv.vim'
 " language utility
 Plug 'JamshedVesuna/vim-markdown-preview', { 'for': 'markdown' }
 
+" linting
+Plug 'dense-analysis/ale'
+Plug 'maximbaz/lightline-ale'
+Plug '~/.vim/plugged/vim-sqflint-ale'
+
 call plug#end()
 
 runtime ftplugin/man.vim
@@ -56,16 +61,6 @@ set lazyredraw
 set list
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-
-" Make background transparent
-highlight Normal ctermbg=None
-highlight Folded ctermbg=None
-highlight NonText ctermbg=None
-highlight LineNr ctermbg=None
 
 " Indentation
 set expandtab
@@ -92,7 +87,8 @@ set mouse=a
 set ttymouse=sgr " Vim does not recognize Alacritty as SGR-supported terminal
 
 " Layout
-autocmd FileType css ColorHighlight
+set showtabline=2
+set noshowmode " diable insert mode information in command line
 set number relativenumber
 au VimResized * exe "normal! \<c-w>="
 
@@ -116,19 +112,15 @@ set ignorecase
 set smartcase
 set rtp+=/usr/bin/fzf
 
-" Fugitive
-set diffopt+=vertical
-
-" NERDTree
-let NERDTreeIgnore = ["\.pyc$", "\.o$", "\.class$", "\.rcg$", "\.rcl$"]
-
-" Syntax Highlighting
+" Highlighting
+autocmd FileType css ColorHighlight
 au BufRead,BufNewFile *.asm set filetype=nasm
 
 " Keybinds
 set showcmd
 set pastetoggle=<F2>
 nnoremap <CR> :let @/ = ""<CR>:<BACKSPACE><CR>
+
 nnoremap <F4> :GundoToggle<CR>
 nnoremap <F5> :NERDTreeTabsToggle<CR>
 nnoremap <F6> :NERDTreeTabsFind<CR>
@@ -143,6 +135,9 @@ nnoremap <Space> za
 map <leader>y "+y
 map <leader>p "+p
 
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+
 if has("nvim")
     tnoremap <Esc> <C-\><C-n>
 endif
@@ -154,20 +149,56 @@ command Wq wq
 command W w
 command Q q
 
-" clang_complete
-let g:clang_library_path = '/usr/lib/libclang.so'
+" Lightline
+let g:lightline = {
+\   'active': {
+\       'left': [ [ 'mode', 'paste' ],
+\                 [ 'gitbranch', 'readonly' ] ],
+\       'right': [ [ 'lineinfo' ],
+\                  [ 'percent' ],
+\                  [ 'fileformat', 'fileencoding', 'filetype' ],
+\                  [ 'linter_checking', 'linter_errors', 'linter_warnings' ] ],
+\   },
+\   'component_function': {
+\       'gitbranch': 'fugitive#head',
+\   },
+\   'component_expand': {
+\       'linter_checking': 'lightline#ale#checking',
+\       'linter_warnings': 'lightline#ale#warnings',
+\       'linter_errors': 'lightline#ale#errors',
+\   },
+\   'component_type': {
+\       'linter_checking': 'right',
+\       'linter_warnings': 'warning',
+\       'linter_errors': 'error',
+\   },
+\}
+
+" tabline same colors as statusline
+let g:lightline#colorscheme#default#palette.normal.right[0] = g:lightline#colorscheme#default#palette.normal.left[0]
+let g:lightline#colorscheme#default#palette.tabline.middle[0] = g:lightline#colorscheme#default#palette.normal.middle[0]
+let g:lightline#colorscheme#default#palette.tabline.left[0] = g:lightline#colorscheme#default#palette.normal.left[1]
+let g:lightline#colorscheme#default#palette.tabline.tabsel[0] = g:lightline#colorscheme#default#palette.normal.left[0]
+
+" integrate ALE
+let g:lightline#ale#indicator_checking = ""
+let g:lightline#ale#indicator_warnings = ""
+let g:lightline#ale#indicator_errors = ""
+
+" Fugitive
+set diffopt+=vertical
+
+" NERDTree
+let NERDTreeIgnore = ["\.pyc$", "\.o$", "\.class$", "\.rcg$", "\.rcl$"]
 
 " Markdown Preview
 let vim_markdown_preview_github = 1
 let vim_markdown_preview_use_xdg_open = 1
 let vim_markdown_preview_hotkey = '<C-m>'
 
-" Lightline
-" tabline same colors as statusline
-let g:lightline#colorscheme#default#palette.normal.right[0] = g:lightline#colorscheme#default#palette.normal.left[0]
-let g:lightline#colorscheme#default#palette.tabline.middle[0] = g:lightline#colorscheme#default#palette.normal.middle[0]
-let g:lightline#colorscheme#default#palette.tabline.left[0] = g:lightline#colorscheme#default#palette.normal.left[1]
-let g:lightline#colorscheme#default#palette.tabline.tabsel[0] = g:lightline#colorscheme#default#palette.normal.left[0]
+" Linters
+let g:ale_disable_lsp = 1 " coc's job
+let g:ale_python_flake8_options="--max-line-length=120"
 
 " HexMode
 " ex command for toggling hex mode - define mapping if desired
