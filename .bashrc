@@ -13,9 +13,9 @@ alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
-alias ll='ls -alhF --color=auto --group-directories-first'
-alias la='ls -A'
-alias l='ls -CF'
+alias ll='ls -alhFv --color=auto --group-directories-first'
+alias la='ls -Av'
+alias l='ls -CFv'
 
 alias fd="fd --hidden"
 
