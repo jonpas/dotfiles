@@ -1,4 +1,4 @@
-if [ -z "$DISPLAY" -a $XDG_VTNR -eq 1 ]; then
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
     startx && exit
 fi
 
@@ -26,8 +26,11 @@ alias vm='sudo ~/dotfiles/vm/win10-pci.sh'
 alias git=hub # GitHub git wrapper
 alias cleandisk="yay -Sc && paccache -rk1"
 
-# Bind fg for switching between vim and terminal (C-z / C-a)
-bind -x '"\C-a":"fg"'
+# If interactive shell
+if [[ "$-" =~ "i" ]]; then
+    # Bind fg for switching between vim and terminal (C-z / C-a)
+    bind -x '"\C-a":"fg"'
+fi
 
 if [ -f /usr/share/bash-completion/completions/git ]; then
     . /usr/share/bash-completion/completions/git
