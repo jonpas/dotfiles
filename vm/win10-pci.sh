@@ -210,7 +210,7 @@ else
     OPTS+=" -usb -device usb-host,vendorid=0x0458,productid=0x0154" # KYE Systems Bluetooth Mouse
 
     # evdev (lctrl + rctrl to swap, no macro keys)
-    OPTS+=" -object input-linux,id=kbd,evdev=/dev/input/by-id/usb-Logitech_Logitech_G710_Keyboard-event-kbd,grab_all=on,repeat=on" # Logitech G710 Keyboard
+    OPTS+=" -object input-linux,id=kbd,evdev=/dev/input/by-path/pci-0000:00:14.0-usb-0:10:1.0-event-kbd,grab_all=on,repeat=on" # Logitech G710 Keyboard
 fi
 
 # USB
