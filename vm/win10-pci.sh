@@ -7,6 +7,7 @@ ENABLE_PASSTHROUGH_USB_CONTROLLER=false
 ENABLE_PASSTHROUGH_USB_DEVICES=true # Only if controller not passed
 ENABLE_PASSTHROUGH_WHEEL=false # Separate from other USB devices
 ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
+ENABLE_EVDEV_MOUSE=false
 ENABLE_QEMU_GPU=false # Integrated QEMU GPU
 ENABLE_HUGEPAGES=true
 ENABLE_LOOKINGGLASS=true
@@ -20,18 +21,20 @@ usage() {
     echo "[-w <true/false>] pass-through wheel"
     echo "[-a <true/false>] pass-through audio"
     echo "[-k <true/false>] pass-through mouse/keyboard"
+    echo "[-e <true/false>] evdev pass-through mouse"
     echo "[-m <gigabytes>] memory"
     echo "[-g <true/false>] use Looking Glass"
     exit 1
 }
 
-while getopts 'hp:w:a:k:m:g:' flag; do
+while getopts 'hp:w:a:k:e:m:g:' flag; do
     case "${flag}" in
         h) usage ;;
         p) ENABLE_HUGEPAGES=${OPTARG} ;;
         w) ENABLE_PASSTHROUGH_WHEEL=${OPTARG} ;;
         a) ENABLE_PASSTHROUGH_AUDIO=${OPTARG} ;;
         k) ENABLE_PASSTHROUGH_MOUSEKEYBOARD=${OPTARG} ;;
+        e) ENABLE_EVDEV_MOUSE=${OPTARG} ;;
         m) MEMORY=${OPTARG} ;;
         g) ENABLE_LOOKINGGLASS=${OPTARG} ;;
         *) usage ;;
@@ -47,6 +50,7 @@ echo "Huge-pages: $ENABLE_HUGEPAGES"
 echo "Pass-Through Wheel: $ENABLE_PASSTHROUGH_WHEEL"
 echo "Pass-Through Audio: $ENABLE_PASSTHROUGH_AUDIO"
 echo "Pass-Through Mouse/Keyboard: $ENABLE_PASSTHROUGH_MOUSEKEYBOARD"
+echo "Evdev Mouse: $ENABLE_EVDEV_MOUSE"
 echo "Memory: ${MEMORY}G"
 echo "Looking Glass: $ENABLE_LOOKINGGLASS"
 if [ "$ENABLE_LOOKINGGLASS" = true ]; then
@@ -211,6 +215,10 @@ else
 
     # evdev (lctrl + rctrl to swap, no macro keys)
     OPTS+=" -object input-linux,id=kbd,evdev=/dev/input/by-path/pci-0000:00:14.0-usb-0:10:1.0-event-kbd,grab_all=on,repeat=on" # Logitech G710 Keyboard
+
+    if [ "$ENABLE_EVDEV_MOUSE" = true ]; then
+        OPTS+=" -object input-linux,id=mouse,evdev=/dev/input/by-path/pci-0000:00:14.0-usb-0:3:1.0-event-mouse"
+    fi
 fi
 
 # USB
