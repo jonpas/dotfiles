@@ -33,6 +33,7 @@ Plug 'sjl/gundo.vim'
 Plug 'airblade/vim-gitgutter'
 
 " language
+Plug 'sheerun/vim-polyglot'
 Plug 'jonpas/vim-sqf-syntax', { 'branch': 'c-like' }
 Plug 'othree/xml.vim'
 Plug 'rust-lang/rust.vim'
