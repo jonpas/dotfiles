@@ -47,6 +47,7 @@ Plug 'JamshedVesuna/vim-markdown-preview', { 'for': 'markdown' }
 Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
 Plug '~/.vim/local/vim-sqflint-ale'
+Plug '~/.vim/local/vim-platformio-ale'
 
 call plug#end()
 
