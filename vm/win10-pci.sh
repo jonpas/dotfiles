@@ -12,7 +12,7 @@ ENABLE_QEMU_GPU=false # Integrated QEMU GPU
 ENABLE_HUGEPAGES=true
 ENABLE_LOOKINGGLASS=true
 LG_SPICE_UNIX_SOCKET=true
-MEMORY="16"
+MEMORY="12"
 
 usage() {
     echo "Windows 10 GPU-Passthrough VM Start script."
