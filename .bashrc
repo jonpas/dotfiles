@@ -49,6 +49,11 @@ function __prompt_command() {
 
     # Window title
     echo -ne "\033]0;$TERMINAL: $(pwd) \007"
+
+    # Python venv/virtualenv
+    if [ -n "$VIRTUAL_ENV" ]; then
+        PS1="\[\033[1;34m\]($(basename $VIRTUAL_ENV))\[\e[0m\] $PS1"
+    fi
 }
 
 # Disable dotnet telemetry
