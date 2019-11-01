@@ -286,6 +286,11 @@ if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
         if pgrep -f "$(dirname $0)/vm-switch.py" > /dev/null; then
             kill -SIGINT $(pgrep -f "$(dirname $0)/vm-switch.py")
         fi
+
+        # Looking Glass client close
+        if pgrep "looking-glass" > /dev/null; then
+            kill -SIGINT $(pgrep "looking-glass")
+        fi
     fi
 fi
 
