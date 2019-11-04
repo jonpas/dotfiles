@@ -277,7 +277,7 @@ bindsym Ctrl+Print exec --no-startup-id flameshot gui
 # Mount location (195 = G710 'G1' key)
 bindcode 192 exec i3-sensible-terminal -d "/run/media/$(whoami)"
 # Calculator (196 = G710 'G2' key)
-bindcode 193 exec i3-sensible-terminal -e bc
+bindcode 193 exec i3-sensible-terminal -e "bc -l"
 
 # Monitor
 exec --no-startup-id ~/.config/i3/monitor.sh
