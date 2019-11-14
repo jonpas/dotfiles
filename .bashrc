@@ -44,6 +44,11 @@ export PROMPT_COMMAND=__prompt_command
 function __prompt_command() {
     export ERR=$?
 
+    # Presentational (shorter) prompt
+    if [ -n "$PRESENT_PROMPT" ]; then
+        USER="uni"
+    fi
+
     prompt-rs --right
     PS1=$(prompt-rs --left)
 
