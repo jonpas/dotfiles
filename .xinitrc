@@ -13,7 +13,7 @@ if [ $(hostname) = "loki" ]; then
     # Load Nvidia driver (for later binding)
     nvidia-modprobe &
 
-    # Enable keyboard repeat (better Synergy compatibility)
+    # Enable keyboard repeat (better Barrier/Synergy compatibility)
     xset r on
 fi
 

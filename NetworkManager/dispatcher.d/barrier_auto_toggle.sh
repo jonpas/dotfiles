@@ -12,7 +12,7 @@ case "$2" in
             sleep 3;
         done
 
-        su jonpas -c "barrierc -d WARNING 192.168.178.30" # Barrier does not like IPv6 TODO Still the case with Barrier?
+        su jonpas -c "barrierc -d WARNING 192.168.178.30" # Barrier does not like IPv6
         ;;
     down)
         pkill -x barrierc

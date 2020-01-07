@@ -1,21 +1,22 @@
 #!/usr/bin/env python3
 
-# Fast Virtual Machine switcher for i3, Looking Glass and Synergy
+# Fast Virtual Machine switcher for i3, Looking Glass and Barrier/Synergy
 #
-# Switches to Looking Glass window, makes it fullscreen and presses Synergy
-# capture key. When captured, switches to last focused window before capture,
-# makes Looking Glass windowed and presses Synergy release key.
+# Switches to Looking Glass window, makes it fullscreen and presses
+# Barrier/Synergy capture key. When captured, switches to last focused window
+# before capture, makes Looking Glass windowed and presses Barrier/Synergy
+# release key.
 #
 # Requires Python packages: keyboard (requires sudo), i3ipc
 #
-# Synergy keys must be defined in its configuration as:
+# Barrier/Synergy keys must be defined in its configuration as:
 #   keystroke(key) = lockCursorToScreen(off), switchToScreen(host)
 #   keystroke(key) = switchToScreen(guest), lockCursorToScreen(on)
 #
-# Note: Synergy grabs keybinds and prevents them from being passed to other X11
-# applications on host (screens support for keystrokes added in 1.10 only
-# support guests), 'keyboard' library reads raw device files instead so we can
-# capture it even when Synergy sends it to the guest.
+# Note: Barrier/Synergy grabs keybinds and prevents them from being passed to
+# other X11 applications on host (screens support for keystrokes added in 1.10
+# only support guests), 'keyboard' library reads raw device files instead so we
+# can capture it even when Barrier/Synergy sends it to the guest.
 
 # pip
 import keyboard
