@@ -1,11 +1,14 @@
 #!/bin/bash
 
 if [ $(hostname) = "loki" ]; then
-    # Set monitor configuration
+    # Set monitor configuration (initially)
     . ~/.config/i3/monitor.sh
 
     # Start Barrier server
     . ~/dotfiles/barrier/barriers.sh
+
+    # Set monitor configuration again, delayed to ensure refresh rate gets set correctly
+    sleep 3 && . ~/.config/i3/monitor.sh &
 fi
 
 # Auto-start programs on workspace 1

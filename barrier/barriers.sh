@@ -5,8 +5,8 @@ if [ $(hostname) = "loki" ]; then
 
     # Change configuration for VM in the center
     if [ "$vm" = "center" ]; then
-        links=$(cat $(dirname $0)/barrier-links-center.conf)
-        perl -i.bak -0777pe "s/section: links\n(.+?)\nend/$links/s" $(dirname $0)/barrier.conf
+        links=$(cat ~/dotfiles/barrier/barrier-links-center.conf)
+        perl -i.bak -0777pe "s/section: links\n(.+?)\nend/$links/s" ~/dotfiles/barrier/barrier.conf
     fi
 
     # Stop if running and start
@@ -14,12 +14,12 @@ if [ $(hostname) = "loki" ]; then
         pkill -x "barriers"
     fi
 
-    barriers --no-daemon --config $(dirname $0)/barrier.conf &
+    barriers -f -c ~/dotfiles/barrier/barrier.conf &>~/.barriers.log &
 
     # Wait a bit for it to start and restore configuration
     sleep 1
     if [ "$vm" = "center" ]; then
-        rm $(dirname $0)/barrier.conf
-        mv $(dirname $0)/barrier.conf.bak $(dirname $0)/barrier.conf
+        rm ~/dotfiles/barrier/barrier.conf
+        mv ~/dotfiles/barrier/barrier.conf.bak ~/dotfiles/barrier/barrier.conf
     fi
 fi
