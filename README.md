@@ -54,13 +54,12 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - looking-glass.conf (VFIO)
     - mkinitcpio.conf (VFIO)
     - slim.conf
-    - synergy.conf (~VFIO)
     - vconsole.conf
 None
     - backup (BAK)
+    - barrier (VFIO)
     - lib
     - vm (VFIO)
-    - synergy-vm-center.conf (VFIO)
 ```
 _Notes:_
 - _`*` folder symlinked, `/*` all files in folder symlinked, `!` copied (sensitive information)._

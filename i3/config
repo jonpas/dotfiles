@@ -11,7 +11,7 @@
 
 # Common programs
 set $set_wallpaper ~/.fehbg
-set $restart_synergy . ~/.config/i3/synergy.sh
+set $restart_barrier . ~/dotfiles/barrier/barriers.sh
 
 # Alias Alt key
 set $alt Mod1
@@ -208,14 +208,14 @@ bindsym $mod+r mode "$resize"
 # external screen management
 set $display_layout  :  ,  ,  ,  , [d]uplicate, [m]irror, [s]econd-only, [o]ff
 mode "$display_layout" {
-    bindsym Left  mode "default" exec mons -e left --primary HDMI2   && $set_wallpaper && $restart_synergy && i3-msg restart
-    bindsym Down  mode "default" exec mons -e bottom --primary HDMI2 && $set_wallpaper && $restart_synergy && i3-msg restart
-    bindsym Up    mode "default" exec mons -e top --primary HDMI2    && $set_wallpaper && $restart_synergy && i3-msg restart
-    bindsym Right mode "default" exec mons -e right --primary HDMI2  && $set_wallpaper && $restart_synergy && i3-msg restart
-    bindsym d mode "default" exec mons -d --primary HDMI2 && $set_wallpaper && $restart_synergy        && i3-msg restart
-    bindsym m mode "default" exec mons -m --primary HDMI2 && $set_wallpaper && $restart_synergy        && i3-msg restart
-    bindsym s mode "default" exec mons -s --primary VGA1  && $set_wallpaper && $restart_synergy center && i3-msg restart
-    bindsym o mode "default" exec mons -o --primary HDMI2 && $set_wallpaper && $restart_synergy        && i3-msg restart
+    bindsym Left  mode "default" exec mons -e left --primary HDMI2   && $set_wallpaper && $restart_barrier && i3-msg restart
+    bindsym Down  mode "default" exec mons -e bottom --primary HDMI2 && $set_wallpaper && $restart_barrier && i3-msg restart
+    bindsym Up    mode "default" exec mons -e top --primary HDMI2    && $set_wallpaper && $restart_barrier && i3-msg restart
+    bindsym Right mode "default" exec mons -e right --primary HDMI2  && $set_wallpaper && $restart_barrier && i3-msg restart
+    bindsym d mode "default" exec mons -d --primary HDMI2 && $set_wallpaper && $restart_barrier        && i3-msg restart
+    bindsym m mode "default" exec mons -m --primary HDMI2 && $set_wallpaper && $restart_barrier        && i3-msg restart
+    bindsym s mode "default" exec mons -s --primary VGA1  && $set_wallpaper && $restart_barrier center && i3-msg restart
+    bindsym o mode "default" exec mons -o --primary HDMI2 && $set_wallpaper && $restart_barrier        && i3-msg restart
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
