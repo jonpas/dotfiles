@@ -41,6 +41,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - udiskie*
     - yay*
 /etc/
+    - NetworkManager/conf.d/*
     - NetworkManager/dispatcher.d/*
     - X11/* (VFIO)
     - X11/xorg.conf.d/*
