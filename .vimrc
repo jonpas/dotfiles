@@ -190,9 +190,6 @@ let g:lightline#ale#indicator_errors = ""
 " Fugitive
 set diffopt+=vertical
 
-" NERDTree
-let NERDTreeIgnore = ["\.pyc$", "\.o$", "\.class$", "\.rcg$", "\.rcl$"]
-
 " Markdown Preview
 let vim_markdown_preview_github = 1
 let vim_markdown_preview_use_xdg_open = 1
