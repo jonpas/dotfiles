@@ -69,8 +69,8 @@ PATH=$PATH:~/.cargo/bin
 # Jump to path aliases
 alias jL='cd ~/Work/Linux'
 alias jS='cd ~/Work/School/FERI-RIT'
-alias jST='cd ~/Work/School/FERI-RIT/Tasks/MAG-1-1'
-alias jSD='cd ~/Work/School/FERI-RIT/Data/MAG-1-1'
+alias jST='cd ~/Work/School/FERI-RIT/Tasks/MAG-1-2'
+alias jSD='cd ~/Work/School/FERI-RIT/Data/MAG-1-2'
 alias jSP='cd ~/Work/School/FERI-RIT/Projects/MAG'
 alias jSF='cd ~/Work/School/FERI-RIT/Theses/MAG'
 alias jA3='cd ~/Work/Arma\ 3'
