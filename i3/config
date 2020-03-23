@@ -12,6 +12,7 @@
 # Common programs
 set $set_wallpaper ~/.fehbg
 set $restart_barrier . ~/dotfiles/barrier/barriers.sh
+set $set_monitors . ~/.config/i3/monitor.sh
 
 # Alias Alt key
 set $alt Mod1
@@ -206,16 +207,15 @@ mode "$resize" {
 bindsym $mod+r mode "$resize"
 
 # external screen management
-set $display_layout  :  ,  ,  ,  , [d]uplicate, [m]irror, [s]econd-only, [o]ff
+set $display_layout  : [a]   , [h]   , [l]   , [o]  
 mode "$display_layout" {
-    bindsym Left  mode "default" exec mons -e left --primary HDMI2   && $set_wallpaper && $restart_barrier && i3-msg restart
-    bindsym Down  mode "default" exec mons -e bottom --primary HDMI2 && $set_wallpaper && $restart_barrier && i3-msg restart
-    bindsym Up    mode "default" exec mons -e top --primary HDMI2    && $set_wallpaper && $restart_barrier && i3-msg restart
-    bindsym Right mode "default" exec ~/.config/i3/monitor.sh        && $set_wallpaper && $restart_barrier && i3-msg restart
-    bindsym d mode "default" exec mons -d --primary HDMI2 && $set_wallpaper && $restart_barrier        && i3-msg restart
-    bindsym m mode "default" exec mons -m --primary HDMI2 && $set_wallpaper && $restart_barrier        && i3-msg restart
-    bindsym s mode "default" exec mons -s --primary VGA1  && $set_wallpaper && $restart_barrier center && i3-msg restart
-    bindsym o mode "default" exec mons -o --primary HDMI2 && $set_wallpaper && $restart_barrier        && i3-msg restart
+    bindsym a     mode "default" exec $set_monitors       && $set_wallpaper && $restart_barrier        && i3-msg restart
+    bindsym o     mode "default" exec $set_monitors off   && $set_wallpaper && $restart_barrier both   && i3-msg restart
+
+    bindsym h     mode "default" exec $set_monitors left  && $set_wallpaper && $restart_barrier        && i3-msg restart
+    bindsym Left  mode "default" exec $set_monitors left  && $set_wallpaper && $restart_barrier        && i3-msg restart
+    bindsym l     mode "default" exec $set_monitors right && $set_wallpaper && $restart_barrier center && i3-msg restart
+    bindsym Right mode "default" exec $set_monitors right && $set_wallpaper && $restart_barrier center && i3-msg restart
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
@@ -300,16 +300,17 @@ exec --no-startup-id flameshot
 exec --no-startup-id $set_wallpaper
 
 # Window Settings
-for_window [class="(?i)gsimplecal"]             floating enable, move position mouse, move down $bar_height px
-for_window [window_role="About"]                floating enable
-for_window [window_role="Preferences"]          floating enable
-for_window [window_role="pop-up"]               floating enable
-for_window [title="Volume Control"]             floating enable
-for_window [title="Library" class="firefox"]    floating enable
-for_window [title="Steam - Update News"]        floating enable
-for_window [title="Music Player" class="Steam"] floating enable
-for_window [title="Chat" class="Steam"]         floating enable
-for_window [title="Steam Guard" class="Steam"]  floating enable
-for_window [class="TeamSpeak 3"]                floating enable
+for_window [class="(?i)gsimplecal"]                 floating enable, move position mouse, move down $bar_height px
+for_window [window_role="About"]                    floating enable
+for_window [window_role="Preferences"]              floating enable
+for_window [window_role="pop-up"]                   floating enable
+for_window [title="Volume Control"]                 floating enable
+for_window [title="Library" class="firefox"]        floating enable
+for_window [title="Steam - Update News"]            floating enable
+for_window [title="Music Player" class="Steam"]     floating enable
+for_window [title="Chat" class="Steam"]             floating enable
+for_window [title="Steam Guard" class="Steam"]      floating enable
+for_window [class="TeamSpeak 3"]                    floating enable
+for_window [title="Microsoft Teams Notification"]   floating enable
 # Prevent i3 crash
-for_window [title="Discord Updater"]            floating disable
+for_window [title="Discord Updater"]                floating disable

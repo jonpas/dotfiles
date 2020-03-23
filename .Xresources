@@ -1,5 +1,8 @@
 ! Xresources
 
+! Cursor size (default: 24 @1080p, vertical stack increases it)
+Xcursor.size: 12
+
 ! Layout
 rofi.width:                          50
 rofi.lines:                          15
