@@ -1,0 +1,113 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 338,
+       "width": 578,
+       "x": 0,
+       "y": 0
+    },
+    "name": "termite: /home/jonpas ",
+    "percent": 0.38,
+    "swallows": [
+       {
+        "class": "^Termite$",
+        "title": "^Terminal\\:\\ monitor$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    // splitv split container with 2 children
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 0.62,
+    "type": "con",
+    "nodes": [
+        {
+            // splith split container with 1 children
+            "border": "pixel",
+            "floating": "auto_off",
+            "layout": "splith",
+            "percent": 0.83,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 362,
+                       "width": 574,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "name": "terminal - htop",
+                    "percent": 1,
+                    "swallows": [
+                       {
+                        "class": "^Termite$",
+                        "title": "^Terminal\\:\\ htop$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        },
+        {
+            // splith split container with 2 children
+            "border": "pixel",
+            "floating": "auto_off",
+            "layout": "splith",
+            "percent": 0.17,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 362,
+                       "width": 574,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "name": "terminal - watch progress",
+                    "percent": 0.5,
+                    "swallows": [
+                       {
+                        "class": "^Termite$",
+                        "title": "^Terminal\\:\\ progress$"
+                       }
+                    ],
+                    "type": "con"
+                },
+                {
+                    "border": "pixel",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 362,
+                       "width": 574,
+                       "x": 0,
+                       "y": 0
+                    },
+                    "name": "terminal - watch cpu freq",
+                    "percent": 0.5,
+                    "swallows": [
+                       {
+                        "class": "^Termite$",
+                        "title": "^Terminal\\:\\ cpu\\ freq$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        }
+    ]
+}
+
