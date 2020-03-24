@@ -207,7 +207,7 @@ mode "$resize" {
 bindsym $mod+r mode "$resize"
 
 # external screen management
-set $display_layout  : [a]   , [h]   , [l]   , [o]  
+set $display_layout  : [a]  , [h]  , [l]  , [o]  , [s]  
 mode "$display_layout" {
     bindsym a     mode "default" exec $set_monitors       && $set_wallpaper && $restart_barrier        && i3-msg restart
     bindsym o     mode "default" exec $set_monitors off   && $set_wallpaper && $restart_barrier both   && i3-msg restart
@@ -216,6 +216,8 @@ mode "$display_layout" {
     bindsym Left  mode "default" exec $set_monitors left  && $set_wallpaper && $restart_barrier        && i3-msg restart
     bindsym l     mode "default" exec $set_monitors right && $set_wallpaper && $restart_barrier center && i3-msg restart
     bindsym Right mode "default" exec $set_monitors right && $set_wallpaper && $restart_barrier center && i3-msg restart
+
+    bindsym s     mode "default" exec xset dpms force suspend
 
     bindsym Return mode "default"
     bindsym Escape mode "default"
