@@ -8,23 +8,33 @@
     "type": "con",
     "nodes": [
         {
+            // splitv split container with 1 children
             "border": "pixel",
-            "current_border_width": 2,
-            "floating": "user_off",
-            "geometry": {
-               "height": 300,
-               "width": 1664,
-               "x": 1928,
-               "y": 797
-            },
-            "name": "Slack",
+            "floating": "auto_off",
+            "layout": "splitv",
             "percent": 0.5,
-            "swallows": [
-               {
-                "class": "^Slack$"
-               }
-            ],
-            "type": "con"
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "geometry": {
+                       "height": 300,
+                       "width": 1664,
+                       "x": 1928,
+                       "y": 797
+                    },
+                    "name": "Slack",
+                    "percent": 1,
+                    "swallows": [
+                       {
+                        "class": "^Slack$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
         },
         {
             "border": "pixel",
@@ -32,9 +42,9 @@
             "floating": "auto_off",
             "geometry": {
                "height": 519,
-               "width": 1065,
-               "x": 2564,
-               "y": 1603
+               "width": 1680,
+               "x": 2566,
+               "y": 1605
             },
             "name": "Discord",
             "percent": 0.5,
@@ -49,10 +59,10 @@
 }
 
 {
-    // tabbed split container with 2 children
+    // splitv split container with 2 children
     "border": "pixel",
     "floating": "auto_off",
-    "layout": "tabbed",
+    "layout": "splitv",
     "percent": 0.44,
     "type": "con",
     "nodes": [
@@ -61,13 +71,13 @@
             "current_border_width": 2,
             "floating": "auto_off",
             "geometry": {
-               "height": 1049,
-               "width": 839,
-               "x": 3637,
-               "y": 1077
+               "height": 1057,
+               "width": 1920,
+               "x": 1282,
+               "y": 1604
             },
             "name": "Microsoft Teams",
-            "percent": 0.33,
+            "percent": 0.5,
             "swallows": [
                {
                 "class": "^Microsoft\\ Teams\\ \\-\\ Preview$",
@@ -87,30 +97,11 @@
                "y": 0
             },
             "name": "Microsoft Teams - Startup Workaround",
-            "percent": 0.33,
+            "percent": 0.5,
             "swallows": [
                {
                 "class": "^Microsoft\\ Teams\\ \\-\\ Preview$",
                 "title": "^Loading\\ Microsoft\\ Teams$"
-               }
-            ],
-            "type": "con"
-        },
-        {
-            "border": "pixel",
-            "current_border_width": 2,
-            "floating": "auto_off",
-            "geometry": {
-               "height": 1057,
-               "width": 2560,
-               "x": 10,
-               "y": 1083
-            },
-            "name": "Chromium",
-            "percent": 0.33,
-            "swallows": [
-               {
-                "class": "^Chromium$"
                }
             ],
             "type": "con"
