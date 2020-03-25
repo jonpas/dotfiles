@@ -28,3 +28,6 @@ if [ $(hostname) = "loki" ]; then
             --output VGA1  $VGA1cfg  --pos 660x0
     fi
 fi
+
+# Wallpaper
+feh --no-fehbg --bg-fill '/home/jonpas/Pictures/current_wallpaper'
