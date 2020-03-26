@@ -1,9 +1,9 @@
 #!/bin/bash
 
-if [ $(hostname) = "loki" ]; then
-    # Set monitor configuration (initially)
-    . ~/.config/i3/monitor.sh
+# Set monitor configuration (initially)
+. ~/.config/i3/monitor.sh
 
+if [ $(hostname) = "loki" ]; then
     # Start Barrier server
     . ~/dotfiles/barrier/barriers.sh
 
