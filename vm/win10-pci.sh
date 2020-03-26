@@ -3,8 +3,8 @@
 # Arguments
 ENABLE_PASSTHROUGH_GPU=true
 ENABLE_PASSTHROUGH_MOUSEKEYBOARD=false # Configuration or latency-free (will disable it in case of crash)
-ENABLE_PASSTHROUGH_USB_CONTROLLER=false
-ENABLE_PASSTHROUGH_USB_DEVICES=true # Only if controller not passed
+ENABLE_PASSTHROUGH_USB_CONTROLLER=true
+ENABLE_PASSTHROUGH_USB_DEVICES=false # Only if controller not passed
 ENABLE_PASSTHROUGH_WHEEL=false # Separate from other USB devices
 ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_EVDEV_MOUSE=false
@@ -42,7 +42,9 @@ while getopts 'hp:w:a:k:e:m:g:' flag; do
 done
 
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
-    echo "USB Device Pass-Through disabled! Controller being passed."
+    if [ "$ENABLE_PASSTHROUGH_USB_DEVICES" = true ]; then
+        echo "USB Device Pass-Through disabled! Controller being passed."
+    fi
     ENABLE_PASSTHROUGH_USB_DEVICES=false
 fi
 
@@ -50,6 +52,7 @@ echo "Huge-pages: $ENABLE_HUGEPAGES"
 echo "Pass-Through Wheel: $ENABLE_PASSTHROUGH_WHEEL"
 echo "Pass-Through Audio: $ENABLE_PASSTHROUGH_AUDIO"
 echo "Pass-Through Mouse/Keyboard: $ENABLE_PASSTHROUGH_MOUSEKEYBOARD"
+echo "Pass-Through USB Controller: $ENABLE_PASSTHROUGH_USB_CONTROLLER"
 echo "Evdev Mouse: $ENABLE_EVDEV_MOUSE"
 echo "Memory: ${MEMORY}G"
 echo "Looking Glass: $ENABLE_LOOKINGGLASS"
@@ -62,10 +65,15 @@ fi
 rebind() {
     dev="$1"
     driver="$2"
+    removeid="$3"
 
     # Unbind
     if [ -e /sys/bus/pci/devices/$dev/driver ]; then
         echo $dev > /sys/bus/pci/devices/$dev/driver/unbind
+    fi
+    if [ "$removeid" = true ]; then
+        # Remove ID (required for XHCI rebind)
+        echo $vendor $device > /sys/bus/pci/drivers/vfio-pci/remove_id
     fi
 
     # Bind
@@ -211,7 +219,9 @@ if [ "$ENABLE_PASSTHROUGH_MOUSEKEYBOARD" = true ]; then
     OPTS+=" -usb -device usb-host,vendorid=0x046d,productid=0xc332" # Logitech G502 Mouse
     OPTS+=" -usb -device usb-host,vendorid=0x046d,productid=0xc24d" # Logitech G710 Keyboard
 else
-    OPTS+=" -usb -device usb-host,vendorid=0x0458,productid=0x0154" # KYE Systems Bluetooth Mouse
+    if [ "$ENABLE_PASSTHROUGH_USB_DEVICES" = true ]; then
+        OPTS+=" -usb -device usb-host,vendorid=0x0458,productid=0x0154" # KYE Systems Bluetooth Mouse
+    fi
 
     # evdev (lctrl + rctrl to swap, no macro keys)
     OPTS+=" -object input-linux,id=kbd,evdev=/dev/input/by-path/pci-0000:00:14.0-usb-0:10:1.0-event-kbd,grab_all=on,repeat=on" # Logitech G710 Keyboard
@@ -224,28 +234,28 @@ fi
 # USB
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
     rebind 0000:06:00.0 vfio-pci # PCIe USB Card
-    OPTS+=" -device vfio-pci,host=06:00.0,bus=root.1"
+    OPTS+=" -device vfio-pci,host=06:00.0,bus=root1,addr=00.4"
 fi
 
 if [ "$ENABLE_PASSTHROUGH_USB_DEVICES" = true ]; then
     OPTS+=" -usb -device usb-host,vendorid=0x131d,productid=0x0158" # Natural Point TrackIR 5 Pro Head Tracker
     OPTS+=" -usb -device usb-host,vendorid=0x0810,productid=0x0003" # Trust USB Gamepad
-    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb10a" # ThurstMaster T.16000M Joystick
+    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb10a" # ThrustMaster T.16000M Joystick
     OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb687" # ThrustMaster TWCS Throttle
-fi
 
-if [ "$ENABLE_PASSTHROUGH_WHEEL" = true ]; then
-    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb677" # Thrustmaster T150 FFB Wheel (ID 1 - Linux reads it as either ID)
-    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb65d" # Thrustmaster T150 FFB Wheel (ID 2 - Linux reads it as either ID)
-    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb676" # Thrustmaster T150 FFB Wheel (Bootloader - Firmware update)
-    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb660" # Thrustmaster TH8A Shifter (T500 RS Gear shift)
-    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb672" # Thrustmaster TH8A Shifter (Bootloader - Firmeware update)
+    if [ "$ENABLE_PASSTHROUGH_WHEEL" = true ]; then
+        OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb677" # Thrustmaster T150 FFB Wheel (ID 1 - Linux reads it as either ID)
+        OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb65d" # Thrustmaster T150 FFB Wheel (ID 2 - Linux reads it as either ID)
+        OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb676" # Thrustmaster T150 FFB Wheel (Bootloader - Firmware update)
+        OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb660" # Thrustmaster TH8A Shifter (T500 RS Gear shift)
+        OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb672" # Thrustmaster TH8A Shifter (Bootloader - Firmeware update)
+    fi
 fi
 
 # Sound
 if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
     rebind 0000:00:1b.0 vfio-pci # Audio
-    OPTS+=" -device vfio-pci,host=00:1b.0,bus=root.1,addr=00.3"
+    OPTS+=" -device vfio-pci,host=00:1b.0,bus=root1,addr=00.3"
 else
     OPTS+=" -soundhw hda" # 'hda' for qemu >=4.0, 'ac97' otherwise
     OPTS+=" -audiodev pa,id=pa1,server=/run/user/1000/pulse/native" # Pulseaudio
@@ -270,7 +280,7 @@ fi
 
 # USB
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
-    rebind 0000:06:00.0 xhci_hcd # PCIe USB Card
+    rebind 0000:06:00.0 xhci_hcd true # PCIe USB Card (remove ID)
 fi
 
 # Sound
