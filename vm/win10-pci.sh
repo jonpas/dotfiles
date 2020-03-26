@@ -4,7 +4,6 @@
 ENABLE_PASSTHROUGH_GPU=true
 ENABLE_PASSTHROUGH_MOUSEKEYBOARD=false # Configuration or latency-free (will disable it in case of crash)
 ENABLE_PASSTHROUGH_USB_CONTROLLER=true
-ENABLE_PASSTHROUGH_USB_DEVICES=false # Only if controller not passed
 ENABLE_PASSTHROUGH_WHEEL=false # Separate from other USB devices
 ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_EVDEV_MOUSE=false
@@ -18,7 +17,8 @@ usage() {
     echo "Windows 10 GPU-Passthrough VM Start script."
     echo "[-h] help"
     echo "[-p <true/false>] use huge pages"
-    echo "[-w <true/false>] pass-through wheel"
+    echo "[-c <true/false>] pass-through USB controller"
+    echo "[-w <true/false>] pass-through wheel (in USB controller)"
     echo "[-a <true/false>] pass-through audio"
     echo "[-k <true/false>] pass-through mouse/keyboard"
     echo "[-e <true/false>] evdev pass-through mouse"
@@ -31,6 +31,7 @@ while getopts 'hp:w:a:k:e:m:g:' flag; do
     case "${flag}" in
         h) usage ;;
         p) ENABLE_HUGEPAGES=${OPTARG} ;;
+        c) ENABLE_PASSTHROUGH_USB_CONTROLLER=${OPTARG} ;;
         w) ENABLE_PASSTHROUGH_WHEEL=${OPTARG} ;;
         a) ENABLE_PASSTHROUGH_AUDIO=${OPTARG} ;;
         k) ENABLE_PASSTHROUGH_MOUSEKEYBOARD=${OPTARG} ;;
@@ -40,13 +41,6 @@ while getopts 'hp:w:a:k:e:m:g:' flag; do
         *) usage ;;
     esac
 done
-
-if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
-    if [ "$ENABLE_PASSTHROUGH_USB_DEVICES" = true ]; then
-        echo "USB Device Pass-Through disabled! Controller being passed."
-    fi
-    ENABLE_PASSTHROUGH_USB_DEVICES=false
-fi
 
 echo "Huge-pages: $ENABLE_HUGEPAGES"
 echo "Pass-Through Wheel: $ENABLE_PASSTHROUGH_WHEEL"
@@ -219,7 +213,8 @@ if [ "$ENABLE_PASSTHROUGH_MOUSEKEYBOARD" = true ]; then
     OPTS+=" -usb -device usb-host,vendorid=0x046d,productid=0xc332" # Logitech G502 Mouse
     OPTS+=" -usb -device usb-host,vendorid=0x046d,productid=0xc24d" # Logitech G710 Keyboard
 else
-    if [ "$ENABLE_PASSTHROUGH_USB_DEVICES" = true ]; then
+    # Secondary mouse (connected to USB controller - internal)
+    if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = false ]; then
         OPTS+=" -usb -device usb-host,vendorid=0x0458,productid=0x0154" # KYE Systems Bluetooth Mouse
     fi
 
@@ -231,17 +226,15 @@ else
     fi
 fi
 
-# USB
+# USB Controller (extension card)
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
     rebind 0000:06:00.0 vfio-pci # PCIe USB Card
     OPTS+=" -device vfio-pci,host=06:00.0,bus=root1,addr=00.4"
 fi
 
-if [ "$ENABLE_PASSTHROUGH_USB_DEVICES" = true ]; then
+# USB devices (connected to USB controller)
+if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = false ]; then
     OPTS+=" -usb -device usb-host,vendorid=0x131d,productid=0x0158" # Natural Point TrackIR 5 Pro Head Tracker
-    OPTS+=" -usb -device usb-host,vendorid=0x0810,productid=0x0003" # Trust USB Gamepad
-    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb10a" # ThrustMaster T.16000M Joystick
-    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb687" # ThrustMaster TWCS Throttle
 
     if [ "$ENABLE_PASSTHROUGH_WHEEL" = true ]; then
         OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb677" # Thrustmaster T150 FFB Wheel (ID 1 - Linux reads it as either ID)
@@ -251,6 +244,11 @@ if [ "$ENABLE_PASSTHROUGH_USB_DEVICES" = true ]; then
         OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb672" # Thrustmaster TH8A Shifter (Bootloader - Firmeware update)
     fi
 fi
+
+# USB devices (not connected to USB controller)
+OPTS+=" -usb -device usb-host,vendorid=0x0810,productid=0x0003" # Trust USB Gamepad
+OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb10a" # ThrustMaster T.16000M Joystick
+OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb687" # ThrustMaster TWCS Throttle
 
 # Sound
 if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
