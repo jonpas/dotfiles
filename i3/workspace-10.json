@@ -3,12 +3,6 @@
     "border": "pixel",
     "current_border_width": 2,
     "floating": "auto_off",
-    "geometry": {
-       "height": 338,
-       "width": 578,
-       "x": 0,
-       "y": 0
-    },
     "name": "termite: /home/jonpas ",
     "percent": 0.38,
     "swallows": [
@@ -40,12 +34,6 @@
                     "border": "pixel",
                     "current_border_width": 2,
                     "floating": "auto_off",
-                    "geometry": {
-                       "height": 362,
-                       "width": 574,
-                       "x": 0,
-                       "y": 0
-                    },
                     "name": "terminal - htop",
                     "percent": 1,
                     "swallows": [
@@ -70,12 +58,6 @@
                     "border": "pixel",
                     "current_border_width": 2,
                     "floating": "auto_off",
-                    "geometry": {
-                       "height": 362,
-                       "width": 574,
-                       "x": 0,
-                       "y": 0
-                    },
                     "name": "terminal - watch progress",
                     "percent": 0.5,
                     "swallows": [
@@ -90,12 +72,6 @@
                     "border": "pixel",
                     "current_border_width": 2,
                     "floating": "auto_off",
-                    "geometry": {
-                       "height": 362,
-                       "width": 574,
-                       "x": 0,
-                       "y": 0
-                    },
                     "name": "terminal - watch cpu freq",
                     "percent": 0.5,
                     "swallows": [
