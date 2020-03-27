@@ -54,7 +54,7 @@ bindsym $mod+$alt+Shift+Return exec PRESENT_PROMPT=1 i3-sensible-terminal -d "$(
 bindsym $mod+Shift+q kill
 
 # start rofi (a program launcher)
-bindsym $mod+d exec --no-startup-id rofi -show run -run-list-command ". ~/.config/i3/rofi-aliases.sh" -run-command "/bin/bash -i -c '{cmd}'"
+bindsym $mod+d exec --no-startup-id rofi -show run -run-command "/bin/bash -i -c '{cmd}'"
 bindsym $mod+Shift+d exec --no-startup-id rofi -show ssh
 
 # change focus
