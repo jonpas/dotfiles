@@ -4,6 +4,7 @@
 ENABLE_PASSTHROUGH_GPU=true
 ENABLE_PASSTHROUGH_MOUSEKEYBOARD=false # Configuration or latency-free (will disable it in case of crash)
 ENABLE_PASSTHROUGH_USB_CONTROLLER=true
+REBIND_BACK_USB_CONTROLLER=false # Keep bound to vfio-pci (xhci-hcd blacklisted)
 ENABLE_PASSTHROUGH_WHEEL=false # Separate from other USB devices
 ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_EVDEV_MOUSE=false
@@ -277,7 +278,7 @@ if [ "$ENABLE_PASSTHROUGH_MOUSEKEYBOARD" = true ]; then
 fi
 
 # USB
-if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
+if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ] && [ "$REBIND_BACK_USB_CONTROLLER" = true ]; then
     rebind 0000:06:00.0 xhci_hcd true # PCIe USB Card (remove ID)
 fi
 
