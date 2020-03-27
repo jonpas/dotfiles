@@ -141,9 +141,8 @@ OPTS+=" -drive if=pflash,format=raw,readonly,file=/usr/share/ovmf/x64/OVMF_CODE.
 OPTS+=" -drive if=pflash,format=raw,file=/home/jonpas/images/vm/OVMF_VARS-win10-ovmf.fd"
 
 # Drives
-OPTS+=" -device virtio-scsi-pci"
-OPTS+=" -drive file=/home/jonpas/images/vm/win10-ovmf.qcow2,format=qcow2,index=0,media=disk,if=virtio"
-OPTS+=" -drive file=/home/jonpas/Data/images/vm/data.qcow2,format=qcow2,index=1,media=disk,if=virtio"
+OPTS+=" -drive file=/home/jonpas/images/vm/win10-ovmf.qcow2,format=qcow2,index=0,media=disk,if=virtio,discard=unmap"
+OPTS+=" -drive file=/home/jonpas/Data/images/vm/data.qcow2,format=qcow2,index=1,media=disk,if=virtio,discard=unmap"
 OPTS+=" -drive file=/home/jonpas/Data/images/windows10.iso,index=2,media=cdrom"
 OPTS+=" -drive file=/home/jonpas/Data/images/virtio-win.iso,index=3,media=cdrom"
 
@@ -255,8 +254,9 @@ if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
     rebind 0000:00:1b.0 vfio-pci # Audio
     OPTS+=" -device vfio-pci,host=00:1b.0,bus=root1,addr=00.3"
 else
-    OPTS+=" -soundhw hda" # 'hda' for qemu >=4.0, 'ac97' otherwise
-    OPTS+=" -audiodev pa,id=pa1,server=/run/user/1000/pulse/native" # Pulseaudio
+    OPTS+=" -device ich9-intel-hda"
+    OPTS+=" -device hda-micro,audiodev=hda"
+    OPTS+=" -audiodev pa,id=hda,server=/run/user/1000/pulse/native" # Pulseaudio
 fi
 
 
