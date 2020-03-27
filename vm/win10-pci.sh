@@ -4,7 +4,6 @@
 ENABLE_PASSTHROUGH_GPU=true
 ENABLE_PASSTHROUGH_MOUSEKEYBOARD=false # Configuration or latency-free (will disable it in case of crash)
 ENABLE_PASSTHROUGH_USB_CONTROLLER=true
-REBIND_BACK_USB_CONTROLLER=false # Keep bound to vfio-pci (xhci-hcd blacklisted)
 ENABLE_PASSTHROUGH_WHEEL=false # Separate from other USB devices
 ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_EVDEV_MOUSE=false
@@ -235,20 +234,20 @@ fi
 # USB devices (connected to USB controller)
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = false ]; then
     OPTS+=" -usb -device usb-host,vendorid=0x131d,productid=0x0158" # Natural Point TrackIR 5 Pro Head Tracker
-
-    if [ "$ENABLE_PASSTHROUGH_WHEEL" = true ]; then
-        OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb677" # Thrustmaster T150 FFB Wheel (ID 1 - Linux reads it as either ID)
-        OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb65d" # Thrustmaster T150 FFB Wheel (ID 2 - Linux reads it as either ID)
-        OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb676" # Thrustmaster T150 FFB Wheel (Bootloader - Firmware update)
-        OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb660" # Thrustmaster TH8A Shifter (T500 RS Gear shift)
-        OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb672" # Thrustmaster TH8A Shifter (Bootloader - Firmeware update)
-    fi
+    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb10a" # ThrustMaster T.16000M Joystick
+    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb687" # ThrustMaster TWCS Throttle
 fi
 
 # USB devices (not connected to USB controller)
 OPTS+=" -usb -device usb-host,vendorid=0x0810,productid=0x0003" # Trust USB Gamepad
-OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb10a" # ThrustMaster T.16000M Joystick
-OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb687" # ThrustMaster TWCS Throttle
+
+if [ "$ENABLE_PASSTHROUGH_WHEEL" = true ]; then
+    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb677" # Thrustmaster T150 FFB Wheel (ID 1 - Linux reads it as either ID)
+    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb65d" # Thrustmaster T150 FFB Wheel (ID 2 - Linux reads it as either ID)
+    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb676" # Thrustmaster T150 FFB Wheel (Bootloader - Firmware update)
+    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb660" # Thrustmaster TH8A Shifter (T500 RS Gear shift)
+    OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb672" # Thrustmaster TH8A Shifter (Bootloader - Firmeware update)
+fi
 
 # Sound
 if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
@@ -278,7 +277,7 @@ if [ "$ENABLE_PASSTHROUGH_MOUSEKEYBOARD" = true ]; then
 fi
 
 # USB
-if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ] && [ "$REBIND_BACK_USB_CONTROLLER" = true ]; then
+if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
     rebind 0000:06:00.0 xhci_hcd true # PCIe USB Card (remove ID)
 fi
 
