@@ -15,7 +15,8 @@ if [ $(hostname) = "loki" ]; then
     elif [ "$layout" = "off" ]; then
         xrandr \
             --output HDMI2 --off \
-            --output HDMI1 --off
+            --output HDMI1 --off \
+            --output VGA1 --primary
     elif [ "$layout" = "right" ]; then
         xrandr \
             --output HDMI2 --off \
