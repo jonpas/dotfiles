@@ -23,7 +23,6 @@ alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
 alias vm='sudo ~/dotfiles/vm/win10-pci.sh'
 
-alias git=hub # GitHub git wrapper
 alias cleandisk="yay -Sc && paccache -rk1"
 
 # If interactive shell
@@ -36,8 +35,12 @@ if [ -f /usr/share/bash-completion/completions/git ]; then
     . /usr/share/bash-completion/completions/git
 fi
 
-if [ -f /usr/share/bash-completion/completions/hub ]; then
-    . /usr/share/bash-completion/completions/hub
+if [ -f /usr/share/bash-completion/completions/gh ]; then
+    . /usr/share/bash-completion/completions/gh
+fi
+
+if [ -f /usr/share/nvm/init-nvm.sh ]; then
+    . /usr/share/nvm/init-nvm.sh
 fi
 
 export PROMPT_COMMAND=__prompt_command
