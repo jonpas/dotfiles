@@ -12,7 +12,7 @@ if [ $(hostname) = "loki" ]; then
 fi
 
 # Auto-start programs
-i3-msg "workspace 10  ; append_layout ~/.config/i3/workspace-10.json"
+i3-msg "workspace 0  ; append_layout ~/.config/i3/workspace-0.json"
 i3-sensible-terminal -t "Terminal: monitor" &
 i3-sensible-terminal -e htop -t "Terminal: htop" &
 i3-sensible-terminal -e 'watch -t progress -q' -t "Terminal: progress" &
