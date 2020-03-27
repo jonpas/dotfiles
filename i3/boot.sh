@@ -21,7 +21,7 @@ i3-sensible-terminal -e 'watch grep \"cpu MHz\" /proc/cpuinfo' -t "Terminal: cpu
 i3-msg "workspace 1  ; append_layout ~/.config/i3/workspace-1.json"
 slack &
 discord &
-teams &
+teams-for-linux --enableDesktopNotificationsHack &
 chromium https://www.facebook.com/messages &
 
 i3-msg "workspace 2  ; append_layout ~/.config/i3/workspace-2.json"
