@@ -69,7 +69,10 @@ set expandtab
 set tabstop=8
 set shiftwidth=4
 set softtabstop=4
-autocmd FileType make set expandtab ts=4 sts=4 sw=4
+
+" Maximum line length marker
+set colorcolumn=121
+highlight ColorColumn ctermbg=darkgray
 
 " Code Folding
 set foldmethod=indent
