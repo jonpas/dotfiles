@@ -3,20 +3,20 @@
 
 # <file system> <dir> <type> <options> <dump> <pass>
 # /dev/sda3
-UUID=4adb0027-be9a-4089-86e3-1fbf78158204	/         	ext4      	rw,relatime,data=ordered	0 1
+UUID=4adb0027-be9a-4089-86e3-1fbf78158204   /   ext4    rw,relatime,data=ordered    0 1
 
 # /dev/sda1
-UUID=7B60-DC67      	/boot     	vfat      	rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro	0 2
+UUID=7B60-DC67  /boot   vfat    rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro   0 2
 
 # /dev/sda2
-/swapfile	none	swap	defaults	0 0
+/swapfile   none    swap    defaults    0 0
 
 # /dev/sdb1
-UUID=95d68f31-ce2c-46fd-bd3d-fcfa65c3dc7a	/home/jonpas/Data	ext4	rw,relatime,data=ordered,nofail	0	0
+UUID=95d68f31-ce2c-46fd-bd3d-fcfa65c3dc7a   /home/jonpas/Data   ext4    rw,relatime,data=ordered,nofail     0 0
 
 # tmpfs
-tmpfs	/tmp	tmpfs	nodev,nosuid,size=16G	0	0
+tmpfs   /tmp    tmpfs   nodev,nosuid,size=16G   0 0
 
 ## Windows (via ntfs-3g)
 # /dev/sdc1
-UUID=F2D00070D0003D7B	/home/jonpas/Storage	ntfs-3g	uid=1000,gid=1000,dmask=022,fmask=133,nofail	0	0
+UUID=F2D00070D0003D7B   /home/jonpas/Storage    ntfs-3g     uid=1000,gid=1000,dmask=022,fmask=133,nofail    0 0
