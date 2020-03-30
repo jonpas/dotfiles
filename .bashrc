@@ -40,7 +40,8 @@ if [ -f /usr/share/bash-completion/completions/gh ]; then
 fi
 
 if [ -f /usr/share/nvm/init-nvm.sh ]; then
-    . /usr/share/nvm/init-nvm.sh
+    # init-vm.sh is slow, only init on request
+    alias nvminit='. /usr/share/nvm/init-nvm.sh'
 fi
 
 export PROMPT_COMMAND=__prompt_command
