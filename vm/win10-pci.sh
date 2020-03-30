@@ -141,12 +141,13 @@ OPTS+=" -drive if=pflash,format=raw,readonly,file=/usr/share/ovmf/x64/OVMF_CODE.
 OPTS+=" -drive if=pflash,format=raw,file=/home/jonpas/images/vm/OVMF_VARS-win10-ovmf.fd"
 
 # Drives
-# Create image: qemu-img create -p -f raw name.img 10G -o preallocate=full (-o cluster_size=16K for qcow2)
+# Create image: qemu-img create -f raw name.img 10G -o preallocation=full (-o cluster_size=16K for qcow2)
 # Convert qcow2 to raw: qemu-img convert -p -O raw source.qcow2 target.img -o preallocation=full
 OPTS+=" -drive file=/home/jonpas/images/vm/win10-ovmf.img,format=raw,index=0,media=disk,if=virtio"
 OPTS+=" -drive file=/home/jonpas/Data/images/vm/data.qcow2,format=qcow2,index=1,media=disk,if=virtio"
 OPTS+=" -drive file=/home/jonpas/Data/images/windows10.iso,index=2,media=cdrom"
 OPTS+=" -drive file=/home/jonpas/Data/images/virtio-win.iso,index=3,media=cdrom"
+
 
 # Network
 OPTS+=" -net none"
