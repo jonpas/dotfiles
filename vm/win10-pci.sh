@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Arguments
-ENABLE_PASSTHROUGH_GPU=true
 ENABLE_PASSTHROUGH_MOUSEKEYBOARD=false # Configuration or latency-free (will disable it in case of crash)
 ENABLE_PASSTHROUGH_USB_CONTROLLER=true
 ENABLE_PASSTHROUGH_WHEEL=false # Separate from other USB devices
 ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_EVDEV_MOUSE=false
+ENABLE_PASSTHROUGH_GPU=true
 ENABLE_QEMU_GPU=false # Integrated QEMU GPU
 ENABLE_HUGEPAGES=true
 ENABLE_LOOKINGGLASS=true
@@ -27,7 +27,7 @@ usage() {
     exit 1
 }
 
-while getopts 'hp:w:a:k:e:m:g:' flag; do
+while getopts 'hp:c:w:a:k:e:m:g:' flag; do
     case "${flag}" in
         h) usage ;;
         p) ENABLE_HUGEPAGES=${OPTARG} ;;
@@ -109,11 +109,6 @@ OPTS+=" -monitor stdio"
 OPTS+=" -cpu host,migratable=no,+invtsc,kvm=off,hv_vendor_id=0123456789ab,hv_time,hv_relaxed,hv_vapic,hv_spinlocks=0x1fff"
 OPTS+=" -smp 4,sockets=1,cores=4,threads=1"
 
-# CPU Pinning - disabled, actually slower when pinning all cores, but latency is probably a bit higher
-#for i in $(seq 0 3); do
-#    OPTS+=" -vcpu vcpunum=$i,affinity=$i" # Pin virtual CPU cores to actual CPU cores (qemu-patched)
-#done
-
 # RAM
 OPTS+=" -m ${MEMORY}G"
 if [ "$ENABLE_HUGEPAGES" = true ]; then
@@ -143,11 +138,10 @@ OPTS+=" -drive if=pflash,format=raw,file=/home/jonpas/images/vm/OVMF_VARS-win10-
 # Drives
 # Create image: qemu-img create -f raw name.img 10G -o preallocation=full (-o cluster_size=16K for qcow2)
 # Convert qcow2 to raw: qemu-img convert -p -O raw source.qcow2 target.img -o preallocation=full
-OPTS+=" -drive file=/home/jonpas/images/vm/win10-ovmf.img,format=raw,index=0,media=disk,if=virtio"
-OPTS+=" -drive file=/home/jonpas/Data/images/vm/data.qcow2,format=qcow2,index=1,media=disk,if=virtio"
+OPTS+=" -drive file=/home/jonpas/images/vm/win10-ovmf.img,format=raw,index=0,media=disk,if=virtio,aio=native,cache=none"
+OPTS+=" -drive file=/home/jonpas/Data/images/vm/data.qcow2,format=qcow2,index=1,media=disk,if=virtio,aio=native,cache=none"
 OPTS+=" -drive file=/home/jonpas/Data/images/windows10.iso,index=2,media=cdrom"
 OPTS+=" -drive file=/home/jonpas/Data/images/virtio-win.iso,index=3,media=cdrom"
-
 
 # Network
 OPTS+=" -net none"
