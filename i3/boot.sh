@@ -23,7 +23,7 @@ i3-sensible-terminal -t 'Terminal: WinVM' &
 i3-msg "workspace 1  ; append_layout ~/.config/i3/workspace-1.json"
 slack &
 discord &
-teams-for-linux --disable-gpu --enableDesktopNotificationsHack &
+chromium https://teams.microsoft.com/ &
 chromium https://www.facebook.com/messages &
 
 i3-msg "workspace 2  ; append_layout ~/.config/i3/workspace-2.json"

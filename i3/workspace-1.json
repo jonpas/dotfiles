@@ -60,40 +60,16 @@
 }
 
 {
-    // tabbed split container with 2 children
     "border": "pixel",
+    "current_border_width": 2,
     "floating": "auto_off",
-    "layout": "tabbed",
+    "name": "Chromium",
     "percent": 0.44,
-    "type": "con",
-    "nodes": [
-        {
-            "border": "pixel",
-            "current_border_width": 2,
-            "floating": "auto_off",
-            "name": "Microsoft Teams",
-            "percent": 0.33,
-            "swallows": [
-               {
-                "class": "^teams\\-for\\-linux$",
-                "title": "\\|\\ Microsoft\\ Teams$"
-               }
-            ],
-            "type": "con"
-        },
-        {
-            "border": "pixel",
-            "current_border_width": 2,
-            "floating": "auto_off",
-            "name": "Chromium",
-            "percent": 0.33,
-            "swallows": [
-               {
-                "class": "^Chromium$"
-               }
-            ],
-            "type": "con"
-        }
-    ]
+    "swallows": [
+       {
+        "class": "^Chromium$"
+       }
+    ],
+    "type": "con"
 }
 
