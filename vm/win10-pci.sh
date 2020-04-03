@@ -103,7 +103,6 @@ OPTS=""
 OPTS+=" -enable-kvm"
 OPTS+=" -machine type=q35,kernel_irqchip=on" # 'kernel_irqchip=on' for qemu >=4.0
 OPTS+=" -rtc base=localtime" # Windows uses localtime
-OPTS+=" -monitor stdio"
 
 # CPU
 OPTS+=" -cpu host,migratable=no,+invtsc,kvm=off,hv_vendor_id=0123456789ab,hv_time,hv_relaxed,hv_vapic,hv_spinlocks=0x1fff"
@@ -160,7 +159,7 @@ if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
 fi
 
 if [ "$ENABLE_QEMU_GPU" = false ]; then
-    OPTS+=" -vga none" # Disable QEMU GPU
+    OPTS+=" -vga none -nographic" # Disable QEMU VGA and graphics
 else
     OPTS+=" -usb -device usb-tablet" # Prevent mouse grabbing on QEMU VGA
 fi
