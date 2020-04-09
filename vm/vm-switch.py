@@ -23,8 +23,8 @@ import keyboard
 import i3ipc
 
 KEY_SWITCH = 188  # scancode 188 = F18
-KEY_SYNERGY_CAPTURE = 187  # scancode 187 = F17
-KEY_SYNERGY_RELEASE = 186  # scancode 186 = F16
+KEY_SYNERGY_CAPTURE = 186  # scancode 186 = F16
+KEY_SYNERGY_RELEASE = 187  # scancode 187 = F17
 
 i3 = i3ipc.Connection(auto_reconnect=True)
 last_window = None
