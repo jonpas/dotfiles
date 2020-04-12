@@ -146,7 +146,7 @@ OPTS+=" -drive file=/home/jonpas/Data/images/virtio-win.iso,index=3,media=cdrom"
 # Network
 OPTS+=" -net none"
 OPTS+=" -net nic,model=virtio" # 'virtio' may cause connection drop after a while without 'fix_virtio' patch (in qemu >=4.0)
-OPTS+=" -net user" #,smb=/home/jonpas/Storage/"
+OPTS+=" -net bridge,br=bridge0" # -net user #,smb=/home/jonpas/Storage/"
 
 # GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then

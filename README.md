@@ -56,6 +56,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - mkinitcpio.conf (VFIO)
     - slim.conf
     - vconsole.conf
+    - vm/qemu* (VFIO)
 None
     - backup (BAK)
     - barrier (VFIO)
