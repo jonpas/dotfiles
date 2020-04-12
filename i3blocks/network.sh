@@ -1,28 +1,35 @@
 #!/bin/bash
 
-# Ethernet
-eth_interface=enp3s0
+wired_interfaces=(bridge0 enp3s0)
+wirless_interfaces=()
+
 if [ $(hostname) != "loki" ]; then
-    eth_interface=enp0s25
+    wired_interfaces=(enp0s25)
+    wireless_interfaces=(wlp3s0)
 fi
 
-address=$(ip addr show $eth_interface | grep -Po 'inet \K[\d.]+')
-if [ -n "$address" ]; then
-    echo " $address"
-    echo " $address"
-    echo "#b8bb26"
-    exit 0
-fi
+# Wired
+for interface in $wired_interfaces; do
+    address=$(ip addr show $interface | grep -Po 'inet \K[\d.]+')
+    if [ -n "$address" ]; then
+        echo " $address"
+        echo " $address"
+        echo "#b8bb26"
+        exit 0
+    fi
+done
 
 # Wi-Fi
-address=$(ip addr show wlp3s0 | grep -Po 'inet \K[\d.]+')
-if [ -n "$address" ]; then
-    ssid=$(iwconfig | grep -o ESSID.* | tail -c +8 | head -c -4)
-    echo " $address ($ssid)"
-    echo " $ssid"
-    echo "#b8bb26"
-    exit 0
-fi
+for interface in $wireless_interfaces; do
+    address=$(ip addr show $interface | grep -Po 'inet \K[\d.]+')
+    if [ -n "$address" ]; then
+        ssid=$(iwconfig | grep -o ESSID.* | tail -c +8 | head -c -4)
+        echo " $address ($ssid)"
+        echo " $ssid"
+        echo "#b8bb26"
+        exit 0
+    fi
+done
 
 # Down
 echo " down"
