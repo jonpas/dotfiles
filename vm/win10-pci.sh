@@ -82,9 +82,9 @@ rebind() {
 
 start_lookingglass_helpers() {
     # Looking Glass client
-    if ! pgrep "looking-glass" > /dev/null; then
-        looking-glass-client &
-    fi
+    #if ! pgrep "looking-glass" > /dev/null; then
+    #    looking-glass-client &
+    #fi
 
     # VM Switcher
     if ! pgrep -f "$(dirname $0)/vm-switch.py" > /dev/null; then
