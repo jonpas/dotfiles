@@ -24,6 +24,8 @@ alias weather='curl http://wttr.in/Lenart'
 alias vm='sudo ~/dotfiles/vm/win10-pci.sh'
 
 alias cleandisk="yay -Sc && paccache -rk1"
+alias vcam="sudo modprobe v4l2loopback exclusive_caps=1"
+alias vcamrm="sudo modprobe -r v4l2loopback"
 
 # If interactive shell
 if [[ "$-" =~ "i" ]]; then
