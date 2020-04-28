@@ -35,6 +35,9 @@ border=#458588
 [network]
 border=#458588
 
+[firewall]
+border=#458588
+
 [battery]
 interval=30
 border=#8ec07c
