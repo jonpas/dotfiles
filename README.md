@@ -30,7 +30,6 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - .vimrc
     - .xinitrc (~VFIO)
 ~/.config/
-    - alacritty* (unused - https://github.com/tomaka/winit/issues/705)
     - dunst*
     - gsimplecal*
     - gtk-3.0/*
