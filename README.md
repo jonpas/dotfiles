@@ -46,7 +46,6 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - default/* (~VFIO)
     - grub.d/*
     - modprobe.d/* (~VFIO)
-    - pacman.d/hooks* (GPU-Nvidia)
     - samba/* (~VFIO)
     - fstab(-hostname)
     - locale.conf
