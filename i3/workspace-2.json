@@ -8,6 +8,7 @@
     "swallows": [
        {
         "class": "^firefox$"
+        "title": "^Google"
        }
     ],
     "type": "con"

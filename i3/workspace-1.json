@@ -15,7 +15,8 @@
             "percent": 0.5,
             "swallows": [
                {
-                "class": "^Slack$"
+                "class": "^firefox$",
+                "title": "^\\(PNG\\ Image"
                }
             ],
             "type": "con"
@@ -67,7 +68,8 @@
     "percent": 0.44,
     "swallows": [
        {
-        "class": "^Chromium$"
+        "class": "^firefox$",
+        "title": "^The\\ Book"
        }
     ],
     "type": "con"
