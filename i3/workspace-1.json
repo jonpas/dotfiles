@@ -11,8 +11,8 @@
             "border": "pixel",
             "current_border_width": 2,
             "floating": "user_off",
-            "name": "Slack",
-            "percent": 0.5,
+            "name": "Chat",
+            "percent": 0.54,
             "swallows": [
                {
                 "class": "^firefox$",
@@ -26,7 +26,7 @@
             "border": "pixel",
             "floating": "auto_off",
             "layout": "splitv",
-            "percent": 0.5,
+            "percent": 0.46,
             "type": "con",
             "nodes": [
                 {
@@ -64,7 +64,7 @@
     "border": "pixel",
     "current_border_width": 2,
     "floating": "auto_off",
-    "name": "Chromium",
+    "name": "Ext",
     "percent": 0.44,
     "swallows": [
        {
