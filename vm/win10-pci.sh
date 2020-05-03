@@ -3,7 +3,7 @@
 # Arguments
 ENABLE_PASSTHROUGH_MOUSEKEYBOARD=false # Configuration or latency-free (will disable it in case of crash)
 ENABLE_PASSTHROUGH_USB_CONTROLLER=true
-ENABLE_PASSTHROUGH_WHEEL=false # Separate from other USB devices
+ENABLE_PASSTHROUGH_WHEEL=true # Separate from other USB devices
 ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_EVDEV_MOUSE=false
 ENABLE_PASSTHROUGH_GPU=true
@@ -131,7 +131,7 @@ if [ "$ENABLE_HUGEPAGES" = true ]; then
 fi
 
 # UEFI/BIOS
-OPTS+=" -drive if=pflash,format=raw,readonly,file=/usr/share/ovmf/x64/OVMF_CODE.fd"
+OPTS+=" -drive if=pflash,format=raw,readonly,file=/usr/share/edk2-ovmf/x64/OVMF_CODE.fd"
 OPTS+=" -drive if=pflash,format=raw,file=/home/jonpas/images/vm/OVMF_VARS-win10-ovmf.fd"
 
 # Drives
