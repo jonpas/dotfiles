@@ -1,85 +1,18 @@
 // vim:ts=4:sw=4:et
 {
-    "border": "pixel",
-    "current_border_width": 2,
-    "floating": "auto_off",
-    "name": "termite: /home/jonpas ",
-    "percent": 0.38,
-    "swallows": [
-       {
-        "class": "^Termite$",
-        "title": "^Terminal\\:\\ monitor$"
-       }
-    ],
-    "type": "con"
-}
-
-{
-    // splitv split container with 3 children
+    // splith split container with 2 children
     "border": "pixel",
     "floating": "auto_off",
-    "layout": "splitv",
-    "percent": 0.62,
+    "layout": "splith",
+    "percent": 0.4,
     "type": "con",
     "nodes": [
-        {
-            // splith split container with 3 children
-            "border": "pixel",
-            "floating": "auto_off",
-            "layout": "splith",
-            "percent": 0.15,
-            "type": "con",
-            "nodes": [
-                {
-                    "border": "pixel",
-                    "current_border_width": 2,
-                    "floating": "auto_off",
-                    "name": "terminal - watch progress",
-                    "percent": 0.38,
-                    "swallows": [
-                       {
-                        "class": "^Termite$",
-                        "title": "^Terminal\\:\\ progress$"
-                       }
-                    ],
-                    "type": "con"
-                },
-                {
-                    "border": "pixel",
-                    "current_border_width": 2,
-                    "floating": "auto_off",
-                    "name": "terminal - watch cpu freq",
-                    "percent": 0.2,
-                    "swallows": [
-                       {
-                        "class": "^Termite$",
-                        "title": "^Terminal\\:\\ cpu\\ freq$"
-                       }
-                    ],
-                    "type": "con"
-                },
-                {
-                    "border": "pixel",
-                    "current_border_width": 2,
-                    "floating": "auto_off",
-                    "name": "terminal - sensors",
-                    "percent": 0.42,
-                    "swallows": [
-                       {
-                        "class": "^Termite$",
-                        "title": "^Terminal\\:\\ sensors$"
-                       }
-                    ],
-                    "type": "con"
-                }
-            ]
-        },
         {
             "border": "pixel",
             "current_border_width": 2,
             "floating": "auto_off",
             "name": "terminal - htop",
-            "percent": 0.55,
+            "percent": 0.5,
             "swallows": [
                {
                 "class": "^Termite$",
@@ -89,19 +22,81 @@
             "type": "con"
         },
         {
+            // splitv split container with 2 children
             "border": "pixel",
-            "current_border_width": 2,
             "floating": "auto_off",
-            "name": "terminal - WinVM",
-            "percent": 0.3,
-            "swallows": [
-               {
-                "class": "^Termite$",
-                "title": "^Terminal\\:\\ WinVM$"
-               }
-            ],
-            "type": "con"
+            "layout": "splitv",
+            "percent": 0.5,
+            "type": "con",
+            "nodes": [
+                {
+                    // splith split container with 2 children
+                    "border": "pixel",
+                    "floating": "auto_off",
+                    "layout": "splith",
+                    "percent": 0.38,
+                    "type": "con",
+                    "nodes": [
+                        {
+                            "border": "pixel",
+                            "current_border_width": 2,
+                            "floating": "auto_off",
+                            "name": "terminal - sensors",
+                            "percent": 0.5,
+                            "swallows": [
+                               {
+                                "class": "^Termite$",
+                                "title": "^Terminal\\:\\ sensors$"
+                               }
+                            ],
+                            "type": "con"
+                        },
+                        {
+                            "border": "pixel",
+                            "current_border_width": 2,
+                            "floating": "auto_off",
+                            "name": "terminal - watch progress",
+                            "percent": 0.5,
+                            "swallows": [
+                               {
+                                "class": "^Termite$",
+                                "title": "^Terminal\\:\\ progress$"
+                               }
+                            ],
+                            "type": "con"
+                        }
+                    ]
+                },
+                {
+                    "border": "pixel",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "name": "terminal - WinVM",
+                    "percent": 0.62,
+                    "swallows": [
+                       {
+                        "class": "^Termite$",
+                        "title": "^Terminal\\:\\ WinVM$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
         }
     ]
 }
 
+{
+    "border": "pixel",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "name": "Mozilla Firefox",
+    "percent": 0.6,
+    "swallows": [
+       {
+        "class": "^firefox$",
+        "title": "^\\(PNG\\ Image"
+       }
+    ],
+    "type": "con"
+}
