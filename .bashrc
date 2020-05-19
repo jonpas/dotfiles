@@ -19,6 +19,9 @@ alias l='ls -CFv'
 
 alias fd="fd --hidden"
 
+alias rm='rmtrash'
+alias rmdir='rmdirtrash'
+
 alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
 alias vm='sudo ~/dotfiles/vm/win10-pci.sh'
