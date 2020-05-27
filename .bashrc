@@ -22,6 +22,8 @@ alias fd="fd --hidden"
 alias rm='rmtrash'
 alias rmdir='rmdirtrash'
 
+alias yay="yay && pkill -RTMIN+4 i3blocks"  # i3blocks update
+
 alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
 alias vm='sudo ~/dotfiles/vm/win10-pci.sh'

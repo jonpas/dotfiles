@@ -7,7 +7,8 @@ border_right=0
 border_bottom=3
 
 [updates]
-interval=600
+interval=3600
+signal=4
 border=#cc241d
 
 [vm]
