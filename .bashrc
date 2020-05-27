@@ -22,8 +22,6 @@ alias fd="fd --hidden"
 alias rm='rmtrash'
 alias rmdir='rmdirtrash'
 
-alias yay="yay && pkill -RTMIN+4 i3blocks"  # i3blocks update
-
 alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
 alias vm='sudo ~/dotfiles/vm/win10-pci.sh'
@@ -37,6 +35,12 @@ if [[ "$-" =~ "i" ]]; then
     # Bind fg for switching between vim and terminal (C-z / C-a)
     bind -x '"\C-a":"fg"'
 fi
+
+function __update() {
+    yay "$@" &&
+    pkill -RTMIN+4 i3blocks
+}
+alias yay='__update'
 
 if [ -f /usr/share/bash-completion/completions/git ]; then
     . /usr/share/bash-completion/completions/git
