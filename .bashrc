@@ -64,8 +64,12 @@ function __prompt_command() {
         USER="uni"
     fi
 
-    prompt-rs --right
-    PS1=$(prompt-rs --left)
+    if [ -x "$(command -v prompt-rs)" ]; then
+        prompt-rs --right
+        PS1=$(prompt-rs --left)
+    else
+        PS1="[\[\e[1;32m\]$(whoami)\[\e[0m\]@\[\e[1;36m\]$(hostname)\[\e[0m\]] $ "
+    fi
 
     # Window title
     echo -ne "\033]0;$TERMINAL: $(pwd) \007"
