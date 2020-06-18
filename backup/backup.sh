@@ -21,6 +21,9 @@ fi
 # Prompt if sure
 echo -n "Are you sure you would like to begin backup? (y/n): "
 read executeback
+if [ $executeback != "y" ]; then
+    exit 0
+fi
 
 # Check if exclude file exists
 if [ -f $exclude_file ]; then
@@ -30,19 +33,24 @@ else
 fi
 
 read continue
-if [ $continue == "n" ]; then
+if [ $continue != "y" ]; then
     exit 0
 fi
 
-if [ $executeback = "y" ]; then
-    mkdir -p /backups
+# Prompt for verbosity
+echo -n "Verbose output (slower on slower terminals)? (y/n): "
+read verbose
 
-    # -p and --xattrs store all permissions and extended attributes.
-    # Without both of these, many programs will stop working!
-    # Verbose (-v) flag slows the process on slower terminals
-    if [ "$1" = "-v" ]; then
-        tar -X $exclude_file --xattrs -czpvf $backupfile /
-    else
-        tar -X $exclude_file --xattrs -czpf $backupfile /
-    fi
+# Perform backup
+mkdir -p /backups
+echo -n "Creating backup $backupfile"
+
+# -p and --xattrs store all permissions and extended attributes.
+# Without both of these, many programs will stop working!
+if [ $verbose = "y" ]; then
+    tar -X $exclude_file --xattrs -czpvf $backupfile /
+else
+    tar -X $exclude_file --xattrs -czpf $backupfile /
 fi
+
+echo -n "$backupfile created"
