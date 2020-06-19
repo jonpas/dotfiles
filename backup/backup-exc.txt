@@ -27,6 +27,7 @@
 /var/spool
 
 # Not various user folders
+*/.local/share/Trash
 */.local/share/Steam
 */.PlayOnLinux
 */VirtualBox\ VMs
