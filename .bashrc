@@ -1,5 +1,5 @@
 # Start X on tty1 on correct user (not root, eg. during restore)
-if [[ -z $DISPLAY ]] && [[ $(tty) = "/dev/tty1" ]] && [[ $(whoami) = "jonpas" ]]; then
+if [[ -z $DISPLAY ]] && [[ "$(tty)" = "/dev/tty1" ]] && [[ "$(whoami)" = "jonpas" ]]; then
     startx && exit
 fi
 
@@ -65,7 +65,7 @@ function __prompt_command() {
         USER="uni"
     fi
 
-    if [ -x "$(command -v prompt-rs)" ]; then
+    if [ "$(whoami)" = "jonpas" ]; then
         prompt-rs --right
         PS1=$(prompt-rs --left)
     else
