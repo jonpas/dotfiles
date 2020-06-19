@@ -10,7 +10,7 @@ exclude_file="./backup-exc.txt"
 # Labels for backup name
 distro=$(cat /etc/*-release | grep "ID=" | awk -F"=" '{print $2}')
 date=$(date +%Y%m%dT%H%M%S)
-backupfile="$backdest/fsbackup_$(hostname)_$distro_$date.tar.gz"
+backupfile="$backdest/fsbackup_$(cat /etc/hostname)_$distro_$date.tar.gz" # cat due to Live ISO chroot using 'archiso'
 
 # Check if running as root
 if [ "$EUID" -ne 0 ]; then
