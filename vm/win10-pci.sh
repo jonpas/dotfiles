@@ -13,49 +13,9 @@ ENABLE_LOOKINGGLASS=true
 LG_SPICE_UNIX_SOCKET=false
 MEMORY="16"
 
-usage() {
-    echo "Windows 10 GPU-Passthrough VM Start script."
-    echo "[-h] help"
-    echo "[-p <true/false>] use huge pages"
-    echo "[-c <true/false>] pass-through USB controller"
-    echo "[-w <true/false>] pass-through wheel (in USB controller)"
-    echo "[-a <true/false>] pass-through audio"
-    echo "[-k <true/false>] pass-through mouse/keyboard"
-    echo "[-e <true/false>] evdev pass-through mouse"
-    echo "[-m <gigabytes>] memory"
-    echo "[-g <true/false>] use Looking Glass"
-    exit 1
-}
+PCI_GPU_VIDEO=0000:09:00.0
+PCI_GPU_AUDIO=0000:09:00.1
 
-while getopts 'hp:c:w:a:k:e:m:g:' flag; do
-    case "${flag}" in
-        h) usage ;;
-        p) ENABLE_HUGEPAGES=${OPTARG} ;;
-        c) ENABLE_PASSTHROUGH_USB_CONTROLLER=${OPTARG} ;;
-        w) ENABLE_PASSTHROUGH_WHEEL=${OPTARG} ;;
-        a) ENABLE_PASSTHROUGH_AUDIO=${OPTARG} ;;
-        k) ENABLE_PASSTHROUGH_MOUSEKEYBOARD=${OPTARG} ;;
-        e) ENABLE_EVDEV_MOUSE=${OPTARG} ;;
-        m) MEMORY=${OPTARG} ;;
-        g) ENABLE_LOOKINGGLASS=${OPTARG} ;;
-        *) usage ;;
-    esac
-done
-
-echo "Huge-pages: $ENABLE_HUGEPAGES"
-echo "Pass-Through Wheel: $ENABLE_PASSTHROUGH_WHEEL"
-echo "Pass-Through Audio: $ENABLE_PASSTHROUGH_AUDIO"
-echo "Pass-Through Mouse/Keyboard: $ENABLE_PASSTHROUGH_MOUSEKEYBOARD"
-echo "Pass-Through USB Controller: $ENABLE_PASSTHROUGH_USB_CONTROLLER"
-echo "Evdev Mouse: $ENABLE_EVDEV_MOUSE"
-echo "Memory: ${MEMORY}G"
-echo "Looking Glass: $ENABLE_LOOKINGGLASS"
-if [ "$ENABLE_LOOKINGGLASS" = true ]; then
-    echo "Spice Unix Socket: $LG_SPICE_UNIX_SOCKET"
-fi
-
-
-# Helpers
 rebind() {
     dev="$1"
     driver="$2"
@@ -92,6 +52,65 @@ start_lookingglass_helpers() {
         $(dirname $0)/vm-switch.py &
     fi
 }
+
+rebind_gpu() {
+    driver="$1"
+
+    if [ "$driver" = "nvidia" ]; then
+        rebind $PCI_GPU_VIDEO nvidia
+        rebind $PCI_GPU_AUDIO snd_hda_intel
+    elif [ "$driver" = "vfio" ] || [ "$driver" = "vfio-pci" ]; then
+        rebind $PCI_GPU_VIDEO vfio-pci
+        rebind $PCI_GPU_AUDIO vfio-pci
+    else
+        echo "Unknown GPU driver!"
+    fi
+
+    exit 1
+}
+
+usage() {
+    echo "Windows 10 GPU-Passthrough VM Start script."
+    echo "[-h] help"
+    echo "[-p <true/false>] use huge pages"
+    echo "[-c <true/false>] pass-through USB controller"
+    echo "[-w <true/false>] pass-through wheel (in USB controller)"
+    echo "[-a <true/false>] pass-through audio"
+    echo "[-k <true/false>] pass-through mouse/keyboard"
+    echo "[-e <true/false>] evdev pass-through mouse"
+    echo "[-m <gigabytes>] memory"
+    echo "[-g <true/false>] use Looking Glass"
+    echo "[-r <vfio/nvidia>] set pass-through GPU driver"
+    exit 1
+}
+
+while getopts 'hp:c:w:a:k:e:m:g:r' flag; do
+    case "${flag}" in
+        h) usage ;;
+        p) ENABLE_HUGEPAGES=${OPTARG} ;;
+        c) ENABLE_PASSTHROUGH_USB_CONTROLLER=${OPTARG} ;;
+        w) ENABLE_PASSTHROUGH_WHEEL=${OPTARG} ;;
+        a) ENABLE_PASSTHROUGH_AUDIO=${OPTARG} ;;
+        k) ENABLE_PASSTHROUGH_MOUSEKEYBOARD=${OPTARG} ;;
+        e) ENABLE_EVDEV_MOUSE=${OPTARG} ;;
+        m) MEMORY=${OPTARG} ;;
+        g) ENABLE_LOOKINGGLASS=${OPTARG} ;;
+        r) rebind_gpu $2 ;;
+        *) usage ;;
+    esac
+done
+
+echo "Huge-pages: $ENABLE_HUGEPAGES"
+echo "Pass-Through Wheel: $ENABLE_PASSTHROUGH_WHEEL"
+echo "Pass-Through Audio: $ENABLE_PASSTHROUGH_AUDIO"
+echo "Pass-Through Mouse/Keyboard: $ENABLE_PASSTHROUGH_MOUSEKEYBOARD"
+echo "Pass-Through USB Controller: $ENABLE_PASSTHROUGH_USB_CONTROLLER"
+echo "Evdev Mouse: $ENABLE_EVDEV_MOUSE"
+echo "Memory: ${MEMORY}G"
+echo "Looking Glass: $ENABLE_LOOKINGGLASS"
+if [ "$ENABLE_LOOKINGGLASS" = true ]; then
+    echo "Spice Unix Socket: $LG_SPICE_UNIX_SOCKET"
+fi
 
 
 # VM INIT
@@ -155,10 +174,10 @@ OPTS+=" -net bridge,br=bridge0" # -net user #,smb=/home/jonpas/Storage/"
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
     OPTS+=" -device pcie-root-port,chassis=0,bus=pcie.0,slot=0,id=root1"
 
-    rebind 0000:09:00.0 vfio-pci # GPU
-    OPTS+=" -device vfio-pci,host=09:00.0,bus=root1,addr=00.0,multifunction=on"
-    rebind 0000:09:00.1 vfio-pci # GPU Audio
-    OPTS+=" -device vfio-pci,host=09:00.1,bus=root1,addr=00.1"
+    rebind $PCI_GPU_VIDEO vfio-pci
+    OPTS+=" -device vfio-pci,host=$(echo $PCI_GPU_VIDEO | cut -c 6-),bus=root1,addr=00.0,multifunction=on"
+    rebind $PCI_GPU_AUDIO vfio-pci
+    OPTS+=" -device vfio-pci,host=$(echo $PCI_GPU_AUDIO | cut -c 6-),bus=root1,addr=00.1"
 fi
 
 if [ "$ENABLE_QEMU_GPU" = false ]; then
@@ -288,8 +307,8 @@ fi
 
 # GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
-    rebind 0000:09:00.0 nvidia # GPU
-    rebind 0000:09:00.1 snd_hda_intel # GPU Audio
+    rebind $PCI_GPU_VIDEO nvidia
+    rebind $PCI_GPU_AUDIO snd_hda_intel
 
     if [ "$ENABLE_LOOKINGGLASS" = true ]; then
         # VM Switcher close
