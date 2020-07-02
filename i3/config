@@ -123,16 +123,16 @@ set $ws8 "8  "
 set $ws9 "9  "
 
 # workspace monitors (if available)
-workspace $ws0 output VGA1
-workspace $ws1 output HDMI1
-workspace $ws2 output HDMI2
-workspace $ws3 output HDMI2
-workspace $ws4 output HDMI2
-workspace $ws5 output HDMI2
-workspace $ws6 output HDMI2
-workspace $ws7 output HDMI2
-workspace $ws8 output HDMI2
-workspace $ws9 output HDMI2
+workspace $ws0 output VGA-0
+workspace $ws1 output DVI-D-0
+workspace $ws2 output HDMI-0
+workspace $ws3 output HDMI-0
+workspace $ws4 output HDMI-0
+workspace $ws5 output HDMI-0
+workspace $ws6 output HDMI-0
+workspace $ws7 output HDMI-0
+workspace $ws8 output HDMI-0
+workspace $ws9 output HDMI-0
 
 # switch to workspace
 bindsym $mod+cedilla workspace $ws0

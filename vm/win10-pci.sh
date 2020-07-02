@@ -10,8 +10,8 @@ ENABLE_PASSTHROUGH_GPU=true
 ENABLE_QEMU_GPU=false # Integrated QEMU GPU
 ENABLE_HUGEPAGES=true
 ENABLE_LOOKINGGLASS=true
-LG_SPICE_UNIX_SOCKET=true
-MEMORY="12"
+LG_SPICE_UNIX_SOCKET=false
+MEMORY="16"
 
 usage() {
     echo "Windows 10 GPU-Passthrough VM Start script."
@@ -60,6 +60,8 @@ rebind() {
     dev="$1"
     driver="$2"
     removeid="$3"
+    vendor=$(cat /sys/bus/pci/devices/$dev/vendor)
+    device=$(cat /sys/bus/pci/devices/$dev/device)
 
     # Unbind
     if [ -e /sys/bus/pci/devices/$dev/driver ]; then
@@ -72,8 +74,6 @@ rebind() {
 
     # Bind
     if [ "$driver" = "vfio-pci" ]; then
-        vendor=$(cat /sys/bus/pci/devices/$dev/vendor)
-        device=$(cat /sys/bus/pci/devices/$dev/device)
         echo $vendor $device > /sys/bus/pci/drivers/$driver/new_id
     else
         echo $dev > /sys/bus/pci/drivers/$driver/bind
@@ -105,8 +105,8 @@ OPTS+=" -machine type=q35,kernel_irqchip=on" # 'kernel_irqchip=on' for qemu >=4.
 OPTS+=" -rtc base=localtime" # Windows uses localtime
 
 # CPU
-OPTS+=" -cpu host,migratable=no,+invtsc,kvm=off,hv_vendor_id=0123456789ab,hv_time,hv_relaxed,hv_vapic,hv_spinlocks=0x1fff"
-OPTS+=" -smp 4,sockets=1,cores=4,threads=1"
+OPTS+=" -cpu host,migratable=no,+invtsc,kvm=off,hv_vendor_id=0123456789ab,hv_time,hv_relaxed,hv_vapic,hv_spinlocks=0x1fff,-amd-stibp"
+OPTS+=" -smp 12,sockets=1,cores=6,threads=2"
 
 # RAM
 OPTS+=" -m ${MEMORY}G"
@@ -155,10 +155,10 @@ OPTS+=" -net bridge,br=bridge0" # -net user #,smb=/home/jonpas/Storage/"
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
     OPTS+=" -device pcie-root-port,chassis=0,bus=pcie.0,slot=0,id=root1"
 
-    rebind 0000:01:00.0 vfio-pci # GPU
-    OPTS+=" -device vfio-pci,host=01:00.0,bus=root1,addr=00.0,multifunction=on"
-    rebind 0000:01:00.1 vfio-pci # GPU Audio
-    OPTS+=" -device vfio-pci,host=01:00.1,bus=root1,addr=00.1"
+    rebind 0000:09:00.0 vfio-pci # GPU
+    OPTS+=" -device vfio-pci,host=09:00.0,bus=root1,addr=00.0,multifunction=on"
+    rebind 0000:09:00.1 vfio-pci # GPU Audio
+    OPTS+=" -device vfio-pci,host=09:00.1,bus=root1,addr=00.1"
 fi
 
 if [ "$ENABLE_QEMU_GPU" = false ]; then
@@ -218,17 +218,17 @@ else
     fi
 
     # evdev (lctrl + rctrl to swap, no macro keys)
-    OPTS+=" -object input-linux,id=kbd,evdev=/dev/input/by-path/pci-0000:00:14.0-usb-0:10:1.0-event-kbd,grab_all=on,repeat=on" # Logitech G710 Keyboard
+    OPTS+=" -object input-linux,id=kbd,evdev=/dev/input/by-path/pci-0000:0c:00.3-usb-0:4:1.0-event-kbd,grab_all=on,repeat=on" # Logitech G710 Keyboard
 
     if [ "$ENABLE_EVDEV_MOUSE" = true ]; then
-        OPTS+=" -object input-linux,id=mouse,evdev=/dev/input/by-path/pci-0000:00:14.0-usb-0:3:1.0-event-mouse"
+        OPTS+=" -object input-linux,id=mouse,evdev=/dev/input/by-path/pci-0000:06:00.1-usb-0:3:1.0-event-mouse"
     fi
 fi
 
 # USB Controller (extension card)
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
-    rebind 0000:06:00.0 vfio-pci # PCIe USB Card
-    OPTS+=" -device vfio-pci,host=06:00.0,bus=root1,addr=00.4"
+    rebind 0000:05:00.0 vfio-pci # PCIe USB Card
+    OPTS+=" -device vfio-pci,host=05:00.0,bus=root1,addr=00.4"
 fi
 
 # USB devices (connected to USB controller)
@@ -251,7 +251,7 @@ fi
 
 # Sound
 if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
-    rebind 0000:00:1b.0 vfio-pci # Audio
+    rebind 0000:0c:00.4 vfio-pci # Audio
     OPTS+=" -device vfio-pci,host=00:1b.0,bus=root1,addr=00.3"
 else
     OPTS+=" -device ich9-intel-hda"
@@ -278,18 +278,18 @@ fi
 
 # USB
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
-    rebind 0000:06:00.0 xhci_hcd true # PCIe USB Card (remove ID)
+    rebind 0000:05:00.0 xhci_hcd true # PCIe USB Card (remove ID)
 fi
 
 # Sound
 if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
-    rebind 0000:00:1b.0 snd_hda_intel # Audio
+    rebind 0000:0c:00.4 snd_hda_intel # Audio
 fi
 
 # GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
-    rebind 0000:01:00.0 nvidia # GPU
-    rebind 0000:01:00.1 snd_hda_intel # GPU Audio
+    rebind 0000:09:00.0 nvidia # GPU
+    rebind 0000:09:00.1 snd_hda_intel # GPU Audio
 
     if [ "$ENABLE_LOOKINGGLASS" = true ]; then
         # VM Switcher close

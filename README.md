@@ -43,17 +43,17 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - NetworkManager/dispatcher.d/*
     - X11/* (VFIO)
     - X11/xorg.conf.d/*
-    - default/* (~VFIO)
+    - default/*(-hostname) (~VFIO)
     - grub.d/*
     - modprobe.d/* (~VFIO)
     - samba/* (~VFIO)
+    - udev/rules.d/* (~VFIO)
+    - vm/qemu* (VFIO)
     - fstab(-hostname)
     - locale.conf
     - looking-glass.conf (VFIO)
     - mkinitcpio.conf (VFIO)
-    - slim.conf
     - vconsole.conf
-    - vm/qemu* (VFIO)
 None
     - backup (BAK)
     - barrier (VFIO)
