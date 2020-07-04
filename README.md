@@ -55,6 +55,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - mkinitcpio.conf (VFIO)
     - vconsole.conf
 None
+    - OpenRGB
     - backup (BAK)
     - barrier (VFIO)
     - lib

@@ -15,6 +15,9 @@ if [ $(hostname) = "loki" ]; then
 
     # Enable keyboard repeat (better Barrier/Synergy compatibility)
     xset r on
+
+    # Load OpenRGB profile
+    OpenRGB --profile ~/dotfiles/OpenRGB/Wraith.orp
 fi
 
 exec i3
