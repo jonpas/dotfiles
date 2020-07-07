@@ -17,11 +17,13 @@ if [ $(hostname) = "loki" ]; then
             --output $AOCp $AOCcfg --pos 2560x1050 \
             --output $SSMp $SSMcfg --pos 660x0
     elif [ "$layout" = "off" ]; then
+        ddcutil --sn CTNB9HA004317 setvcp 60 0x03
         xrandr \
             --output $LGWp --off \
             --output $AOCp --off #\
             --output $SSMp --primary
     elif [ "$layout" = "right" ]; then
+        ddcutil --sn CTNB9HA004317 setvcp 60 0x04
         xrandr \
             --output $LGWp --off \
             --output $AOCp $AOCcfg --pos 0x0 --primary \
