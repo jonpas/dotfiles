@@ -208,7 +208,7 @@ mode "$resize" {
 bindsym $mod+r mode "$resize"
 
 # external screen management
-set $display_layout  : [a]  , [h]  , [l]  , [o]  , [s]  
+set $display_layout  : [a]  , [h]  , [l]  , [o]  , [s] 
 mode "$display_layout" {
     bindsym a     mode "default" exec $set_monitors       && $restart_barrier        && i3-msg restart
     bindsym o     mode "default" exec $set_monitors off   && $restart_barrier both   && i3-msg restart
@@ -218,9 +218,9 @@ mode "$display_layout" {
     bindsym l     mode "default" exec $set_monitors right && $restart_barrier center && i3-msg restart
     bindsym Right mode "default" exec $set_monitors right && $restart_barrier center && i3-msg restart
 
-    bindsym s     mode "default" exec xset dpms force suspend
+    bindsym s     mode "default" exec xset dpms force suspend && OpenRGB -p ~/dotfiles/OpenRGB/Off.orp
 
-    bindsym Return mode "default"
+    bindsym Return mode "default" exec OpenRGB -p ~/dotfiles/OpenRGB/Wraith.orp
     bindsym Escape mode "default"
 }
 
