@@ -10,7 +10,7 @@ ENABLE_PASSTHROUGH_GPU=true
 ENABLE_QEMU_GPU=false # Integrated QEMU GPU
 ENABLE_HUGEPAGES=true
 ENABLE_LOOKINGGLASS=true
-LG_SPICE_UNIX_SOCKET=false
+LG_SPICE_UNIX_SOCKET=true
 MEMORY="16"
 
 PCI_GPU_VIDEO=0000:09:00.0
@@ -201,7 +201,7 @@ if [ "$ENABLE_LOOKINGGLASS" = true ]; then
 
     # Spice connection
     if [ "$LG_SPICE_UNIX_SOCKET" = true ]; then
-        OPTS+=" -spice gl=on,unix,addr=/run/user/1000/spice.sock,disable-ticketing" # Unix socket
+        OPTS+=" -spice unix,addr=/run/user/1000/spice.sock,disable-ticketing" # Unix socket
 
         # Set owner of Unix socket file (remove if exists, wait to be created by QEMU, change owner)
         if [ -S /run/user/1000/spice.sock ]; then
@@ -219,9 +219,9 @@ if [ "$ENABLE_LOOKINGGLASS" = true ]; then
     fi
 
     # Spice Agent (clipboard)
-    OPTS+=" -device virtio-serial"
-    OPTS+=" -chardev spicevmc,id=vdagent,debug=0,name=vdagent"
-    OPTS+=" -device virtserialport,chardev=vdagent,name=com.redhat.spice.0"
+    OPTS+=" -device virtio-serial-pci"
+    OPTS+=" -device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0"
+    OPTS+=" -chardev spicevmc,id=spicechannel0,name=vdagent"
 fi
 
 # Mouse & Keyboard (pass one always in case of lock-ups or network issues)
