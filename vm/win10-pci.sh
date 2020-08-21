@@ -162,8 +162,9 @@ OPTS+=" -device scsi-block,drive=ssd0,bus=scsi.0"
 # Convert qcow2 to raw: qemu-img convert -p -O raw source.qcow2 target.img -o preallocation=full
 # Resize image: qemu-img resize -f raw --preallocation=full source.img +5G
 OPTS+=" -drive file=/home/jonpas/Data/images/vm/data.img,format=raw,index=1,media=disk,if=virtio,aio=native,cache=none"
-OPTS+=" -drive file=/home/jonpas/images/windows10.iso,index=2,media=cdrom"
-OPTS+=" -drive file=/home/jonpas/images/virtio-win.iso,index=3,media=cdrom"
+OPTS+=" -drive file=/home/jonpas/images/vm/games.img,format=raw,index=2,media=disk,if=virtio,aio=native,cache=none"
+OPTS+=" -drive file=/home/jonpas/images/windows10.iso,index=3,media=cdrom"
+OPTS+=" -drive file=/home/jonpas/images/virtio-win.iso,index=4,media=cdrom"
 
 # Network
 OPTS+=" -net none"
