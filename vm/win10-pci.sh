@@ -125,7 +125,7 @@ OPTS+=" -rtc base=localtime" # Windows uses localtime
 
 # CPU
 OPTS+=" -cpu host,migratable=no,+invtsc,kvm=off,hv_vendor_id=0123456789ab,hv_time,hv_relaxed,hv_vapic,hv_spinlocks=0x1fff,-amd-stibp,topoext"
-OPTS+=" -smp 12,sockets=1,cores=6,threads=2"
+OPTS+=" -smp 16,sockets=1,cores=8,threads=2"
 
 # RAM
 OPTS+=" -m ${MEMORY}G"
