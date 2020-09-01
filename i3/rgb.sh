@@ -6,6 +6,6 @@ if [ $(hostname) = "loki" ]; then
     if [ "$state" = "on" ]; then
         OpenRGB -p ~/dotfiles/OpenRGB/Wraith.orp
     elif [ "$state" = "off" ]; then
-        OpenRGB -p ~/dotfiles/OpenRGB/off.orp
+        OpenRGB -p ~/dotfiles/OpenRGB/Off.orp
     fi
 fi
