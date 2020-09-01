@@ -13,4 +13,6 @@ convert /tmp/screenshot.jpg -resize ${resizeX}x${resizeY} -scale ${targetX}x${ta
 i3lock -i /tmp/screenshotblur.png --nofork # no fork waits for unlock to continue executing
 
 # Unlock
-OpenRGB -p ~/dotfiles/OpenRGB/Wraith.orp
+if [ $(hostname) = "loki" ]; then
+    . ~/.config/i3/rgb.sh on
+fi
