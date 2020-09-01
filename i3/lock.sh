@@ -7,6 +7,10 @@ targetY=$(awk '{print $3}' <<< $target)
 resizeX=$(( $targetX / 20 ))
 resizeY=$(( $targetY / 20 ))
 
-scrot -q 1 /tmp/screenshot.jpg
+scrot -o -q 1 /tmp/screenshot.jpg
 convert /tmp/screenshot.jpg -resize ${resizeX}x${resizeY} -scale ${targetX}x${targetY} /tmp/screenshotblur.png
-i3lock -i /tmp/screenshotblur.png
+
+i3lock -i /tmp/screenshotblur.png --nofork # no fork waits for unlock to continue executing
+
+# Unlock
+OpenRGB -p ~/dotfiles/OpenRGB/Wraith.orp
