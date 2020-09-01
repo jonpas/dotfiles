@@ -53,6 +53,12 @@ call plug#end()
 
 runtime ftplugin/man.vim
 
+" Templates
+augroup templates
+    autocmd BufNewFile *.sh 0r ~/.vim/templates/skeleton.sh
+    autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
+augroup END
+
 " Style (color list: http://jonasjacek.github.io/colors/)
 set background=dark
 colorscheme gruvbox
