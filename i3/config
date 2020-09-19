@@ -13,7 +13,6 @@
 set $lock . ~/.config/i3/lock.sh
 set $set_monitors . ~/.config/i3/monitor.sh
 set $restart_barrier . ~/dotfiles/barrier/barriers.sh
-set $set_rgb . ~/.config/i3/rgb.sh
 
 # Alias Alt key
 set $alt Mod1
@@ -220,9 +219,9 @@ mode "$display_layout" {
     bindsym l     mode "default" exec $set_monitors right && $restart_barrier center && i3-msg restart
     bindsym Right mode "default" exec $set_monitors right && $restart_barrier center && i3-msg restart
 
-    bindsym s     mode "default" exec xset dpms force suspend && $lock && $set_rgb off
+    bindsym s     mode "default" exec xset dpms force suspend && $lock
 
-    bindsym Return mode "default" exec $set_rgb on
+    bindsym Return mode "default" exec ~/.config/i3/rgb.sh on
     bindsym Escape mode "default"
 }
 

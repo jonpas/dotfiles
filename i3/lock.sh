@@ -10,6 +10,11 @@ resizeY=$(( $targetY / 20 ))
 scrot -o -q 1 /tmp/screenshot.jpg
 convert /tmp/screenshot.jpg -resize ${resizeX}x${resizeY} -scale ${targetX}x${targetY} /tmp/screenshotblur.png
 
+# Lock
+if [ $(hostname) = "loki" ]; then
+    . ~/.config/i3/rgb.sh off
+fi
+
 i3lock -i /tmp/screenshotblur.png --nofork # no fork waits for unlock to continue executing
 
 # Unlock
