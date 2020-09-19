@@ -219,7 +219,7 @@ mode "$display_layout" {
     bindsym l     mode "default" exec $set_monitors right && $restart_barrier center && i3-msg restart
     bindsym Right mode "default" exec $set_monitors right && $restart_barrier center && i3-msg restart
 
-    bindsym s     mode "default" exec xset dpms force suspend && $lock
+    bindsym s     mode "default" exec $lock true
 
     bindsym Return mode "default" exec ~/.config/i3/rgb.sh on
     bindsym Escape mode "default"
