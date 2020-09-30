@@ -10,6 +10,4 @@ if [ "$1" = "enp0s25" ]; then
             nmcli radio wifi on
             ;;
     esac
-else
-    nmcli radio wifi on
 fi
