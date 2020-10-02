@@ -87,13 +87,17 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
 PATH=$PATH:~/.cargo/bin
 
 # Jump to path aliases
+__base_school='~/Work/School/FERI-RIT'
 alias jL='cd ~/Work/Linux'
-alias jS='cd ~/Work/School/FERI-RIT'
-alias jST='cd ~/Work/School/FERI-RIT/Tasks/MAG-2-1'
-alias jSD='cd ~/Work/School/FERI-RIT/Data/MAG-2-1'
-alias jSP='cd ~/Work/School/FERI-RIT/Projects/MAG'
-alias jSF='cd ~/Work/School/FERI-RIT/Theses/MAG'
+alias jS="cd $__base_school"
+alias jST="cd $__base_school/Tasks/MAG-2-1"
+alias jSD="cd $__base_school/Data/MAG-2-1"
+alias jSP="cd $__base_school/Projects/MAG"
+alias jSF="cd $__base_school/Theses/MAG"
 alias jA3='cd ~/Work/Arma\ 3'
 alias jA3M='cd ~/Work/Arma\ 3/Mods'
 alias jA3T='cd ~/Work/Arma\ 3/Tools'
 alias jIDI='cd ~/Work/IDI'
+
+# Sync aliases
+alias sS="rsync -azP --delete loki:$__base_school/Data loki:$__base_school/Theses $__base_school/"
