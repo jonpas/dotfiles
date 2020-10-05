@@ -34,19 +34,20 @@ Plug 'airblade/vim-gitgutter'
 
 " language
 Plug 'sheerun/vim-polyglot'
-Plug 'jonpas/vim-sqf-syntax', { 'branch': 'c-like' }
-Plug 'othree/xml.vim'
-Plug 'rust-lang/rust.vim'
-Plug 'cespare/vim-toml'
-Plug 'chrisbra/csv.vim'
+Plug 'jonpas/vim-sqf-syntax', { 'for': 'sqf', 'branch': 'c-like' }
+Plug 'othree/xml.vim', { 'for': 'xml' }
+Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 
 " language utility
 Plug 'JamshedVesuna/vim-markdown-preview', { 'for': 'markdown' }
+Plug 'jupyter-vim/jupyter-vim', { 'for': 'python' }
 
 " linting
 Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
-Plug '~/.vim/local/vim-sqflint-ale'
+Plug '~/.vim/local/vim-sqflint-ale', { 'for': 'sqf' }
 Plug '~/.vim/local/vim-platformio-ale'
 
 call plug#end()
@@ -209,10 +210,15 @@ let g:ale_disable_lsp = 1 " coc's job
 let g:ale_python_flake8_options="--max-line-length=120"
 
 " HexMode
-" ex command for toggling hex mode - define mapping if desired
+" ex command for toggling hex mode
 command -bar Hexmode call ToggleHex()
 
-" helper function to toggle hex mode
+" Save su-owned file as user
+cmap w!! %!sudo tee > /dev/null %
+
+
+" Helper functions
+" Toggle hex mode
 function ToggleHex()
     " hex mode should be considered a read-only operation
     " save values for modified and read-only for restoration later,
@@ -251,6 +257,3 @@ function ToggleHex()
     let &readonly=l:oldreadonly
     let &modifiable=l:oldmodifiable
 endfunction
-
-" Save su-owned file as user
-cmap w!! %!sudo tee > /dev/null %
