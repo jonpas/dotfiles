@@ -12,6 +12,7 @@
 # Common programs
 set $lock . ~/.config/i3/lock.sh
 set $set_monitors . ~/.config/i3/monitor.sh
+set $set_volume . ~/.config/i3/volume.sh
 set $restart_barrier . ~/dotfiles/barrier/barriers.sh
 
 # Alias Alt key
@@ -264,9 +265,9 @@ smart_borders on
 # Function Keys
 bindsym XF86MonBrightnessUp   exec pkill -RTMIN+1 i3blocks # Actual brightness controlled by hardware
 bindsym XF86MonBrightnessDown exec pkill -RTMIN+1 i3blocks # Actual brightness controlled by hardware
-bindsym XF86AudioRaiseVolume  exec --no-startup-id amixer -q set Master 5%+    && pkill -RTMIN+2 i3blocks
-bindsym XF86AudioLowerVolume  exec --no-startup-id amixer -q set Master 5%-    && pkill -RTMIN+2 i3blocks
-bindsym XF86AudioMute         exec --no-startup-id amixer -q set Master toggle && pkill -RTMIN+2 i3blocks
+bindsym XF86AudioRaiseVolume  exec --no-startup-id $set_volume +5%    && pkill -RTMIN+2 i3blocks
+bindsym XF86AudioLowerVolume  exec --no-startup-id $set_volume -5%    && pkill -RTMIN+2 i3blocks
+bindsym XF86AudioMute         exec --no-startup-id $set_volume toggle && pkill -RTMIN+2 i3blocks
 bindsym XF86AudioStop         exec --no-startup-id playerctl stop
 bindsym XF86AudioPause        exec --no-startup-id playerctl play-pause
 bindsym XF86AudioPlay         exec --no-startup-id playerctl play-pause
