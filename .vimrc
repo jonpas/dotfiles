@@ -41,7 +41,7 @@ Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 
 " language utility
-Plug 'JamshedVesuna/vim-markdown-preview', { 'for': 'markdown' }
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'jupyter-vim/jupyter-vim', { 'for': 'python' }
 
 " linting
@@ -150,6 +150,8 @@ map <leader>p "+p
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
+nmap <C-m> <Plug>MarkdownPreview
+
 if has("nvim")
     tnoremap <Esc> <C-\><C-n>
 endif
@@ -201,9 +203,7 @@ let g:lightline#ale#indicator_errors = ""
 set diffopt+=vertical
 
 " Markdown Preview
-let vim_markdown_preview_github = 1
-let vim_markdown_preview_use_xdg_open = 1
-let vim_markdown_preview_hotkey = '<C-m>'
+let g:mkdp_auto_close = 0
 
 " Linters
 let g:ale_disable_lsp = 1 " coc's job

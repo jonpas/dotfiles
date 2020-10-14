@@ -1,0 +1,13 @@
+# use with `pandoc -dreport <in>.md > <out>.pdf`
+
+from: gfm
+to: pdf
+
+standalone: true
+pdf-engine: xelatex
+
+variables:
+  geometry:
+  - a4paper
+  - margin=2cm
+  mainfont: "Nimbus Sans"
