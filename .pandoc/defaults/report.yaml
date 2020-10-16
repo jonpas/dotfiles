@@ -1,6 +1,6 @@
 # use with `pandoc -dreport <in>.md > <out>.pdf`
 
-from: gfm
+from: markdown-implicit_figures
 to: pdf
 
 standalone: true
