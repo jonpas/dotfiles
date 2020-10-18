@@ -12,7 +12,7 @@
             "border": "pixel",
             "floating": "auto_off",
             "layout": "splith",
-            "percent": 0.2,
+            "percent": 0.25,
             "type": "con",
             "nodes": [
                 {
@@ -98,7 +98,7 @@
             "current_border_width": 2,
             "floating": "auto_off",
             "name": "Mozilla Firefox",
-            "percent": 0.8,
+            "percent": 0.75,
             "swallows": [
                {
                 "class": "^firefox$",
