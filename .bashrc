@@ -26,6 +26,7 @@ alias rmdir='rmdirtrash'
 alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
 alias vm='sudo ~/dotfiles/vm/win10-pci.sh'
+alias ptt='sudo python ~/dotfiles/lib/ptt.py'
 
 alias cleandisk="yay -Sc && paccache -rk1"
 alias vcam="sudo modprobe v4l2loopback exclusive_caps=1"
