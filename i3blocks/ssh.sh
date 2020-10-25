@@ -5,10 +5,10 @@ if [ $(hostname) != "loki" ]; then
 fi
 
 if [ ! -z "${BLOCK_BUTTON}" ]; then
-    notify-send "Active SSH Connections" "$(ss | grep ssh | awk '{print $6}')" &
+    notify-send "Active SSH Connections" "$(ss | grep ^tcp | awk '$5 ~ /ssh/ {print $6}')" &
 fi
 
-connections=$(ss | grep ssh | wc -l)
+connections=$(ss | grep ^tcp | awk '$5 ~ /ssh/' | wc -l)
 
 ssh=""
 color="#b8bb26"
