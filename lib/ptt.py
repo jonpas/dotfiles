@@ -18,7 +18,8 @@ KEY_PTT = "pause"
 MAPPINGS = {
     # (class, mute key) - searches in order
     "\\| Jitsi Meet": "m",
-    "Microsoft Teams$": "ctrl+shift+m"  # desktop or browser (Chromium)
+    "Microsoft Teams$": "ctrl+shift+m",  # desktop
+    "Microsoft Teams - .+$": "ctrl+shift+m",  # browser (Chromium)
 }
 
 i3 = i3ipc.Connection(auto_reconnect=True)
