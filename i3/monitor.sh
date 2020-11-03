@@ -15,7 +15,7 @@ if [ $(hostname) = "loki" ]; then
         xrandr \
             --output $LGWp $LGWcfg --pos 0x1050 \
             --output $AOCp $AOCcfg --pos 2560x1050 \
-            --output $SSMp $SSMcfg --pos 660x0
+            --output $SSMp $SSMcfg --pos 600x0
     elif [ "$layout" = "off" ]; then
         ddcutil --sn CTNB9HA004317 setvcp 60 0x03
         xrandr \
@@ -33,7 +33,7 @@ if [ $(hostname) = "loki" ]; then
         xrandr \
             --output $LGWp $LGWcfg --pos 0x1050 \
             --output $AOCp --off \
-            --output $SSMp $SSMcfg  --pos 660x0
+            --output $SSMp $SSMcfg  --pos 600x0
     fi
 fi
 
