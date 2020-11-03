@@ -17,7 +17,7 @@ if [ $(hostname) = "loki" ]; then
     xset r on
 
     # Load OpenRGB profile
-    OpenRGB --profile ~/dotfiles/OpenRGB/Wraith.orp
+    . ~/.config/i3/rgb.sh on
 fi
 
 exec i3
