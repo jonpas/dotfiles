@@ -100,7 +100,7 @@ set ttymouse=sgr " Vim does not recognize Alacritty as SGR-supported terminal
 
 " Layout
 set showtabline=2
-set noshowmode " diable insert mode information in command line
+set noshowmode " disable insert mode information in command line
 set number relativenumber
 au VimResized * exe "normal! \<c-w>="
 
@@ -109,6 +109,7 @@ set splitright
 set diffopt+=vertical
 silent! set splitvertical
 if v:errmsg != ''
+    " support for no splitvertical
     cabbrev split vert split
     cabbrev hsplit split
     cabbrev help vert help
@@ -130,27 +131,35 @@ au BufRead,BufNewFile *.asm set filetype=nasm
 
 " Keybinds
 set showcmd
+set clipboard=unnamedplus " use system clipboard
+" make Y work from the cursor to the end of line (like C and D)
+map Y y$
 set pastetoggle=<F2>
-nnoremap <CR> :let @/ = ""<CR>:<BACKSPACE><CR>
+" clear last used search pattern
+nnoremap <ENTER> :let @/ = ""<CR>:<BACKSPACE><CR>
+
+" Disable arrow keys
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
 
 nnoremap <F4> :GundoToggle<CR>
 nnoremap <F5> :NERDTreeTabsToggle<CR>
 nnoremap <F6> :NERDTreeTabsFind<CR>
-nnoremap <F7> :tabp<CR>
-nnoremap <F8> :tabn<CR>
+nnoremap <Left> :tabp<CR>
+nnoremap <Right> :tabn<CR>
 map <F9> :set path += "."<CR><C-w>gf
 nnoremap gb :make<CR> <bar> :cwindow<CR>
 nnoremap <F12> :tabe ~/.vimrc<CR>
-nnoremap <Left> :cprev<CR>
-nnoremap <Right> :cnext<CR>
+nnoremap <Up> :cprev<CR>
+nnoremap <Down> :cnext<CR>
 nnoremap <Space> za
-map <leader>y "+y
-map <leader>p "+p
 
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
-nmap <C-m> <Plug>MarkdownPreview
+nmap <C-s> <Plug>MarkdownPreview
 
 if has("nvim")
     tnoremap <Esc> <C-\><C-n>
@@ -158,10 +167,10 @@ endif
 
 " Ex commands
 " simplify saving and closing when shift held for too long
-command WQ wq
-command Wq wq
-command W w
-command Q q
+command -bang WQ wq
+command -bang Wq wq
+command -bang W w
+command -bang Q q
 
 " Lightline
 let g:lightline = {
