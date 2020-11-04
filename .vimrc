@@ -136,7 +136,7 @@ set clipboard=unnamedplus " use system clipboard
 map Y y$
 set pastetoggle=<F2>
 " clear last used search pattern
-nnoremap <ENTER> :let @/ = ""<CR>:<BACKSPACE><CR>
+nnoremap <CR> :let @/ = ""<CR>:<BACKSPACE><CR>
 
 " Disable arrow keys
 noremap <Up> <Nop>
