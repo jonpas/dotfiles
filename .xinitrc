@@ -17,7 +17,7 @@ if [ $(hostname) = "loki" ]; then
     xset r on
 
     # Load OpenRGB profile
-    . ~/.config/i3/rgb.sh on
+    ~/dotfiles/rgb/rgb.sh on
 fi
 
 exec i3

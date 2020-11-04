@@ -16,12 +16,12 @@ convert /tmp/screenshot.jpg -resize ${resizeX}x${resizeY} -scale ${targetX}x${ta
 # Lock
 if [ "$dark" = "true" ]; then
     xset dpms force suspend &&
-    . ~/.config/i3/rgb.sh off &
+    ~/dotfiles/rgb/rgb.sh off &
 fi
 
 i3lock -i /tmp/screenshotblur.png --nofork # no fork waits for unlock to continue executing
 
 # Unlock
 if [ "$dark" = "true" ]; then
-    . ~/.config/i3/rgb.sh on
+    ~/dotfiles/rgb/rgb.sh on
 fi
