@@ -42,7 +42,8 @@ Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 
 " language utility
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-Plug 'jupyter-vim/jupyter-vim', { 'for': 'python' }
+"Plug 'jupyter-vim/jupyter-vim', { 'for': 'python' }
+Plug 'jonpas/jupyter-vim', { 'branch': 'fix-delimiter', 'for': 'python' }
 
 " linting
 Plug 'dense-analysis/ale'
@@ -217,6 +218,12 @@ let g:mkdp_auto_close = 0
 " Linters
 let g:ale_disable_lsp = 1 " coc's job
 let g:ale_python_flake8_options="--max-line-length=120"
+
+" jupyter-vim
+let g:jupyter_mapkeys = 0
+autocmd FileType python nnoremap <buffer> <silent> <Leader>e :JupyterSendCell<CR>
+autocmd FileType python nnoremap <buffer> <silent> <Leader>E :JupyterSendCell<CR>/# %%<CR>zz
+autocmd FileType python vmap <buffer> <silent> <Leader>e <Plug>JupyterRunVisual
 
 " HexMode
 " ex command for toggling hex mode
