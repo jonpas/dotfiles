@@ -42,8 +42,7 @@ Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 
 " language utility
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
-"Plug 'jupyter-vim/jupyter-vim', { 'for': 'python' }
-Plug 'jonpas/jupyter-vim', { 'branch': 'fix-delimiter', 'for': 'python' }
+Plug 'jupyter-vim/jupyter-vim', { 'for': 'python' }
 
 " linting
 Plug 'dense-analysis/ale'
