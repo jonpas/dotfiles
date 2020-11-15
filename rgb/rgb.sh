@@ -4,8 +4,8 @@ if [ $(hostname) = "loki" ]; then
     state=$1
 
     if [ "$state" = "on" ]; then
-        openrgb -p "$(dirname $0)/loki.orp"
+        openrgb -p loki.orp
     elif [ "$state" = "off" ]; then
-        openrgb -p "$(dirname $0)/off.orp"
+        openrgb -p off.orp
     fi
 fi

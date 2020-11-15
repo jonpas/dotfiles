@@ -36,6 +36,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - i3* (~VFIO)
     - i3blocks*
     - ranger/*
+    - rgb/*.orp (~/.config/OpenRGB)
     - termite*
     - udiskie*
     - yay*
@@ -58,7 +59,6 @@ None
     - backup (BAK)
     - barrier (VFIO)
     - lib
-    - rgb
     - vm (VFIO)
 ```
 _Notes:_
