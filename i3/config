@@ -304,6 +304,7 @@ exec --no-startup-id flameshot
 
 # Window Settings
 for_window [class="(?i)gsimplecal"]                 floating enable, move position mouse, move down $bar_height px
+for_window [class="(?i)zenmonitor"]                 floating enable, move position mouse, move down $bar_height px
 for_window [window_role="About"]                    floating enable
 for_window [window_role="Preferences"]              floating enable
 for_window [window_role="pop-up"]                   floating enable

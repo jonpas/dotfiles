@@ -21,6 +21,9 @@ interval=once
 signal=1
 border=#d79921
 
+[cpu_mode]
+border=#a9a9a9
+
 [cpu]
 border=#b16286
 
