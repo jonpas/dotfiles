@@ -317,5 +317,6 @@ for_window [class="TeamSpeak 3"]                    floating enable
 for_window [class="Mumble"]                         floating enable
 for_window [title="KeePass"]                        floating enable
 for_window [title="Microsoft Teams Notification"]   floating enable
+for_window [title="Figure"]                         floating enable
 # Prevent i3 crash
 for_window [title="Discord Updater"]                floating disable
