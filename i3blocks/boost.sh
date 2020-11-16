@@ -18,7 +18,6 @@ if [ ! -z "${BLOCK_BUTTON}" ]; then
             governor="schedutil"
         fi
         i3-sensible-terminal -e "sudo cpupower frequency-set -g $governor"
-        notify-send "CPU governor set to \"$governor\""
     fi
 fi
 

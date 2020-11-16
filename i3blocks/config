@@ -21,7 +21,8 @@ interval=once
 signal=1
 border=#d79921
 
-[cpu_mode]
+[boost]
+interval=once
 border=#a9a9a9
 
 [cpu]
@@ -50,7 +51,7 @@ interval=30
 border=#8ec07c
 
 [volume]
-interval=60
+interval=once
 signal=2
 border=#83a598
 
