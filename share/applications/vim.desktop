@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Vim
+Comment=Open a text file in terminal Vim
+Icon=gvim
+Terminal=false
+Exec=i3-sensible-terminal -e "vim %F"

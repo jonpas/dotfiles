@@ -40,6 +40,8 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - termite*
     - udiskie*
     - yay*
+~/.local/
+    - share/applications/*
 /etc/
     - NetworkManager/dispatcher.d/*
     - X11/* (VFIO)
