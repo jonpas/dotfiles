@@ -1,0 +1,4 @@
+[submodule "lib/i3-status-rust"]
+	path = lib/i3-status-rust
+	url = https://github.com/jonpas/i3status-rust
+	branch = jonpas

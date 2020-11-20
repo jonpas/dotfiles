@@ -5,11 +5,18 @@ Dotfiles for Arch Linux with i3, vim, rofi, termite... and VFIO.
 
 ## Programs
 
-### Subrepos
-
-_Using [git-subrepo](https://github.com/ingydotnet/git-subrepo)._
+### Submodules
 
 - Programs: `lib/`
+
+```sh
+# Download
+$ git submodule init
+$ git sumbodule update --remote
+
+# Update
+$ git submodule update --recursive --remote
+```
 
 ### Vim Plugins
 
