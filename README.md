@@ -27,6 +27,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - .drirc (iGPU-Intel)
     - .gtkrc-2.0
     - .prompt.py
+    - .urlview
     - .vimrc
     - .xinitrc (~VFIO)
 ~/.config/
