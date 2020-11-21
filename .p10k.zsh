@@ -394,13 +394,15 @@
       res+=":${(V)VCS_STATUS_REMOTE_BRANCH//\%/%%}"  # escape %
     fi
 
+    res="($res)"
+
     # ⇣42 if behind the remote.
     #(( VCS_STATUS_COMMITS_BEHIND )) && res+=" ${clean}v${VCS_STATUS_COMMITS_BEHIND}"
-    (( VCS_STATUS_COMMITS_BEHIND )) && res+=" v${VCS_STATUS_COMMITS_BEHIND}"
+    (( VCS_STATUS_COMMITS_BEHIND )) && res="${VCS_STATUS_COMMITS_BEHIND}v $res"
     # ⇡42 if ahead of the remote; no leading space if also behind the remote: ⇣42⇡42.
-    (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND )) && res+=" "
+    #(( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND )) && res+=" "
     #(( VCS_STATUS_COMMITS_AHEAD  )) && res+="${clean}^${VCS_STATUS_COMMITS_AHEAD}"
-    (( VCS_STATUS_COMMITS_AHEAD  )) && res+="^${VCS_STATUS_COMMITS_AHEAD}"
+    (( VCS_STATUS_COMMITS_AHEAD  )) && res="${VCS_STATUS_COMMITS_AHEAD}^ $res"
     # ⇠42 if behind the push remote.
     #(( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" ${clean}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
     #(( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" "
@@ -427,13 +429,12 @@
     # in this case.
     #(( VCS_STATUS_HAS_UNSTAGED == -1 )) && res+=" ${modified}─"
 
-    res="%B($res)"
     if (( VCS_STATUS_HAS_UNSTAGED )); then
-        typeset -g my_git_format="%F{red}$res"
+        typeset -g my_git_format="%B%F{red}$res"
     elif (( VCS_STATUS_HAS_STAGED )); then
-        typeset -g my_git_format="%F{yellow}$res"
+        typeset -g my_git_format="%B%F{yellow}$res"
     else
-        typeset -g my_git_format="%F{green}$res"
+        typeset -g my_git_format="%B%F{green}$res"
     fi
   }
   functions -M my_git_formatter 2>/dev/null
