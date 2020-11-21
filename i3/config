@@ -47,16 +47,14 @@ mouse_warping none
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+$alt+Return exec PRESENT_PROMPT=1 i3-sensible-terminal # Minimal prompt (PS1)
 # start a terminal (in current working directory)
 bindsym $mod+Shift+Return exec i3-sensible-terminal -d "$(xcwd)"
-bindsym $mod+$alt+Shift+Return exec PRESENT_PROMPT=1 i3-sensible-terminal -d "$(xcwd)" # Minimal prompt (PS1)
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start rofi (a program launcher)
-bindsym $mod+d exec --no-startup-id rofi -show run -run-list-command ". ~/.config/i3/rofi-aliases.sh" -run-command "/bin/bash -i -c '{cmd}'"
+bindsym $mod+d exec --no-startup-id rofi -show run -run-list-command ". ~/.config/i3/rofi-aliases.sh" -run-command "/bin/zsh -i -c '{cmd}'"
 bindsym $mod+Shift+d exec --no-startup-id rofi -show ssh
 
 # change focus
@@ -274,7 +272,7 @@ bindsym XF86AudioPlay         exec --no-startup-id playerctl play-pause
 bindsym XF86AudioPrev         exec --no-startup-id playerctl previous
 bindsym XF86AudioNext         exec --no-startup-id playerctl next
 bindsym XF86Launch1           exec i3-sensible-terminal -d "/run/media/$(whoami)" # ThinkVantage button on ThinkPad
-bindsym $mod+XF86Launch1      exec i3-sensible-terminal -e bc
+bindsym $mod+XF86Launch1      exec i3-sensible-terminal -e "bc -lq"
 
 # Lock
 bindsym $mod+Ctrl+l exec --no-startup-id $lock
@@ -284,7 +282,7 @@ bindsym Ctrl+Print exec --no-startup-id flameshot gui
 # Mount location (195 = G710 'G1' key)
 bindcode 192 exec i3-sensible-terminal -d "/run/media/$(whoami)"
 # Calculator (196 = G710 'G2' key)
-bindcode 193 exec i3-sensible-terminal -e "bc -l"
+bindcode 193 exec i3-sensible-terminal -e "bc -lq"
 
 # Monitor
 exec --no-startup-id ~/.config/i3/boot.sh

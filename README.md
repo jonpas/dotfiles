@@ -34,9 +34,12 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - .drirc (iGPU-Intel)
     - .gtkrc-2.0
     - .prompt.py
+    - .p10k.zsh
     - .urlview
     - .vimrc
     - .xinitrc (~VFIO)
+    - .zprofile (no root)
+    - .zshrc
 ~/.config/
     - dunst*
     - gsimplecal*
