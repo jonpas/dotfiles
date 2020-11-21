@@ -14,6 +14,8 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 wintitle() { echo -ne "\033];$TERMINAL: $(pwd) \007" }
 precmd_functions+=(wintitle)
 
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
 # Zsh options
 setopt autocd
 setopt interactive_comments
@@ -42,7 +44,12 @@ bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
 bindkey -M menuselect 'j' vi-down-line-or-history
-bindkey -v '^?' backward-delete-char
+bindkey -v '^?' backward-delete-char # fix backspace deletion after re-entering insert mode
+
+# Edit line in vim with Ctrl-e
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^e' edit-command-line
 
 # Disable dotnet telemetry
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
@@ -64,6 +71,8 @@ alias fd="fd --hidden"
 
 alias rm='rmtrash'
 alias rmdir='rmdirtrash'
+
+alias bc='bc -lq'
 
 alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
@@ -92,6 +101,18 @@ if [[ "$-" =~ "i" ]]; then
     zle -N fgswitch
     bindkey '^Z' fgswitch
 fi
+
+# https://github.com/gujiaxi/ranger-cd/blob/master/ranger-cd.zsh
+function ranger-cd {
+    tempfile="$(mktemp -t tmp.XXXXXX)"
+    /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
+    test -f "$tempfile" &&
+    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
+        cd -- "$(cat "$tempfile")"
+    fi
+    rm -f -- "$tempfile"
+}
+bindkey -s '^O' 'ranger-cd\n'
 
 # Jump to path and synchronization aliases
 __base_school='~/Work/School/FERI-RIT'
