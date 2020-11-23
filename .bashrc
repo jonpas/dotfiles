@@ -18,19 +18,22 @@ alias ll='ls -alhFv --color=auto --group-directories-first'
 alias la='ls -Av'
 alias l='ls -CFv'
 
-alias fd="fd --hidden"
+alias fd='fd --hidden'
+alias bc='bc -lq'
 
 alias rm='rmtrash'
 alias rmdir='rmdirtrash'
+alias cleandisk='yay -Sc && paccache -rk1 && trash-empty'
 
 alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
 alias vm='sudo ~/dotfiles/vm/win10-pci.sh'
 alias ptt='sudo python ~/dotfiles/lib/ptt.py'
 
-alias cleandisk="yay -Sc && paccache -rk1"
 alias vcam="sudo modprobe v4l2loopback exclusive_caps=1 card_label='OBS Virtual Camera'"
 alias vcamrm="sudo modprobe -r v4l2loopback"
+
+alias matlab='matlab -desktop -nosplash -useStartupFolderPref'
 
 # If interactive shell
 if [[ "$-" =~ "i" ]]; then
