@@ -11,3 +11,7 @@ clock_label = Local
 clock_tz =
 clock_label = UTC
 clock_tz = :UTC
+clock_label = Pacific
+clock_tz = :US/Pacific
+clock_label = Michigan
+clock_tz = :US/Michigan
