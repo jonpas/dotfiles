@@ -165,10 +165,6 @@ nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 nmap <C-s> <Plug>MarkdownPreview
 
-if has("nvim")
-    tnoremap <Esc> <C-\><C-n>
-endif
-
 " Ex commands
 " simplify saving and closing when shift held for too long
 command -bang WQ wq
