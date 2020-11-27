@@ -2,6 +2,10 @@
 
 setxkbmap -layout si
 
+# Caps Lock to Escape
+xmodmap -e "remove Lock = Caps_Lock"
+xmodmap -e "keycode 66 = Escape" # 66 = Caps Lock
+
 # G710 keys
 xmodmap -e "keycode 192 = F14" # 192 = G710 'G1' key
 xmodmap -e "keycode 193 = F15" # 193 = G710 'G2' key
