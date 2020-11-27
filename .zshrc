@@ -40,11 +40,6 @@ export EDITOR=vim
 # vi-mode
 bindkey -v
 bindkey -v '^?' backward-delete-char # fix backspace deletion after re-entering insert mode
-bindkey -M viins 'jj' vi-cmd-mode
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
 bindkey '^R' history-incremental-pattern-search-backward # bind inverse search like non-vi-mode
 
 # Edit line in vim with Ctrl-e
