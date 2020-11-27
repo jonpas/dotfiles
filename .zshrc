@@ -55,16 +55,9 @@ bindkey '^e' edit-command-line
 bindkey '^ ' autosuggest-accept
 
 # fzf
+export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude ".git"' # use with fd instead of find
 [ -f "/usr/share/fzf/key-bindings.zsh" ] && source /usr/share/fzf/key-bindings.zsh
 [ -f "/usr/share/fzf/completion.zsh" ] && source /usr/share/fzf/completion.zsh
-
-# use fd instead of find
-_fzf_compgen_path() {
-  fd --hidden --follow --exclude ".git" . "$1"
-}
-_fzf_compgen_dir() {
-  fd --type d --hidden --follow --exclude ".git" . "$1"
-}
 
 [ -d "~/.cargo/bin" ] && PATH=$PATH:~/.cargo/bin
 
