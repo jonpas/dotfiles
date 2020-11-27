@@ -8,13 +8,10 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 wintitle() { echo -ne "\033];$TERMINAL: $(pwd) \007" }
 precmd_functions+=(wintitle)
-
-source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
 # Zsh options
 setopt autocd
@@ -26,7 +23,7 @@ SAVEHIST=10000000
 HISTFILE=~/.cache/zsh/history
 
 # Basic auto/tab complete
-autoload -U compinit
+autoload -Uz compinit
 zstyle ':completion:*' menu select
 zmodload zsh/complist
 compinit
@@ -39,13 +36,37 @@ export EDITOR=vim
 
 # vi-mode
 bindkey -v
+KEYTIMEOUT=5
 bindkey -v '^?' backward-delete-char # fix backspace deletion after re-entering insert mode
-bindkey '^R' history-incremental-pattern-search-backward # bind inverse search like non-vi-mode
+# hjkl autocomplete menu select
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+bindkey -M menuselect 'j' vi-down-line-or-history
 
 # Edit line in vim with Ctrl-e
 autoload edit-command-line
 zle -N edit-command-line
 bindkey '^e' edit-command-line
+
+[ -f "/usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" ] && source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+[ -f "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+bindkey '^ ' autosuggest-accept
+
+# fzf
+[ -f "/usr/share/fzf/key-bindings.zsh" ] && source /usr/share/fzf/key-bindings.zsh
+[ -f "/usr/share/fzf/completion.zsh" ] && source /usr/share/fzf/completion.zsh
+
+# use fd instead of find
+_fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+_fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
+
+[ -d "~/.cargo/bin" ] && PATH=$PATH:~/.cargo/bin
 
 # Disable dotnet telemetry
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
@@ -128,5 +149,3 @@ if [ $(hostname) = "odin" ]; then
     alias pullS="rsync -azP --delete loki:$__base_school/Data loki:$__base_school/Theses $__base_school/"
     alias pushS="rsync -azP --delete $__base_school/Data $__base_school/Theses loki:$__base_school/"
 fi
-
-[ -d "~/.cargo/bin" ] && PATH=$PATH:~/.cargo/bin

@@ -23,7 +23,6 @@ Plug 'ryanoasis/vim-devicons'
 " utility
 Plug 'scrooloose/nerdtree'
 Plug 'jistr/vim-nerdtree-tabs'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 
@@ -138,6 +137,7 @@ set pastetoggle=<F2>
 " clear last used search pattern
 nnoremap <CR> :let @/ = ""<CR>:<BACKSPACE><CR>
 
+
 " Disable arrow keys
 noremap <Up> <Nop>
 noremap <Down> <Nop>
@@ -163,6 +163,7 @@ nnoremap <Space> za
 nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
+nmap <C-p> :FZF<CR>
 nmap <C-s> <Plug>MarkdownPreview
 
 " Ex commands
@@ -202,6 +203,9 @@ let g:lightline#colorscheme#default#palette.normal.right[0] = g:lightline#colors
 let g:lightline#colorscheme#default#palette.tabline.middle[0] = g:lightline#colorscheme#default#palette.normal.middle[0]
 let g:lightline#colorscheme#default#palette.tabline.left[0] = g:lightline#colorscheme#default#palette.normal.left[1]
 let g:lightline#colorscheme#default#palette.tabline.tabsel[0] = g:lightline#colorscheme#default#palette.normal.left[0]
+
+" fzf
+let g:fzf_layout = { 'down': '40%' }
 
 " integrate ALE
 let g:lightline#ale#indicator_checking = ""
