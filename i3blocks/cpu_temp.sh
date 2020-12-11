@@ -8,6 +8,6 @@ if [ $usage -ge 90 ]; then
     play --no-show-progress --null --channels 1 synth 0.4 sine 900 # play from SoX
 fi
 
-if [ $temp -ge 70 ]; then
+if [ $temp -ge 80 ]; then
     exit 33
 fi
