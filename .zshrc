@@ -16,6 +16,7 @@ precmd_functions+=(wintitle)
 # Zsh options
 setopt autocd
 setopt interactive_comments
+setopt no_auto_remove_slash
 
 # History in cache directory
 HISTSIZE=10000000
