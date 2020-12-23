@@ -41,11 +41,6 @@ rebind() {
 }
 
 start_lookingglass_helpers() {
-    # Looking Glass client
-    #if ! pgrep "looking-glass" > /dev/null; then
-    #    looking-glass-client &
-    #fi
-
     # VM Switcher
     if ! pgrep -f "$(dirname $0)/vm-switch.py" > /dev/null; then
         sleep 5 && # Wait for things to initialize to prevent threading errors
@@ -154,15 +149,21 @@ OPTS+=" -drive if=pflash,format=raw,readonly,file=/usr/share/edk2-ovmf/x64/OVMF_
 OPTS+=" -drive if=pflash,format=raw,file=/home/jonpas/images/vm/OVMF_VARS-win10-ovmf.fd"
 
 # Drives
-OPTS+=" -drive file=/dev/disk/by-uuid/1EFECCD6FECCA77D,format=raw,index=0,if=none,aio=native,cache=none,id=ssd0"
-OPTS+=" -device virtio-scsi-pci,id=scsi"
-OPTS+=" -device scsi-block,drive=ssd0,bus=scsi.0"
+OPTS+=" -device virtio-scsi-pci,id=scsi0"
+OPTS+=" -drive file=/dev/disk/by-id/ata-Samsung_SSD_860_EVO_500GB_S3Z2NB2KA62661K,format=raw,index=0,if=none,aio=native,cache=none,id=drive0" # 'scsi-block' requires '/by-id/'
+OPTS+=" -device scsi-hd,drive=drive0,bus=scsi0.0,bootindex=1,rotation_rate=1" # 'scsi-block' for stats and SMART inside guiset, 'scsi-hd' for discard/trim
 
 # Create image: qemu-img create -f raw name.img 10G -o preallocation=full (-o cluster_size=16K for qcow2)
 # Convert qcow2 to raw: qemu-img convert -p -O raw source.qcow2 target.img -o preallocation=full
 # Resize image: qemu-img resize -f raw --preallocation=full source.img +5G
-OPTS+=" -drive file=/home/jonpas/Data/images/vm/data.img,format=raw,index=1,media=disk,if=virtio,aio=native,cache=none"
-OPTS+=" -drive file=/home/jonpas/images/vm/games.img,format=raw,index=2,media=disk,if=virtio,aio=native,cache=none"
+OPTS+=" -device virtio-scsi-pci,id=scsi1"
+OPTS+=" -drive file=/home/jonpas/Data/images/vm/data.img,format=raw,index=1,media=disk,if=none,aio=native,cache=none,id=drive1"
+OPTS+=" -device scsi-hd,drive=drive1,bus=scsi1.0,rotation_rate=7200"
+
+OPTS+=" -device virtio-scsi-pci,id=scsi2"
+OPTS+=" -drive file=/home/jonpas/images/vm/games.img,format=raw,index=2,media=disk,if=none,aio=native,cache=none,id=drive2"
+OPTS+=" -device scsi-hd,drive=drive2,bus=scsi2.0,rotation_rate=1"
+
 OPTS+=" -drive file=/home/jonpas/images/windows10.iso,index=3,media=cdrom"
 OPTS+=" -drive file=/home/jonpas/images/virtio-win.iso,index=4,media=cdrom"
 
@@ -315,11 +316,6 @@ if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
         # VM Switcher close
         if pgrep -f "$(dirname $0)/vm-switch.py" > /dev/null; then
             kill -SIGINT $(pgrep -f "$(dirname $0)/vm-switch.py")
-        fi
-
-        # Looking Glass client close
-        if pgrep "looking-glass" > /dev/null; then
-            kill -SIGINT $(pgrep "looking-glass")
         fi
     fi
 fi
