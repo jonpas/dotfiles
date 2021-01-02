@@ -1,6 +1,6 @@
 #!/bin/bash
 
-wired_interfaces=(bridge0 enp3s0)
+wired_interfaces=(bridge0 enp5s0)
 wirless_interfaces=()
 
 if [ $(hostname) != "loki" ]; then
