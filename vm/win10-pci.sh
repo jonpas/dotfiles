@@ -242,14 +242,14 @@ else
     OPTS+=" -object input-linux,id=kbd,evdev=/dev/input/by-path/pci-0000:0c:00.3-usb-0:4:1.0-event-kbd,grab_all=on,repeat=on" # Logitech G710 Keyboard
 
     if [ "$ENABLE_EVDEV_MOUSE" = true ]; then
-        OPTS+=" -object input-linux,id=mouse,evdev=/dev/input/by-path/pci-0000:06:00.1-usb-0:3:1.0-event-mouse"
+        OPTS+=" -object input-linux,id=mouse,evdev=/dev/input/by-path/pci-0000:06:00.1-usb-0:3:1.0-event-mouse" # Logitech G502 Mouse
     fi
 fi
 
 # USB Controller (extension card)
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
-    rebind 0000:05:00.0 vfio-pci # PCIe USB Card
-    OPTS+=" -device vfio-pci,host=05:00.0,bus=root1,addr=00.4"
+    rebind 0000:04:00.0 vfio-pci # PCIe USB Card
+    OPTS+=" -device vfio-pci,host=04:00.0,bus=root1,addr=00.4"
 fi
 
 # USB devices (connected to USB controller)
@@ -299,7 +299,7 @@ fi
 
 # USB
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
-    rebind 0000:05:00.0 xhci_hcd true # PCIe USB Card (remove ID)
+    rebind 0000:04:00.0 xhci_hcd true # PCIe USB Card (remove ID)
 fi
 
 # Sound
