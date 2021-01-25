@@ -3,12 +3,11 @@
     "border": "pixel",
     "current_border_width": 2,
     "floating": "auto_off",
-    "name": "Mozilla Firefox",
+    "name": "firefox",
     "percent": 1,
     "swallows": [
        {
         "class": "^firefox$"
-        "title": "^Google"
        }
     ],
     "type": "con"
