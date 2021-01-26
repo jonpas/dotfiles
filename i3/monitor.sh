@@ -3,19 +3,20 @@
 if [ $(hostname) = "loki" ]; then
     layout=$1
 
-    LGWcfg="--mode 2560x1080 --rate 75 --primary"
+    LGWcfg="--mode 2560x1080 --rate 75"
     LGWp="HDMI-0"
     IIYcfg="--mode 1920x1080 --rate 60"
     IIYp="DVI-D-0"
     SSMcfg="--mode 1680x1050 --rate 60 --rotate left"
     SSMp="VGA-0"
 
+    # Offsets by 1 to detach monitors and allow moving through empty off-screen space
     if [ -z "$layout" ]; then
         ddcutil --sn 1130751321527 setvcp 60 0x03
         xrandr \
-            --output $LGWp $LGWcfg --panning 2560x1080+0+1080 \
-            --output $IIYp $IIYcfg --panning 1920x1080+640+0 \
-            --output $SSMp $SSMcfg --panning 1050x1680+2560+480
+            --output $LGWp $LGWcfg --panning 2560x1080+0+1080 --primary \
+            --output $IIYp $IIYcfg --panning 1920x1080+500+0 \
+            --output $SSMp $SSMcfg --panning 1050x1680+2561+480
     elif [ "$layout" = "off" ]; then
         ddcutil --sn 1130751321527 setvcp 60 0x11
         xrandr \
@@ -26,14 +27,14 @@ if [ $(hostname) = "loki" ]; then
         ddcutil --sn 1130751321527 setvcp 60 0x03
         xrandr \
             --output $LGWp --off \
-            --output $IIYp $IIYcfg --panning 1920x1080+0+0 --primary \
-            --output $SSMp $SSMcfg --panning 1050x1680+1920+480
+            --output $SSMp $SSMcfg --panning 1050x1680+0+0 \
+            --output $IIYp $IIYcfg --panning 1920x1080+1050+600 --primary
     elif [ "$layout" = "down" ]; then
         ddcutil --sn 1130751321527 setvcp 60 0x11
         xrandr \
-            --output $LGWp $LGWcfg --panning 2560x1080+0+1080 \
+            --output $LGWp $LGWcfg --panning 2560x1080+0+600 --primary \
             --output $IIYp --off \
-            --output $SSMp $SSMcfg --panning 1050x1680+2560+480
+            --output $SSMp $SSMcfg --panning 1050x1680+2561+0
     fi
 
     xrandr -s 0  # reset size
