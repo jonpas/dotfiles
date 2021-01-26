@@ -12,51 +12,24 @@ if [ $(hostname) = "loki" ]; then
 fi
 
 
-# Auto-start programs
-
-## Workspace 0 (system / VM)
-#i3-msg "workspace 0  ; append_layout ~/.config/i3/workspace-0.json"
-#
-#i3-sensible-terminal -e htop -t "Terminal: htop" &
-#
-#if [ $(hostname) = "loki" ]; then
-#    i3-sensible-terminal -e 'watch -t "sensors zenpower-pci-00c3 -A | grep °C"' -t "Terminal: sensors" &
-#else
-#    i3-sensible-terminal -e 'watch -t "sensors coretemp-isa-0000 -A | grep °C"' -t "Terminal: sensors" &
-#fi
-#
-#i3-sensible-terminal -t 'Terminal: WinVM' &
-#
-#firefox --new-window about:logo &
-#
-## Workspace 1 (chat)
-#i3-msg "workspace 1  ; append_layout ~/.config/i3/workspace-1.json"
-#
-#slack &
-#discord &
-#chromium &
-#
-## Workspace 2 (main)
-#i3-msg "workspace 2  ; append_layout ~/.config/i3/workspace-2.json"
-#
-#firefox &
-
-# TEST
-i3-msg "workspace 0  ; append_layout ~/.config/i3/workspace-0.json"
+# Prepare workspaces
+if [ $(hostname) = "loki" ]; then
+    i3-msg "workspace 0  ; append_layout ~/.config/i3/workspace-0.json"
+fi
 i3-msg "workspace 1  ; append_layout ~/.config/i3/workspace-1.json"
 i3-msg "workspace 2  ; append_layout ~/.config/i3/workspace-2.json"
 
+# Auto-start programs
 i3-sensible-terminal -e htop -t "Terminal: htop" &
 i3-sensible-terminal -t 'Terminal: VM' &
+firefox &
 
 if [ $(hostname) = "loki" ]; then
     i3-sensible-terminal -e 'watch -t "sensors zenpower-pci-00c3 -A | grep °C"' -t "Terminal: sensors" &
+    slack &
+    discord &
+    chromium &
+    firefox --new-window about:logo &
 else
     i3-sensible-terminal -e 'watch -t "sensors coretemp-isa-0000 -A | grep °C"' -t "Terminal: sensors" &
 fi
-
-slack &
-discord &
-chromium &
-firefox &
-firefox --new-window about:logo &
