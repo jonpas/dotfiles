@@ -10,14 +10,13 @@ if [ $(hostname) = "loki" ]; then
     SSMcfg="--mode 1680x1050 --rate 60 --rotate left"
     SSMp="VGA-0"
 
-    # Offsets by 1 to detach monitors and allow moving through empty off-screen space
     if [ -z "$layout" ]; then
         ddcutil --sn 1130751321527 setvcp 60 0x03
         xrandr \
             --output $LGWp $LGWcfg --panning 2560x1080+0+1080 --primary \
             --output $IIYp $IIYcfg --panning 1920x1080+500+0 \
-            --output $SSMp $SSMcfg --panning 1050x1680+2561+480
-    elif [ "$layout" = "off" ]; then
+            --output $SSMp $SSMcfg --panning 1050x1680+2560+480
+    elif [ "$layout" = "right" ]; then
         ddcutil --sn 1130751321527 setvcp 60 0x11
         xrandr \
             --output $LGWp --off \
@@ -34,7 +33,7 @@ if [ $(hostname) = "loki" ]; then
         xrandr \
             --output $LGWp $LGWcfg --panning 2560x1080+0+600 --primary \
             --output $IIYp --off \
-            --output $SSMp $SSMcfg --panning 1050x1680+2561+0
+            --output $SSMp $SSMcfg --panning 1050x1680+2560+0
     fi
 
     xrandr -s 0  # reset size

@@ -208,10 +208,13 @@ mode "$resize" {
 bindsym $mod+r mode "$resize"
 
 # external screen management
-set $display_layout  : [a]  , [j]   , [k]   , [o]  , [s] 
+set $display_layout  : [a]  , [j]   , [k]   , [l/o]  , [s] 
 mode "$display_layout" {
     bindsym a     mode "default" exec $set_monitors       && $restart_barrier        && i3-msg restart
-    bindsym o     mode "default" exec $set_monitors off   && $restart_barrier both   && i3-msg restart
+
+    bindsym o     mode "default" exec $set_monitors right && $restart_barrier both   && i3-msg restart
+    bindsym l     mode "default" exec $set_monitors right && $restart_barrier both   && i3-msg restart
+    bindsym Right mode "default" exec $set_monitors right && $restart_barrier both   && i3-msg restart
 
     bindsym j     mode "default" exec $set_monitors down  && $restart_barrier        && i3-msg restart
     bindsym Down  mode "default" exec $set_monitors down  && $restart_barrier        && i3-msg restart
