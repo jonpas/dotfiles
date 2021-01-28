@@ -20,6 +20,7 @@
 
 # pip
 import keyboard
+import evdev
 import i3ipc
 
 KEY_SWITCH = 188  # scancode 188 = F18
@@ -28,6 +29,16 @@ KEY_SYNERGY_RELEASE = 187  # scancode 187 = F17
 
 i3 = i3ipc.Connection(auto_reconnect=True)
 last_window = None
+
+dev = evdev.InputDevice('/dev/input/by-path/pci-0000:0c:00.3-usb-0:4:1.0-event-kbd')
+
+
+def evdev_toggle():
+    dev.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL, 1)
+    dev.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_RIGHTCTRL, 1)
+    dev.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_LEFTCTRL, 0)
+    dev.write(evdev.ecodes.EV_KEY, evdev.ecodes.KEY_RIGHTCTRL, 0)
+    dev.write(evdev.ecodes.EV_SYN, 0, 0)
 
 
 def switch():
@@ -59,6 +70,8 @@ def switch():
         # recognized immediately if focusing last
         lg_window.command("focus; fullscreen enable")
         keyboard.press_and_release(KEY_SYNERGY_CAPTURE)
+
+    # evdev_toggle()
 
 
 print("Waiting for switch ...")

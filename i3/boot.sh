@@ -14,7 +14,7 @@ fi
 
 # Prepare workspaces
 if [ $(hostname) = "loki" ]; then
-    i3-msg "workspace 0  ; append_layout ~/.config/i3/workspace-0.json"
+    i3-msg "workspace 0  ; append_layout ~/.config/i3/workspace-0.json"
 fi
 i3-msg "workspace 1  ; append_layout ~/.config/i3/workspace-1.json"
 i3-msg "workspace 2  ; append_layout ~/.config/i3/workspace-2.json"
