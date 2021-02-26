@@ -83,6 +83,19 @@
             "type": "con"
         },
         {
+            "border": "pixel",
+            "current_border_width": 2,
+            "floating": "auto_off",
+            "name": "Slack",
+            "percent": 0.3,
+            "swallows": [
+               {
+                "class": "^Slack$"
+               }
+            ],
+            "type": "con"
+        },
+        {
             // splith split container with 1 children
             "border": "pixel",
             "floating": "auto_off",
@@ -117,19 +130,6 @@
                     "type": "con"
                 }
             ]
-        },
-        {
-            "border": "pixel",
-            "current_border_width": 2,
-            "floating": "auto_off",
-            "name": "Slack",
-            "percent": 0.3,
-            "swallows": [
-               {
-                "class": "^Slack$"
-               }
-            ],
-            "type": "con"
         }
     ]
 }
