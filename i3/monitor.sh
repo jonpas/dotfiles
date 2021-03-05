@@ -5,11 +5,11 @@ if [ $(hostname) = "loki" ]; then
 
     global="--dpi 96"
     LGWcfg="--mode 2560x1080 --rate 75"
-    LGWp="HDMI-A-0"
+    LGWp="HDMI-A-1"
     IIYcfg="--mode 1920x1080 --rate 60"
-    IIYp="DisplayPort-0"
+    IIYp="DisplayPort-3"
     SSMcfg="--mode 1680x1050 --rate 60 --rotate left"
-    SSMp="DVI-D-0"
+    SSMp="DVI-D-1"
 
     if [ -z "$layout" ]; then
         ddcutil --sn 1130751321527 setvcp 60 0x03

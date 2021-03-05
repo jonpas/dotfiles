@@ -101,6 +101,11 @@ yay() {
     pkill -RTMIN+4 i3blocks
 }
 
+# PRIME GPU Offload
+prime() {
+    DRI_PRIME=1 "$@"
+}
+
 # init-vm.sh is slow, only init on request
 if [ -f /usr/share/nvm/init-nvm.sh ]; then
     alias nvminit='. /usr/share/nvm/init-nvm.sh'

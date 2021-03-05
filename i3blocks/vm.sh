@@ -25,11 +25,11 @@ aud_drv=$(lspci -s 09:00.1 -k | awk -F': ' '/Kernel driver in use/{print tolower
 if [ "$gpu_drv" == "vfio-pci" ] && [ "$aud_drv" == "vfio-pci" ]; then
     gpu+="VFIO"
     color="#d3d3d3"
-elif [ "$gpu_drv" != "nvidia" ] || [ "$aud_drv" != "snd_hda_intel" ]; then
+elif [[ ("$gpu_drv" == "nvidia" || "$gpu_drv" == "nouveau") && "$aud_drv" == "snd_hda_intel" ]]; then
+    gpu+="HOST"
+else
     gpu+="NONE"
     color="#fb4934"
-else
-    gpu+="HOST"
 fi
 
 # Barrier (Scroll Lock LED as locked to screen indicator)

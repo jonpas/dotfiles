@@ -54,9 +54,12 @@ rebind_gpu() {
     if [ "$driver" = "nvidia" ]; then
         rebind $PCI_GPU_VIDEO nvidia
         rebind $PCI_GPU_AUDIO snd_hda_intel
+    elif [ "$driver" = "nouveau" ]; then
+        rebind $PCI_GPU_VIDEO nouveau
+        rebind $PCI_GPU_AUDIO snd_hda_intel
     elif [ "$driver" = "vfio" ] || [ "$driver" = "vfio-pci" ]; then
-        rebind $PCI_GPU_VIDEO vfio-pci
-        rebind $PCI_GPU_AUDIO vfio-pci
+        rebind $PCI_GPU_VIDEO vfio-pci true
+        rebind $PCI_GPU_AUDIO vfio-pci true
     else
         echo "Unknown GPU driver!"
     fi
@@ -75,7 +78,7 @@ usage() {
     echo "[-e <true/false>] evdev pass-through mouse"
     echo "[-m <gigabytes>] memory"
     echo "[-g <true/false>] use Looking Glass"
-    echo "[-r <vfio/nvidia>] set pass-through GPU driver"
+    echo "[-r <vfio/nvidia/nouveau>] set pass-through GPU driver"
     exit 1
 }
 
@@ -309,7 +312,8 @@ fi
 
 # GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
-    rebind $PCI_GPU_VIDEO nvidia
+    #rebind $PCI_GPU_VIDEO nvidia
+    rebind $PCI_GPU_VIDEO nouveau
     rebind $PCI_GPU_AUDIO snd_hda_intel
 
     if [ "$ENABLE_LOOKINGGLASS" = true ]; then
