@@ -23,7 +23,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Fantasque Sans Mono 11
+font pango:Fantasque Sans Mono 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -123,16 +123,16 @@ set $ws8 "8  "
 set $ws9 "9  "
 
 # workspace monitors (if available)
-workspace $ws0 output DVI-D-0
-workspace $ws1 output VGA-0
-workspace $ws2 output HDMI-0
-workspace $ws3 output HDMI-0
-workspace $ws4 output HDMI-0
-workspace $ws5 output HDMI-0
-workspace $ws6 output HDMI-0
-workspace $ws7 output HDMI-0
-workspace $ws8 output HDMI-0
-workspace $ws9 output DVI-D-0
+workspace $ws0 output DisplayPort-0
+workspace $ws1 output DVI-D-0
+workspace $ws2 output HDMI-A-0
+workspace $ws3 output HDMI-A-0
+workspace $ws4 output HDMI-A-0
+workspace $ws5 output HDMI-A-0
+workspace $ws6 output HDMI-A-0
+workspace $ws7 output HDMI-A-0
+workspace $ws8 output HDMI-A-0
+workspace $ws9 output DisplayPort-0
 
 # switch to workspace
 bindsym $mod+cedilla workspace $ws0

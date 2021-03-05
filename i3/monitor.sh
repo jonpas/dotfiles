@@ -3,40 +3,39 @@
 if [ $(hostname) = "loki" ]; then
     layout=$1
 
+    global="--dpi 96"
     LGWcfg="--mode 2560x1080 --rate 75"
-    LGWp="HDMI-0"
+    LGWp="HDMI-A-0"
     IIYcfg="--mode 1920x1080 --rate 60"
-    IIYp="DVI-D-0"
+    IIYp="DisplayPort-0"
     SSMcfg="--mode 1680x1050 --rate 60 --rotate left"
-    SSMp="VGA-0"
+    SSMp="DVI-D-0"
 
     if [ -z "$layout" ]; then
         ddcutil --sn 1130751321527 setvcp 60 0x03
-        xrandr \
-            --output $LGWp $LGWcfg --panning 2560x1080+0+1080 --primary \
-            --output $IIYp $IIYcfg --panning 1920x1080+500+0 \
-            --output $SSMp $SSMcfg --panning 1050x1680+2560+480
+        xrandr $global \
+            --output $LGWp $LGWcfg --pos 0x1080 --primary \
+            --output $IIYp $IIYcfg --pos 640x0 \
+            --output $SSMp $SSMcfg --pos 2560x480 --rotate left
     elif [ "$layout" = "right" ]; then
         ddcutil --sn 1130751321527 setvcp 60 0x11
-        xrandr \
+        xrandr $global \
             --output $LGWp --off \
             --output $IIYp --off \
             --output $SSMp --primary
     elif [ "$layout" = "up" ]; then
         ddcutil --sn 1130751321527 setvcp 60 0x03
-        xrandr \
+        xrandr $global \
             --output $LGWp --off \
-            --output $SSMp $SSMcfg --panning 1050x1680+0+0 \
-            --output $IIYp $IIYcfg --panning 1920x1080+1050+600 --primary
+            --output $SSMp $SSMcfg --pos 0x0 \
+            --output $IIYp $IIYcfg --pos 1050x600 --primary
     elif [ "$layout" = "down" ]; then
         ddcutil --sn 1130751321527 setvcp 60 0x11
-        xrandr \
-            --output $LGWp $LGWcfg --panning 2560x1080+0+600 --primary \
+        xrandr $global \
+            --output $LGWp $LGWcfg --pos 0x600 --primary \
             --output $IIYp --off \
-            --output $SSMp $SSMcfg --panning 1050x1680+2560+0
+            --output $SSMp $SSMcfg --pos 2560x0
     fi
-
-    xrandr -s 0  # reset size
 fi
 
 # Wallpaper

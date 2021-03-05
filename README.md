@@ -31,7 +31,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - .vim*
     - .Xresources
     - .bashrc
-    - .drirc (iGPU-Intel)
+    - .drirc (GPU)
     - .gtkrc-2.0
     - .prompt.py
     - .p10k.zsh
@@ -79,5 +79,4 @@ _Notes:_
 - _`(-hostname)` for splitting different files for different machines._
 - _`(BAK)` for backup tools._
 - _`(VFIO)` for PCI passthrough Virtual Machine setup (`~` for partially VFIO)._
-- _`(GPU-Nvidia)` for Nvidia GPUs._
-- _`(iGPU-Intel)` for Intel iGPUs._
+- _`(GPU)` for GPUs._
