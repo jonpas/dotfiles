@@ -7,7 +7,7 @@ if [ $(hostname) = "loki" ]; then
     LGWcfg="--mode 2560x1080 --rate 75"
     LGWp="HDMI-A-1"
     IIYcfg="--mode 1920x1080 --rate 60"
-    IIYp="DisplayPort-3"
+    IIYp="DisplayPort-0"
     SSMcfg="--mode 1680x1050 --rate 60 --rotate left"
     SSMp="DVI-D-1"
 
@@ -15,7 +15,7 @@ if [ $(hostname) = "loki" ]; then
         ddcutil --sn 1130751321527 setvcp 60 0x03
         xrandr $global \
             --output $LGWp $LGWcfg --pos 0x1080 --primary \
-            --output $IIYp $IIYcfg --pos 640x0 \
+            --output $IIYp $IIYcfg --pos 500x0 \
             --output $SSMp $SSMcfg --pos 2560x480 --rotate left
     elif [ "$layout" = "right" ]; then
         ddcutil --sn 1130751321527 setvcp 60 0x11
