@@ -101,9 +101,10 @@ yay() {
     pkill -RTMIN+4 i3blocks
 }
 
-# PRIME GPU Offload
-prime() {
-    DRI_PRIME=1 "$@"
+# GPU Offload
+gpu() {
+    #DRI_PRIME=1 "$@"  # PRIME
+    pvkrun "$@"  # Bumblebee (Optimus/Prime) + primus_vk
 }
 
 # init-vm.sh is slow, only init on request

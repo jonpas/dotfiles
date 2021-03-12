@@ -27,7 +27,7 @@ rebind() {
     if [ -e /sys/bus/pci/devices/$dev/driver ]; then
         echo $dev > /sys/bus/pci/devices/$dev/driver/unbind
     fi
-    if [ "$removeid" = true ]; then
+    if [ "$removeid" = true ] && [ -e /sys/bus/pci/drivers/vfio-pci/remove_id ]; then
         # Remove ID (required for XHCI rebind)
         echo $vendor $device > /sys/bus/pci/drivers/vfio-pci/remove_id
     fi
@@ -312,8 +312,7 @@ fi
 
 # GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
-    #rebind $PCI_GPU_VIDEO nvidia
-    rebind $PCI_GPU_VIDEO nouveau
+    rebind $PCI_GPU_VIDEO nvidia
     rebind $PCI_GPU_AUDIO snd_hda_intel
 
     if [ "$ENABLE_LOOKINGGLASS" = true ]; then

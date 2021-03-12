@@ -4,8 +4,11 @@
 . ~/.config/i3/monitor.sh
 
 if [ $(hostname) = "loki" ]; then
+    # Load Nvidia driver (for later binding)
+    nvidia-modprobe &
+
     # Start Barrier server
-    . ~/dotfiles/barrier/barriers.sh
+    . ~/dotfiles/barrier/barriers.sh &
 
     # Set monitor configuration again, delayed to ensure refresh rate gets set correctly
     sleep 3 && . ~/.config/i3/monitor.sh &
