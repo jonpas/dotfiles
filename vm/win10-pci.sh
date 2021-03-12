@@ -279,8 +279,14 @@ if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
     OPTS+=" -device vfio-pci,host=00:1b.0,bus=root1,addr=00.3"
 else
     OPTS+=" -device ich9-intel-hda"
-    OPTS+=" -device hda-micro,audiodev=hda"
-    OPTS+=" -audiodev pa,id=hda,server=/run/user/1000/pulse/native" # Pulseaudio
+    # 'hda' requires buffer-length and timer-period parameters to avoid noticable delays
+    OPTS+=" -device hda-micro,audiodev=hda" # Speaker + Microphone
+    OPTS+=" -audiodev pa,id=hda,server=unix:/tmp/pulse-socket,out.buffer-length=512,timer-period=1000" # PulseAudio
+    # 'usb-audio' has 5.1 support, but crackles a bit
+    #OPTS+=" -device usb-audio,audiodev=usb,multi=on" # Speaker only
+    #OPTS+=" -audiodev pa,id=usb,server=unix:/tmp/pulse-socket,out.mixing-engine=off,out.buffer-length=512,timer-period=1000" # PulseAudio
+    # 'unix:/tmp/pulse-socket' requires following in PulseAudio configuration ('/etc/pulse/default.pa'):
+    # load-module module-native-protocol-unix auth-anonymous=1 socket=/tmp/pulse-socket
 fi
 
 
