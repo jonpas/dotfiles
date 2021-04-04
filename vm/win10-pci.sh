@@ -124,6 +124,7 @@ OPTS+=" -rtc base=localtime" # Windows uses localtime
 # CPU
 OPTS+=" -cpu host,migratable=no,+invtsc,hv_time,hv_relaxed,hv_vapic,hv_spinlocks=0x1fff,topoext"
 OPTS+=" -smp 16,sockets=1,cores=8,threads=2"
+# `bcdedit.exe /set useplatformclock true` enables HPET timer in Windows and introduces stuttering (most noticable with mouse input over barrier)
 
 # RAM
 OPTS+=" -m ${MEMORY}G"
