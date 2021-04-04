@@ -122,7 +122,7 @@ OPTS+=" -machine type=q35,kernel_irqchip=on" # 'kernel_irqchip=on' for qemu >=4.
 OPTS+=" -rtc base=localtime" # Windows uses localtime
 
 # CPU
-OPTS+=" -cpu host,migratable=no,+invtsc,kvm=off,hv_vendor_id=0123456789ab,hv_time,hv_relaxed,hv_vapic,hv_spinlocks=0x1fff,-amd-stibp,topoext"
+OPTS+=" -cpu host,migratable=no,+invtsc,hv_time,hv_relaxed,hv_vapic,hv_spinlocks=0x1fff,topoext"
 OPTS+=" -smp 16,sockets=1,cores=8,threads=2"
 
 # RAM
