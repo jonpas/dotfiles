@@ -165,7 +165,7 @@ OPTS+=" -drive file=/home/jonpas/Data/images/vm/data.img,format=raw,index=1,medi
 OPTS+=" -device scsi-hd,drive=drive1,bus=scsi1.0,rotation_rate=7200"
 
 OPTS+=" -device virtio-scsi-pci,id=scsi2"
-OPTS+=" -drive file=/home/jonpas/images/vm/games.img,format=raw,index=2,media=disk,if=none,aio=native,cache=none,id=drive2"
+OPTS+=" -drive file=/home/jonpas/images/vm/fast.img,format=raw,index=2,media=disk,if=none,aio=native,cache=none,id=drive2"
 OPTS+=" -device scsi-hd,drive=drive2,bus=scsi2.0,rotation_rate=1"
 
 OPTS+=" -drive file=/home/jonpas/images/windows10.iso,index=3,media=cdrom"
