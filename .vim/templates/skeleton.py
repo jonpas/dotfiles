@@ -6,7 +6,7 @@ import sys
 
 def main():
     # Parse arguments
-    parser = argparse.ArgumentParser(description="Base Slovene subtitle pipeline")
+    parser = argparse.ArgumentParser(description="")
     args = parser.parse_args()
 
     return 0
