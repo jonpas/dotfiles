@@ -282,7 +282,7 @@ else
     OPTS+=" -device ich9-intel-hda"
     # 'hda' requires buffer-length and timer-period parameters to avoid noticable delays
     OPTS+=" -device hda-micro,audiodev=hda" # Speaker + Microphone
-    OPTS+=" -audiodev pa,id=hda,server=unix:/tmp/pulse-socket,out.buffer-length=512,timer-period=1000" # PulseAudio
+    OPTS+=" -audiodev pa,id=hda,server=unix:/tmp/pulse-socket,out.buffer-length=512,timer-period=1000" # PulseAudio + 44100 Hz in Windows
     # 'usb-audio' has 5.1 support, but crackles a bit
     #OPTS+=" -device usb-audio,audiodev=usb,multi=on" # Speaker only
     #OPTS+=" -audiodev pa,id=usb,server=unix:/tmp/pulse-socket,out.mixing-engine=off,out.buffer-length=512,timer-period=1000" # PulseAudio
