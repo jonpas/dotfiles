@@ -65,6 +65,9 @@ export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude ".git"' # use with fd
 # Disable dotnet telemetry
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
+# Require virtualenv for pip
+export PIP_REQUIRE_VIRTUALENV=true
+
 # Aliases
 alias ls='ls --color=auto'
 alias dir='dir --color=auto'
