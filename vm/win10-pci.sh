@@ -149,7 +149,7 @@ if [ "$ENABLE_HUGEPAGES" = true ]; then
 fi
 
 # UEFI/BIOS
-OPTS+=" -drive if=pflash,format=raw,readonly,file=/usr/share/edk2-ovmf/x64/OVMF_CODE.fd"
+OPTS+=" -drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2-ovmf/x64/OVMF_CODE.fd"
 OPTS+=" -drive if=pflash,format=raw,file=/home/jonpas/images/vm/OVMF_VARS-win10-ovmf.fd"
 
 # Drives
@@ -207,7 +207,7 @@ if [ "$ENABLE_LOOKINGGLASS" = true ]; then
 
     # Spice connection
     if [ "$LG_SPICE_UNIX_SOCKET" = true ]; then
-        OPTS+=" -spice unix,addr=/run/user/1000/spice.sock,disable-ticketing" # Unix socket
+        OPTS+=" -spice unix=on,addr=/run/user/1000/spice.sock,disable-ticketing=on" # Unix socket
 
         # Set owner of Unix socket file (remove if exists, wait to be created by QEMU, change owner)
         if [ -S /run/user/1000/spice.sock ]; then
@@ -220,7 +220,7 @@ if [ "$ENABLE_LOOKINGGLASS" = true ]; then
         echo "Spice socket owner changed" &&
         start_lookingglass_helpers &
     else
-        OPTS+=" -spice port=5900,addr=127.0.0.1,disable-ticketing" # TCP
+        OPTS+=" -spice port=5900,addr=127.0.0.1,disable-ticketing=on" # TCP
         start_lookingglass_helpers
     fi
 
