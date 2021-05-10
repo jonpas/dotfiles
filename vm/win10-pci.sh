@@ -286,7 +286,7 @@ else
     # 'usb-audio' has 5.1 support, but crackles a bit
     #OPTS+=" -device usb-audio,audiodev=usb,multi=on" # Speaker only
     #OPTS+=" -audiodev pa,id=usb,server=unix:/tmp/pulse-socket,out.mixing-engine=off,out.buffer-length=512,timer-period=1000" # PulseAudio
-    # 'unix:/tmp/pulse-socket' requires following in PulseAudio configuration ('/etc/pulse/default.pa'):
+    # 'unix:/tmp/pulse-socket' requires following in PulseAudio configuration ('~/.config/pulse/default.pa'):
     # load-module module-native-protocol-unix auth-anonymous=1 socket=/tmp/pulse-socket
 fi
 
