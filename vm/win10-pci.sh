@@ -11,10 +11,10 @@ ENABLE_QEMU_GPU=false # Integrated QEMU GPU
 ENABLE_HUGEPAGES=true
 ENABLE_LOOKINGGLASS=true
 LG_SPICE_UNIX_SOCKET=true
-MEMORY="16"
+MEMORY="32"
 
-PCI_GPU_VIDEO=0000:09:00.0
-PCI_GPU_AUDIO=0000:09:00.1
+PCI_GPU_VIDEO=0000:0a:00.0
+PCI_GPU_AUDIO=0000:0a:00.1
 
 rebind() {
     dev="$1"
@@ -37,14 +37,6 @@ rebind() {
         echo $vendor $device > /sys/bus/pci/drivers/$driver/new_id
     else
         echo $dev > /sys/bus/pci/drivers/$driver/bind
-    fi
-}
-
-start_lookingglass_helpers() {
-    # VM Switcher
-    if ! pgrep -f "$(dirname $0)/vm-switch.py" > /dev/null; then
-        sleep 5 && # Wait for things to initialize to prevent threading errors
-        $(dirname $0)/vm-switch.py &
     fi
 }
 
@@ -140,8 +132,9 @@ if [ "$ENABLE_HUGEPAGES" = true ]; then
         exit 2
     fi
 
-    # 8400 2MB pages = 16GB (+ overhead = multiplier 50)
-    hugepages=$(( ${MEMORY} * 1050 / 2 ))
+    # 8192 2MB pages = 16GB
+    # 16384 2MB pages = 32GB
+    hugepages=$(( ${MEMORY} * 1024 / 2 ))
     echo "Huge Pages: ${hugepages}"
     echo $hugepages > /proc/sys/vm/nr_hugepages
     OPTS+=" -mem-path /dev/hugepages"
@@ -154,19 +147,19 @@ OPTS+=" -drive if=pflash,format=raw,file=/home/jonpas/images/vm/OVMF_VARS-win10-
 
 # Drives
 OPTS+=" -device virtio-scsi-pci,id=scsi0"
+
 OPTS+=" -drive file=/dev/disk/by-id/ata-Samsung_SSD_860_EVO_500GB_S3Z2NB2KA62661K,format=raw,index=0,if=none,aio=native,cache=none,id=drive0" # 'scsi-block' requires '/by-id/'
-OPTS+=" -device scsi-hd,drive=drive0,bus=scsi0.0,bootindex=1,rotation_rate=1" # 'scsi-block' for stats and SMART inside guiset, 'scsi-hd' for discard/trim
+OPTS+=" -device scsi-hd,drive=drive0,bus=scsi0.0,bootindex=1,rotation_rate=1" # 'scsi-block' for stats and SMART inside guest, 'scsi-hd' for discard/trim
+
+OPTS+=" -drive file=/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_2TB_S4J4NM0R706278T,format=raw,index=1,if=none,aio=native,cache=none,id=drive1" # 'scsi-block' requires '/by-id/'
+OPTS+=" -device scsi-hd,drive=drive1,bus=scsi0.0,rotation_rate=1" # 'scsi-block' for stats and SMART inside guest, 'scsi-hd' for discard/trim
 
 # Create image: qemu-img create -f raw name.img 10G -o preallocation=full (-o cluster_size=16K for qcow2)
 # Convert qcow2 to raw: qemu-img convert -p -O raw source.qcow2 target.img -o preallocation=full
 # Resize image: qemu-img resize -f raw --preallocation=full source.img +5G
-OPTS+=" -device virtio-scsi-pci,id=scsi1"
-OPTS+=" -drive file=/home/jonpas/Data/images/vm/data.img,format=raw,index=1,media=disk,if=none,aio=native,cache=none,id=drive1"
-OPTS+=" -device scsi-hd,drive=drive1,bus=scsi1.0,rotation_rate=7200"
-
-OPTS+=" -device virtio-scsi-pci,id=scsi2"
-OPTS+=" -drive file=/home/jonpas/images/vm/fast.img,format=raw,index=2,media=disk,if=none,aio=native,cache=none,id=drive2"
-OPTS+=" -device scsi-hd,drive=drive2,bus=scsi2.0,rotation_rate=1"
+#OPTS+=" -device virtio-scsi-pci,id=scsi1"
+#OPTS+=" -drive file=/home/jonpas/Data/images/vm/data.img,format=raw,index=2,media=disk,if=none,aio=native,cache=none,id=drive2"
+#OPTS+=" -device scsi-hd,drive=drive2,bus=scsi1.0,rotation_rate=7200"
 
 OPTS+=" -drive file=/home/jonpas/images/windows10.iso,index=3,media=cdrom"
 OPTS+=" -drive file=/home/jonpas/images/virtio-win.iso,index=4,media=cdrom"
@@ -217,11 +210,9 @@ if [ "$ENABLE_LOOKINGGLASS" = true ]; then
             sleep 1
         done &&
         chown jonpas:jonpas /run/user/1000/spice.sock &&
-        echo "Spice socket owner changed" &&
-        start_lookingglass_helpers &
+        echo "Spice socket owner changed" &
     else
         OPTS+=" -spice port=5900,addr=127.0.0.1,disable-ticketing=on" # TCP
-        start_lookingglass_helpers
     fi
 
     # Spice Agent (clipboard)
@@ -243,17 +234,17 @@ else
     fi
 
     # evdev (lctrl + rctrl to swap, no macro keys)
-    OPTS+=" -object input-linux,id=kbd,evdev=/dev/input/by-path/pci-0000:0c:00.3-usb-0:4:1.0-event-kbd,grab_all=on,repeat=on" # Logitech G710 Keyboard
+    OPTS+=" -object input-linux,id=kbd,evdev=/dev/input/by-path/pci-0000:0d:00.3-usb-0:4:1.0-event-kbd,grab_all=on,repeat=on" # Logitech G710 Keyboard
 
     if [ "$ENABLE_EVDEV_MOUSE" = true ]; then
-        OPTS+=" -object input-linux,id=mouse,evdev=/dev/input/by-path/pci-0000:06:00.1-usb-0:3:1.0-event-mouse" # Logitech G502 Mouse
+        OPTS+=" -object input-linux,id=mouse,evdev=/dev/input/by-path/pci-0000:07:00.1-usb-0:3:1.0-event-mouse" # Logitech G502 Mouse
     fi
 fi
 
 # USB Controller (extension card)
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
-    rebind 0000:04:00.0 vfio-pci # PCIe USB Card
-    OPTS+=" -device vfio-pci,host=04:00.0,bus=root1,addr=00.4"
+    rebind 0000:05:00.0 vfio-pci # PCIe USB Card
+    OPTS+=" -device vfio-pci,host=05:00.0,bus=root1,addr=00.4"
 fi
 
 # USB devices (connected to USB controller)
@@ -261,6 +252,7 @@ if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = false ]; then
     OPTS+=" -usb -device usb-host,vendorid=0x131d,productid=0x0158" # Natural Point TrackIR 5 Pro Head Tracker
     OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb10a" # ThrustMaster T.16000M Joystick
     OPTS+=" -usb -device usb-host,vendorid=0x044f,productid=0xb687" # ThrustMaster TWCS Throttle
+    OPTS+=" -usb -device usb-host,vendorid=0x06a3,productid=0x0763" # Saitek (Logitech) G Flight Rudder Pedal
 fi
 
 # USB devices (not connected to USB controller)
@@ -276,8 +268,8 @@ fi
 
 # Sound
 if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
-    rebind 0000:0c:00.4 vfio-pci # Audio
-    OPTS+=" -device vfio-pci,host=00:1b.0,bus=root1,addr=00.3"
+    rebind 0000:0d:00.4 vfio-pci # Audio
+    OPTS+=" -device vfio-pci,host=00:0d.0,bus=root1,addr=00.3"
 else
     OPTS+=" -device ich9-intel-hda"
     # 'hda' requires buffer-length and timer-period parameters to avoid noticable delays
@@ -310,25 +302,18 @@ fi
 
 # USB
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
-    rebind 0000:04:00.0 xhci_hcd true # PCIe USB Card (remove ID)
+    rebind 0000:05:00.0 xhci_hcd true # PCIe USB Card (remove ID)
 fi
 
 # Sound
 if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
-    rebind 0000:0c:00.4 snd_hda_intel # Audio
+    rebind 0000:0d:00.4 snd_hda_intel # Audio
 fi
 
 # GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
     rebind $PCI_GPU_VIDEO nvidia
     rebind $PCI_GPU_AUDIO snd_hda_intel
-
-    if [ "$ENABLE_LOOKINGGLASS" = true ]; then
-        # VM Switcher close
-        if pgrep -f "$(dirname $0)/vm-switch.py" > /dev/null; then
-            kill -SIGINT $(pgrep -f "$(dirname $0)/vm-switch.py")
-        fi
-    fi
 fi
 
 pkill -RTMIN+3 i3blocks
