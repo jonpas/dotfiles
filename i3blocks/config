@@ -32,6 +32,7 @@ border=#b16286
 border=#689d6a
 
 [cpu_temp]
+interval=1
 border=#a89984
 
 [bandwidth]

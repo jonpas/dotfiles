@@ -1,9 +1,9 @@
 #!/bin/bash
 
 if [ $(hostname) = "loki" ]; then
-    temp=$(sensors | grep -o "+[0-9]*" | head -3 | tail -1 | tail -c +2)
+    temp=$(sensors | grep -o "Tdie:\s*+[0-9]*" | tail -c -3)
 else
-    temp=$(sensors | grep -o "+[0-9]*" | head -1 | tail -c +2)
+    temp=$(sensors | grep -o "Package id 0:\s*+[0-9]*" | tail -c -3)
 fi
 
 echo " $temp°C"

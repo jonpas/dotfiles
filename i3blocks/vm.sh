@@ -33,7 +33,7 @@ else
 fi
 
 # Barrier (Scroll Lock LED as locked to screen indicator)
-last_state_log=$(cat ~/.barriers.log | grep "locked" | tail -n 1)
+last_state_log=$(cat ~/.barriers.log | grep -a "locked" | tail -n 1)
 if grep --quiet " locked" <<< $last_state_log; then
     xset led named "Scroll Lock"
 else
