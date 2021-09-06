@@ -1,0 +1,24 @@
+@import "gruvbox-dark.rasi"
+
+* {
+    columns: 2;
+    scrollbar: false;
+
+    selected-normal-background: #ff9800;
+    selected-normal-foreground: #282828;
+
+    selected-urgent-background: #d79921;
+    selected-urgent-foreground: #282828;
+
+    selected-active-background: #ff9800;
+    selected-active-foreground: #282828;
+}
+
+window {
+    background-color: #ff9800;
+    border: 0;
+}
+
+listview {
+    border: 0;
+}

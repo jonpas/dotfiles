@@ -49,6 +49,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - pulse/*
     - ranger/*
     - rgb/*.orp (~/.config/OpenRGB)
+    - rofi*
     - termite*
     - udiskie*
     - yay*
