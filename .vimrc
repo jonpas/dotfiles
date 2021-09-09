@@ -36,7 +36,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'jonpas/vim-sqf-syntax', { 'for': 'sqf', 'branch': 'c-like' }
 Plug 'othree/xml.vim', { 'for': 'xml' }
 Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'cespare/vim-toml', { 'for': 'toml', 'branch': 'main' }
 Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 
 " language utility
