@@ -35,6 +35,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - .gtkrc-2.0
     - .prompt.py
     - .p10k.zsh
+    - .tmux.conf (REMOTE)
     - .urlview
     - .vimrc
     - .xinitrc (~VFIO)
@@ -82,3 +83,4 @@ _Notes:_
 - _`(BAK)` for backup tools._
 - _`(VFIO)` for PCI passthrough Virtual Machine setup (`~` for partially VFIO)._
 - _`(GPU)` for GPUs._
+- _`(REMOTE)` for remote machine work._
