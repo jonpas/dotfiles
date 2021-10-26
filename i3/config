@@ -277,6 +277,11 @@ bindsym XF86AudioNext         exec --no-startup-id playerctl next
 bindsym XF86Launch1           exec i3-sensible-terminal -d "/run/media/$(whoami)" # ThinkVantage button on ThinkPad
 bindsym $mod+XF86Launch1      exec i3-sensible-terminal -e "bc -lq"
 
+# Notifications (dunst)
+bindsym Shift+space         exec --no-startup-id dunstctl close
+bindsym Ctrl+Shift+space    exec --no-startup-id dunstctl close-all
+bindsym Ctrl+cedilla        exec --no-startup-id dunstctl history-pop
+
 # Lock
 bindsym $mod+Ctrl+l exec --no-startup-id $lock
 # Screenshot (flameshot)
