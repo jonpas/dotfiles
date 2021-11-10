@@ -17,7 +17,8 @@ if [ $(hostname) = "loki" ]; then
         pkill -x "barriers"
     fi
 
-    barriers -f -c ~/dotfiles/barrier/barrier.conf &>~/.barriers.log &
+    # SSL seems to be broken at the moment
+    barriers -f --disable-crypto -c ~/dotfiles/barrier/barrier.conf &>~/.barriers.log &
 
     # Wait a bit for it to start and restore configuration
     sleep 1
