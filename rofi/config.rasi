@@ -1,6 +1,6 @@
 configuration {
-    theme: "theme";
-
     sorting-method: "fzf";
     kb-cancel: "Escape,Control+c";
 }
+
+@theme "theme"
