@@ -1,10 +1,8 @@
 #!/bin/bash
 
-# Take first in case of multiple channels and strip the percentage sign
-volume=($(amixer get Master | grep -E -o '[0-9]{1,3}?%'))
-volume=$(head -c -2 <<< ${volume[0]})
+volume=$(pamixer --get-volume)
 
-if [ $(amixer get Master | tail -c -5 | head -c -2) == "off" ]; then
+if [ $(pamixer --get-mute) = "true" ]; then
     echo " $volume%"
     exit 0
 fi

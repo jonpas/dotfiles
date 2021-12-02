@@ -1,6 +1,0 @@
-#!/usr/bin/pulseaudio -nF
-
-.include /etc/pulse/default.pa
-
-#load-module module-echo-cancel
-load-module module-native-protocol-unix auth-anonymous=1 socket=/tmp/pulse-socket
