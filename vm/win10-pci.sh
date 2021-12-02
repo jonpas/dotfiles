@@ -36,7 +36,13 @@ rebind() {
     if [ "$driver" = "vfio-pci" ]; then
         echo $vendor $device > /sys/bus/pci/drivers/$driver/new_id
     else
-        echo $dev > /sys/bus/pci/drivers/$driver/bind
+        if [ "$driver" = "nvidia" ] && [ ! -e /sys/bus/pci/drivers/nvidia ]; then
+            # Special nvidia handling, version 495 nvidia-modprobe does not seem to create system files unless an
+            # unbound GPU is available but it does automatically eat the unbound GPU!
+            nvidia-modprobe && sleep 5
+        else
+            echo $dev > /sys/bus/pci/drivers/$driver/bind
+        fi
     fi
 }
 

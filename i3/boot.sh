@@ -4,9 +4,6 @@
 . ~/.config/i3/monitor.sh
 
 if [ $(hostname) = "loki" ]; then
-    # Load Nvidia driver (for later binding)
-    nvidia-modprobe &
-
     # Start Barrier server
     . ~/dotfiles/barrier/barriers.sh &
 
