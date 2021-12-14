@@ -290,16 +290,13 @@ if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
     rebind 0000:0d:00.4 vfio-pci # Audio
     OPTS+=" -device vfio-pci,host=00:0d.0,bus=root1,addr=00.3"
 else
+    # JACK (PipeWire)
+    export PIPEWIRE_RUNTIME_DIR=/run/user/1000
+    export PIPEWIRE_LATENCY=512/48000
+    OPTS+=" -audiodev jack,id=hda0,in.client-name=win-vm,out.client-name=win-vm,out.connect-ports=Starship.*:playback_F[LR],in.connect-ports=Starship.*:capture_F[LR]"
+
     OPTS+=" -device ich9-intel-hda"
-    # 'hda' requires buffer-length and timer-period parameters to avoid noticable delays
-    OPTS+=" -device hda-micro,audiodev=hda" # Speaker + Microphone
-    #OPTS+=" -audiodev pa,id=hda,server=unix:/tmp/pulse-socket,out.buffer-length=512,timer-period=1000" # PulseAudio + 44100 Hz in Windows (timer-period broken with QEMU 6.0)
-    OPTS+=" -audiodev pa,id=hda,server=unix:/tmp/pulse-socket" # PulseAudio + 44100 Hz in Windows
-    # 'usb-audio' has 5.1 support, but crackles a bit
-    #OPTS+=" -device usb-audio,audiodev=usb,multi=on" # Speaker only
-    #OPTS+=" -audiodev pa,id=usb,server=unix:/tmp/pulse-socket,out.mixing-engine=off,out.buffer-length=512,timer-period=1000" # PulseAudio
-    # 'unix:/tmp/pulse-socket' requires following in PulseAudio configuration ('~/.config/pulse/default.pa'):
-    # load-module module-native-protocol-unix auth-anonymous=1 socket=/tmp/pulse-socket
+    OPTS+=" -device hda-micro,audiodev=hda0"
 fi
 
 

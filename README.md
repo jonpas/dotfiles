@@ -47,7 +47,6 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - gtk-3.0/*
     - i3* (~VFIO)
     - i3blocks*
-    - pipewire*
     - ranger/*
     - rgb/*.orp (~/.config/OpenRGB)
     - rofi*
