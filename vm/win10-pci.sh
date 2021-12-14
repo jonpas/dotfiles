@@ -201,7 +201,7 @@ if [ "$ENABLE_LOOKINGGLASS" = true ]; then
         # Create KVMFR device
         modprobe kvmfr static_size_mb=32
 
-        # Set owner of KVMFR device (remove if exists, wait to be created by QEMU, change owner)
+        # Set owner of KVMFR device (wait to be created by modprobe, change owner)
         while [ ! -c /dev/kvmfr0 ]; do echo "Waiting for KVMFR device" && sleep 5; done &&
         chown jonpas:jonpas /dev/kvmfr0 &&
         echo "KVMFR device owner changed" &
