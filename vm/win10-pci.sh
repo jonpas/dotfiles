@@ -107,6 +107,7 @@ echo "Memory: ${MEMORY}G"
 echo "Looking Glass: $ENABLE_LOOKINGGLASS"
 if [ "$ENABLE_LOOKINGGLASS" = true ]; then
     echo "Spice Unix Socket: $LG_SPICE_UNIX_SOCKET"
+    echo "KVMFR Device: $LG_KVMFR_DEVICE"
 fi
 
 
@@ -201,9 +202,7 @@ if [ "$ENABLE_LOOKINGGLASS" = true ]; then
         modprobe kvmfr static_size_mb=32
 
         # Set owner of KVMFR device (remove if exists, wait to be created by QEMU, change owner)
-        while [ ! -c /dev/kvmfr0 ]; do
-            sleep 1
-        done &&
+        while [ ! -c /dev/kvmfr0 ]; do echo "Waiting for KVMFR device" && sleep 5; done &&
         chown jonpas:jonpas /dev/kvmfr0 &&
         echo "KVMFR device owner changed" &
     else
@@ -228,9 +227,7 @@ if [ "$ENABLE_LOOKINGGLASS" = true ]; then
         if [ -S /run/user/1000/spice.sock ]; then
             rm /run/user/1000/spice.sock
         fi
-        while [ ! -S /run/user/1000/spice.sock ]; do
-            sleep 1
-        done &&
+        while [ ! -S /run/user/1000/spice.sock ]; do echo "Waiting for Spice socket" && sleep 5; done &&
         chown jonpas:jonpas /run/user/1000/spice.sock &&
         echo "Spice socket owner changed" &
     else
