@@ -11,6 +11,7 @@ ENABLE_QEMU_GPU=false # Integrated QEMU GPU
 ENABLE_HUGEPAGES=true
 ENABLE_LOOKINGGLASS=true
 LG_SPICE_UNIX_SOCKET=true
+LG_KVMFR_DEVICE=true
 MEMORY="32"
 
 PCI_GPU_VIDEO=0000:0a:00.0
@@ -192,17 +193,32 @@ else
 fi
 
 if [ "$ENABLE_LOOKINGGLASS" = true ]; then
-    OPTS+=" -device ivshmem-plain,memdev=ivshmem,bus=pcie.0"
-    OPTS+=" -object memory-backend-file,id=ivshmem,share=on,mem-path=/dev/shm/looking-glass,size=32M"
+    if [ "$LG_KVMFR_DEVICE" = true ]; then
+        OPTS+=" -device ivshmem-plain,id=shmem0,memdev=looking-glass"
+        OPTS+=" -object memory-backend-file,id=looking-glass,mem-path=/dev/kvmfr0,size=32M,share=yes"
 
-    # Create shared memory
-    if [ -f /dev/shm/looking-glass ]; then
-        rm /dev/shm/looking-glass
+        # Create KVMFR device
+        modprobe kvmfr static_size_mb=32
+
+        # Set owner of KVMFR device (remove if exists, wait to be created by QEMU, change owner)
+        while [ ! -c /dev/kvmfr0 ]; do
+            sleep 1
+        done &&
+        chown jonpas:jonpas /dev/kvmfr0 &&
+        echo "KVMFR device owner changed" &
+    else
+        OPTS+=" -device ivshmem-plain,memdev=ivshmem,bus=pcie.0"
+        OPTS+=" -object memory-backend-file,id=ivshmem,share=on,mem-path=/dev/shm/looking-glass,size=32M"
+
+        # Create shared memory
+        if [ -f /dev/shm/looking-glass ]; then
+            rm /dev/shm/looking-glass
+        fi
+
+        touch /dev/shm/looking-glass
+        chown jonpas:jonpas /dev/shm/looking-glass
+        chmod 660 /dev/shm/looking-glass
     fi
-
-    touch /dev/shm/looking-glass
-    chown jonpas:jonpas /dev/shm/looking-glass
-    chmod 660 /dev/shm/looking-glass
 
     # Spice connection
     if [ "$LG_SPICE_UNIX_SOCKET" = true ]; then
