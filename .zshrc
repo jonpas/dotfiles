@@ -12,6 +12,7 @@ source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
 
 wintitle() { echo -ne "\033];$TERMINAL: $(pwd) \007" }
 precmd_functions+=(wintitle)
+i3name() { i3-msg focus parent, title_format "$@", focus child }
 
 # Zsh options
 setopt autocd
