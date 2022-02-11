@@ -4,17 +4,22 @@ if [ $(hostname) = "loki" ]; then
     exit 0
 fi
 
-stat=$(acpi -b | awk '{print $3}')
-charge=$(acpi -b | awk '{print $4}' | cut -d % -f 1)
+stat=$(cat /sys/class/power_supply/BAT0/status)
+charge=$(cat /sys/class/power_supply/BAT0/capacity)
 
-if [[ $stat == "Charging," ]] || [[ $stat == "Full," ]]; then
+if [[ $stat == "Not charging" ]] || [[ $stat == "Full" ]]; then
     echo " $charge%"
     exit 0
 fi
 
-remaining=$(acpi -b | awk '{print $5}' | head -c 5)
+remaining=$(acpi -b | awk -F '[,]' '{print $3}' | cut -c 2- | head -c 5)
 if [ ! -z "$remaining" ]; then
     remaining=" ($remaining)"
+fi
+
+if [ $stat == "Charging" ]; then
+    echo " $charge%$remaining"
+    exit 0
 fi
 
 if [ $charge -ge 80 ]; then
