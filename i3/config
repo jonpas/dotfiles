@@ -286,6 +286,8 @@ bindsym Ctrl+cedilla        exec --no-startup-id dunstctl history-pop
 bindsym $mod+Ctrl+l exec --no-startup-id $lock
 # Screenshot (flameshot)
 bindsym Ctrl+Print exec --no-startup-id flameshot gui
+# Screen record (peek)
+bindsym Ctrl+Shift+Print exec --no-startup-id peek
 
 # Mount location (195 = G710 'G1' key)
 bindcode 192 exec i3-sensible-terminal -d "/run/media/$(whoami)"
