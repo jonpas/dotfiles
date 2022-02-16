@@ -3,7 +3,7 @@ if [[ -z $DISPLAY ]] && [[ "$(tty)" = "/dev/tty1" ]] && [[ "$(whoami)" = "jonpas
     startx && exit
 fi
 
-export TERMINAL=termite #alacritty https://github.com/tomaka/winit/issues/705
+export TERMINAL=kitty
 export EDITOR=vim
 
 alias ls='ls --color=auto'

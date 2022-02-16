@@ -23,7 +23,7 @@
                     "percent": 0.7,
                     "swallows": [
                         {
-                            "class": "^Termite$",
+                            "class": "^kitty$",
                             "title": "^Terminal\\:\\ htop$"
                         }
                     ],
@@ -45,7 +45,7 @@
                             "percent": 0.35,
                             "swallows": [
                                 {
-                                    "class": "^Termite$",
+                                    "class": "^kitty$",
                                     "title": "^Terminal\\:\\ sensors$"
                                 }
                             ],
@@ -59,7 +59,7 @@
                             "percent": 0.65,
                             "swallows": [
                                 {
-                                    "class": "^Termite$",
+                                    "class": "^kitty$",
                                     "title": "^Terminal\\:\\ VM$"
                                 }
                             ],

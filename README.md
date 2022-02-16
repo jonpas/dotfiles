@@ -1,7 +1,7 @@
 dotfiles
 ========
 
-Dotfiles for Arch Linux with i3, vim, rofi, termite... and VFIO.
+Dotfiles for Arch Linux with i3, vim, rofi, kitty... and VFIO.
 
 ## Programs
 
@@ -47,10 +47,10 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - gtk-3.0/*
     - i3* (~VFIO)
     - i3blocks*
+    - kitty*
     - ranger/*
     - rgb/*.orp (~/.config/OpenRGB)
     - rofi*
-    - termite*
     - udiskie*
     - yay*
 ~/.local/

@@ -33,7 +33,7 @@ _comp_options+=(globdots) # include hidden files
 
 setopt magicequalsubst
 
-export TERMINAL=termite #alacritty https://github.com/tomaka/winit/issues/705
+export TERMINAL=kitty
 export EDITOR=vim
 
 # vi-mode
