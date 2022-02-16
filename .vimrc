@@ -18,7 +18,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'jonpas/gruvbox', { 'branch': 'jonpas' }
 Plug 'itchyny/lightline.vim'
 Plug 'chrisbra/Colorizer'
-Plug 'ryanoasis/vim-devicons'
 
 " utility
 Plug 'scrooloose/nerdtree'
@@ -48,6 +47,9 @@ Plug 'dense-analysis/ale'
 Plug 'maximbaz/lightline-ale'
 Plug '~/.vim/local/vim-sqflint-ale', { 'for': 'sqf' }
 Plug '~/.vim/local/vim-platformio-ale'
+
+" style - must be last ones
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
