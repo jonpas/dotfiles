@@ -82,6 +82,8 @@ alias l='ls -CFv'
 alias fd='fd --hidden'
 alias bc='bc -lq'
 
+alias ssh='TERM=vt100 ssh' # kitty terminfo is different, use vt100 for SSH for maximum compatibility
+
 alias rm='rmtrash'
 alias rmdir='rmdirtrash'
 alias cleandisk='yay -Sc && paccache -rk1 && trash-empty'
