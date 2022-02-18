@@ -20,16 +20,16 @@ i3-msg "workspace 1  ; append_layout ~/.config/i3/workspace-1.json"
 i3-msg "workspace 2  ; append_layout ~/.config/i3/workspace-2.json"
 
 # Auto-start programs
-i3-sensible-terminal -e htop -t "Terminal: htop" &
-i3-sensible-terminal -t 'Terminal: VM' &
+i3-sensible-terminal --title "Terminal: htop" htop &
+i3-sensible-terminal --title 'Terminal: VM' &
 firefox &
 
 if [ $(hostname) = "loki" ]; then
-    i3-sensible-terminal -e 'watch -t "sensors zenpower-pci-00c3 -A | grep °C"' -t "Terminal: sensors" &
+    i3-sensible-terminal --title "Terminal: sensors" watch -t "sensors zenpower-pci-00c3 -A | grep °C" &
     slack &
     discord &
     chromium &
     firefox --new-window about:logo &
 else
-    i3-sensible-terminal -e 'watch -t "sensors coretemp-isa-0000 -A | grep °C"' -t "Terminal: sensors" &
+    i3-sensible-terminal --title "Terminal: sensors" watch -t "sensors coretemp-isa-0000 -A | grep °C" &
 fi
