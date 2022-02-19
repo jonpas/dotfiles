@@ -282,7 +282,7 @@ bindsym XF86AudioPlay         exec --no-startup-id playerctl play-pause
 bindsym XF86AudioPrev         exec --no-startup-id playerctl previous
 bindsym XF86AudioNext         exec --no-startup-id playerctl next
 bindsym XF86Launch1           exec i3-sensible-terminal -d "/run/media/$(whoami)" # ThinkVantage button on ThinkPad
-bindsym $mod+XF86Launch1      exec i3-sensible-terminal -e "bc -lq"
+bindsym $mod+XF86Launch1      exec i3-sensible-terminal bc -lq
 
 # Notifications (dunst)
 bindsym Ctrl+space          exec --no-startup-id dunstctl close
@@ -299,7 +299,7 @@ bindsym Ctrl+Shift+Print exec --no-startup-id peek
 # Mount location (195 = G710 'G1' key)
 bindcode 192 exec i3-sensible-terminal -d "/run/media/$(whoami)"
 # Calculator (196 = G710 'G2' key)
-bindcode 193 exec i3-sensible-terminal -e "bc -lq"
+bindcode 193 exec i3-sensible-terminal bc -lq
 
 # Monitor
 exec --no-startup-id ~/.config/i3/boot.sh
