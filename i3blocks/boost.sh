@@ -12,7 +12,7 @@ if [ ! -z "${BLOCK_BUTTON}" ]; then
         governor_set="performance"
     fi
 
-    i3-sensible-terminal -e "sudo cpupower frequency-set -g $governor_set"
+    i3-sensible-terminal sudo cpupower frequency-set -g $governor_set
 
     if [ "$(cpupower frequency-info -p | grep -o '".*"' | tr -d '"')" != "$governor" ]; then
         governor=$governor_set
