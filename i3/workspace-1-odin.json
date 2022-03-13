@@ -46,17 +46,27 @@
             ]
         },
         {
+            // splith split container with 1 children
             "border": "pixel",
-            "current_border_width": 2,
             "floating": "auto_off",
-            "name": "terminal",
+            "layout": "splith",
             "percent": 0.9,
-            "swallows": [
-               {
-                "class": "^kitty$"
-               }
-            ],
-            "type": "con"
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "name": "terminal",
+                    "percent": 1,
+                    "swallows": [
+                       {
+                        "class": "^kitty$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
         }
     ]
 }
