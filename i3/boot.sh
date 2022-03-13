@@ -15,21 +15,25 @@ fi
 # Prepare workspaces
 if [ $(hostname) = "loki" ]; then
     i3-msg "workspace 0  ; append_layout ~/.config/i3/workspace-0.json"
+    i3-msg "workspace 1  ; append_layout ~/.config/i3/workspace-1.json"
+    i3-msg "workspace 2  ; append_layout ~/.config/i3/workspace-2.json"
+elif [ $(hostname) = "odin" ]; then
+    i3-msg "workspace 1  ; append_layout ~/.config/i3/workspace-1-odin.json"
 fi
-i3-msg "workspace 1  ; append_layout ~/.config/i3/workspace-1.json"
-i3-msg "workspace 2  ; append_layout ~/.config/i3/workspace-2.json"
 
 # Auto-start programs
 i3-sensible-terminal --title "Terminal: htop" htop &
-i3-sensible-terminal --title 'Terminal: VM' &
-firefox &
 
 if [ $(hostname) = "loki" ]; then
+    i3-sensible-terminal --title 'Terminal: VM' &
+    firefox &
+
     i3-sensible-terminal --title "Terminal: sensors" watch -t "sensors zenpower-pci-00c3 -A | grep °C" &
     slack &
     discord &
     chromium &
     firefox --new-window about:logo &
-else
+elif [ $(hostname) = "odin" ]; then
     i3-sensible-terminal --title "Terminal: sensors" watch -t "sensors coretemp-isa-0000 -A | grep °C" &
+    i3-sensible-terminal &
 fi
