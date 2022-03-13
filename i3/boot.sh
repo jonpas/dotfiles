@@ -17,7 +17,7 @@ if [ $(hostname) = "loki" ]; then
     ~/dotfiles/rgb/rgb.sh on
 elif [ $(hostname) = "odin" ]; then
     # Lock on ACPI events (suspend/hibernate/lock-session/unlock-session)
-    xss-lock -- ~/.config/i3/lock.sh &
+    xss-lock --transfer-sleep-lock -- ~/.config/i3/lock.sh &
 fi
 
 
