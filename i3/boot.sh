@@ -15,8 +15,8 @@ if [ $(hostname) = "loki" ]; then
 
     # Load OpenRGB profile
     ~/dotfiles/rgb/rgb.sh on
-elif [ $(hostname) = "odin" ]; then
-    # Lock on ACPI events (suspend/hibernate/lock-session/unlock-session)
+
+    # Lock on ACPI events (suspend / hibernate / screen blank)
     xss-lock --transfer-sleep-lock -- ~/.config/i3/lock.sh &
 fi
 
