@@ -64,6 +64,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - grub.d/*
     - modprobe.d/* (~VFIO)
     - samba/* (~VFIO)
+    - sane.d/*
     - udev/rules.d/* (~VFIO)
     - vm/qemu* (VFIO)
     - fstab(-hostname)
@@ -84,3 +85,12 @@ _Notes:_
 - _`(VFIO)` for PCI passthrough Virtual Machine setup (`~` for partially VFIO)._
 - _`(GPU)` for GPUs._
 - _`(REMOTE)` for remote machine work._
+
+## Printing
+
+### Canon Pixma MX475
+
+Arch packages:
+- `cups`
+- `cups-bjnp` (Canon USB over IP protocol driver)
+- `gutenprint` (best driver for Pixma printers)
