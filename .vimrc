@@ -186,7 +186,7 @@ let g:lightline = {
 \                  [ 'linter_checking', 'linter_errors', 'linter_warnings' ] ],
 \   },
 \   'component_function': {
-\       'gitbranch': 'fugitive#head',
+\       'gitbranch': 'FugitiveHead',
 \   },
 \   'component_expand': {
 \       'linter_checking': 'lightline#ale#checking',
