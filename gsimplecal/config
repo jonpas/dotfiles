@@ -15,3 +15,5 @@ clock_label = Pacific
 clock_tz = :US/Pacific
 clock_label = Michigan
 clock_tz = :US/Michigan
+clock_label = Sydney
+clock_tz = :Australia/Sydney
