@@ -150,7 +150,7 @@ if [ "$ENABLE_HUGEPAGES" = true ]; then
 fi
 
 # UEFI/BIOS
-OPTS+=" -drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2-ovmf/x64/OVMF_CODE.fd"
+OPTS+=" -drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2-ovmf/x64/OVMF_CODE.secboot.fd" # Win11 requires Secure Boot (available, not enabled)
 OPTS+=" -drive if=pflash,format=raw,file=/home/jonpas/images/vm/OVMF_VARS-win10-ovmf.fd"
 
 # Drives
@@ -176,6 +176,18 @@ OPTS+=" -drive file=/home/jonpas/images/virtio-win.iso,index=4,media=cdrom"
 OPTS+=" -net none"
 OPTS+=" -net nic,model=virtio" # 'virtio' may cause connection drop after a while without 'fix_virtio' patch (in qemu >=4.0)
 OPTS+=" -net bridge,br=virbr0" # -net user #,smb=/home/jonpas/Storage/"
+
+# TPM (Win11 requires TPM 2.0)
+OPTS+=" -chardev socket,id=chrtpm,path=/tmp/qemu-tpm0/swtpm.sock"
+OPTS+=" -tpmdev emulator,id=tpm0,chardev=chrtpm"
+OPTS+=" -device tpm-tis,tpmdev=tpm0"
+
+if [ ! -S /tmp/qemu-tpm0/swtpm.sock ]; then
+    mkdir -p /tmp/qemu-tpm0
+    swtpm socket --tpm2 --tpmstate dir=/tmp/qemu-tpm0 \
+        --ctrl type=unixio,path=/tmp/qemu-tpm0/swtpm.sock \
+        --daemon
+fi
 
 # GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
