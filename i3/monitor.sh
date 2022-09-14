@@ -12,25 +12,26 @@ if [ $(hostname) = "loki" ]; then
     SSMp="DVI-D-0"
 
     if [ -z "$layout" ]; then
-        ddcutil --sn 1130751321527 setvcp 60 0x03
+        ddcutil --sn 1130751321527 setvcp 60 0x03 # DVI
         xrandr $global \
             --output $LGWp $LGWcfg --pos 0x1080 --primary \
             --output $IIYp $IIYcfg --pos 500x0 \
             --output $SSMp $SSMcfg --pos 2560x480 --rotate left
     elif [ "$layout" = "right" ]; then
-        ddcutil --sn 1130751321527 setvcp 60 0x11
+        ddcutil --sn 1130751321527 setvcp 60 0x11 # HDMI
         xrandr $global \
             --output $LGWp --off \
             --output $IIYp --off \
             --output $SSMp --primary
     elif [ "$layout" = "up" ]; then
-        ddcutil --sn 1130751321527 setvcp 60 0x03
+        ddcutil --sn 1130751321527 setvcp 60 0x03 # DVI
         xrandr $global \
             --output $LGWp --off \
             --output $SSMp $SSMcfg --pos 0x0 \
             --output $IIYp $IIYcfg --pos 1050x600 --primary
     elif [ "$layout" = "down" ]; then
-        ddcutil --sn 1130751321527 setvcp 60 0x11
+        #ddcutil --sn 1130751321527 setvcp 60 0x11 # HDMI
+        ddcutil --sn 1130751321527 setvcp 60 0x01 # VGA
         xrandr $global \
             --output $LGWp $LGWcfg --pos 0x600 --primary \
             --output $IIYp --off \
