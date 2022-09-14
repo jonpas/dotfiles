@@ -98,6 +98,8 @@ alias vcamrm="sudo modprobe -r v4l2loopback"
 
 alias matlab='matlab -desktop -nosplash -useStartupFolderPref'
 
+alias fsmaps='ranger ~/Work/TARGET/Mappings'
+
 # Signal on yay exit (i3block)
 yay() {
     command yay "$@" &&
