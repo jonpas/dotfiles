@@ -208,10 +208,10 @@ fi
 if [ "$ENABLE_LOOKINGGLASS" = true ]; then
     if [ "$LG_KVMFR_DEVICE" = true ]; then
         OPTS+=" -device ivshmem-plain,id=shmem0,memdev=looking-glass"
-        OPTS+=" -object memory-backend-file,id=looking-glass,mem-path=/dev/kvmfr0,size=32M,share=yes"
+        OPTS+=" -object memory-backend-file,id=looking-glass,mem-path=/dev/kvmfr0,size=64M,share=yes"
 
         # Create KVMFR device
-        modprobe kvmfr static_size_mb=32
+        modprobe kvmfr static_size_mb=64
 
         # Set owner of KVMFR device (wait to be created by modprobe, change owner)
         while [ ! -c /dev/kvmfr0 ]; do echo "Waiting for KVMFR device" && sleep 5; done &&
@@ -219,7 +219,7 @@ if [ "$ENABLE_LOOKINGGLASS" = true ]; then
         echo "KVMFR device owner changed" &
     else
         OPTS+=" -device ivshmem-plain,memdev=ivshmem,bus=pcie.0"
-        OPTS+=" -object memory-backend-file,id=ivshmem,share=on,mem-path=/dev/shm/looking-glass,size=32M"
+        OPTS+=" -object memory-backend-file,id=ivshmem,share=on,mem-path=/dev/shm/looking-glass,size=64M"
 
         # Create shared memory
         if [ -f /dev/shm/looking-glass ]; then
