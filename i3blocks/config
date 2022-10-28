@@ -44,6 +44,9 @@ border=#458588
 [firewall]
 border=#458588
 
+[vpn]
+border=#458588
+
 [ssh]
 border=#458588
 
