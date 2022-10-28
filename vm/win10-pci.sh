@@ -8,7 +8,6 @@ ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_EVDEV_MOUSE=false
 ENABLE_PASSTHROUGH_GPU=true
 ENABLE_QEMU_GPU=true # Integrated QEMU GPU
-ENABLE_QEMU_GPU_QXL=true # SPICE QXL GPU (requires ENABLE_QEMU_GPU!)
 ENABLE_HUGEPAGES=true
 ENABLE_LOOKINGGLASS=true
 LG_SPICE_UNIX_SOCKET=true
@@ -201,11 +200,7 @@ if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
 fi
 
 if [ "$ENABLE_QEMU_GPU" = true ]; then
-    if [ "$ENABLE_QEMU_GPU_QXL" = true ]; then
-        OPTS+=" -vga qxl" # Use SPICE QXL GPU
-    else
-        OPTS+=" -usb -device usb-tablet" # Prevent mouse grabbing on QEMU VGA
-    fi
+    OPTS+=" -vga std"
 else
     OPTS+=" -vga none -nographic" # Disable QEMU VGA and graphics
 fi
