@@ -91,7 +91,7 @@ alias cleandisk='yay -Sc && paccache -rk1 && trash-empty'
 
 alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
-alias vm='sudo ~/dotfiles/vm/win10-pci.sh'
+alias vm='sudo ~/dotfiles/vm/win-pci.sh'
 alias ptt='sudo python ~/dotfiles/lib/ptt.py'
 
 alias vcam="sudo modprobe v4l2loopback exclusive_caps=1 card_label='OBS Virtual Camera'"

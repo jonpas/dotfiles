@@ -67,7 +67,7 @@ rebind_gpu() {
 }
 
 usage() {
-    echo "Windows 10 GPU-Passthrough VM Start script."
+    echo "Windows GPU-Passthrough VM Start script."
     echo "[-h] help"
     echo "[-p <true/false>] use huge pages"
     echo "[-c <true/false>] pass-through USB controller"
@@ -151,7 +151,7 @@ fi
 
 # UEFI/BIOS
 OPTS+=" -drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2-ovmf/x64/OVMF_CODE.secboot.fd" # Win11 requires Secure Boot (available, not enabled)
-OPTS+=" -drive if=pflash,format=raw,file=/home/jonpas/images/vm/OVMF_VARS-win10-ovmf.fd"
+OPTS+=" -drive if=pflash,format=raw,file=/home/jonpas/images/vm/OVMF_VARS-win-ovmf.fd"
 
 # Drives
 OPTS+=" -device virtio-scsi-pci,id=scsi0"
@@ -169,7 +169,7 @@ OPTS+=" -device scsi-hd,drive=drive1,bus=scsi0.0,rotation_rate=1" # 'scsi-block'
 #OPTS+=" -drive file=/home/jonpas/Data/images/vm/data.img,format=raw,index=2,media=disk,if=none,aio=native,cache=none,id=drive2"
 #OPTS+=" -device scsi-hd,drive=drive2,bus=scsi1.0,rotation_rate=7200"
 
-OPTS+=" -drive file=/home/jonpas/images/windows10.iso,index=3,media=cdrom"
+OPTS+=" -drive file=/home/jonpas/images/windows.iso,index=3,media=cdrom"
 OPTS+=" -drive file=/home/jonpas/images/virtio-win.iso,index=4,media=cdrom"
 
 # Network
