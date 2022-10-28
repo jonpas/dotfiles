@@ -83,7 +83,7 @@ function __prompt_command() {
 # Disable dotnet telemetry
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
-PATH=$PATH:~/.cargo/bin
+PATH=$PATH:~/.cargo/bin:~/.local/bin
 
 # Jump to path and synchronization aliases
 __base_school='~/Work/School/FERI-RIT'
