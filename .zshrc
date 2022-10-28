@@ -61,7 +61,8 @@ export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude ".git"' # use with fd
 [ -f "/usr/share/fzf/key-bindings.zsh" ] && source /usr/share/fzf/key-bindings.zsh
 [ -f "/usr/share/fzf/completion.zsh" ] && source /usr/share/fzf/completion.zsh
 
-[ -d "~/.cargo/bin" ] && PATH=$PATH:~/.cargo/bin
+[ -d "~/.cargo/bin" ] && PATH="$PATH:~/.cargo/bin"
+PATH="$PATH:~/.local/bin"
 
 # Disable dotnet telemetry
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
