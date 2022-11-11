@@ -115,6 +115,8 @@ gpu() {
     pvkrun "$@"  # Bumblebee (Optimus/Prime) + primus_vk
 }
 
+alias obs='vk_pro obs'  # AMD AMF (hardware encoder) with AMDGPU PRO
+
 # Require virtualenv for pip
 export PIP_REQUIRE_VIRTUALENV=true
 pip-global() {
