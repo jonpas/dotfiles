@@ -9,16 +9,18 @@ if [ $(hostname) = "loki" ]; then
     g710_wasd=$(find /sys/class/leds/ -lname "*$g710_vpid*:white:wasd")
 
     if [ "$state" = "on" ]; then
-        openrgb -p loki.orp
-
         # G710+ Driver Kernel API
         echo 2 > $g710_keys/brightness
         echo 3 > $g710_wasd/brightness
-    elif [ "$state" = "off" ]; then
-        openrgb -p off.orp
 
+        # OpenRGB last as it's slowest
+        openrgb -p loki.orp --noautoconnect
+    elif [ "$state" = "off" ]; then
         # G710+ Driver Kernel API
         echo 0 > $g710_keys/brightness
         echo 0 > $g710_wasd/brightness
+
+        # OpenRGB last as it's slowest
+        openrgb -p off.orp --noautoconnect
     fi
 fi
