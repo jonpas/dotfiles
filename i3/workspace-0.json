@@ -4,7 +4,7 @@
     "current_border_width": 2,
     "floating": "auto_off",
     "name": "firefox",
-    "percent": 0.5,
+    "percent": 1,
     "swallows": [
        {
         "class": "^firefox$",
