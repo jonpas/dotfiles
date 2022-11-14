@@ -28,7 +28,7 @@ if [ $(hostname) = "loki" ]; then
         #ddcutil --sn $s2 setvcp 60 $s2hdmi
         ddcutil --sn $s3 setvcp 60 $s3dvi
         xrandr $global \
-            --output $p1 $c1 --pos 0x$(( 1080 - 280 )) --primary \
+            --output $p1 $c1 --pos 0x$(( 1080 - 285 )) --primary \
             --output $p2 $c2 --pos 3440x1080 \
             --output $p3 $c3 --pos 3440x0
     elif [ "$layout" = "right" ]; then
@@ -44,7 +44,7 @@ if [ $(hostname) = "loki" ]; then
         #ddcutil --sn $s2 setvcp 60 $s2dp
         ddcutil --sn $s3 setvcp 60 $s3dvi
         xrandr $global \
-            --output $p1 $c1 --pos 0x$(( 1080 - 280 )) --primary \
+            --output $p1 $c1 --pos 0x$(( 1080 - 285 )) --primary \
             --output $p2 --off \
             --output $p3 $c3 --pos 3440x0
     elif [ "$layout" = "up" ]; then
