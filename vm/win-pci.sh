@@ -147,7 +147,7 @@ if [ "$ENABLE_HUGEPAGES" = true ]; then
 
     # Make sure we can allocate enough memory
     if [ $(free --giga | awk '/Mem:/ { print $4 }') -le $MEMORY ]; then
-        echo "Error! Not enough free memory!"
+        echo "[ERROR] Not enough free memory!"
         exit 2
     fi
 
@@ -225,9 +225,16 @@ if [ "$ENABLE_LOOKINGGLASS" = true ]; then
         modprobe kvmfr static_size_mb=64
 
         # Set owner of KVMFR device (wait to be created by modprobe, change owner)
-        while [ ! -c /dev/kvmfr0 ]; do echo "Waiting for KVMFR device" && sleep 5; done &&
-        chown jonpas:jonpas /dev/kvmfr0 &&
-        echo "KVMFR device owner changed" &
+        wait_time=10
+        while [ ! -c /dev/kvmfr0 ] && [ $wait_time -gt 0 ]; do
+            echo "Waiting for KVMFR device (timeout: ${wait_time}s" && wait_time=$((wait_time-5)) && sleep 5
+        done &&
+            if [ $wait_time -gt 0 ]; then
+                chown jonpas:jonpas /dev/kvmfr0 &&
+                echo "KVMFR device owner changed"
+            else
+                echo "[WARNING] KVMFR device timed out!"
+            fi &
     else
         OPTS+=(-device ivshmem-plain,memdev=ivshmem,bus=pcie.0)
         OPTS+=(-object memory-backend-file,id=ivshmem,share=on,mem-path=/dev/shm/looking-glass,size=64M)
@@ -250,9 +257,17 @@ if [ "$ENABLE_LOOKINGGLASS" = true ]; then
         if [ -S /run/user/1000/spice.sock ]; then
             rm /run/user/1000/spice.sock
         fi
-        while [ ! -S /run/user/1000/spice.sock ]; do echo "Waiting for Spice socket" && sleep 5; done &&
-        chown jonpas:jonpas /run/user/1000/spice.sock &&
-        echo "Spice socket owner changed" &
+
+        wait_time=30 &&
+        while [ ! -S /run/user/1000/spice.sock ] && [ $wait_time -gt 0 ]; do
+            echo "Waiting for Spice socket (timeout: ${wait_time}s)" && wait_time=$(($wait_time-5)) && sleep 5
+        done &&
+            if [ $wait_time -gt 0 ]; then
+                chown jonpas:jonpas /run/user/1000/spice.sock &&
+                echo "Spice socket owner changed"
+            else
+                echo "[WARNING] Spice socket timed out!"
+            fi &
     else
         OPTS+=(-spice port=5900,addr=127.0.0.1,disable-ticketing=on) # TCP
     fi
