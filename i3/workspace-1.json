@@ -61,7 +61,7 @@
                             "percent": 0.5,
                             "swallows": [
                                 {
-                                    "class": "^kitty$"
+                                    "class": "^discord$"
                                 }
                             ],
                             "type": "con"
@@ -132,7 +132,7 @@
                             "percent": 0.333333333333333,
                             "swallows": [
                                 {
-                                    "class": "^signal$"
+                                    "class": "^Signal$"
                                 }
                             ],
                             "type": "con"

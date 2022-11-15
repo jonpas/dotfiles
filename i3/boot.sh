@@ -38,10 +38,11 @@ if [ $(hostname) = "loki" ]; then
     firefox &
 
     i3-sensible-terminal --title "Terminal: sensors" watch -t "sensors zenpower-pci-00c3 -A | grep °C" &
-    slack &
     discord &
+    slack &
     chromium &
-    firefox --new-window about:logo &
+    signal-desktop &
+    sleep 1 && firefox --new-window about:logo & # allow main firefox to start and take over its window first, as that window will eat whichever comes first
 elif [ $(hostname) = "odin" ]; then
     i3-sensible-terminal --title "Terminal: sensors" watch -t "sensors coretemp-isa-0000 -A | grep °C" &
     i3-sensible-terminal &
