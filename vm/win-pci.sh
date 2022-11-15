@@ -118,20 +118,21 @@ fi
 
 
 # VM INIT
-OPTS=()
+OPTS=(-enable-kvm)
 
 #OPTS+=(-runas $(whoami))
 
 # General
-OPTS+=(-enable-kvm)
-OPTS+=(-machine type=q35,kernel_irqchip=on) # 'kernel_irqchip=on' for qemu >=4.0
-OPTS+=(-rtc base=localtime) # Windows uses localtime
-
-# CPU (Hyper-V Englightenments https://www.qemu.org/docs/master/system/i386/hyperv.html, x2apic only on VM with 255+ vCPUs)
-OPTS+=(-cpu host,migratable=off,+invtsc,topoext,x2apic=off,hv_relaxed,hv_vapic,hv_spinlocks=0x1fff,hv_vpindex,hv_runtime,hv_time,hv_synic,hv_stimer,hv_tlbflush,hv_ipi,hv_frequencies,hv_avic) # hv_stimer_direct causes boot freeze
-OPTS+=(-global kvm-pit.lost_tick_policy=discard) # required for AVIC (kernel 6.0)
-OPTS+=(-smp 16,sockets=1,cores=8,threads=2)
 # `bcdedit.exe /set useplatformclock true` enables HPET timer in Windows and introduces stuttering (most noticable with mouse input over barrier)
+OPTS+=(-machine type=q35,kernel_irqchip=on,hpet=off) # 'kernel_irqchip=on' for qemu >=4.0
+OPTS+=(-rtc base=localtime,driftfix=slew) # Windows uses localtime
+
+# CPU (Hyper-V Englightenments https://www.qemu.org/docs/master/system/i386/hyperv.html)
+# x2apic only sensible on VM with 255+ vCPUs, hv_stimer_direct causes boot freeze
+OPTS+=(-cpu host,migratable=off,+invtsc,topoext,x2apic=off,hv_relaxed,hv_vapic,hv_spinlocks=0x1fff,hv_vpindex,hv_runtime,hv_time,hv_synic,hv_stimer,hv_tlbflush,hv_ipi,hv_frequencies,hv_avic)
+OPTS+=(-smp 16,sockets=1,cores=8,threads=2)
+
+OPTS+=(-global kvm-pit.lost_tick_policy=discard) # required for AVIC (kernel 6.0)
 
 # SMBIOS / DMI (decrease VM detection chance)
 OPTS+=(-smbios type=0,vendor="$(smbios bios-vendor)",date="$(smbios bios-release-date)",version="$(smbios bios-version)") # 0=BIOS
