@@ -10,6 +10,7 @@ ENABLE_PASSTHROUGH_GPU=true
 ENABLE_QEMU_GPU=true # Integrated QEMU GPU
 ENABLE_HUGEPAGES=true
 ENABLE_LOOKINGGLASS=true
+ENABLE_NESTED_VIRT=false
 LG_SPICE_UNIX_SOCKET=true
 LG_KVMFR_DEVICE=true
 MEMORY="32"
@@ -81,13 +82,14 @@ usage() {
     echo "[-a <true/false>] pass-through audio"
     echo "[-k <true/false>] pass-through mouse/keyboard"
     echo "[-e <true/false>] evdev pass-through mouse"
+    echo "[-n <true/false>] nested virtualization"
     echo "[-m <gigabytes>] memory"
     echo "[-g <true/false>] use Looking Glass"
     echo "[-r <vfio/nvidia/nouveau>] set pass-through GPU driver"
     exit 1
 }
 
-while getopts 'hp:c:w:a:k:e:m:g:r' flag; do
+while getopts 'hp:c:w:a:k:e:n:m:g:r' flag; do
     case "${flag}" in
         h) usage ;;
         p) ENABLE_HUGEPAGES=${OPTARG} ;;
@@ -96,6 +98,7 @@ while getopts 'hp:c:w:a:k:e:m:g:r' flag; do
         a) ENABLE_PASSTHROUGH_AUDIO=${OPTARG} ;;
         k) ENABLE_PASSTHROUGH_MOUSEKEYBOARD=${OPTARG} ;;
         e) ENABLE_EVDEV_MOUSE=${OPTARG} ;;
+        n) ENABLE_NESTED_VIRT=${OPTARG} ;;
         m) MEMORY=${OPTARG} ;;
         g) ENABLE_LOOKINGGLASS=${OPTARG} ;;
         r) rebind_gpu $2 ;;
@@ -109,6 +112,7 @@ echo "Pass-Through Audio: $ENABLE_PASSTHROUGH_AUDIO"
 echo "Pass-Through Mouse/Keyboard: $ENABLE_PASSTHROUGH_MOUSEKEYBOARD"
 echo "Pass-Through USB Controller: $ENABLE_PASSTHROUGH_USB_CONTROLLER"
 echo "Evdev Mouse: $ENABLE_EVDEV_MOUSE"
+echo "Nested Virtualization: $ENABLE_NESTED_VIRT"
 echo "Memory: ${MEMORY}G"
 echo "Looking Glass: $ENABLE_LOOKINGGLASS"
 if [ "$ENABLE_LOOKINGGLASS" = true ]; then
@@ -128,8 +132,10 @@ OPTS+=(-machine type=q35,kernel_irqchip=on,hpet=off) # 'kernel_irqchip=on' for q
 OPTS+=(-rtc base=localtime,driftfix=slew) # Windows uses localtime
 
 # CPU (Hyper-V Englightenments https://www.qemu.org/docs/master/system/i386/hyperv.html)
+[[ "$ENABLE_NESTED_VIRT" = true ]] && nested=on || nested=off  # WSL2, Docker, etc.
+
 # x2apic only sensible on VM with 255+ vCPUs, hv_stimer_direct causes boot freeze
-OPTS+=(-cpu host,migratable=off,+invtsc,topoext,x2apic=off,hv_relaxed,hv_vapic,hv_spinlocks=0x1fff,hv_vpindex,hv_runtime,hv_time,hv_synic,hv_stimer,hv_tlbflush,hv_ipi,hv_frequencies,hv_avic)
+OPTS+=(-cpu host,migratable=off,+invtsc,topoext,svm=$nested,x2apic=off,hv_relaxed,hv_vapic,hv_spinlocks=0x1fff,hv_vpindex,hv_runtime,hv_time,hv_synic,hv_stimer,hv_tlbflush,hv_ipi,hv_frequencies,hv_avic)
 OPTS+=(-smp 16,sockets=1,cores=8,threads=2)
 
 OPTS+=(-global kvm-pit.lost_tick_policy=discard) # required for AVIC (kernel 6.0)
