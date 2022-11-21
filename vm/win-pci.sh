@@ -136,7 +136,7 @@ OPTS+=(-global kvm-pit.lost_tick_policy=discard) # required for AVIC (kernel 6.0
 
 # SMBIOS / DMI (decrease VM detection chance)
 OPTS+=(-smbios type=0,vendor="$(smbios bios-vendor)",date="$(smbios bios-release-date)",version="$(smbios bios-version)") # 0=BIOS
-OPTS+=(-smbios type=1,manufacturer="$(smbios system-manufacturer)",product="$(smbios system-product-name)",version="$(smbios system-version)",uuid="$(smbios system-uuid)",family="$(smbios system-family)") # 1=System
+OPTS+=(-smbios type=1,manufacturer="$(smbios system-manufacturer)",product="$(smbios system-product-name)",version="$(smbios system-version)",uuid="$(smbios system-uuid)",sku="$(smbios system-sku-number)",family="$(smbios system-family)") # 1=System
 OPTS+=(-smbios type=2,manufacturer="$(smbios baseboard-manufacturer)",product="$(smbios baseboard-product-name)",version="$(smbios baseboard-version)") # 2=Baseboard
 
 # RAM
