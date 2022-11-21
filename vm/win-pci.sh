@@ -185,6 +185,12 @@ OPTS+=(-device scsi-hd,drive=drive1,bus=scsi0.0,rotation_rate=1) # 'scsi-block' 
 OPTS+=(-drive file=/home/jonpas/images/windows.iso,index=3,media=cdrom)
 OPTS+=(-drive file=/home/jonpas/images/virtio-win.iso,index=4,media=cdrom)
 
+# Install VirtIO driver if uninstalled (eg. Windows Update on bare metal)
+# Source: https://superuser.com/questions/1057959/windows-10-in-kvm-change-boot-disk-to-virtio/1200899#1200899
+# wmic logicaldisk get deviceid, volumename, description
+# drvload f:\vioscsi\w10\amd64\vioscsi.inf
+# dism /image:c:\ /add-driver /driver:f:\vioscsi\w10\amd64\vioscsi.inf
+
 # Network
 OPTS+=(-net none)
 OPTS+=(-net nic,model=virtio) # 'virtio' may cause connection drop after a while without 'fix_virtio' patch (in qemu >=4.0)
