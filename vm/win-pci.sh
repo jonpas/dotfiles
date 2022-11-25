@@ -63,9 +63,9 @@ rebind_gpu() {
     elif [ "$driver" = "nouveau" ]; then
         rebind $PCI_GPU_VIDEO nouveau
         rebind $PCI_GPU_AUDIO snd_hda_intel
-    elif [ "$driver" = "amdgpu" ]; then
+    elif [ "$driver" = "amdgpu" ] || [ "$driver" = "amd" ]; then
         rebind $PCI_GPU_VIDEO amdgpu
-        rebind $PCI_GPU_VIDEO snd_hda_intel
+        rebind $PCI_GPU_AUDIO snd_hda_intel
     elif [ "$driver" = "vfio" ] || [ "$driver" = "vfio-pci" ]; then
         rebind $PCI_GPU_VIDEO vfio-pci true
         rebind $PCI_GPU_AUDIO vfio-pci true
@@ -384,8 +384,7 @@ fi
 
 # GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
-    # Unbinding amdgpu resets primary display card's X11 as well for some reason
-    #rebind $PCI_GPU_VIDEO amdgpu
+    rebind $PCI_GPU_VIDEO amdgpu
     rebind $PCI_GPU_AUDIO snd_hda_intel
 fi
 
