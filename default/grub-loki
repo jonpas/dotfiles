@@ -3,7 +3,7 @@
 GRUB_DEFAULT=0
 GRUB_TIMEOUT=-1
 GRUB_DISTRIBUTOR="Arch"
-GRUB_CMDLINE_LINUX_DEFAULT="amd_iommu=on iommu=pt acpi_osi='!Windows 2012' acpi_enforce_resources=lax vfio-pci.ids=10de:1c03,10de:10f1"
+GRUB_CMDLINE_LINUX_DEFAULT="amd_iommu=on iommu=pt acpi_osi='!Windows 2012' acpi_enforce_resources=lax vfio-pci.ids=1002:73bf,1002:ab28"
 GRUB_CMDLINE_LINUX=""
 GRUB_DISABLE_OS_PROBER=false
 

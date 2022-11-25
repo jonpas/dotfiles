@@ -15,8 +15,8 @@ LG_SPICE_UNIX_SOCKET=true
 LG_KVMFR_DEVICE=true
 MEMORY="32"
 
-PCI_GPU_VIDEO=0000:0a:00.0
-PCI_GPU_AUDIO=0000:0a:00.1
+PCI_GPU_VIDEO=0000:0c:00.0
+PCI_GPU_AUDIO=0000:0c:00.1
 
 smbios() {
     dmi_string="$1"
@@ -63,6 +63,9 @@ rebind_gpu() {
     elif [ "$driver" = "nouveau" ]; then
         rebind $PCI_GPU_VIDEO nouveau
         rebind $PCI_GPU_AUDIO snd_hda_intel
+    elif [ "$driver" = "amdgpu" ]; then
+        rebind $PCI_GPU_VIDEO amdgpu
+        rebind $PCI_GPU_VIDEO snd_hda_intel
     elif [ "$driver" = "vfio" ] || [ "$driver" = "vfio-pci" ]; then
         rebind $PCI_GPU_VIDEO vfio-pci true
         rebind $PCI_GPU_AUDIO vfio-pci true
@@ -305,7 +308,7 @@ else
     fi
 
     # evdev (lctrl + rctrl to swap, no macro keys)
-    OPTS+=(-object input-linux,id=kbd,evdev=/dev/input/by-path/pci-0000:0d:00.3-usb-0:4:1.0-event-kbd,grab_all=on,repeat=on) # Logitech G710 Keyboard
+    OPTS+=(-object input-linux,id=kbd,evdev=/dev/input/by-path/pci-0000:0f:00.3-usb-0:4:1.0-event-kbd,grab_all=on,repeat=on) # Logitech G710 Keyboard
 
     if [ "$ENABLE_EVDEV_MOUSE" = true ]; then
         OPTS+=(-object input-linux,id=mouse,evdev=/dev/input/by-path/pci-0000:07:00.1-usb-0:3:1.0-event-mouse) # Logitech G502 Mouse
@@ -381,7 +384,8 @@ fi
 
 # GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
-    rebind $PCI_GPU_VIDEO nvidia
+    # Unbinding amdgpu resets primary display card's X11 as well for some reason
+    #rebind $PCI_GPU_VIDEO amdgpu
     rebind $PCI_GPU_AUDIO snd_hda_intel
 fi
 
