@@ -65,6 +65,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - samba/* (~VFIO)
     - sane.d/*
     - udev/rules.d/* (~VFIO)
+    - ufw/applications.d/*
     - vm/qemu* (VFIO)
     - fstab(-hostname)
     - locale.conf
