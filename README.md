@@ -64,6 +64,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - modprobe.d/* (~VFIO)
     - samba/* (~VFIO)
     - sane.d/*
+    - ssh/* (SRV)
     - udev/rules.d/* (~VFIO)
     - ufw/applications.d/*
     - vm/qemu* (VFIO)
@@ -85,6 +86,7 @@ _Notes:_
 - _`(VFIO)` for PCI passthrough Virtual Machine setup (`~` for partially VFIO)._
 - _`(GPU)` for GPUs._
 - _`(REMOTE)` for remote machine work._
+- _`(SRV)` for remote machine work._
 
 ## Printing
 
