@@ -33,7 +33,6 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - .bashrc
     - .drirc (GPU)
     - .gtkrc-2.0
-    - .prompt.py
     - .p10k.zsh
     - .tmux.conf (REMOTE)
     - .urlview

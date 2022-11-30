@@ -6,6 +6,8 @@ fi
 export TERMINAL=kitty
 export EDITOR=vim
 
+alias sudo='sudo ' # check 2nd word for alias as well
+
 alias ls='ls --color=auto'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
@@ -35,9 +37,8 @@ alias vcamrm="sudo modprobe -r v4l2loopback"
 
 alias matlab='matlab -desktop -nosplash -useStartupFolderPref'
 
-# If interactive shell
+# Bind fg for switching between vim and terminal (C-z / C-a) if interactive shell
 if [[ "$-" =~ "i" ]]; then
-    # Bind fg for switching between vim and terminal (C-z / C-a)
     bind -x '"\C-a":"fg"'
 fi
 

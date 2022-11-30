@@ -68,6 +68,8 @@ PATH=$PATH:~/.local/bin
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 # Aliases
+alias sudo='sudo ' # check 2nd word for alias as well
+
 alias ls='ls --color=auto'
 alias dir='dir --color=auto'
 alias vdir='vdir --color=auto'
