@@ -316,10 +316,6 @@ exec --no-startup-id lxpolkit
 exec --no-startup-id udiskie -s
 # Screenshot
 exec --no-startup-id flameshot
-# Evolution
-exec --no-startup-id evolution
-# Jellyfin MPV Shim
-exec --no-startup-id jellyfin-mpv-shim
 
 # Window Settings
 for_window [class="(?i)gsimplecal"]                 floating enable, move position mouse, move down $bar_height px

@@ -15,11 +15,10 @@ if [ $(hostname) = "loki" ]; then
 
     # Load OpenRGB profile
     ~/dotfiles/rgb/rgb.sh on
-
-    # Lock on ACPI events (suspend / hibernate / screen blank)
-    xss-lock --transfer-sleep-lock -- ~/.config/i3/lock.sh &
 fi
 
+# Lock on ACPI events (suspend / hibernate / screen blank)
+xss-lock --transfer-sleep-lock -- ~/.config/i3/lock.sh &
 
 # Prepare workspaces
 if [ $(hostname) = "loki" ]; then
@@ -43,6 +42,10 @@ if [ $(hostname) = "loki" ]; then
     chromium &
     signal-desktop &
     sleep 1 && firefox --new-window about:logo & # allow main firefox to start and take over its window first, as that window will eat whichever comes first
+
+    # Background
+    evolution &
+    jellyfin-mpv-shim &
 elif [ $(hostname) = "odin" ]; then
     i3-sensible-terminal --title "Terminal: sensors" watch -t "sensors coretemp-isa-0000 -A | grep °C" &
     i3-sensible-terminal &
