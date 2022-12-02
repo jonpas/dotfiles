@@ -54,6 +54,8 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - yay*
 ~/.local/
     - share/applications/*
+/boot/
+    - loader! _(systemd-boot)_
 /etc/
     - NetworkManager/dispatcher.d/*
     - X11/* (VFIO)
