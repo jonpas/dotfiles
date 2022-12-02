@@ -1,0 +1,4 @@
+[WSD]
+title=WSD
+description=WSD Discovery/Name Service
+ports=3702/tcp|3702/udp
