@@ -1,0 +1,4 @@
+[LLMNR]
+title=LLMNR
+description=LLMNR Discovery/Name Service
+ports=5355/tcp|5355/udp
