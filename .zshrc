@@ -86,6 +86,7 @@ alias fd='fd --hidden'
 alias bc='bc -lq'
 
 alias ssh='TERM=vt100 ssh' # kitty terminfo is different, use vt100 for SSH for maximum compatibility
+alias rsyncnoperm="rsync -azPZ"
 
 alias rm='rmtrash'
 alias rmdir='rmdirtrash'
@@ -169,3 +170,5 @@ if [ $(hostname) = "odin" ]; then
     alias pullS="rsync -azP --delete loki:$__base_school/Data loki:$__base_school/Theses $__base_school/"
     alias pushS="rsync -azP --delete $__base_school/Data $__base_school/Theses loki:$__base_school/"
 fi
+
+alias rsyncnoperm="rsync -azPZ"

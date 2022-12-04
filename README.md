@@ -34,6 +34,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - .drirc (GPU)
     - .gtkrc-2.0
     - .p10k.zsh
+    - .popt
     - .tmux.conf (REMOTE)
     - .urlview
     - .vimrc

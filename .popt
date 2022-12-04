@@ -1,0 +1,3 @@
+# Give destination-default permissions
+# Executability bit gets set on files due to ACL providing default for both files and folders (but applies it only to folders), rsync will set it for files as well, so we specifically unset it for files
+rsync alias -Z --no-p --no-g --chmod=ugo+rwX,Fugo-X
