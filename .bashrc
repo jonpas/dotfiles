@@ -6,6 +6,9 @@ fi
 export TERMINAL=kitty
 export EDITOR=vim
 
+# vi-mode
+set -o vi
+
 alias sudo='sudo ' # check 2nd word for alias as well
 
 alias ls='ls --color=auto'
