@@ -1,0 +1,7 @@
+[Pihole]
+title=Pi-hole
+description=Network-wide ad blocking via your own Linux hardware
+# DNS only
+ports=53/tcp|53/udp
+# DNS + DHCP
+#ports=67,547/udp
