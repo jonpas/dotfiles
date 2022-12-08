@@ -70,7 +70,6 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - ssh/* (SRV)
     - udev/rules.d/* (~VFIO)
     - ufw/applications.d/*
-    - vm/qemu* (VFIO)
     - fstab(-hostname)
     - locale.conf
     - looking-glass.conf (VFIO)
