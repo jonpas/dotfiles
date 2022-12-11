@@ -1,4 +1,4 @@
 [Deluge Custom]
 title=Deluge Custom
 description=Deluge BitTorrent client
-ports=59518/tcp
+ports=59518/tcp|59518/udp
