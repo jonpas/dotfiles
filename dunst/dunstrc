@@ -72,7 +72,7 @@
     idle_threshold = 120
 
     # Which monitor should the notifications be displayed on.
-    monitor = 2
+    monitor = 1
 
     # Display notification on focused monitor.  Possible modes are:
     #   mouse: follow mouse pointer
@@ -86,6 +86,12 @@
     # If this option is set to mouse or keyboard, the monitor option
     # will be ignored.
     follow = none
+
+    # Position the notification in the top right corner
+    origin = top-left
+
+    # Offset from the origin
+    offset = 10x30
 
     # Should a notification popped up from history be sticky or timeout
     # as if it would normally do.
