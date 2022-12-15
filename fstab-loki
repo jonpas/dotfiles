@@ -16,6 +16,5 @@ UUID=0C2A-2654  /boot   vfat    rw,relatime,fmask=0022,dmask=0022,codepage=437,i
 # /dev/sdb1
 UUID=95d68f31-ce2c-46fd-bd3d-fcfa65c3dc7a   /home/jonpas/Data   ext4    rw,relatime,data=ordered,nofail     0 0
 
-## Windows (via ntfs-3g)
 # /dev/sdc1
-UUID=F2D00070D0003D7B   /home/jonpas/Storage    ntfs-3g     uid=1000,gid=1000,dmask=022,fmask=133,nofail    0 0
+UUID=e34e5794-92ec-4b9c-84c8-46911dc43eb9	/home/jonpas/Storage    ext4     rw,relatime,data=ordered,nofail    0 0
