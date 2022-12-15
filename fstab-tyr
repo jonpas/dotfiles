@@ -17,8 +17,8 @@ UUID=DE1C-6267      	/boot     	vfat      	rw,relatime,fmask=0022,dmask=0022,cod
 UUID=325e2e16-2c42-4562-89c2-41b16e330b30	/mnt/disk1  	ext4      	rw,relatime	0 2
 
 # /dev/sdc1
-UUID=e34e5794-92ec-4b9c-84c8-46911dc43eb9	/mnt/disk2  	ext4      	rw,relatime	0 2
+UUID=2e3c231f-73b0-4668-8b3a-6d90652d1b63	/mnt/disk2  	ext4      	rw,relatime	0 2
 
 
-# merge jellyfin data into common libraries with mergerfs (requires package: fuse2)
+# merge data into common libraries with mergerfs (requires package: fuse2)
 /mnt/disk* /srv/data	fuse.mergerfs	allow_other,use_ino	0 0
