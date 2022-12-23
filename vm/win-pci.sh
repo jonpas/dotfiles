@@ -348,7 +348,7 @@ else
     # JACK (PipeWire)
     export PIPEWIRE_RUNTIME_DIR=/run/user/1000
     export PIPEWIRE_LATENCY=512/48000
-    OPTS+=(-audiodev jack,id=hda0,in.client-name=win-vm,out.client-name=win-vm,out.connect-ports=USB.*:playback_F[LR],in.connect-ports=USB.*:capture_F[LR])
+    OPTS+=(-audiodev jack,id=hda0,in.client-name=win-vm,out.client-name=win-vm,out.connect-ports=USB.*:playback_F[LR],in.connect-ports=USB.*:capture_MONO)
 
     OPTS+=(-device ich9-intel-hda)
     OPTS+=(-device hda-micro,audiodev=hda0)
