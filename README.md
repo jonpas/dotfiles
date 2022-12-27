@@ -63,7 +63,6 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - X11/xorg.conf.d/*
     - bumblebee/* (GPU)
     - default/*(-hostname) (~VFIO)
-    - grub.d/*
     - modprobe.d/* (~VFIO)
     - samba/*(-hostname) (~VFIO/SRV)
     - sane.d/*
