@@ -88,18 +88,21 @@ while getopts 'hp:c:w:a:k:e:n:m:g:r' flag; do
     esac
 done
 
-echo "Huge-pages: $ENABLE_HUGEPAGES"
 echo "Pass-Through Wheel: $ENABLE_PASSTHROUGH_WHEEL"
 echo "Pass-Through Audio: $ENABLE_PASSTHROUGH_AUDIO"
 echo "Pass-Through Mouse/Keyboard: $ENABLE_PASSTHROUGH_MOUSEKEYBOARD"
+echo "Pass-Through USB PCIe Card: $ENABLE_PASSTHROUGH_USB_PCIE_CARD"
 echo "Pass-Through USB Controller: $ENABLE_PASSTHROUGH_USB_CONTROLLER"
 echo "Evdev Mouse: $ENABLE_EVDEV_MOUSE"
+echo "TPM & Secure Boot: $WIN11_INSTALL"
+echo "QEMU GPU: $ENABLE_QEMU_GPU"
 echo "Nested Virtualization: $ENABLE_NESTED_VIRT"
+echo "Huge-pages: $ENABLE_HUGEPAGES"
 echo "Memory: ${MEMORY}G"
 echo "Looking Glass: $ENABLE_LOOKINGGLASS"
 if [ "$ENABLE_LOOKINGGLASS" = true ]; then
-    echo "Spice Unix Socket: $LG_SPICE_UNIX_SOCKET"
-    echo "KVMFR Device: $LG_KVMFR_DEVICE"
+    echo " Spice Unix Socket: $LG_SPICE_UNIX_SOCKET"
+    echo " KVMFR Device: $LG_KVMFR_DEVICE"
 fi
 
 
