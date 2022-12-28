@@ -201,9 +201,11 @@ if [ "$WIN11_INSTALL" = true ]; then
     fi
 fi
 
+# PCIe Root Port
+OPTS+=(-device pcie-root-port,chassis=0,bus=pcie.0,slot=0,id=root1)
+
 # GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
-    OPTS+=(-device pcie-root-port,chassis=0,bus=pcie.0,slot=0,id=root1)
 
     rebind $PCI_GPU_VIDEO vfio-pci
     OPTS+=(-device vfio-pci,host=$(echo $PCI_GPU_VIDEO | cut -c 6-),bus=root1,addr=00.0,multifunction=on)
