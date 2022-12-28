@@ -4,6 +4,7 @@
 ENABLE_PASSTHROUGH_MOUSEKEYBOARD=false # Configuration or latency-free (will disable it in case of crash)
 ENABLE_PASSTHROUGH_USB_CONTROLLER=true
 ENABLE_PASSTHROUGH_WHEEL=true # Separate from other USB devices
+ENABLE_PASSTHROUGH_WHEEL=false # Separate from other USB devices
 ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_EVDEV_MOUSE=false
 ENABLE_PASSTHROUGH_GPU=true
