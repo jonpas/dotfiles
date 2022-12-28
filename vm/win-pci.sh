@@ -2,8 +2,8 @@
 
 # Arguments
 ENABLE_PASSTHROUGH_MOUSEKEYBOARD=false # Configuration or latency-free (will disable it in case of crash)
-ENABLE_PASSTHROUGH_USB_CONTROLLER=true
-ENABLE_PASSTHROUGH_WHEEL=true # Separate from other USB devices
+ENABLE_PASSTHROUGH_USB_PCIE_CARD=true
+ENABLE_PASSTHROUGH_USB_CONTROLLER=false
 ENABLE_PASSTHROUGH_WHEEL=false # Separate from other USB devices
 ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_EVDEV_MOUSE=false
@@ -19,6 +19,9 @@ MEMORY="32"
 
 PCI_GPU_VIDEO=0000:0c:00.0
 PCI_GPU_AUDIO=0000:0c:00.1
+PCI_USB_PCIE_CARD=0000:05:00.0 # PCIe USB Card
+PCI_USB_CONTROLLER=0000:0f:00.3 # X570 Aorus Pro USB Controller
+PCI_AUDIO=0000:0d:00.4
 
 smbios() {
     dmi_string="$1"
@@ -301,10 +304,14 @@ else
     fi
 fi
 
-# USB Controller (extension card)
+# USB Controllers
+if [ "$ENABLE_PASSTHROUGH_USB_PCIE_CARD" = true ]; then
+    rebind $PCI_USB_PCIE_CARD vfio-pci
+    OPTS+=(-device vfio-pci,host=05:00.0,bus=root1,addr=01.0)
+fi
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
-    rebind 0000:05:00.0 vfio-pci # PCIe USB Card
-    OPTS+=(-device vfio-pci,host=05:00.0,bus=root1,addr=00.4)
+    rebind $PCI_USB_CONTROLLER vfio-pci
+    OPTS+=(-device vfio-pci,host=0f:00.3,bus=root1,addr=02.0)
 fi
 
 # USB devices (connected to USB controller)
@@ -326,8 +333,8 @@ fi
 
 # Sound
 if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
-    rebind 0000:0d:00.4 vfio-pci # Audio
-    OPTS+=(-device vfio-pci,host=00:0d.0,bus=root1,addr=00.3)
+    rebind $PCI_AUDIO vfio-pci
+    OPTS+=(-device vfio-pci,host=00:0d.0,bus=root1,addr=05.0)
 else
     # JACK (PipeWire)
     export PIPEWIRE_RUNTIME_DIR=/run/user/1000
@@ -357,13 +364,16 @@ if [ "$ENABLE_PASSTHROUGH_MOUSEKEYBOARD" = true ]; then
 fi
 
 # USB
+if [ "$ENABLE_PASSTHROUGH_USB_PCIE_CARD" = true ]; then
+    rebind $PCI_USB_PCIE_CARD xhci_hcd true # remove ID
+fi
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
-    rebind 0000:05:00.0 xhci_hcd true # PCIe USB Card (remove ID)
+    rebind $PCI_USB_CONTROLLER xhci_hcd true # remove ID
 fi
 
 # Sound
 if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
-    rebind 0000:0d:00.4 snd_hda_intel # Audio
+    rebind $PCI_AUDIO snd_hda_intel
 fi
 
 # GPU
