@@ -11,6 +11,7 @@ ENABLE_QEMU_GPU=true # Integrated QEMU GPU
 ENABLE_HUGEPAGES=true
 ENABLE_LOOKINGGLASS=true
 ENABLE_NESTED_VIRT=false
+WIN11_INSTALL=false
 LG_SPICE_UNIX_SOCKET=true
 LG_KVMFR_DEVICE=true
 MEMORY="32"
@@ -147,8 +148,13 @@ if [ "$ENABLE_HUGEPAGES" = true ]; then
 fi
 
 # UEFI/BIOS
-OPTS+=(-drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2-ovmf/x64/OVMF_CODE.secboot.fd) # Win11 requires Secure Boot (available, not enabled)
-OPTS+=(-drive if=pflash,format=raw,file=/home/jonpas/images/vm/OVMF_VARS-win-ovmf.fd)
+if [ "$WIN11_INSTALL" = true ]; then
+    # Win11 requires Secure Boot (available, not enabled)
+    OPTS+=(-drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2-ovmf/x64/OVMF_CODE.secboot.4m.fd)
+else
+    OPTS+=(-drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2-ovmf/x64/OVMF_CODE.4m.fd)
+fi
+OPTS+=(-drive if=pflash,format=raw,file=/home/jonpas/images/vm/OVMF_VARS-win-ovmf.4m.fd)
 
 # Drives
 OPTS+=(-device virtio-scsi-pci,id=scsi0)
@@ -180,16 +186,18 @@ OPTS+=(-net none)
 OPTS+=(-net nic,model=virtio) # 'virtio' may cause connection drop after a while without 'fix_virtio' patch (in qemu >=4.0)
 OPTS+=(-net bridge,br=virbr0) # -net user #,smb=/home/jonpas/Storage/"
 
-# TPM (Win11 requires TPM 2.0)
-OPTS+=(-chardev socket,id=chrtpm,path=/tmp/qemu-tpm0/swtpm.sock)
-OPTS+=(-tpmdev emulator,id=tpm0,chardev=chrtpm)
-OPTS+=(-device tpm-tis,tpmdev=tpm0)
+# TPM (Win11 requires TPM 2.0 for installation)
+if [ "$WIN11_INSTALL" = true ]; then
+    OPTS+=(-chardev socket,id=chrtpm,path=/tmp/qemu-tpm0/swtpm.sock)
+    OPTS+=(-tpmdev emulator,id=tpm0,chardev=chrtpm)
+    OPTS+=(-device tpm-tis,tpmdev=tpm0)
 
-if [ ! -S /tmp/qemu-tpm0/swtpm.sock ]; then
-    mkdir -p /tmp/qemu-tpm0
-    swtpm socket --tpm2 --tpmstate dir=/tmp/qemu-tpm0 \
-        --ctrl type=unixio,path=/tmp/qemu-tpm0/swtpm.sock \
-        --daemon
+    if [ ! -S /tmp/qemu-tpm0/swtpm.sock ]; then
+        mkdir -p /tmp/qemu-tpm0
+        swtpm socket --tpm2 --tpmstate dir=/tmp/qemu-tpm0 \
+            --ctrl type=unixio,path=/tmp/qemu-tpm0/swtpm.sock \
+            --daemon
+    fi
 fi
 
 # GPU
