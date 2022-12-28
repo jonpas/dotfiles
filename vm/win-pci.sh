@@ -291,10 +291,10 @@ else
     fi
 
     # evdev (lctrl + rctrl to swap, no macro keys)
-    OPTS+=(-object input-linux,id=kbd,evdev=/dev/input/by-path/pci-0000:0f:00.3-usb-0:4:1.0-event-kbd,grab_all=on,repeat=on) # Logitech G710 Keyboard
+    OPTS+=(-object input-linux,id=kbd,evdev=/dev/input/by-id/usb-Logitech_Logitech_G710_Keyboard-event-kbd,grab_all=on,repeat=on) # Logitech G710 Keyboard
 
     if [ "$ENABLE_EVDEV_MOUSE" = true ]; then
-        OPTS+=(-object input-linux,id=mouse,evdev=/dev/input/by-path/pci-0000:07:00.1-usb-0:3:1.0-event-mouse) # Logitech G502 Mouse
+        OPTS+=(-object input-linux,id=mouse,evdev=/dev/input/by-id/usb-Logitech_Gaming_Mouse_G502_117C37613432-event-mouse) # Logitech G502 Mouse
     fi
 fi
 
@@ -310,10 +310,8 @@ if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = false ]; then
     OPTS+=(-usb -device usb-host,vendorid=0x044f,productid=0xb10a) # ThrustMaster T.16000M Joystick
     OPTS+=(-usb -device usb-host,vendorid=0x044f,productid=0xb687) # ThrustMaster TWCS Throttle
     OPTS+=(-usb -device usb-host,vendorid=0x06a3,productid=0x0763) # Saitek (Logitech) G Flight Rudder Pedal
+    OPTS+=(-usb -device usb-host,vendorid=0x0810,productid=0x0003) # Trust USB Gamepad
 fi
-
-# USB devices (not connected to USB controller)
-OPTS+=(-usb -device usb-host,vendorid=0x0810,productid=0x0003) # Trust USB Gamepad
 
 if [ "$ENABLE_PASSTHROUGH_WHEEL" = true ]; then
     OPTS+=(-usb -device usb-host,vendorid=0x044f,productid=0xb677) # Thrustmaster T150 FFB Wheel (ID 1 - Linux reads it as either ID)
