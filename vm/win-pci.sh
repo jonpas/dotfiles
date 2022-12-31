@@ -295,7 +295,7 @@ if [ "$ENABLE_PASSTHROUGH_MOUSEKEYBOARD" = true ]; then
     OPTS+=(-usb -device usb-host,vendorid=0x046d,productid=0xc24d) # Logitech G710 Keyboard
 else
     # Secondary mouse (connected to USB controller - internal)
-    if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = false ]; then
+    if [ "$ENABLE_PASSTHROUGH_USB_PCIE_CARD" = false ]; then
         OPTS+=(-usb -device usb-host,vendorid=0x0458,productid=0x0154) # KYE Systems Bluetooth Mouse
     fi
 
@@ -317,8 +317,8 @@ if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
     OPTS+=(-device vfio-pci,host=0f:00.3,bus=root1,addr=02.0)
 fi
 
-# USB devices (connected to USB controller)
-if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = false ]; then
+# USB devices (connected to USB PCIe Card)
+if [ "$ENABLE_PASSTHROUGH_USB_PCIE_CARD" = false ]; then
     OPTS+=(-usb -device usb-host,vendorid=0x131d,productid=0x0158) # Natural Point TrackIR 5 Pro Head Tracker
     OPTS+=(-usb -device usb-host,vendorid=0x044f,productid=0xb10a) # ThrustMaster T.16000M Joystick
     OPTS+=(-usb -device usb-host,vendorid=0x044f,productid=0xb687) # ThrustMaster TWCS Throttle
