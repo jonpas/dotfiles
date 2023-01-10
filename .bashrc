@@ -26,9 +26,7 @@ alias l='ls -CFv'
 alias fd='fd --hidden'
 alias bc='bc -lq'
 
-alias rm='rmtrash'
-alias rmdir='rmdirtrash'
-alias cleandisk='yay -Sc && paccache -rk1 && trash-empty'
+alias cleandisk='yay -Sc && paccache -rk1 && sudo trash-empty --all-users'
 
 alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
