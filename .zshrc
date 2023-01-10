@@ -88,9 +88,7 @@ alias bc='bc -lq'
 alias ssh='TERM=vt100 ssh' # kitty terminfo is different, use vt100 for SSH for maximum compatibility
 alias rsyncnoperm="rsync -azPZ"
 
-alias rm='rmtrash'
-alias rmdir='rmdirtrash'
-alias cleandisk='yay -Sc && paccache -rk1 && trash-empty'
+alias cleandisk='yay -Sc && paccache -rk1 && sudo trash-empty --all-users'
 
 alias sysinfo='echo "" && neofetch'
 alias weather='curl http://wttr.in/Lenart'
