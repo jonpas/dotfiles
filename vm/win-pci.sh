@@ -192,8 +192,8 @@ OPTS+=(-drive file=/home/jonpas/images/virtio-win.iso,index=4,media=cdrom)
 # Install VirtIO driver if uninstalled (eg. Windows Update on bare metal)
 # Source: https://superuser.com/questions/1057959/windows-10-in-kvm-change-boot-disk-to-virtio/1200899#1200899
 # wmic logicaldisk get deviceid, volumename, description
-# drvload f:\vioscsi\w10\amd64\vioscsi.inf
-# dism /image:c:\ /add-driver /driver:f:\vioscsi\w10\amd64\vioscsi.inf
+# (not needed) drvload f:\vioscsi\w11\amd64\vioscsi.inf
+# dism /image:c:\ /add-driver /driver:f:\vioscsi\w11\amd64\vioscsi.inf
 
 # Network
 OPTS+=(-net none)
