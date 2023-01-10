@@ -12,6 +12,7 @@ ENABLE_QEMU_GPU=true # Integrated QEMU GPU
 ENABLE_HUGEPAGES=true
 ENABLE_LOOKINGGLASS=true
 ENABLE_NESTED_VIRT=false
+BOOT_VIRTIO=true # Disable to use boot disk as IDE device (after dual-booting Windows)
 WIN11_INSTALL=false
 LG_SPICE_UNIX_SOCKET=true
 LG_KVMFR_DEVICE=true
@@ -94,6 +95,7 @@ echo "Pass-Through Mouse/Keyboard: $ENABLE_PASSTHROUGH_MOUSEKEYBOARD"
 echo "Pass-Through USB PCIe Card: $ENABLE_PASSTHROUGH_USB_PCIE_CARD"
 echo "Pass-Through USB Controller: $ENABLE_PASSTHROUGH_USB_CONTROLLER"
 echo "Evdev Mouse: $ENABLE_EVDEV_MOUSE"
+echo "Boot VirtIO: $BOOT_VIRTIO"
 echo "TPM & Secure Boot: $WIN11_INSTALL"
 echo "QEMU GPU: $ENABLE_QEMU_GPU"
 echo "Nested Virtualization: $ENABLE_NESTED_VIRT"
@@ -156,7 +158,7 @@ fi
 
 # UEFI/BIOS
 if [ "$WIN11_INSTALL" = true ]; then
-    # Win11 requires Secure Boot (available, not enabled)
+    # Win11 requires Secure Boot for installation (available, not enabled)
     OPTS+=(-drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2-ovmf/x64/OVMF_CODE.secboot.4m.fd)
 else
     OPTS+=(-drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2-ovmf/x64/OVMF_CODE.4m.fd)
@@ -166,11 +168,16 @@ OPTS+=(-drive if=pflash,format=raw,file=/home/jonpas/images/vm/OVMF_VARS-win-ovm
 # Drives
 OPTS+=(-device virtio-scsi-pci,id=scsi0)
 
-OPTS+=(-drive file=/dev/disk/by-id/ata-Samsung_SSD_860_EVO_500GB_S3Z2NB2KA62661K,format=raw,index=0,if=none,aio=native,cache=none,id=drive0) # 'scsi-block' requires '/by-id/'
-OPTS+=(-device scsi-hd,drive=drive0,bus=scsi0.0,bootindex=1,rotation_rate=1) # 'scsi-block' for stats and SMART inside guest, 'scsi-hd' for discard/trim
+if [ "$BOOT_VIRTIO" = true ]; then
+    OPTS+=(-drive file=/dev/disk/by-id/ata-Samsung_SSD_860_EVO_500GB_S3Z2NB2KA62661K,format=raw,index=0,if=none,aio=native,cache=none,id=drive0) # 'scsi-block' requires '/by-id/'
+    OPTS+=(-device scsi-block,drive=drive0,bus=scsi0.0,bootindex=1)
+else
+    # Windows direct (dual) boot will remove VirtIO driver, use IDE block device
+    OPTS+=(-drive format=raw,file="/dev/sda",if=ide,index=0)
+fi
 
 OPTS+=(-drive file=/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_2TB_S4J4NM0R706278T,format=raw,index=1,if=none,aio=native,cache=none,id=drive1) # 'scsi-block' requires '/by-id/'
-OPTS+=(-device scsi-hd,drive=drive1,bus=scsi0.0,rotation_rate=1) # 'scsi-block' for stats and SMART inside guest, 'scsi-hd' for discard/trim
+OPTS+=(-device scsi-hd,drive=drive1,bus=scsi0.0,rotation_rate=1) # TODO PCI Passthrough
 
 # Create image: qemu-img create -f raw name.img 10G -o preallocation=full (-o cluster_size=16K for qcow2)
 # Convert qcow2 to raw: qemu-img convert -p -O raw source.qcow2 target.img -o preallocation=full
