@@ -34,7 +34,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'sheerun/vim-polyglot'
 Plug 'jonpas/vim-sqf-syntax', { 'for': 'sqf', 'branch': 'c-like' }
 Plug 'othree/xml.vim', { 'for': 'xml' }
-Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+Plug 'rust-lang/rust.vim', { 'for': ['rust', 'rhai'] }
 Plug 'cespare/vim-toml', { 'for': 'toml', 'branch': 'main' }
 Plug 'chrisbra/csv.vim', { 'for': 'csv' }
 
@@ -129,6 +129,7 @@ set rtp+=/usr/bin/fzf
 " Highlighting
 autocmd FileType css ColorHighlight
 au BufRead,BufNewFile *.asm set filetype=nasm
+au BufRead,BufNewFile *.rhai set filetype=rust
 
 " Keybinds
 set showcmd
