@@ -66,6 +66,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - modprobe.d/* (~VFIO)
     - samba/*(-hostname) (~VFIO/SRV)
     - sane.d/*
+    - security/*
     - ssh/* (SRV)
     - udev/rules.d/* (~VFIO)
     - ufw/applications.d/*
