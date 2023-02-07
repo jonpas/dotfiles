@@ -109,11 +109,8 @@ yay() {
 }
 
 # GPU Offload
-export PRIMUS_VK_DISPLAYID=1002:699f  # AMD RX 550
-export PRIMUS_VK_RENDERID=10de:1c03  # Nvidia GTX 1060 6GB
 gpu() {
-    #DRI_PRIME=1 "$@"  # PRIME
-    pvkrun "$@"  # Bumblebee (Optimus/Prime) + primus_vk
+    DRI_PRIME=1 "$@"  # PRIME
 }
 
 alias obs='vk_pro obs'  # AMD AMF (hardware encoder) with AMDGPU PRO
