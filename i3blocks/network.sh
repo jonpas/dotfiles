@@ -10,7 +10,7 @@ fi
 
 # Wired
 for interface in $wired_interfaces; do
-    address=$(ip addr show $interface | grep -Po 'inet \K[\d.]+')
+    address=$(ip addr show $interface | grep -Po 'inet \K[0-9.]+')
     if [ -n "$address" ]; then
         echo " $address"
         echo " $address"
@@ -21,7 +21,7 @@ done
 
 # Wi-Fi
 for interface in $wireless_interfaces; do
-    address=$(ip addr show $interface | grep -Po 'inet \K[\d.]+')
+    address=$(ip addr show $interface | grep -Po 'inet \K[0-9.]+')
     if [ -n "$address" ]; then
         ssid=$(iwconfig | grep -o ESSID.* | tail -c +8 | head -c -4)
         echo " $address ($ssid)"
