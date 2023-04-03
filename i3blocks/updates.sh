@@ -1,6 +1,6 @@
 #!/bin/bash
 
-updates=$(($(checkupdates | wc -l) + $(yay -Qum | wc -l)))
+updates=$(yay -Quq | wc -l)
 
 if [ "$updates" = "0" ]; then
     exit 0
