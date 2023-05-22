@@ -83,7 +83,7 @@ None
     - vm (VFIO)
 ```
 _Notes:_
-- _`*` folder symlinked, `/*` all files in folder symlinked, `!` copied (sensitive information)._
+- _`*` folder symlinked, `/*` all files in folder symlinked, `!` copied (sensitive or boot information)._
 - _`(-hostname)` for splitting different files for different machines._
 - _`(BAK)` for backup tools._
 - _`(VFIO)` for PCI passthrough Virtual Machine setup (`~` for partially VFIO)._
