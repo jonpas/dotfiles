@@ -346,13 +346,20 @@ if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
     rebind $PCI_AUDIO vfio-pci
     OPTS+=(-device vfio-pci,host=00:0d.0,bus=root1,addr=05.0)
 else
-    # JACK (PipeWire)
-    export PIPEWIRE_RUNTIME_DIR=/run/user/1000
-    export PIPEWIRE_LATENCY=512/48000
-    OPTS+=(-audiodev jack,id=hda0,in.client-name=win-vm,out.client-name=win-vm,out.connect-ports=USB.*:playback_F[LR],in.connect-ports=USB.*:capture_MONO)
+    if [ "$ENABLE_LOOKINGGLASS" = true ]; then
+        # Spice
+        OPTS+=(-audiodev spice,id=spice)
+        OPTS+=(-device ich9-intel-hda)
+        OPTS+=(-device hda-micro,audiodev=spice)
+    else
+        # JACK (PipeWire)
+        export PIPEWIRE_RUNTIME_DIR=/run/user/1000
+        export PIPEWIRE_LATENCY=512/48000
+        OPTS+=(-audiodev jack,id=hda0,in.client-name=win-vm,out.client-name=win-vm,out.connect-ports=USB.*:playback_F[LR],in.connect-ports=USB.*:capture_MONO)
 
-    OPTS+=(-device ich9-intel-hda)
-    OPTS+=(-device hda-micro,audiodev=hda0)
+        OPTS+=(-device ich9-intel-hda)
+        OPTS+=(-device hda-micro,audiodev=hda0)
+    fi
 fi
 
 
