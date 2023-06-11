@@ -7,8 +7,8 @@ fi
 governor=$(cpupower frequency-info -p | grep -o '".*"' | tr -d '"')
 
 if [ ! -z "${BLOCK_BUTTON}" ]; then
-    governor_set="schedutil"
-    if [ "$governor" == "schedutil" ]; then
+    governor_set="powersave"
+    if [ "$governor" == "powersave" ]; then
         governor_set="performance"
     fi
 
