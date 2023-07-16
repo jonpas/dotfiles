@@ -243,7 +243,7 @@ if [ "$ENABLE_LOOKINGGLASS" = true ]; then
         # Set owner of KVMFR device (wait to be created by modprobe, change owner)
         wait_time=10
         while [ ! -c /dev/kvmfr0 ] && [ $wait_time -gt 0 ]; do
-            echo "Waiting for KVMFR device (timeout: ${wait_time}s)" && wait_time=$((wait_time-5)) && sleep 5
+            echo "Waiting for KVMFR device (timeout: ${wait_time}s)" && wait_time=$(($wait_time-5)) && sleep 5
         done &&
             if [ $wait_time -gt 0 ]; then
                 chown jonpas:jonpas /dev/kvmfr0 &&
