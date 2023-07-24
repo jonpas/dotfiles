@@ -14,7 +14,7 @@ UUID=DE1C-6267      	/boot     	vfat      	rw,relatime,fmask=0022,dmask=0022,cod
 
 
 # /dev/sdb1
-UUID=f0ca6363-897f-4a56-ab61-47a793c349b3	/mnt/disk1	ext4	rw,relatime,nofail	0 2
+UUID=c157bce3-305a-4356-a534-fe0f12254001	/mnt/disk1	ext4	rw,relatime,nofail	0 2
 
 # /dev/sdc1
 UUID=14cc7647-be84-47cc-b77e-eac555b96475	/mnt/disk2	ext4	rw,relatime,nofail	0 2
