@@ -219,10 +219,9 @@ OPTS+=(-device pcie-root-port,chassis=0,bus=pcie.0,slot=0,id=root1)
 
 # GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
-
-    rebind $PCI_GPU_VIDEO vfio-pci
+    rebind $PCI_GPU_VIDEO vfio-pci true
     OPTS+=(-device vfio-pci,host=$(echo $PCI_GPU_VIDEO | cut -c 6-),bus=root1,addr=00.0,multifunction=on)
-    rebind $PCI_GPU_AUDIO vfio-pci
+    rebind $PCI_GPU_AUDIO vfio-pci true
     OPTS+=(-device vfio-pci,host=$(echo $PCI_GPU_AUDIO | cut -c 6-),bus=root1,addr=00.1)
 fi
 
