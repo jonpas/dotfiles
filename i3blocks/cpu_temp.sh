@@ -8,10 +8,10 @@ fi
 
 echo " $temp°C"
 
-if [ $temp -ge 90 ]; then
+if [ $temp -ge 95 ]; then
     play --no-show-progress --null --channels 1 synth 0.4 sine 900 # play from SoX
 fi
 
-if [ $temp -ge 80 ]; then
+if [ $temp -ge 90 ]; then
     exit 33
 fi
