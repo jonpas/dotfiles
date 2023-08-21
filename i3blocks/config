@@ -47,6 +47,10 @@ border=#458588
 [ssh]
 border=#458588
 
+[ups]
+interval=1
+border=#a9a9a9
+
 [battery]
 interval=30
 border=#8ec07c
