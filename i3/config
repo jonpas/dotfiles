@@ -110,16 +110,16 @@ bindsym $mod+a focus parent
 bindsym $mod+Shift+a focus child
 
 # workspaces
-set $ws0 "0  "
-set $ws1 "1  "
-set $ws2 "2  "
-set $ws3 "3  "
-set $ws4 "4  "
-set $ws5 "5  "
-set $ws6 "6  "
-set $ws7 "7  "
-set $ws8 "8  "
-set $ws9 "9  "
+set $ws0 "0 "
+set $ws1 "1 "
+set $ws2 "2 "
+set $ws3 "3 "
+set $ws4 "4 "
+set $ws5 "5 "
+set $ws6 "6 "
+set $ws7 "7 "
+set $ws8 "8 "
+set $ws9 "9 "
 
 # workspace monitors (if available)
 workspace $ws0 output DVI-D-0
@@ -180,7 +180,7 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
-set $resize  : [h]  , [j]  , [k]  , [l] 
+set $resize : [h], [j], [k], [l]
 mode "$resize" {
     # These bindings trigger as soon as you enter the resize mode
 
@@ -207,11 +207,13 @@ mode "$resize" {
 bindsym $mod+r mode "$resize"
 
 # external screen management
-set $display_layout  : [a]  , [j]   , [k]   , [l/o]  , [s] 
+set $display_layout : [a], [h] ( ↾), [j] (↾?), [k] ( ↾), [l] ( ↾), [s] 
 mode "$display_layout" {
     bindsym a     mode "default" exec $set_monitors       && $restart_barrier        && i3-msg restart
 
-    bindsym o     mode "default" exec $set_monitors right && $restart_barrier both   && i3-msg restart
+    bindsym h     mode "default" exec $set_monitors left  && $restart_barrier both   && i3-msg restart
+    bindsym Left  mode "default" exec $set_monitors left  && $restart_barrier both   && i3-msg restart
+
     bindsym l     mode "default" exec $set_monitors right && $restart_barrier both   && i3-msg restart
     bindsym Right mode "default" exec $set_monitors right && $restart_barrier both   && i3-msg restart
 
@@ -229,7 +231,7 @@ mode "$display_layout" {
 bindsym $mod+p mode "$display_layout"
 
 # passthrough i3 keybinds
-set $passthrough  : [mod+Pause] End Passthrough
+set $passthrough : [mod+Pause] End Passthrough
 mode "$passthrough" {
     bindsym $mod+Pause mode default
 }
