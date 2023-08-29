@@ -64,6 +64,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - bumblebee/* (GPU)
     - default/*(-hostname) (~VFIO)
     - modprobe.d/* (~VFIO)
+    - powerpanel/* [pwrstatd.conf to /etc/] (UPS)
     - samba/*(-hostname) (~VFIO/SRV)
     - sane.d/*
     - security/*
@@ -90,6 +91,7 @@ _Notes:_
 - _`(GPU)` for GPUs._
 - _`(REMOTE)` for remote machine work._
 - _`(SRV)` for remote machine work._
+- _`(UPS)` for uninterruptible power supply._
 
 ## Printing
 
