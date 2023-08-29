@@ -22,11 +22,11 @@ xss-lock --transfer-sleep-lock -- ~/.config/i3/lock.sh &
 
 # Prepare workspaces
 if [ $(hostname) = "loki" ]; then
-    i3-msg "workspace 0  ; append_layout ~/.config/i3/workspace-0.json"
-    i3-msg "workspace 1  ; append_layout ~/.config/i3/workspace-1.json"
-    i3-msg "workspace 2  ; append_layout ~/.config/i3/workspace-2.json"
+    i3-msg "workspace 0 ; append_layout ~/.config/i3/workspace-0.json"
+    i3-msg "workspace 1 ; append_layout ~/.config/i3/workspace-1.json"
+    i3-msg "workspace 2 ; append_layout ~/.config/i3/workspace-2.json"
 elif [ $(hostname) = "odin" ]; then
-    i3-msg "workspace 1  ; append_layout ~/.config/i3/workspace-1-odin.json"
+    i3-msg "workspace 1 ; append_layout ~/.config/i3/workspace-1-odin.json"
 fi
 
 # Auto-start programs
