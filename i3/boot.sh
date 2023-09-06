@@ -40,7 +40,7 @@ if [ $(hostname) = "loki" ]; then
     discord &
     slack &
     chromium &
-    signal-desktop &
+    #signal-desktop &
     sleep 1 && firefox --new-window about:logo & # allow main firefox to start and take over its window first, as that window will eat whichever comes first
 
     # Background

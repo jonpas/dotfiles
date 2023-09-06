@@ -89,7 +89,7 @@
                             },
                             "marks": [],
                             "name": "Slack",
-                            "percent": 0.333333333333333,
+                            "percent": 0.5,
                             "swallows": [
                                 {
                                     "class": "^Slack$"
@@ -109,30 +109,10 @@
                             },
                             "marks": [],
                             "name": "Chromium",
-                            "percent": 0.333333333333333,
+                            "percent": 0.5,
                             "swallows": [
                                 {
                                     "class": "^Chromium$"
-                                }
-                            ],
-                            "type": "con"
-                        },
-                        {
-                            "border": "pixel",
-                            "current_border_width": 2,
-                            "floating": "auto_off",
-                            "geometry": {
-                               "height": 336,
-                               "width": 3432,
-                               "x": 4,
-                               "y": 167
-                            },
-                            "marks": [],
-                            "name": "Signal",
-                            "percent": 0.333333333333333,
-                            "swallows": [
-                                {
-                                    "class": "^Signal$"
                                 }
                             ],
                             "type": "con"
