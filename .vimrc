@@ -222,6 +222,7 @@ set diffopt+=vertical
 let g:mkdp_auto_close = 0
 
 " Linters
+let g:ale_enabled = 0
 let g:ale_disable_lsp = 1 " coc's job
 let g:ale_python_flake8_options="--max-line-length=160"
 let g:ale_echo_msg_format = '[%linter%] %code: %%s'
