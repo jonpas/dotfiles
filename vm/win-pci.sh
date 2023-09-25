@@ -316,11 +316,11 @@ fi
 # USB Controllers
 if [ "$ENABLE_PASSTHROUGH_USB_PCIE_CARD" = true ]; then
     rebind $PCI_USB_PCIE_CARD vfio-pci
-    OPTS+=(-device vfio-pci,host=05:00.0,bus=root1,addr=01.0)
+    OPTS+=(-device vfio-pci,host=05:00.0,bus=root1,addr=00.2)
 fi
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
     rebind $PCI_USB_CONTROLLER vfio-pci
-    OPTS+=(-device vfio-pci,host=0f:00.3,bus=root1,addr=02.0)
+    OPTS+=(-device vfio-pci,host=0f:00.3,bus=root1,addr=00.3)
 fi
 
 # USB devices (connected to USB PCIe Card)
@@ -343,7 +343,7 @@ fi
 # Sound
 if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
     rebind $PCI_AUDIO vfio-pci
-    OPTS+=(-device vfio-pci,host=00:0d.0,bus=root1,addr=05.0)
+    OPTS+=(-device vfio-pci,host=00:0d.0,bus=root1,addr=00.5)
 else
     if [ "$ENABLE_LOOKINGGLASS" = true ]; then
         # Spice
