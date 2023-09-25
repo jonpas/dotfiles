@@ -214,15 +214,13 @@ if [ "$WIN11_INSTALL" = true ]; then
     fi
 fi
 
-# PCIe Root Port
-OPTS+=(-device pcie-root-port,chassis=0,bus=pcie.0,slot=0,id=root1)
-
 # GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
     rebind $PCI_GPU_VIDEO vfio-pci true
-    OPTS+=(-device vfio-pci,host=$(echo $PCI_GPU_VIDEO | cut -c 6-),bus=root1,addr=00.0,multifunction=on)
     rebind $PCI_GPU_AUDIO vfio-pci true
-    OPTS+=(-device vfio-pci,host=$(echo $PCI_GPU_AUDIO | cut -c 6-),bus=root1,addr=00.1)
+    OPTS+=(-device pcie-root-port,chassis=0,bus=pcie.0,slot=0,id=pci0)
+    OPTS+=(-device vfio-pci,host=$(echo $PCI_GPU_VIDEO | cut -c 6-),bus=pci0,addr=00.0,multifunction=on)
+    OPTS+=(-device vfio-pci,host=$(echo $PCI_GPU_AUDIO | cut -c 6-),bus=pci0,addr=00.1)
 fi
 
 if [ "$ENABLE_QEMU_GPU" = true ]; then
@@ -316,11 +314,13 @@ fi
 # USB Controllers
 if [ "$ENABLE_PASSTHROUGH_USB_PCIE_CARD" = true ]; then
     rebind $PCI_USB_PCIE_CARD vfio-pci
-    OPTS+=(-device vfio-pci,host=05:00.0,bus=root1,addr=00.2)
+    OPTS+=(-device pcie-root-port,chassis=0,bus=pcie.0,slot=1,id=pci1)
+    OPTS+=(-device vfio-pci,host=05:00.0,bus=pci1,addr=00.0)
 fi
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
     rebind $PCI_USB_CONTROLLER vfio-pci
-    OPTS+=(-device vfio-pci,host=0f:00.3,bus=root1,addr=00.3)
+    OPTS+=(-device pcie-root-port,chassis=0,bus=pcie.0,slot=2,id=pci2)
+    OPTS+=(-device vfio-pci,host=0f:00.3,bus=pci2,addr=00.0)
 fi
 
 # USB devices (connected to USB PCIe Card)
@@ -343,7 +343,8 @@ fi
 # Sound
 if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
     rebind $PCI_AUDIO vfio-pci
-    OPTS+=(-device vfio-pci,host=00:0d.0,bus=root1,addr=00.5)
+    OPTS+=(-device pcie-root-port,chassis=0,bus=pcie.0,slot=3,id=pci3)
+    OPTS+=(-device vfio-pci,host=00:0d.0,bus=pci3,addr=00.0)
 else
     if [ "$ENABLE_LOOKINGGLASS" = true ]; then
         # Spice
