@@ -115,7 +115,8 @@ OPTS=(-enable-kvm)
 
 # General
 # `bcdedit.exe /set useplatformclock true` enables HPET timer in Windows and introduces stuttering (most noticable with mouse input over barrier)
-OPTS+=(-machine type=q35,kernel_irqchip=on,hpet=off) # 'kernel_irqchip=on' for qemu >=4.0
+# keep HPET enabled in QEMU, otherwise we get high idle CPU usage [does not drop clocks] (but disabled in Windows for above reason)
+OPTS+=(-machine type=q35,kernel_irqchip=on,hpet=on) # 'kernel_irqchip=on' for qemu >=4.0
 # Windows uses localtime by default, set UTC: reg add "HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\TimeZoneInformation" /v RealTimeIsUniversal /d 1 /t REG_DWORD /f
 OPTS+=(-rtc driftfix=slew)
 
