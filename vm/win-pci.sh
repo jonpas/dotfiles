@@ -8,6 +8,7 @@ ENABLE_PASSTHROUGH_WHEEL=false # Separate from other USB devices
 ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
 ENABLE_EVDEV_MOUSE=false
 ENABLE_PASSTHROUGH_GPU=true
+ENABLE_RESIZE_GPU_BAR0=false # works natively with full ReBAR in QEMU 8.2
 ENABLE_QEMU_GPU=true # Integrated QEMU GPU
 ENABLE_HUGEPAGES=true
 ENABLE_LOOKINGGLASS=true
@@ -37,7 +38,10 @@ rebind() {
 rebind_gpu() {
     driver="$1"
 
-    if [ "$driver" = "nvidia" ]; then
+    if [ "$driver" = "none" ]; then
+        rebind $PCI_GPU_VIDEO none
+        rebind $PCI_GPU_VIDEO none
+    elif [ "$driver" = "nvidia" ]; then
         rebind $PCI_GPU_VIDEO nvidia
         rebind $PCI_GPU_AUDIO snd_hda_intel
     elif [ "$driver" = "nouveau" ]; then
@@ -47,8 +51,8 @@ rebind_gpu() {
         rebind $PCI_GPU_VIDEO amdgpu
         rebind $PCI_GPU_AUDIO snd_hda_intel
     elif [ "$driver" = "vfio" ] || [ "$driver" = "vfio-pci" ]; then
-        rebind $PCI_GPU_VIDEO vfio-pci true
-        rebind $PCI_GPU_AUDIO vfio-pci true
+        rebind $PCI_GPU_VIDEO vfio-pci
+        rebind $PCI_GPU_AUDIO vfio-pci
     else
         echo "Unknown GPU driver!"
     fi
@@ -68,7 +72,7 @@ usage() {
     echo "[-n <true/false>] nested virtualization"
     echo "[-m <gigabytes>] memory"
     echo "[-g <true/false>] use Looking Glass"
-    echo "[-r <vfio/amd/amdgpu/nvidia/nouveau>] set pass-through GPU driver"
+    echo "[-r <vfio/amd/amdgpu/nvidia/nouveau/none>] set pass-through GPU driver"
     exit 1
 }
 
@@ -217,8 +221,15 @@ fi
 
 # GPU
 if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
-    rebind $PCI_GPU_VIDEO vfio-pci true
-    rebind $PCI_GPU_AUDIO vfio-pci true
+    if [ "$ENABLE_RESIZE_GPU_BAR0" = true ]; then
+        # https://forum.level1techs.com/t/new-looking-glass-beta-7-release-candidate-1/208250/3
+        rebind $PCI_GPU_VIDEO none # just unbind
+        echo 14 > /sys/bus/pci/devices/$PCI_GPU_VIDEO/resource0_resize # BAR0 to 16GB
+        echo "GPU Resize BAR0: $(sudo lspci -s $PCI_GPU_VIDEO -vv | grep 'BAR 0')"
+    fi
+
+    rebind $PCI_GPU_VIDEO vfio-pci
+    rebind $PCI_GPU_AUDIO vfio-pci
     OPTS+=(-device pcie-root-port,chassis=0,bus=pcie.0,slot=0,id=pci0)
     OPTS+=(-device vfio-pci,host=$(echo $PCI_GPU_VIDEO | cut -c 6-),bus=pci0,addr=00.0,multifunction=on)
     OPTS+=(-device vfio-pci,host=$(echo $PCI_GPU_AUDIO | cut -c 6-),bus=pci0,addr=00.1)
@@ -383,10 +394,10 @@ fi
 
 # USB
 if [ "$ENABLE_PASSTHROUGH_USB_PCIE_CARD" = true ]; then
-    rebind $PCI_USB_PCIE_CARD xhci_hcd true # remove ID
+    rebind $PCI_USB_PCIE_CARD xhci_hcd
 fi
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
-    rebind $PCI_USB_CONTROLLER xhci_hcd true # remove ID
+    rebind $PCI_USB_CONTROLLER xhci_hcd
 fi
 
 # Sound
