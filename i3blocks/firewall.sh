@@ -3,7 +3,7 @@
 color="#b8bb26"
 firewall=""
 
-enabled=$(ag ENABLED /etc/ufw/ufw.conf | cut -c 3-)
+enabled=$(ag ENABLED /etc/ufw/ufw.conf)
 service=$(systemctl status ufw | ag active | awk '{print $2}')
 
 if [ $enabled != "ENABLED=yes" ] || [ $service != "active" ]; then
