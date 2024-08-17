@@ -188,8 +188,8 @@ OPTS+=(-device scsi-hd,drive=drive1,bus=scsi0.0,rotation_rate=1) # TODO PCI Pass
 # Convert qcow2 to raw: qemu-img convert -p -O raw source.qcow2 target.img -o preallocation=full
 # Resize image: qemu-img resize -f raw --preallocation=full source.img +5G
 #OPTS+=(-device virtio-scsi-pci,id=scsi1)
-#OPTS+=(-drive file=/home/jonpas/Data/images/vm/data.img,format=raw,index=2,media=disk,if=none,aio=native,cache=none,id=drive2)
-#OPTS+=(-device scsi-hd,drive=drive2,bus=scsi1.0,rotation_rate=7200)
+OPTS+=(-drive file=/home/jonpas/images/vm/fast-virt.img,format=raw,index=2,media=disk,if=none,aio=native,cache=none,id=drive2)
+OPTS+=(-device scsi-hd,drive=drive2,bus=scsi0.0,rotation_rate=1)
 
 OPTS+=(-drive file=/home/jonpas/images/windows.iso,index=3,media=cdrom)
 OPTS+=(-drive file=/home/jonpas/images/virtio-win.iso,index=4,media=cdrom)
