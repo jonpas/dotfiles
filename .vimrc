@@ -1,5 +1,8 @@
 let mapleader=","
 
+" Packages
+packadd! editorconfig
+
 " Plugins
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !mkdir -p '~/.vim/autoload'
@@ -12,7 +15,6 @@ call plug#begin('~/.vim/plugged')
 
 " base
 Plug 'tpope/vim-sensible'
-Plug 'editorconfig/editorconfig-vim'
 
 " style
 Plug 'jonpas/gruvbox', { 'branch': 'jonpas' }
@@ -37,6 +39,7 @@ Plug 'othree/xml.vim', { 'for': 'xml' }
 Plug 'rust-lang/rust.vim', { 'for': ['rust', 'rhai'] }
 Plug 'cespare/vim-toml', { 'for': 'toml', 'branch': 'main' }
 Plug 'chrisbra/csv.vim', { 'for': 'csv' }
+Plug 'wuelnerdotexe/vim-astro'
 
 " language utility
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
