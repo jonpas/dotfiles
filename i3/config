@@ -327,7 +327,7 @@ for_window [class="(?i)gsimplecal"]                     floating enable, move po
 for_window [class="(?i)zenmonitor"]                     floating enable, move position mouse, move down $bar_height px
 for_window [title="Volume Control" class="pavucontrol"] floating enable
 for_window [title="Library" class="firefox"]            floating enable
-for_window [title="Steam - Update News", class="steam"] floating enable
+for_window [title="Steam - Update News" class="steam"] floating enable
 for_window [title="Music Player" class="Steam"]         floating enable
 for_window [title="Chat" class="Steam"]                 floating enable
 for_window [title="Steam Guard" class="Steam"]          floating enable
