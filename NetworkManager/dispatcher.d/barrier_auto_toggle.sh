@@ -7,11 +7,6 @@ fi
 
 case "$2" in
     up)
-        # Wait for nm-applet to start (during boot)
-        while [ -z $(pidof nm-applet) ]; do
-            sleep 3;
-        done
-
         su jonpas -c "barrierc --disable-crypto -d WARNING 192.168.178.30" # Barrier does not like IPv6
         ;;
     down)
