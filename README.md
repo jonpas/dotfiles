@@ -62,6 +62,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - NetworkManager/dispatcher.d/*
     - X11/* (VFIO)
     - X11/xorg.conf.d/*
+    - bluetooth/*
     - bumblebee/* (GPU)
     - default/*(-hostname) (~VFIO)
     - modprobe.d/* (~VFIO)
