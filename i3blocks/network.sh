@@ -4,7 +4,7 @@ wired_interfaces=(virbr0 enp6s0)
 wirless_interfaces=()
 
 if [ $(hostname) != "loki" ]; then
-    wired_interfaces=(enp0s25)
+    wired_interfaces=(enp0s31f6)
     wireless_interfaces=(wlp3s0)
 fi
 

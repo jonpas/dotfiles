@@ -51,7 +51,13 @@ border=#458588
 interval=1
 border=#a9a9a9
 
-[battery]
+[battery0]
+command=~/.config/i3blocks/battery.sh 0
+interval=30
+border=#8ec07c
+
+[battery1]
+command=~/.config/i3blocks/battery.sh 1
 interval=30
 border=#8ec07c
 

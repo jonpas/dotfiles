@@ -2,10 +2,10 @@
 # See fstab(5) for details.
 
 # <file system> <dir> <type> <options> <dump> <pass>
-# /dev/sda3
+# /dev/nvme0n1p2
 UUID=8491604f-781b-45b4-b481-57240b1310fb   /   ext4    rw,relatime,data=ordered    0 1
 
-# /dev/sda1
+# /dev/nvme0n1p1
 UUID=BB62-6346  /boot   vfat    rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,utf8,errors=remount-ro   0 2
 
 # / swapfile
