@@ -35,10 +35,15 @@ border=#689d6a
 interval=1
 border=#a89984
 
+[bluetooth]
+interval=5
+border=#458588
+
 [bandwidth]
 border=#458588
 
 [network]
+interval=5
 border=#458588
 
 [firewall]

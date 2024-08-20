@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ ! -z "${BLOCK_BUTTON}" ]; then
+    networkmanager_dmenu &
+fi
+
 wired_interfaces=(virbr0 enp6s0)
 wirless_interfaces=()
 

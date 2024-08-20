@@ -55,6 +55,8 @@ bindsym $mod+Shift+q kill
 # start rofi (a program launcher)
 bindsym $mod+d exec --no-startup-id rofi -show run -run-list-command ". ~/.config/i3/rofi-aliases.sh" -run-command "/bin/zsh -i -c '{cmd}'"
 bindsym $mod+Shift+d exec --no-startup-id rofi -show ssh
+bindsym $mod+b exec --no-startup-id rofi-bluetooth -i
+bindsym $mod+n exec --no-startup-id networkmanager_dmenu
 
 # change focus
 # vi-like
@@ -311,8 +313,8 @@ exec --no-startup-id ~/.config/i3/keyboard.sh
 # Notifications
 exec --no-startup-id dunst
 # Network Manager applet
-exec --no-startup-id nm-applet
-# Multiple monitors manager
+#exec --no-startup-id nm-applet
+# PolicyKit authentication agent
 exec --no-startup-id lxpolkit
 # USB automounter
 exec --no-startup-id udiskie -s
