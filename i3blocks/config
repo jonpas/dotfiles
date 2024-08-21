@@ -18,7 +18,7 @@ border=#a9a9a9
 
 [backlight]
 interval=once
-signal=1
+signal=6
 border=#d79921
 
 [boost]
@@ -68,7 +68,7 @@ border=#8ec07c
 
 [volume]
 interval=once
-signal=2
+signal=5
 border=#83a598
 
 [time]

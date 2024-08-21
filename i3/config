@@ -122,6 +122,7 @@ set $ws6 "6 "
 set $ws7 "7 "
 set $ws8 "8 "
 set $ws9 "9 "
+set $ws10 ""
 
 # workspace monitors (if available)
 workspace $ws0 output DVI-D-0
@@ -240,9 +241,10 @@ mode "$passthrough" {
 bindsym $mod+Pause mode "$passthrough"
 
 # Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
-set $bar_height 23
+set $bar_height 24
 bar {
-    status_command i3blocks
+    status_command i3status-rs ~/.config/i3/status/config-`hostname`.toml
+    #status_command i3blocks
     position top
     tray_output primary
     height $bar_height
@@ -274,11 +276,11 @@ smart_gaps on
 smart_borders on
 
 # Function Keys
-bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 5 -perceived && pkill -RTMIN+1 i3blocks
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5 -perceived && pkill -RTMIN+1 i3blocks
-bindsym XF86AudioRaiseVolume  exec --no-startup-id pamixer -i 5 && pkill -RTMIN+2 i3blocks
-bindsym XF86AudioLowerVolume  exec --no-startup-id pamixer -d 5 && pkill -RTMIN+2 i3blocks
-bindsym XF86AudioMute         exec --no-startup-id pamixer -t   && pkill -RTMIN+2 i3blocks
+bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 5 -perceived && pkill -RTMIN+6 i3blocks
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5 -perceived && pkill -RTMIN+6 i3blocks
+bindsym XF86AudioRaiseVolume  exec --no-startup-id pamixer -i 5 && pkill -RTMIN+5 i3blocks
+bindsym XF86AudioLowerVolume  exec --no-startup-id pamixer -d 5 && pkill -RTMIN+5 i3blocks
+bindsym XF86AudioMute         exec --no-startup-id pamixer -t   && pkill -RTMIN+5 i3blocks
 bindsym XF86AudioMicMute      exec --no-startup-id pamixer --default-source -t
 bindsym XF86AudioStop         exec --no-startup-id playerctl stop
 bindsym XF86AudioPause        exec --no-startup-id playerctl play-pause
@@ -312,8 +314,6 @@ exec --no-startup-id xrdb ~/.Xresources
 exec --no-startup-id ~/.config/i3/keyboard.sh
 # Notifications
 exec --no-startup-id dunst
-# Network Manager applet
-#exec --no-startup-id nm-applet
 # PolicyKit authentication agent
 exec --no-startup-id lxpolkit
 # USB automounter
@@ -329,7 +329,7 @@ for_window [class="(?i)gsimplecal"]                     floating enable, move po
 for_window [class="(?i)zenmonitor"]                     floating enable, move position mouse, move down $bar_height px
 for_window [title="Volume Control" class="pavucontrol"] floating enable
 for_window [title="Library" class="firefox"]            floating enable
-for_window [title="Steam - Update News" class="steam"] floating enable
+for_window [title="Steam - Update News" class="steam"]  floating enable
 for_window [title="Music Player" class="Steam"]         floating enable
 for_window [title="Chat" class="Steam"]                 floating enable
 for_window [title="Steam Guard" class="Steam"]          floating enable
@@ -340,5 +340,7 @@ for_window [title="Figure*" class="(?i)matplotlib"]     floating enable
 for_window [class="(?i)zoom"]                           floating enable
 for_window [class="Evolution"]                          floating enable, focus mode_toggle
 for_window [title="bc" class="kitty"]                   floating enable, resize set 300 px 300 px
+for_window [class="Spotify"]                            move container to workspace $ws10
+for_window [class="Spotify" urgent=latest]              focus
 # Prevent i3 crash
 for_window [title="Discord Updater" class="discord"]    floating disable
