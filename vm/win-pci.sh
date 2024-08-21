@@ -72,11 +72,12 @@ usage() {
     echo "[-n <true/false>] nested virtualization"
     echo "[-m <gigabytes>] memory"
     echo "[-g <true/false>] use Looking Glass"
+    echo "[-b <true/false>] boot virtio disk"
     echo "[-r <vfio/amd/amdgpu/nvidia/nouveau/none>] set pass-through GPU driver"
     exit 1
 }
 
-while getopts 'hp:c:w:a:k:e:n:m:g:r' flag; do
+while getopts 'hp:c:w:a:k:e:n:m:g:b:r' flag; do
     case "${flag}" in
         h) usage ;;
         p) ENABLE_HUGEPAGES=${OPTARG} ;;
@@ -88,6 +89,7 @@ while getopts 'hp:c:w:a:k:e:n:m:g:r' flag; do
         n) ENABLE_NESTED_VIRT=${OPTARG} ;;
         m) MEMORY=${OPTARG} ;;
         g) ENABLE_LOOKINGGLASS=${OPTARG} ;;
+        b) BOOT_VIRTIO=${OPTARG} ;;
         r) rebind_gpu $2 ;;
         *) usage ;;
     esac
