@@ -39,7 +39,6 @@ Plug 'othree/xml.vim', { 'for': 'xml' }
 Plug 'rust-lang/rust.vim', { 'for': ['rust', 'rhai'] }
 Plug 'cespare/vim-toml', { 'for': 'toml', 'branch': 'main' }
 Plug 'chrisbra/csv.vim', { 'for': 'csv' }
-Plug 'itspriddle/vim-shellcheck'
 Plug 'wuelnerdotexe/vim-astro'
 
 " language utility
