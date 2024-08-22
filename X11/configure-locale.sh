@@ -1,9 +1,15 @@
 #!/bin/bash
 
-# Run to setup keyboard config files, saves to:
+# Run to setup locale and keymap config files
+
+# Locale saves to:
+# - /etc/locale.conf
+localectl set-locale LANG=en_US.UTF-8 LC_TIME=en_GB.UTF-8
+
+# Keyboard layout saves to:
 # - /etc/X11/xorg.conf.d/00-keyboard.conf
 # - /etc/vconsole.conf
-localectl set-x11-keymap si logitech_g15 "" caps:escape
+localectl set-x11-keymap si "" "" caps:escape
 
 # G710 keys - set by xkb: /usr/share/X11/xkb/symbols/inet
 # keycode 192 = XF86Launch5
