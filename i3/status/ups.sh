@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pwrstat="$(sudo pwrstat -status)"
+pwrstat="$(pwrstat -status)"
 load=$(echo "$pwrstat" | grep -oP "Load\.* \K[0-9]*")
 pwrstate=$(echo "$pwrstat" | grep -oP "State\.* \K.*")
 battery=$(echo "$pwrstat" | grep -oP "Battery Capacity\.* \K[0-9]*")
