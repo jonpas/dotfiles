@@ -106,7 +106,7 @@ alias fsmaps='ranger ~/Work/TARGET/Mappings'
 # Signal on yay exit (i3block)
 yay() {
     command yay "$@" &&
-    pkill -RTMIN+4 i3blocks
+    pkill -RTMIN+4 i3status-rs
 }
 
 # GPU Offload

@@ -378,7 +378,7 @@ fi
 
 
 # VM START
-pkill -RTMIN+3 i3blocks
+pkill -RTMIN+3 i3status-rs
 echo "OPTS:${OPTS[@]}"
 qemu-system-x86_64 "${OPTS[@]}"
 
@@ -413,5 +413,5 @@ if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
     rebind $PCI_GPU_AUDIO snd_hda_intel
 fi
 
-pkill -RTMIN+3 i3blocks
+pkill -RTMIN+3 i3status-rs
 exit 0

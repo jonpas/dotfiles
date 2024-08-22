@@ -45,7 +45,7 @@ fi
 
 function __update() {
     yay "$@" &&
-    pkill -RTMIN+4 i3blocks
+    pkill -RTMIN+4 i3status-rs
 }
 alias yay='__update'
 

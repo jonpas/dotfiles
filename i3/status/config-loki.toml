@@ -79,7 +79,7 @@ action = "seek_backward"
 
 [[block]]
 block = "sound"
-signal = 5
+signal = 2
 max_vol = 100
 show_volume_when_muted = true
 
