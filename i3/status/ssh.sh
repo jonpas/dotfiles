@@ -1,14 +1,14 @@
 #!/bin/bash
 
-state="Good"
+state="Idle"
 connections=$(ss | grep ^tcp | awk '$5 ~ /ssh/' | wc -l)
 
 if [ $connections -gt 0 ]; then
-    state="Warning"
+    state="Info"
 fi
 
 if [ $connections -gt 1 ]; then
-    state="Critical"
+    state="Warning"
 fi
 
 echo {\"state\": \"$state\", \"text\": \"SSH $connections\"}

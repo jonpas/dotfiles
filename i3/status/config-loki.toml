@@ -1,32 +1,24 @@
 [theme]
-theme = "gruvbox-dark"
+theme = "slick"
 [theme.overrides]
 idle_bg = "#282828"
-#idle_fg = "#ebdbb2" # idle == normal
-idle_fg = "#a9a9a9"
-#idle_fg = "#d3d3d3"
+idle_fg = "#ebdbb2"
 info_bg = "#282828"
-info_fg = "#ebdbb2"
-#info_fg = "#a9a9a9" # info == indicator
-warning_bg = "#282828"
-warning_fg = "#d79921"
 good_bg = "#282828"
 good_fg = "#b8bb26"
-critical_bg = "#282828"
-critical_fg = "#fb4934"
-separator = " ⧸ "
-separator_bg = "#282828"
-separator_fg = "#00000000"
+separator = "<span font='16'></span>"
 
 [icons]
 icons = "awesome4"
 [icons.overrides]
 net_vpn = ""
-firewall = "\uf132"
-windows = "\uf17a"
-eye = "\uf06e"
-eye_slash = "\uf070"
-terminal = "\uf120"
+bluetooth = ""
+# new
+firewall = ""
+windows = ""
+eye = ""
+eye_slash = ""
+terminal = ""
 
 [[block]]
 block = "privacy"
@@ -45,7 +37,7 @@ aur_command = "yay -Qua"
 
 [[block]]
 block = "custom" # vm
-interval = 1
+interval = 5
 signal = 3
 command = "~/.config/i3/status/vm.sh"
 json = true
@@ -90,28 +82,27 @@ block = "sound"
 signal = 5
 max_vol = 100
 show_volume_when_muted = true
-[block.theme_overrides]
-idle_fg = { link = "info_fg" }
-
-#[[block]]
-#block = "custom" # cpu_boost
-#format = "  "
-#interval = "once"
-#command = "cpupower frequency-info -p | grep -o '\".*\"' | tr -d '\"'"
-#cycle = ["i3-sensible-terminal sudo cpupower frequency-set -g performance", "i3-sensible-terminal sudo cpupower frequency-set -g powersave"]
-#[[block.click]]
-#button = "left"
-#action = "cycle"
 
 [[block]]
 block = "cpu"
 interval = 1
+format = " $icon $utilization "
+format_alt = " $icon $frequency{ $boost|} "
 info_cpu = 50
 warning_cpu = 85
 critical_cpu = 100
-[[block.click]]
-button = "right"
-cmd = "~/.config/i3blocks/boost.sh"
+merge_with_next = true
+
+[[block]]
+block = "toggle" # cpu governor (performance)
+format = " $icon "
+command_on = "i3-sensible-terminal sudo cpupower frequency-set -g performance"
+command_off = "i3-sensible-terminal sudo cpupower frequency-set -g powersave"
+command_state = "cpupower frequency-info -p | grep -o '\".*\"' | tr -d '\"' | grep performance"
+icon_on = "cpu_boost_on"
+icon_off = "cpu_boost_off"
+state_on = "good"
+state_off = "idle"
 
 [[block]]
 block = "memory"
@@ -130,17 +121,18 @@ warning = 95
 
 [[block]]
 block = "net"
-device = "virbr0|enp6s0"
+device = "^(virbr0|enp6s0)$"
 interval = 2
-format = " ^icon_net_down $speed_down.eng(p:K,hide_unit:true) ^icon_net_up $speed_up.eng(p:K,hide_unit:true)  $icon {$ip |N/A }"
-format_alt = " ^icon_net_down $speed_down.eng(p:K,hide_unit:true) ^icon_net_up $speed_up.eng(p:K,hide_unit:true)  $icon $device"
+format = " $icon ^icon_net_down $speed_down.eng(p:K,hide_unit:true) ^icon_net_up $speed_up.eng(p:K,hide_unit:true) "
+format_alt = " $icon {$ip |N/A }($device) "
 inactive_format = " $icon  "
 missing_format = " $icon × "
 [[block.click]]
-button = "right"
+button = "left"
 cmd = "networkmanager_dmenu"
-[block.theme_overrides]
-idle_fg = { link = "info_fg" }
+[[block.click]]
+button = "right"
+action = "toggle_format"
 
 [[block]]
 block = "vpn"
@@ -162,7 +154,7 @@ merge_with_next = true
 
 [[block]]
 block = "custom" # ssh
-interval = 10
+interval = 5
 command = "~/.config/i3/status/ssh.sh"
 json = true
 [[block.click]]
@@ -187,5 +179,3 @@ short = " $timestamp.datetime(f:%R) "
 [[block.click]]
 button = "left"
 cmd = "gsimplecal"
-[block.theme_overrides]
-idle_fg = { link = "info_fg" }

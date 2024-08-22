@@ -9,7 +9,7 @@ state="Idle"
 # Win VM
 if pgrep "win-pci" > /dev/null; then
     vm=" "
-    state="Info"
+    state="Idle"
 fi
 
 # GPU Pass-Through
@@ -18,7 +18,7 @@ aud_drv=$(lspci -s 0c:00.1 -k | awk -F': ' '/Kernel driver in use/{print tolower
 
 if [ "$gpu_drv" == "vfio-pci" ] && [ "$aud_drv" == "vfio-pci" ]; then
     gpu+="VFIO"
-    state="Info"
+    state="Idle"
 elif [[ ("$gpu_drv" == "nvidia" || "$gpu_drv" == "nouveau" || "$gpu_drv" == "amdgpu") && "$aud_drv" == "snd_hda_intel" ]]; then
     gpu+="HOST"
 else

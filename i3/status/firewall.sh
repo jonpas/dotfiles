@@ -1,6 +1,6 @@
 #!/bin/bash
 
-state="Good"
+state="Idle"
 
 enabled=$(ag ENABLED /etc/ufw/ufw.conf)
 service=$(systemctl status ufw | ag active | awk '{print $2}')
