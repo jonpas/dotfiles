@@ -1,0 +1,213 @@
+[theme]
+theme = "gruvbox-dark"
+[theme.overrides]
+idle_bg = "#282828"
+#idle_fg = "#ebdbb2" # idle == normal
+idle_fg = "#a9a9a9"
+#idle_fg = "#d3d3d3"
+info_bg = "#282828"
+info_fg = "#ebdbb2"
+#info_fg = "#a9a9a9" # info == indicator
+warning_bg = "#282828"
+warning_fg = "#d79921"
+good_bg = "#282828"
+good_fg = "#b8bb26"
+critical_bg = "#282828"
+critical_fg = "#fb4934"
+separator = " ⧸ "
+separator_bg = "#282828"
+separator_fg = "#00000000"
+
+[icons]
+icons = "awesome4"
+[icons.overrides]
+net_vpn = ""
+bluetooth = "\uf293"
+# new
+firewall = "\uf132"
+windows = "\uf17a"
+eye = "\uf06e"
+eye_slash = "\uf070"
+terminal = "\uf120"
+
+[[block]]
+block = "privacy"
+[[block.driver]]
+name = "v4l"
+[[block.driver]]
+name = "pipewire"
+display = "nickname"
+
+[[block]]
+block = "packages"
+interval = 3600
+signal = 4
+package_manager = ["pacman", "aur"]
+aur_command = "yay -Qua"
+
+#[[block]]
+#block = "custom" # vm
+#interval = 1
+#signal = 3
+#command = "~/.config/i3/status/vm.sh"
+#json = true
+#[[block.click]]
+#button = "left"
+#cmd = "i3-msg workspace 9 "
+
+[[block]]
+block = "docker"
+interval = 5
+error_format = ""
+
+[[block]]
+block = "backlight"
+signal = 6
+device = "intel_backlight"
+root_scaling = 3.0
+invert_icons = true
+
+[[block]]
+block = "music"
+format = "{ $icon $volume $combo.str(max_w:20) $prev $next |}"
+format_alt = "{ $icon $volume $combo $prev $next |}"
+separator = " | "
+[[block.click]]
+button = "left"
+action = "play_pause"
+[[block.click]]
+button = "middle"
+action = "toggle_format"
+[[block.click]]
+button = "right"
+cmd = "i3-msg workspace "
+[[block.click]]
+button = "up"
+action = "volume_up"
+[[block.click]]
+button = "down"
+action = "volume_down"
+[[block.click]]
+button = "forward"
+action = "seek_forward"
+[[block.click]]
+button = "back"
+action = "seek_backward"
+
+[[block]]
+block = "sound"
+signal = 5
+max_vol = 100
+show_volume_when_muted = true
+[block.theme_overrides]
+idle_fg = { link = "info_fg" }
+
+[[block]]
+block = "cpu"
+interval = 1
+info_cpu = 50
+warning_cpu = 85
+critical_cpu = 100
+[[block.click]]
+button = "right"
+cmd = "~/.config/i3blocks/boost.sh"
+
+[[block]]
+block = "memory"
+interval = 5
+format = " $icon $mem_used_percents.eng(w:1) "
+format_alt = " $icon_swap $swap_used_percents.eng(w:1) ($swap_used.eng(w:3,u:B,p:G,hide_unit:true)/$swap_total.eng(w:3,u:B,p:G,hide_unit:true)) "
+
+[[block]]
+block = "temperature"
+interval = 1
+format = " $icon {$max}C "
+chip = "coretemp-*"
+idle = 40
+info = 60
+warning = 70
+
+[[block]]
+block = "custom" # bluetooth (use rofi-bluetooth instead of block)
+interval = 5
+command = "~/.config/i3/status/bluetooth.sh"
+json = true
+[[block.click]]
+button = "left"
+cmd = "rofi-bluetooth -i"
+
+[[block]]
+block = "net"
+device = "virbr0|enp0s31f6"
+interval = 2
+format = " $icon ^icon_net_down $speed_down.eng(p:K,hide_unit:true) ^icon_net_up $speed_up.eng(p:K,hide_unit:true) "
+format_alt = " $icon {$ip |N/A }($device) "
+inactive_format = " $icon  "
+missing_format = " $icon × "
+[[block.click]]
+button = "left"
+cmd = "networkmanager_dmenu"
+[[block.click]]
+button = "right"
+action = "toggle_format"
+[block.theme_overrides]
+idle_fg = { link = "info_fg" }
+
+[[block]]
+block = "net"
+device = "wlp3s0"
+interval = 2
+format = " $icon {$signal_strength $ssid $frequency.eng(w:1)|} ^icon_net_down $speed_down.eng(p:K,hide_unit:true) ^icon_net_up $speed_up.eng(p:K,hide_unit:true) "
+format_alt = " $icon {$ip |N/A }($device) "
+inactive_format = " $icon  "
+missing_format = " $icon × "
+[[block.click]]
+button = "left"
+cmd = "networkmanager_dmenu"
+[[block.click]]
+button = "right"
+action = "toggle_format"
+[block.theme_overrides]
+idle_fg = { link = "info_fg" }
+
+[[block]]
+block = "vpn"
+driver = "nordvpn"
+interval = 10
+format_connected = " VPN $icon "
+format_disconnected = " VPN $icon "
+state_connected = "good"
+state_disconnected = "idle"
+merge_with_next = true
+
+[[block]]
+block = "custom" # firewall
+interval = 10
+format = " UFW $icon "
+command = "~/.config/i3/status/firewall.sh"
+json = true
+
+[[block]]
+block = "battery"
+interval = 10
+device = "BAT0"
+format = " $icon $percentage {($time) |}"
+merge_with_next = true
+
+[[block]]
+block = "battery"
+interval = 10
+device = "BAT1"
+format = " $icon $percentage {($time) |}"
+
+[[block]]
+block = "time"
+interval = 10
+[block.format]
+full = "  $timestamp.datetime(f:'%Y-%m-%d') $icon $timestamp.datetime(f:%R) "
+short = " $timestamp.datetime(f:%R) "
+[[block.click]]
+button = "left"
+cmd = "gsimplecal"
+[block.theme_overrides]
+idle_fg = { link = "info_fg" }
