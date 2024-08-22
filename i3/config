@@ -286,8 +286,10 @@ bindsym XF86AudioPause        exec --no-startup-id playerctl play-pause
 bindsym XF86AudioPlay         exec --no-startup-id playerctl play-pause
 bindsym XF86AudioPrev         exec --no-startup-id playerctl previous
 bindsym XF86AudioNext         exec --no-startup-id playerctl next
-bindsym XF86Launch1           exec i3-sensible-terminal -d "/run/media/$(whoami)" # ThinkVantage button on ThinkPad
-bindsym $mod+XF86Launch1      exec i3-sensible-terminal bc -lq
+bindsym XF86Launch1           exec i3-sensible-terminal -d "/run/media/$USER" # ThinkVantage button on ThinkPads
+bindsym XF86Tools             exec i3-sensible-terminal -d "/run/media/$USER" # Fn+F9 on T480
+bindsym XF86Favorites         exec i3-sensible-terminal bc -lq # Fn+F12 on T480
+#bindsym XF86Display          # TODO Display Extend/Clone # Fn+F7 on T480
 
 # Notifications (dunst)
 bindsym Ctrl+space          exec --no-startup-id dunstctl close
@@ -302,7 +304,7 @@ bindsym Ctrl+Print exec flameshot gui
 bindsym Ctrl+Shift+Print exec peek
 
 # Mount location (195 or XF86Launch5 = G710 'G1' key)
-bindsym XF86Launch5 exec i3-sensible-terminal -d "/run/media/$(whoami)"
+bindsym XF86Launch5 exec i3-sensible-terminal -d "/run/media/$USER"
 # Calculator (196 or XF86Launch6 = G710 'G2' key)
 bindsym XF86Launch6 exec i3-sensible-terminal bc -lq
 
