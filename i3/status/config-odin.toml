@@ -156,8 +156,23 @@ device = "^wlp3s0$"
 interval = 2
 format = " $icon {$signal_strength $ssid $frequency.eng(w:1)|} ^icon_net_down $speed_down.eng(p:K,hide_unit:true) ^icon_net_up $speed_up.eng(p:K,hide_unit:true) "
 format_alt = " $icon {$ip |N/A }($device) "
-inactive_format = " $icon  "
-missing_format = " $icon × "
+inactive_format = " ^icon_net_wireless  "
+missing_format = " ^icon_net_wireless × "
+[[block.click]]
+button = "left"
+cmd = "networkmanager_dmenu"
+[[block.click]]
+button = "right"
+action = "toggle_format"
+
+[[block]]
+block = "net"
+device = "^wwp0s20f0u6$"
+interval = 2
+format = " ^icon_net_cellular {$signal_strength $ssid $frequency.eng(w:1)|} ^icon_net_down $speed_down.eng(p:K,hide_unit:true) ^icon_net_up $speed_up.eng(p:K,hide_unit:true) "
+format_alt = " $icon_net_cellular {$ip |N/A }($device) "
+inactive_format = " ^icon_net_cellular  "
+missing_format = " ^icon_net_cellular × "
 [[block.click]]
 button = "left"
 cmd = "networkmanager_dmenu"
