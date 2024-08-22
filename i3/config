@@ -314,8 +314,6 @@ exec --no-startup-id dunst
 exec --no-startup-id lxpolkit
 # USB automounter
 exec --no-startup-id udiskie -s
-# Screenshot
-exec --no-startup-id flameshot
 
 # Window Settings
 for_window [window_role="About"]                        floating enable
