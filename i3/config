@@ -297,20 +297,17 @@ bindsym Ctrl+cedilla        exec --no-startup-id dunstctl history-pop
 # Lock
 bindsym $mod+Ctrl+l exec --no-startup-id $lock
 # Screenshot (flameshot)
-bindsym Ctrl+Print exec --no-startup-id flameshot gui
+bindsym Ctrl+Print exec flameshot gui
 # Screen record (peek)
-bindsym Ctrl+Shift+Print exec --no-startup-id peek
+bindsym Ctrl+Shift+Print exec peek
 
-# Mount location (195 = G710 'G1' key)
-bindcode 192 exec i3-sensible-terminal -d "/run/media/$(whoami)"
-# Calculator (196 = G710 'G2' key)
-bindcode 193 exec i3-sensible-terminal bc -lq
+# Mount location (195 or XF86Launch5 = G710 'G1' key)
+bindsym XF86Launch5 exec i3-sensible-terminal -d "/run/media/$(whoami)"
+# Calculator (196 or XF86Launch6 = G710 'G2' key)
+bindsym XF86Launch6 exec i3-sensible-terminal bc -lq
 
 # Monitor
 exec --no-startup-id ~/.config/i3/boot.sh
-# Keyboard
-exec --no-startup-id xrdb ~/.Xresources
-exec --no-startup-id ~/.config/i3/keyboard.sh
 # Notifications
 exec --no-startup-id dunst
 # PolicyKit authentication agent

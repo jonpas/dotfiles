@@ -3,6 +3,9 @@
 # Set monitor configuration (initially)
 . ~/.config/i3/monitor.sh
 
+# Set X11 resources (cursor size) - after xrandr
+xrdb ~/.Xresources
+
 if [ $(hostname) = "loki" ]; then
     # Start Barrier server
     . ~/dotfiles/barrier/barriers.sh &
