@@ -151,10 +151,6 @@ __base_school='~/Work/School/FERI-RIT'
 
 alias jL='cd ~/Work/Linux'
 alias jS="cd $__base_school"
-alias jST="cd $__base_school/Tasks/MAG-2-1"
-alias jST2="cd $__base_school/Tasks/MAG-2-2"
-alias jSD="cd $__base_school/Data/MAG-2-1"
-alias jSD2="cd $__base_school/Data/MAG-2-2"
 alias jSP="cd $__base_school/Projects/MAG"
 alias jSF="cd $__base_school/Theses/MAG"
 alias jA3='cd ~/Work/Arma\ 3'
@@ -163,6 +159,5 @@ alias jA3T='cd ~/Work/Arma\ 3/Tools'
 alias jIDI='cd ~/Work/IDI'
 
 if [ $(hostname) = "odin" ]; then
-    alias pullS="rsync -azP --delete loki:$__base_school/Data loki:$__base_school/Theses $__base_school/"
-    alias pushS="rsync -azP --delete $__base_school/Data $__base_school/Theses loki:$__base_school/"
+    alias vm='sudo ~/dotfiles/vm/win-gvt.sh'
 fi
