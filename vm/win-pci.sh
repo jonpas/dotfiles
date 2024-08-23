@@ -40,7 +40,7 @@ rebind_gpu() {
 
     if [ "$driver" = "none" ]; then
         rebind $PCI_GPU_VIDEO none
-        rebind $PCI_GPU_VIDEO none
+        rebind $PCI_GPU_AUDIO none
     elif [ "$driver" = "nvidia" ]; then
         rebind $PCI_GPU_VIDEO nvidia
         rebind $PCI_GPU_AUDIO snd_hda_intel
@@ -189,7 +189,6 @@ OPTS+=(-device scsi-hd,drive=drive1,bus=scsi0.0,rotation_rate=1) # TODO PCI Pass
 # Create image: qemu-img create -f raw name.img 10G -o preallocation=full (-o cluster_size=16K for qcow2)
 # Convert qcow2 to raw: qemu-img convert -p -O raw source.qcow2 target.img -o preallocation=full
 # Resize image: qemu-img resize -f raw --preallocation=full source.img +5G
-#OPTS+=(-device virtio-scsi-pci,id=scsi1)
 OPTS+=(-drive file=/home/jonpas/images/vm/fast-virt.img,format=raw,index=2,media=disk,if=none,aio=native,cache=none,id=drive2)
 OPTS+=(-device scsi-hd,drive=drive2,bus=scsi0.0,rotation_rate=1)
 
@@ -203,9 +202,7 @@ OPTS+=(-drive file=/home/jonpas/images/virtio-win.iso,index=4,media=cdrom)
 # dism /image:c:\ /add-driver /driver:v:\vioscsi\w11\amd64\vioscsi.inf
 
 # Network
-OPTS+=(-net none)
-OPTS+=(-net nic,model=virtio) # 'virtio' may cause connection drop after a while without 'fix_virtio' patch (in qemu >=4.0)
-OPTS+=(-net bridge,br=virbr0) # -net user #,smb=/home/jonpas/Storage/"
+OPTS+=(-nic bridge,model=virtio,br=virbr0) # -nic user,model=virtio,smb=/home/jonpas/Downloads/
 
 # TPM (Win11 requires TPM 2.0 for installation)
 if [ "$WIN11_INSTALL" = true ]; then
@@ -232,7 +229,7 @@ if [ "$ENABLE_PASSTHROUGH_GPU" = true ]; then
 
     rebind $PCI_GPU_VIDEO vfio-pci
     rebind $PCI_GPU_AUDIO vfio-pci
-    OPTS+=(-device pcie-root-port,chassis=0,bus=pcie.0,slot=0,id=pci0)
+    OPTS+=(-device pcie-root-port,chassis=0,bus=pcie.0,slot=0,id=pci0,hotplug=off)
     OPTS+=(-device vfio-pci,host=$(echo $PCI_GPU_VIDEO | cut -c 6-),bus=pci0,addr=00.0,multifunction=on)
     OPTS+=(-device vfio-pci,host=$(echo $PCI_GPU_AUDIO | cut -c 6-),bus=pci0,addr=00.1)
 fi
@@ -328,12 +325,12 @@ fi
 # USB Controllers
 if [ "$ENABLE_PASSTHROUGH_USB_PCIE_CARD" = true ]; then
     rebind $PCI_USB_PCIE_CARD vfio-pci
-    OPTS+=(-device pcie-root-port,chassis=0,bus=pcie.0,slot=1,id=pci1)
+    OPTS+=(-device pcie-root-port,chassis=0,bus=pcie.0,slot=1,id=pci1,hotplug=off)
     OPTS+=(-device vfio-pci,host=05:00.0,bus=pci1,addr=00.0)
 fi
 if [ "$ENABLE_PASSTHROUGH_USB_CONTROLLER" = true ]; then
     rebind $PCI_USB_CONTROLLER vfio-pci
-    OPTS+=(-device pcie-root-port,chassis=0,bus=pcie.0,slot=2,id=pci2)
+    OPTS+=(-device pcie-root-port,chassis=0,bus=pcie.0,slot=2,id=pci2,hotplug=off)
     OPTS+=(-device vfio-pci,host=0f:00.3,bus=pci2,addr=00.0)
 fi
 
@@ -357,7 +354,7 @@ fi
 # Sound
 if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
     rebind $PCI_AUDIO vfio-pci
-    OPTS+=(-device pcie-root-port,chassis=0,bus=pcie.0,slot=3,id=pci3)
+    OPTS+=(-device pcie-root-port,chassis=0,bus=pcie.0,slot=3,id=pci3,hotplug=off)
     OPTS+=(-device vfio-pci,host=00:0d.0,bus=pci3,addr=00.0)
 else
     if [ "$ENABLE_LOOKINGGLASS" = true ]; then
