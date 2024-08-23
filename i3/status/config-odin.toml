@@ -35,15 +35,15 @@ signal = 4
 package_manager = ["pacman", "aur"]
 aur_command = "yay -Qua"
 
-#[[block]]
-#block = "custom" # vm
-#interval = 1
-#signal = 3
-#command = "~/.config/i3/status/vm.sh"
-#json = true
-#[[block.click]]
-#button = "left"
-#cmd = "i3-msg workspace 9 "
+[[block]]
+block = "custom" # vm
+interval = 5
+signal = 3
+command = "~/.config/i3/status/vm.sh"
+json = true
+[[block.click]]
+button = "left"
+cmd = "i3-msg workspace 9 "
 
 [[block]]
 block = "docker"
@@ -202,6 +202,9 @@ block = "battery"
 interval = 10
 device = "BAT0"
 format = " $icon $percentage {($time) |}"
+full_format = " $icon $percentage "
+empty_format = " $icon $percentage "
+not_charging_format = " $icon $percentage "
 merge_with_next = true
 
 [[block]]
@@ -209,6 +212,9 @@ block = "battery"
 interval = 10
 device = "BAT1"
 format = " $icon $percentage {($time) |}"
+full_format = " $icon $percentage "
+empty_format = " $icon $percentage "
+not_charging_format = " $icon $percentage "
 
 [[block]]
 block = "time"
