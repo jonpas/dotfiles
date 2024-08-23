@@ -52,8 +52,8 @@ error_format = ""
 
 [[block]]
 block = "music"
-format = "{ $icon $volume $combo.str(max_w:20) $prev $next |}"
-format_alt = "{ $icon $volume $combo $prev $next |}"
+format = " $icon {$volume $combo.str(max_w:20) $prev $next |}"
+format_alt = " $icon {$volume $combo $prev $next |}"
 separator = " | "
 [[block.click]]
 button = "left"
