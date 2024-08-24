@@ -37,9 +37,9 @@ fi
 
 # Auto-start programs
 i3-sensible-terminal --title "Terminal: htop" htop &
+i3-sensible-terminal --title 'Terminal: VM' &
 
 if [ $(hostname) = "loki" ]; then
-    i3-sensible-terminal --title 'Terminal: VM' &
     firefox &
 
     i3-sensible-terminal --title "Terminal: sensors" watch -t "sensors zenpower-pci-00c3 -A | grep °C" &
