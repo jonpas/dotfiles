@@ -1,11 +1,12 @@
 #!/bin/bash
 
 # Arguments
-ENABLE_PASSTHROUGH_MOUSEKEYBOARD=false # Configuration or latency-free (will disable it in case of crash)
 ENABLE_PASSTHROUGH_USB_PCIE_CARD=true
+ENABLE_PASSTHROUGH_MOUSEKEYBOARD=false
 ENABLE_PASSTHROUGH_USB_CONTROLLER=false
 ENABLE_PASSTHROUGH_WHEEL=false # Separate from other USB devices
-ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues
+ENABLE_PASSTHROUGH_AUDIO=false # qemu-patched solves most issues / just use Looking Glass
+ENABLE_EVDEV_KEYBOARD=false
 ENABLE_EVDEV_MOUSE=false
 ENABLE_PASSTHROUGH_GPU=true
 ENABLE_RESIZE_GPU_BAR0=false # works natively with full ReBAR in QEMU 8.2
@@ -63,13 +64,9 @@ rebind_gpu() {
 usage() {
     echo "Windows GPU-Passthrough VM Start script."
     echo "[-h] help"
-    echo "[-p <true/false>] use huge pages ($ENABLE_HUGEPAGES)"
-    echo "[-c <true/false>] pass-through USB controller ($ENABLE_PASSTHROUGH_USB_CONTROLLER)"
-    echo "[-w <true/false>] pass-through wheel (in USB controller) ($ENABLE_PASSTHROUGH_WHEEL)"
-    echo "[-a <true/false>] pass-through audio ($ENABLE_PASSTHROUGH_AUDIO)"
-    echo "[-k <true/false>] pass-through mouse/keyboard ($ENABLE_PASSTHROUGH_MOUSEKEYBOARD)"
-    echo "[-e <true/false>] evdev pass-through mouse ($ENABLE_EVDEV_MOUSE)"
+    echo "[-c <true/false>] pass-through USB PCIe card ($ENABLE_PASSTHROUGH_USB_PCIE_CARD)"
     echo "[-n <true/false>] nested virtualization ($ENABLE_NESTED_VIRT)"
+    echo "[-p <true/false>] use huge pages ($ENABLE_HUGEPAGES)"
     echo "[-m <gigabytes>] memory ($MEMORY)"
     echo "[-g <true/false>] use Looking Glass ($ENABLE_LOOKINGGLASS)"
     echo "[-b <true/false>] boot virtio disk ($BOOT_VIRTIO)"
@@ -77,15 +74,11 @@ usage() {
     exit 1
 }
 
-while getopts 'hp:c:w:a:k:e:n:m:g:b:r' flag; do
+while getopts 'hp:c:n:m:g:b:r' flag; do
     case "${flag}" in
         h) usage ;;
         p) ENABLE_HUGEPAGES=${OPTARG} ;;
-        c) ENABLE_PASSTHROUGH_USB_CONTROLLER=${OPTARG} ;;
-        w) ENABLE_PASSTHROUGH_WHEEL=${OPTARG} ;;
-        a) ENABLE_PASSTHROUGH_AUDIO=${OPTARG} ;;
-        k) ENABLE_PASSTHROUGH_MOUSEKEYBOARD=${OPTARG} ;;
-        e) ENABLE_EVDEV_MOUSE=${OPTARG} ;;
+        c) ENABLE_PASSTHROUGH_USB_PCIE_CARD=${OPTARG} ;;
         n) ENABLE_NESTED_VIRT=${OPTARG} ;;
         m) MEMORY=${OPTARG} ;;
         g) ENABLE_LOOKINGGLASS=${OPTARG} ;;
@@ -315,7 +308,9 @@ else
     fi
 
     # evdev (lctrl + rctrl to swap, no macro keys)
-    OPTS+=(-object input-linux,id=kbd,evdev=/dev/input/by-id/usb-Logitech_Logitech_G710_Keyboard-event-kbd,grab_all=on,repeat=on) # Logitech G710 Keyboard
+    if [ "$ENABLE_EVDEV_KEYBOARD" = true ]; then
+        OPTS+=(-object input-linux,id=kbd,evdev=/dev/input/by-id/usb-Logitech_Logitech_G710_Keyboard-event-kbd,grab_all=on,repeat=on) # Logitech G710 Keyboard
+    fi
 
     if [ "$ENABLE_EVDEV_MOUSE" = true ]; then
         OPTS+=(-object input-linux,id=mouse,evdev=/dev/input/by-id/usb-Logitech_Gaming_Mouse_G502_117C37613432-event-mouse) # Logitech G502 Mouse

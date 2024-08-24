@@ -37,8 +37,8 @@ usage() {
     echo "Windows VM Start script."
     echo "[-h] help"
     echo "[-d <true/false>] use GVT-g GPU ($ENABLE_GVT_GPU)"
-    echo "[-p <true/false>] use huge pages ($ENABLE_HUGEPAGES)"
     echo "[-n <true/false>] nested virtualization ($ENABLE_NESTED_VIRT)"
+    echo "[-p <true/false>] use huge pages ($ENABLE_HUGEPAGES)"
     echo "[-m <gigabytes>] memory ($MEMORY)"
     echo "[-r <create/remove>] manage GVT-g"
     exit 1
