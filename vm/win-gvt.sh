@@ -249,7 +249,8 @@ OPTS+=(-device hda-micro,audiodev=spice)
 # VM START
 pkill -RTMIN+3 i3status-rs
 echo "OPTS:${OPTS[@]}"
-qemu-system-x86_64 "${OPTS[@]}"
+systemd-inhibit --what="sleep:handle-lid-switch" --who="win-gvt" --why="VM needs to be turned off" --mode="block" \
+    qemu-system-x86_64 "${OPTS[@]}"
 
 
 # VM DEINIT
