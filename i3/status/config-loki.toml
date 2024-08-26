@@ -92,6 +92,9 @@ info_cpu = 50
 warning_cpu = 85
 critical_cpu = 100
 merge_with_next = true
+[[block.click]]
+button = "right"
+cmd = "zenmonitor"
 
 [[block]]
 block = "toggle" # cpu governor (performance)
