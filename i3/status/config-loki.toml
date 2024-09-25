@@ -54,6 +54,7 @@ error_format = ""
 block = "music"
 format = " $icon {$volume $combo.str(max_w:20) $prev $next |}"
 format_alt = " $icon {$volume $combo $prev $next |}"
+player = ["spotify"]
 separator = " | "
 [[block.click]]
 button = "left"
