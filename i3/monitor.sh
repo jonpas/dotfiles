@@ -34,6 +34,7 @@ if [ $(hostname) = "loki" ]; then
             --output $p1 $c1 --pos 0x$(( 1080 - 285 )) --primary \
             --output $p2 $c2 --pos 3440x1080 \
             --output $p3 $c3 --pos 3440x0
+        dunstctl set-paused false
     elif [ "$layout" = "right" ]; then
         ddcutil $s1 setvcp $s1dp2 &
         ddcutil $s2 setvcp $s2hdmi &
@@ -42,6 +43,7 @@ if [ $(hostname) = "loki" ]; then
             --output $p1 --off \
             --output $p2 $c2 --pos 0x1080 --primary \
             --output $p3 $c3 --pos 0x0
+        dunstctl set-paused false
     elif [ "$layout" = "left" ]; then
         ddcutil $s1 setvcp $s1dp1 &
         ddcutil $s2 setvcp $s2dp &
@@ -50,6 +52,7 @@ if [ $(hostname) = "loki" ]; then
             --output $p1 $c1 --pos 0x$(( 1080 - 285 )) --primary \
             --output $p2 --off \
             --output $p3 $c3 --pos 3440x0
+        dunstctl set-paused false
     elif [ "$layout" = "up" ]; then
         ddcutil $s1 setvcp $s1dp2 &
         ddcutil $s2 setvcp $s2dp &
@@ -58,6 +61,7 @@ if [ $(hostname) = "loki" ]; then
             --output $p1 --off \
             --output $p2 --off \
             --output $p3 $c3 --pos 0x0 --primary
+        dunstctl set-paused false
     elif [ "$layout" = "down" ]; then
         ddcutil $s1 setvcp $s1dp1 &
         ddcutil $s2 setvcp $s2hdmi &
@@ -66,6 +70,16 @@ if [ $(hostname) = "loki" ]; then
             --output $p1 $c1 --pos 0x0 --primary \
             --output $p2 $c2 --pos 3440x285 \
             --output $p3 --off
+        dunstctl set-paused false
+    elif [ "$layout" = "movie" ]; then
+        ddcutil $s1 setvcp $s1dp1 &
+        ddcutil $s2 setvcp $s2hdmi &
+        ddcutil $s3 setvcp $s3dvi
+        xrandr $global \
+            --output $p1 $c1 --pos 0x0 --primary \
+            --output $p2 --off \
+            --output $p3 --off
+        dunstctl set-paused true
     fi
 fi
 
