@@ -1,6 +1,7 @@
 configuration {
     sorting-method: "fzf";
     kb-cancel: "Escape,Control+c";
+    kb-secondary-copy: "Control+Shift+c";
 }
 
 @theme "theme"
