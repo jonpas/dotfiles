@@ -91,7 +91,7 @@ alias rsyncnoperm="rsync -azPZ"
 
 alias cleandisk='yay -Sc && paccache -rk1 && sudo trash-empty --all-users'
 
-alias sysinfo='echo "" && neofetch'
+alias sysinfo='echo "" && fastfetch'
 alias weather='curl http://wttr.in/Lenart'
 alias vm='sudo ~/dotfiles/vm/win-pci.sh'
 alias ptt='sudo python ~/dotfiles/lib/ptt.py'
