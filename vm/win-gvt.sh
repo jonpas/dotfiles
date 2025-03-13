@@ -146,8 +146,8 @@ OPTS+=(-drive file=/home/jonpas/images/virtio-win.iso,index=4,media=cdrom)
 # dism /image:c:\ /add-driver /driver:v:\vioscsi\w11\amd64\vioscsi.inf
 
 # Network
-#OPTS+=(-nic user,model=virtio,smb=/home/jonpas/Downloads/)
-OPTS+=(-nic bridge,model=virtio,br=virbr0,mac=52:54:00:12:34:57)
+OPTS+=(-nic user,model=virtio,smb=/home/jonpas/Downloads/)
+#OPTS+=(-nic bridge,model=virtio,br=virbr0,mac=52:54:00:12:34:57)
 
 # TPM (Win11 requires TPM 2.0 for installation)
 if [ "$WIN11_INSTALL" = true ]; then
