@@ -117,6 +117,21 @@ gpu() {
 
 alias obs='vk_pro obs'  # AMD AMF (hardware encoder) with AMDGPU PRO
 
+# VNC screens
+vnc() {
+    display=3 # default 1080p display
+    if [ ! -z "$1" ]; then
+        display=$1
+    fi
+
+    displays=(
+        3440x1440+0+795
+        2560x1080+3440+1080
+        1920x1080+3440+0)
+    echo "Starting x1vnc with -clip ${displays[display]}"
+    x11vnc -display :0 -localhost -clip ${displays[display]}
+}
+
 # Require virtualenv for pip
 export PIP_REQUIRE_VIRTUALENV=true
 pip-global() {

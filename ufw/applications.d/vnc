@@ -1,0 +1,4 @@
+[VNC]
+title=VNC
+description=VNC
+ports=5900/tcp

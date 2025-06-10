@@ -82,9 +82,9 @@ ChallengeResponseAuthentication no
 UsePAM yes
 
 AllowAgentForwarding no #yes
-AllowTcpForwarding no #yes
+AllowTcpForwarding yes
 AllowStreamLocalForwarding no
-DisableForwarding yes
+DisableForwarding no
 GatewayPorts no
 X11Forwarding no
 #X11DisplayOffset 10
