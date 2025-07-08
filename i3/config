@@ -46,8 +46,8 @@ mouse_warping none
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
-# start a terminal (in current working directory)
-bindsym $mod+Shift+Return exec i3-sensible-terminal -d "$(xcwd)"
+# [set in kitty.conf, xcwd does not work in kitty or in wayland] start a terminal (in current working directory)
+#bindsym $mod+Shift+Return exec i3-sensible-terminal -d "$(xcwd)"
 
 # kill focused window
 bindsym $mod+Shift+q kill
