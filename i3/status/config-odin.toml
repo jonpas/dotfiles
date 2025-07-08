@@ -21,6 +21,15 @@ eye_slash = ""
 terminal = ""
 
 [[block]]
+block = "custom" # desktop
+interval = 5
+command = "~/.config/i3/status/desktop.sh"
+json = true
+[[block.click]]
+button = "left"
+cmd = "i3-sensible-terminal sudo chvt 2"
+
+[[block]]
 block = "privacy"
 [[block.driver]]
 name = "v4l"
