@@ -201,6 +201,14 @@ state_disconnected = "idle"
 merge_with_next = true
 
 [[block]]
+block = "custom" # meshnet
+interval = 5
+format = " MESH $icon "
+command = "~/.config/i3/status/meshnet.sh"
+json = true
+merge_with_next = true
+
+[[block]]
 block = "custom" # firewall
 interval = 10
 format = " UFW $icon "
