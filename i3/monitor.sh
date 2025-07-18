@@ -80,6 +80,9 @@ if [ $(hostname) = "loki" ]; then
             --output $p2 --off \
             --output $p3 --off
         dunstctl set-paused true
+        xset -dpms
+        xset s noblank
+        xset s off
     fi
 fi
 
