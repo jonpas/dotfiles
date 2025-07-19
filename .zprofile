@@ -6,5 +6,8 @@ if [[ -z $DISPLAY ]] && [[ "$(whoami)" = "jonpas" ]]; then
     elif [[ "$(tty)" = "/dev/tty2" ]] && [[ "$(hostname)" = "odin" ]]; then
         # KDE Plasma on Wayland
         /usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland && exit
+    elif [[ "$(tty)" = "/dev/tty3" ]]; then
+        # Sway on Wayland
+        exec sway && exit
     fi
 fi

@@ -1,0 +1,87 @@
+// vim:ts=4:sw=4:et
+{
+    // splitv split container with 2 children
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "percent": 1,
+    "type": "con",
+    "nodes": [
+        {
+            // splith split container with 2 children
+            "border": "pixel",
+            "floating": "auto_off",
+            "layout": "splith",
+            "percent": 0.1,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "name": "Terminal: htop",
+                    "percent": 0.5,
+                    "swallows": [
+                        {
+                            "class": "^kitty$",
+                            "title": "^Terminal\\:\\ htop$"
+                        }
+                    ],
+                    "type": "con"
+                },
+                {
+                    "border": "pixel",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "name": "Terminal: sensors",
+                    "percent": 0.25,
+                    "swallows": [
+                        {
+                            "class": "^kitty$",
+                            "title": "^Terminal\\:\\ sensors$"
+                        }
+                    ],
+                    "type": "con"
+                },
+                {
+                    "border": "pixel",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "name": "Terminal: VM",
+                    "percent": 0.25,
+                    "swallows": [
+                        {
+                            "class": "^kitty$",
+                            "title": "^Terminal\\:\\ VM$"
+                        }
+                    ],
+                    "type": "con"
+                }
+
+            ]
+        },
+        {
+            // splith split container with 1 children
+            "border": "pixel",
+            "floating": "auto_off",
+            "layout": "splith",
+            "percent": 0.9,
+            "type": "con",
+            "nodes": [
+                {
+                    "border": "pixel",
+                    "current_border_width": 2,
+                    "floating": "auto_off",
+                    "name": "terminal",
+                    "percent": 1,
+                    "swallows": [
+                       {
+                        "class": "^kitty$"
+                       }
+                    ],
+                    "type": "con"
+                }
+            ]
+        }
+    ]
+}

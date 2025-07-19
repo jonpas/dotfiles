@@ -1,0 +1,245 @@
+[theme]
+theme = "slick"
+[theme.overrides]
+idle_bg = "#282828"
+idle_fg = "#ebdbb2"
+info_bg = "#282828"
+good_bg = "#282828"
+good_fg = "#b8bb26"
+separator = "<span font='16'></span>"
+
+[icons]
+icons = "awesome4"
+[icons.overrides]
+net_vpn = ""
+bluetooth = ""
+# new
+firewall = ""
+windows = ""
+eye = ""
+eye_slash = ""
+terminal = ""
+
+[[block]]
+block = "custom" # desktop
+interval = 5
+command = "~/.config/sway/status/desktop.sh"
+json = true
+[[block.click]]
+button = "left"
+cmd = "$TERMINAL sudo chvt 2"
+
+[[block]]
+block = "privacy"
+[[block.driver]]
+name = "v4l"
+[[block.driver]]
+name = "pipewire"
+display = "nickname"
+
+[[block]]
+block = "packages"
+interval = 3600
+signal = 4
+package_manager = ["pacman", "aur"]
+aur_command = "yay -Qua"
+
+[[block]]
+block = "custom" # vm
+interval = 5
+signal = 3
+command = "~/.config/sway/status/vm.sh"
+json = true
+[[block.click]]
+button = "left"
+cmd = "swaymsg workspace 9 "
+
+[[block]]
+block = "docker"
+interval = 5
+error_format = ""
+
+[[block]]
+block = "backlight"
+signal = 1
+device = "intel_backlight"
+root_scaling = 3.0
+invert_icons = true
+
+[[block]]
+block = "music"
+format = " $icon {$volume $combo.str(max_w:20) $prev $next |}"
+format_alt = " $icon {$volume $combo $prev $next |}"
+player = ["spotify"]
+separator = " | "
+[[block.click]]
+button = "left"
+action = "play_pause"
+[[block.click]]
+button = "middle"
+action = "toggle_format"
+[[block.click]]
+button = "right"
+cmd = "swaymsg workspace "
+[[block.click]]
+button = "up"
+action = "volume_up"
+[[block.click]]
+button = "down"
+action = "volume_down"
+[[block.click]]
+button = "forward"
+action = "seek_forward"
+[[block.click]]
+button = "back"
+action = "seek_backward"
+
+[[block]]
+block = "sound"
+signal = 2
+max_vol = 100
+show_volume_when_muted = true
+
+[[block]]
+block = "cpu"
+interval = 1
+format = " $icon $utilization "
+format_alt = " $icon $frequency{ $boost|} "
+info_cpu = 50
+warning_cpu = 85
+critical_cpu = 100
+merge_with_next = true
+
+[[block]]
+block = "toggle" # cpu governor (performance)
+format = " $icon "
+command_on = "$TERMINAL sudo cpupower frequency-set -g performance"
+command_off = "$TERMINAL sudo cpupower frequency-set -g powersave"
+command_state = "cpupower frequency-info -p | grep -o '\".*\"' | tr -d '\"' | grep performance"
+icon_on = "cpu_boost_on"
+icon_off = "cpu_boost_off"
+state_on = "good"
+state_off = "idle"
+
+[[block]]
+block = "memory"
+interval = 5
+format = " $icon $mem_used_percents.eng(w:1) "
+format_alt = " $icon_swap $swap_used_percents.eng(w:1) ($swap_used.eng(w:3,u:B,p:G,hide_unit:true)/$swap_total.eng(w:3,u:B,p:G,hide_unit:true)) "
+
+[[block]]
+block = "temperature"
+interval = 1
+format = " $icon {$max}C "
+chip = "coretemp-*"
+idle = 40
+info = 60
+warning = 70
+
+[[block]]
+block = "custom" # bluetooth (use rofi-bluetooth instead of block)
+interval = 5
+command = "~/.config/sway/status/bluetooth.sh"
+json = true
+[[block.click]]
+button = "left"
+cmd = "rofi-bluetooth -i"
+
+[[block]]
+block = "net"
+device = "^(virbr0|enp0s31f6)$"
+interval = 2
+format = " $icon ^icon_net_down $speed_down.eng(p:K,hide_unit:true) ^icon_net_up $speed_up.eng(p:K,hide_unit:true) "
+format_alt = " $icon {$ip |N/A }($device) "
+inactive_format = " $icon  "
+missing_format = " $icon × "
+[[block.click]]
+button = "left"
+cmd = "networkmanager_dmenu"
+[[block.click]]
+button = "right"
+action = "toggle_format"
+
+[[block]]
+block = "net"
+device = "^wlp3s0$"
+interval = 2
+format = " $icon {$signal_strength $ssid $frequency.eng(w:4)|} ^icon_net_down $speed_down.eng(p:K,hide_unit:true) ^icon_net_up $speed_up.eng(p:K,hide_unit:true) "
+format_alt = " $icon {$ip |N/A }($device) "
+inactive_format = " ^icon_net_wireless  "
+missing_format = " ^icon_net_wireless × "
+[[block.click]]
+button = "left"
+cmd = "networkmanager_dmenu"
+[[block.click]]
+button = "right"
+action = "toggle_format"
+
+[[block]]
+block = "net"
+device = "^wwp0s20f0u6$"
+interval = 2
+format = " ^icon_net_cellular {$signal_strength $ssid $frequency.eng(w:4)|} ^icon_net_down $speed_down.eng(p:K,hide_unit:true) ^icon_net_up $speed_up.eng(p:K,hide_unit:true) "
+format_alt = " $icon_net_cellular {$ip |N/A }($device) "
+inactive_format = " ^icon_net_cellular  "
+missing_format = " ^icon_net_cellular × "
+[[block.click]]
+button = "left"
+cmd = "networkmanager_dmenu"
+[[block.click]]
+button = "right"
+action = "toggle_format"
+
+[[block]]
+block = "vpn"
+driver = "nordvpn"
+interval = 10
+format_connected = " VPN $icon "
+format_disconnected = " VPN $icon "
+state_connected = "good"
+state_disconnected = "idle"
+merge_with_next = true
+
+[[block]]
+block = "custom" # meshnet
+interval = 5
+format = " MESH $icon "
+command = "~/.config/sway/status/meshnet.sh"
+json = true
+merge_with_next = true
+
+[[block]]
+block = "custom" # firewall
+interval = 10
+format = " UFW $icon "
+command = "~/.config/sway/status/firewall.sh"
+json = true
+
+[[block]]
+block = "battery"
+interval = 10
+device = "BAT0"
+format = " $icon $percentage {($time) |}"
+full_format = " $icon $percentage "
+empty_format = " $icon $percentage "
+not_charging_format = " $icon $percentage "
+merge_with_next = true
+
+[[block]]
+block = "battery"
+interval = 10
+device = "BAT1"
+format = " $icon $percentage {($time) |}"
+full_format = " $icon $percentage "
+empty_format = " $icon $percentage "
+not_charging_format = " $icon $percentage "
+
+[[block]]
+block = "time"
+interval = 10
+[block.format]
+full = "  $timestamp.datetime(f:'%Y-%m-%d') $icon $timestamp.datetime(f:%R) "
+short = " $timestamp.datetime(f:%R) "
+[[block.click]]
+button = "left"
+cmd = "gsimplecal"

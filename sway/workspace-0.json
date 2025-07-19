@@ -1,0 +1,15 @@
+// vim:ts=4:sw=4:et
+{
+    "border": "pixel",
+    "current_border_width": 2,
+    "floating": "auto_off",
+    "name": "firefox",
+    "percent": 1,
+    "swallows": [
+       {
+        "class": "^firefox$",
+        "title": "^\\(PNG\\ Image"
+       }
+    ],
+    "type": "con"
+}

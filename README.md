@@ -45,12 +45,13 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - dunst*
     - gsimplecal*
     - gtk-3.0/*
-    - i3* (~VFIO)
+    - i3 (~VFIO)
     - kitty*
     - networkmanager-dmenu*
     - ranger/*
     - rgb/*.orp (~/.config/OpenRGB)
     - rofi*
+    - sway (~VFIO)
     - udiskie*
     - yay*
 ~/.local/
@@ -74,6 +75,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - ufw/applications.d/*
     - fonts/*
     - fstab(-hostname)
+    - issue(-hostname)
     - locale.conf
     - looking-glass.conf (VFIO)
     - mkinitcpio.conf (VFIO)

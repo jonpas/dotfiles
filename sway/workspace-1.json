@@ -1,0 +1,211 @@
+// vim:ts=4:sw=4:et
+{
+    // splith split container with 2 children
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splith",
+    "marks": [],
+    "percent": 1,
+    "type": "con",
+    "nodes": [
+        {
+            // splith split container with 2 children
+            "border": "pixel",
+            "floating": "auto_off",
+            "layout": "splith",
+            "marks": [],
+            "percent": 0.7,
+            "type": "con",
+            "nodes": [
+                {
+                    // splitv split container with 2 children
+                    "border": "pixel",
+                    "floating": "auto_off",
+                    "layout": "splitv",
+                    "marks": [],
+                    "percent": 0.5,
+                    "type": "con",
+                    "nodes": [
+                        {
+                            "border": "pixel",
+                            "current_border_width": 2,
+                            "floating": "auto_off",
+                            "geometry": {
+                               "height": 405,
+                               "width": 1714,
+                               "x": 1722,
+                               "y": 1031
+                            },
+                            "marks": [],
+                            "name": "Discord",
+                            "percent": 0.5,
+                            "swallows": [
+                               {
+                               "class": "^discord$"
+                               }
+                            ],
+                            "type": "con"
+                        },
+                        {
+                            "border": "pixel",
+                            "current_border_width": 2,
+                            "floating": "auto_off",
+                            "geometry": {
+                               "height": 1045,
+                               "width": 508,
+                               "x": 0,
+                               "y": 0
+                            },
+                            "marks": [],
+                            "name": "Discord Updater - Startup Workaround",
+                            "percent": 0.5,
+                            "swallows": [
+                                {
+                                    "class": "^discord$"
+                                }
+                            ],
+                            "type": "con"
+                        }
+                    ]
+                },
+                {
+                    // tabbed split container with 3 children
+                    "border": "pixel",
+                    "floating": "auto_off",
+                    "layout": "tabbed",
+                    "marks": [],
+                    "percent": 0.5,
+                    "type": "con",
+                    "nodes": [
+                        {
+                            "border": "pixel",
+                            "current_border_width": 2,
+                            "floating": "auto_off",
+                            "geometry": {
+                               "height": 520,
+                               "width": 3432,
+                               "x": 4,
+                               "y": 507
+                            },
+                            "marks": [],
+                            "name": "Slack",
+                            "percent": 0.5,
+                            "swallows": [
+                                {
+                                    "class": "^Slack$"
+                                }
+                            ],
+                            "type": "con"
+                        },
+                        {
+                            "border": "pixel",
+                            "current_border_width": 2,
+                            "floating": "auto_off",
+                            "geometry": {
+                               "height": 336,
+                               "width": 3432,
+                               "x": 4,
+                               "y": 167
+                            },
+                            "marks": [],
+                            "name": "Chromium",
+                            "percent": 0.5,
+                            "swallows": [
+                                {
+                                    "class": "^Chromium$"
+                                }
+                            ],
+                            "type": "con"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            // splith split container with 1 children
+            "border": "pixel",
+            "floating": "auto_off",
+            "layout": "splith",
+            "marks": [],
+            "percent": 0.3,
+            "type": "con",
+            "nodes": [
+                {
+                    // splitv split container with 3 children
+                    "border": "pixel",
+                    "floating": "auto_off",
+                    "layout": "splitv",
+                    "marks": [],
+                    "percent": 1,
+                    "type": "con",
+                    "nodes": [
+                        {
+                            "border": "pixel",
+                            "current_border_width": 2,
+                            "floating": "auto_off",
+                            "geometry": {
+                               "height": 136,
+                               "width": 2402,
+                               "x": 4,
+                               "y": 27
+                            },
+                            "marks": [],
+                            "name": "Terminal: htop",
+                            "percent": 0.5,
+                            "swallows": [
+                                {
+                                    "class": "^kitty$",
+                                    "title": "^Terminal\\:\\ htop$"
+                                }
+                            ],
+                            "type": "con"
+                        },
+                        {
+                            "border": "pixel",
+                            "current_border_width": 2,
+                            "floating": "auto_off",
+                            "geometry": {
+                               "height": 44,
+                               "width": 1026,
+                               "x": 2410,
+                               "y": 27
+                            },
+                            "marks": [],
+                            "name": "Terminal: sensors",
+                            "percent": 0.1,
+                            "swallows": [
+                                {
+                                    "class": "^kitty$",
+                                    "title": "^Terminal\\:\\ sensors$"
+                                }
+                            ],
+                            "type": "con"
+                        },
+                        {
+                            "border": "pixel",
+                            "current_border_width": 2,
+                            "floating": "auto_off",
+                            "geometry": {
+                               "height": 88,
+                               "width": 1026,
+                               "x": 2410,
+                               "y": 75
+                            },
+                            "marks": [],
+                            "name": "Terminal: VM",
+                            "percent": 0.4,
+                            "swallows": [
+                                {
+                                    "class": "^kitty$",
+                                    "title": "^Terminal\\:\\ VM$"
+                                }
+                            ],
+                            "type": "con"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+

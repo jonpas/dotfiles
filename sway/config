@@ -1,0 +1,343 @@
+# Common programs
+set $lock . ~/.config/sway/lock.sh
+set $set_monitors . ~/.config/sway/monitor.sh
+set $restart_barrier . ~/dotfiles/barrier/barriers.sh
+
+set $term kitty
+#set $menu rofi # TODO
+
+# Alias Alt key
+set $alt Mod1
+
+# Super/Win key as modifier
+set $mod Mod4
+
+output * bg ~/Pictures/current_wallpaper fill
+
+#exec swayidle -w \
+#    timeout 300 "exec $lock" \
+#    timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
+#    before-sleep 'swaylock -f -c 000000'
+
+input type:keyboard {
+    xkb_layout "si"
+    xkb_options caps:escape
+}
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:Fantasque Sans Mono 10
+
+# This font is widely installed, provides lots of unicode glyphs, right-to-left
+# text rendering and scalability on retina/hidpi displays (thanks to pango).
+#font pango:DejaVu Sans Mono 8
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# Disable mouse focus
+focus_follows_mouse no
+
+# Disable mouse warping (cursor moves to center of screen when focus is switched to different output)
+mouse_warping none
+
+# start a terminal
+bindsym $mod+Return exec $term
+# [set in kitty.conf, xcwd does not work in kitty or in wayland] start a terminal (in current working directory)
+#bindsym $mod+Shift+Return exec $term -d "$(xcwd)"
+
+# kill focused window
+bindsym $mod+Shift+q kill
+
+# start rofi (a program launcher)
+bindsym $mod+d exec --no-startup-id rofi -show run -run-list-command ". ~/.config/sway/rofi-aliases.sh" -run-command "/bin/zsh -i -c '{cmd}'"
+bindsym $mod+Shift+d exec --no-startup-id rofi -show ssh
+bindsym $mod+b exec --no-startup-id rofi-bluetooth -i
+bindsym $mod+n exec --no-startup-id networkmanager_dmenu
+
+# change focus
+# vi-like
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+# arrow keys
+bindsym $mod+Left  focus left
+bindsym $mod+Down  focus down
+bindsym $mod+Up    focus up
+bindsym $mod+Right focus right
+
+# move focused window
+# vi-like
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+# arrow keys
+bindsym $mod+Shift+Left  move left
+bindsym $mod+Shift+Down  move down
+bindsym $mod+Shift+Up    move up
+bindsym $mod+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $mod+c split h
+
+# split in vertical orientation
+bindsym $mod+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+# sticky window
+bindsym $mod+Shift+s sticky toggle
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+Shift+a focus child
+
+# workspaces
+set $ws0 "0 "
+set $ws1 "1 "
+set $ws2 "2 "
+set $ws3 "3 "
+set $ws4 "4 "
+set $ws5 "5 "
+set $ws6 "6 "
+set $ws7 "7 "
+set $ws8 "8 "
+set $ws9 "9 "
+set $ws10 ""
+
+# workspace monitors (if available)
+workspace $ws0 output DVI-D-0
+workspace $ws1 output HDMI-A-0
+workspace $ws2 output DisplayPort-0
+workspace $ws3 output DisplayPort-0
+workspace $ws4 output DisplayPort-0
+workspace $ws5 output DisplayPort-0
+workspace $ws6 output DisplayPort-0
+workspace $ws7 output DisplayPort-0
+workspace $ws8 output DisplayPort-0
+workspace $ws9 output DisplayPort-0
+
+# switch to workspace
+bindsym $mod+cedilla workspace $ws0
+bindsym $mod+0 workspace $ws0
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+workspace_auto_back_and_forth yes
+
+# move focused container to workspace
+bindsym $mod+Shift+cedilla move container to workspace $ws0
+bindsym $mod+Shift+0 move container to workspace $ws0
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+
+# move workspace to another monitor
+# vi-like
+bindsym $mod+$alt+h move workspace to output left
+bindsym $mod+$alt+j move workspace to output down
+bindsym $mod+$alt+k move workspace to output up
+bindsym $mod+$alt+l move workspace to output right
+# arrow keys
+bindsym $mod+$alt+Left  move workspace to output left
+bindsym $mod+$alt+Down  move workspace to output down
+bindsym $mod+$alt+Up    move workspace to output up
+bindsym $mod+$alt+Right move workspace to output right
+
+# reload the configuration file
+bindsym $mod+Shift+c reload
+# restart sway inplace (preserves your layout/session, can be used to upgrade sway)
+bindsym $mod+Shift+r restart
+# exit sway (logs you out of your X session)
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'"
+
+# resize window (you can also use the mouse for that)
+set $resize : [h], [j], [k], [l]
+mode "$resize" {
+    # These bindings trigger as soon as you enter the resize mode
+
+    # Pressing left will shrink the window’s width.
+    # Pressing right will grow the window’s width.
+    # Pressing up will shrink the window’s height.
+    # Pressing down will grow the window’s height.
+    bindsym h resize shrink width  10 px or 3 ppt
+    bindsym j resize grow   height 10 px or 3 ppt
+    bindsym k resize shrink height 10 px or 3 ppt
+    bindsym l resize grow   width  10 px or 3 ppt
+
+    # same bindings, but for the arrow keys
+    bindsym Left  resize shrink width  10 px or 3 ppt
+    bindsym Down  resize grow   height 10 px or 3 ppt
+    bindsym Up    resize shrink height 10 px or 3 ppt
+    bindsym Right resize grow   width  10 px or 3 ppt
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "$resize"
+
+# external screen management
+set $display_layout : [a], [h] ( ↾), [j] (↾?), [k] ( ↾), [l] ( ↾), [m]  , [s] 
+mode "$display_layout" {
+    bindsym a     mode "default" exec $set_monitors       && $restart_barrier        && swaymsg restart
+    bindsym m     mode "default" exec $set_monitors movie && $restart_barrier        && swaymsg restart
+
+    bindsym h     mode "default" exec $set_monitors left  && $restart_barrier both   && swaymsg restart
+    bindsym Left  mode "default" exec $set_monitors left  && $restart_barrier both   && swaymsg restart
+
+    bindsym l     mode "default" exec $set_monitors right && $restart_barrier both   && swaymsg restart
+    bindsym Right mode "default" exec $set_monitors right && $restart_barrier both   && swaymsg restart
+
+    bindsym j     mode "default" exec $set_monitors down  && $restart_barrier        && swaymsg restart
+    bindsym Down  mode "default" exec $set_monitors down  && $restart_barrier        && swaymsg restart
+    bindsym k     mode "default" exec $set_monitors up    && $restart_barrier center && swaymsg restart
+    bindsym Up    mode "default" exec $set_monitors up    && $restart_barrier center && swaymsg restart
+
+    bindsym s     mode "default" exec $lock true
+
+    bindsym Return mode "default" exec ~/dotfiles/rgb/rgb.sh on
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+p mode "$display_layout"
+
+# passthrough sway keybinds
+set $passthrough : [mod+Pause] End Passthrough
+mode "$passthrough" {
+    bindsym $mod+Pause mode default
+}
+bindsym $mod+Pause mode "$passthrough"
+
+# Start i3status-rs to display a workspace bar
+set $bar_height 23
+bar {
+    status_command i3status-rs ~/.config/sway/status/config-`hostname`.toml
+    position top
+    tray_output primary
+    height $bar_height
+
+    colors {
+        background #282828
+        statusline #ebdbb2
+        separator  #00000000
+
+        #                  border  backgr. text
+        focused_workspace  #fabd2f #fabd2f #282828
+        active_workspace   #d79921 #5f676a #d79921
+        inactive_workspace #282828 #282828 #d79921
+        urgent_workspace   #cc241d #fb4934 #ffffff
+    }
+}
+
+# class                 border  backgr. text    indicator
+client.focused          #d79921 #d79921 #282828 #fabd2f
+client.unfocused        #282828 #282828 #ebdbb2 #282828
+client.focused_inactive #d79921 #282828 #ebdbb2 #282828
+client.urgent           #cc241d #383a3b #fb4934 #383a3b
+
+# Borders & Gaps
+default_border pixel 2
+gaps inner 5
+gaps outer 0
+smart_gaps on
+smart_borders on
+
+# Function Keys
+bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 5 -perceived && pkill -RTMIN+1 i3status-rs
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5 -perceived && pkill -RTMIN+1 i3status-rs
+bindsym XF86AudioRaiseVolume  exec --no-startup-id pamixer -i 5 && pkill -RTMIN+2 i3status-rs
+bindsym XF86AudioLowerVolume  exec --no-startup-id pamixer -d 5 && pkill -RTMIN+2 i3status-rs
+bindsym XF86AudioMute         exec --no-startup-id pamixer -t   && pkill -RTMIN+2 i3status-rs
+bindsym XF86AudioMicMute      exec --no-startup-id pamixer --default-source -t
+bindsym XF86AudioStop         exec --no-startup-id playerctl stop
+bindsym XF86AudioPause        exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPlay         exec --no-startup-id playerctl play-pause
+bindsym XF86AudioPrev         exec --no-startup-id playerctl previous
+bindsym XF86AudioNext         exec --no-startup-id playerctl next
+bindsym XF86Launch1           exec $term -d "/run/media/$USER" # ThinkVantage button on ThinkPads
+bindsym XF86Tools             exec $term -d "/run/media/$USER" # Fn+F9 on T480
+bindsym XF86Favorites         exec $term bc -lq # Fn+F12 on T480
+#bindsym XF86Display          # TODO Display Extend/Clone # Fn+F7 on T480
+
+# Notifications (dunst)
+bindsym Ctrl+space          exec --no-startup-id dunstctl close
+bindsym Ctrl+Shift+space    exec --no-startup-id dunstctl close-all
+bindsym Ctrl+cedilla        exec --no-startup-id dunstctl history-pop
+
+# Lock
+bindsym $mod+Ctrl+l exec --no-startup-id $lock
+# Screenshot (flameshot)
+bindsym Ctrl+Print exec flameshot gui -r | xclip -selection clipboard -t image/png
+# Screen record (peek)
+bindsym Ctrl+Shift+Print exec peek
+
+# Mount location (195 or XF86Launch5 = G710 'G1' key)
+bindsym XF86Launch5 exec $term -d "/run/media/$USER"
+# Calculator (196 or XF86Launch6 = G710 'G2' key)
+bindsym XF86Launch6 exec $term bc -lq
+
+# Monitor
+exec --no-startup-id ~/.config/sway/boot.sh
+# Notifications
+exec --no-startup-id dunst
+# PolicyKit authentication agent
+exec --no-startup-id lxpolkit
+# USB automounter
+exec --no-startup-id udiskie -s
+
+# Window Settings
+for_window [window_role="About"]                        floating enable
+for_window [window_role="Preferences"]                  floating enable
+for_window [window_role="pop-up"]                       floating enable
+for_window [class="(?i)gsimplecal"]                     floating enable, move position mouse, move down $bar_height px
+for_window [class="(?i)zenmonitor"]                     floating enable, move position mouse, move down $bar_height px
+for_window [title="Volume Control" class="pavucontrol"] floating enable
+for_window [title="Library" class="firefox"]            floating enable
+for_window [title="Steam - Update News" class="steam"]  floating enable
+for_window [title="Music Player" class="Steam"]         floating enable
+for_window [title="Chat" class="Steam"]                 floating enable
+for_window [title="Steam Guard" class="Steam"]          floating enable
+for_window [class="TeamSpeak 3"]                        floating enable
+for_window [class="Mumble"]                             floating enable
+for_window [class="KeePass"]                            floating enable
+for_window [title="Figure*" class="(?i)matplotlib"]     floating enable
+for_window [class="(?i)zoom"]                           floating enable
+for_window [class="Evolution"]                          floating enable, focus mode_toggle
+for_window [title="bc" class="kitty"]                   floating enable, resize set 300 px 300 px
+for_window [class="Spotify"]                            move container to workspace $ws10
+for_window [class="Spotify" urgent=latest]              focus
+# Prevent i3 crash TODO recheck in sway
+for_window [title="Discord Updater" class="discord"]    floating disable
+
+# default workspace
+workspace $ws1
