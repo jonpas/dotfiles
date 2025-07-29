@@ -74,6 +74,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - ufw/applications.d/*
     - fonts/*
     - fstab(-hostname)
+    - issue(-hostname)
     - locale.conf
     - looking-glass.conf (VFIO)
     - mkinitcpio.conf (VFIO)
