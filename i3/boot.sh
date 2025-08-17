@@ -51,7 +51,6 @@ if [ $(hostname) = "loki" ]; then
 
     # Background
     evolution &
-    jellyfin-mpv-shim &
     kdeconnect-indicator &
 elif [ $(hostname) = "odin" ]; then
     i3-sensible-terminal --title "Terminal: sensors" watch -t "sensors coretemp-isa-0000 -A | grep °C" &
