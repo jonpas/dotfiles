@@ -54,7 +54,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - udiskie*
     - yay*
 ~/.local/
-    - share/applications/*
+    - share/applications/* (proxsign is copied to /usr/share/applications/)
 /boot/
     - loader! _(systemd-boot)_
 /etc/

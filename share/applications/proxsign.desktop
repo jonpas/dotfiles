@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=proXSign
+Comment=SETCCE proXSign® is a set of components for PKI based digital signing.
+Exec=/usr/bin/proxsign %U
+Icon=document-sign
+Terminal=false
+Type=Application
+Categories=Office
+MimeType=x-scheme-handler/proxsign;
