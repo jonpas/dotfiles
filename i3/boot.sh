@@ -7,9 +7,6 @@
 xrdb ~/.Xresources
 
 if [ $(hostname) = "loki" ]; then
-    # Start Barrier server
-    . ~/dotfiles/barrier/barriers.sh &
-
     # Set monitor configuration again, delayed to ensure refresh rate gets set correctly
     sleep 3 && . ~/.config/i3/monitor.sh &
 

@@ -12,7 +12,6 @@
 # Common programs
 set $lock . ~/.config/i3/lock.sh
 set $set_monitors . ~/.config/i3/monitor.sh
-set $restart_barrier . ~/dotfiles/barrier/barriers.sh
 
 # Alias Alt key
 set $alt Mod1
@@ -212,19 +211,19 @@ bindsym $mod+r mode "$resize"
 # external screen management
 set $display_layout : [a], [h] ( ↾), [j] (↾?), [k] ( ↾), [l] ( ↾), [m]  , [s] 
 mode "$display_layout" {
-    bindsym a     mode "default" exec $set_monitors       && $restart_barrier        && i3-msg restart
-    bindsym m     mode "default" exec $set_monitors movie && $restart_barrier        && i3-msg restart
+    bindsym a     mode "default" exec $set_monitors       && i3-msg restart
+    bindsym m     mode "default" exec $set_monitors movie && i3-msg restart
 
-    bindsym h     mode "default" exec $set_monitors left  && $restart_barrier both   && i3-msg restart
-    bindsym Left  mode "default" exec $set_monitors left  && $restart_barrier both   && i3-msg restart
+    bindsym h     mode "default" exec $set_monitors left  && i3-msg restart
+    bindsym Left  mode "default" exec $set_monitors left  && i3-msg restart
 
-    bindsym l     mode "default" exec $set_monitors right && $restart_barrier both   && i3-msg restart
-    bindsym Right mode "default" exec $set_monitors right && $restart_barrier both   && i3-msg restart
+    bindsym l     mode "default" exec $set_monitors right && i3-msg restart
+    bindsym Right mode "default" exec $set_monitors right && i3-msg restart
 
-    bindsym j     mode "default" exec $set_monitors down  && $restart_barrier        && i3-msg restart
-    bindsym Down  mode "default" exec $set_monitors down  && $restart_barrier        && i3-msg restart
-    bindsym k     mode "default" exec $set_monitors up    && $restart_barrier center && i3-msg restart
-    bindsym Up    mode "default" exec $set_monitors up    && $restart_barrier center && i3-msg restart
+    bindsym j     mode "default" exec $set_monitors down  && i3-msg restart
+    bindsym Down  mode "default" exec $set_monitors down  && i3-msg restart
+    bindsym k     mode "default" exec $set_monitors up    && i3-msg restart
+    bindsym Up    mode "default" exec $set_monitors up    && i3-msg restart
 
     bindsym s     mode "default" exec $lock true
 

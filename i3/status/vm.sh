@@ -22,14 +22,6 @@ if [ $(hostname) = "loki" ]; then
         gpu+="NONE"
         state="Warning"
     fi
-
-    # Barrier (Scroll Lock LED as locked to screen indicator)
-    last_state_log=$(cat ~/.barriers.log | grep -a "locked" | tail -n 1)
-    if grep --quiet " locked" <<< $last_state_log; then
-        xset led named "Scroll Lock"
-    else
-        xset -led named "Scroll Lock"
-    fi
 elif [ $(hostname) = "odin" ]; then
     # GVT-g mediated device
     mdevs=$(ls /sys/bus/mdev/devices/ | wc -l)
