@@ -300,7 +300,7 @@ OPTS+=(-device virtio-mouse-pci)
 OPTS+=(-device virtio-keyboard-pci)
 if [ "$ENABLE_PASSTHROUGH_MOUSEKEYBOARD" = true ]; then
     OPTS+=(-usb -device usb-host,vendorid=0x046d,productid=0xc332) # Logitech G502 Mouse
-    OPTS+=(-usb -device usb-host,vendorid=0x046d,productid=0xc24d) # Logitech G710 Keyboard
+    OPTS+=(-usb -device usb-host,vendorid=0x3233,productid=0x8311) # Ducky One 3 TKL RGB
 else
     # Secondary mouse (connected to USB controller - internal)
     if [ "$ENABLE_PASSTHROUGH_USB_PCIE_CARD" = false ]; then
@@ -309,7 +309,7 @@ else
 
     # evdev (lctrl + rctrl to swap, no macro keys)
     if [ "$ENABLE_EVDEV_KEYBOARD" = true ]; then
-        OPTS+=(-object input-linux,id=kbd,evdev=/dev/input/by-id/usb-Logitech_Logitech_G710_Keyboard-event-kbd,grab_all=on,repeat=on) # Logitech G710 Keyboard
+        OPTS+=(-object input-linux,id=kbd,evdev=/dev/input/by-id/usb-Ducky_Ducky_One_3_TKL_RGB_DK-V1.15-250211-if01-event-kbd,grab_all=on,repeat=on) # Ducky One 3 TKL RGB
     fi
 
     if [ "$ENABLE_EVDEV_MOUSE" = true ]; then

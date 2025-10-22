@@ -303,10 +303,10 @@ bindsym Ctrl+Print exec flameshot gui -r | xclip -selection clipboard -t image/p
 # Screen record (peek)
 bindsym Ctrl+Shift+Print exec peek
 
-# Mount location (195 or XF86Launch5 = G710 'G1' key)
-bindsym XF86Launch5 exec i3-sensible-terminal -d "/run/media/$USER"
-# Calculator (196 or XF86Launch6 = G710 'G2' key)
-bindsym XF86Launch6 exec i3-sensible-terminal bc -lq
+# Calculator
+bindsym $mod+F1 exec i3-sensible-terminal qalc
+# Mount location
+bindsym $mod+F2 exec i3-sensible-terminal -d "/run/media/$USER"
 
 # Monitor
 exec --no-startup-id ~/.config/i3/boot.sh
@@ -335,7 +335,7 @@ for_window [class="KeePass"]                            floating enable
 for_window [title="Figure*" class="(?i)matplotlib"]     floating enable
 for_window [class="(?i)zoom"]                           floating enable
 for_window [class="Evolution"]                          floating enable, focus mode_toggle
-for_window [title="bc" class="kitty"]                   floating enable, resize set 300 px 300 px
+for_window [title="qalc" class="kitty"]                 floating enable, resize set 600 px 300 px
 for_window [class="Spotify"]                            move container to workspace $ws10
 for_window [class="Spotify" urgent=latest]              focus
 # Prevent i3 crash
