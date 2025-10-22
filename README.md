@@ -65,7 +65,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - bumblebee/* (GPU)
     - default/*(-hostname) (~VFIO)
     - modprobe.d/* (~VFIO)
-    - powerpanel/* [pwrstatd.conf to /etc/] (UPS)
+    - powerpanel/* [pwrstatd.conf to /etc/] (UPS/SRV)
     - samba/*(-hostname) (~VFIO/SRV)
     - sane.d/*
     - security/*
