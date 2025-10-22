@@ -1,5 +1,5 @@
 #!/bin/sh
 
-sudo -u jonpas ssh tyr "sudo systemctl poweroff"
+sudo -u jonpas ssh loki "sudo systemctl poweroff"
 
 systemctl poweroff
