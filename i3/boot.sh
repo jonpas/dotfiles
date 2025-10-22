@@ -10,9 +10,6 @@ if [ $(hostname) = "loki" ]; then
     # Set monitor configuration again, delayed to ensure refresh rate gets set correctly
     sleep 3 && . ~/.config/i3/monitor.sh &
 
-    # Enable keyboard repeat (better Barrier/Synergy compatibility)
-    xset r on
-
     # Load OpenRGB profile
     ~/dotfiles/rgb/rgb.sh on
 else
