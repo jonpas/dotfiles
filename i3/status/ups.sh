@@ -1,9 +1,8 @@
 #!/bin/bash
 
-pwrstat="$(pwrstat -status)"
-load=$(echo "$pwrstat" | grep -oP "Load\.* \K[0-9]*")
-pwrstate=$(echo "$pwrstat" | grep -oP "State\.* \K.*")
-battery=$(echo "$pwrstat" | grep -oP "Battery Capacity\.* \K[0-9]*")
+load="$(upsc cyberpower@tyr ups.load)"
+battery="$(upsc cyberpower@tyr battery.charge)"
+upsstatus="$(upsc cyberpower@tyr ups.status)"
 
 ups=" "
 state="Idle"
@@ -11,7 +10,7 @@ state="Idle"
 if [ -z "$load" ]; then
     ups+="N/A"
 else
-    ups+="${load}W"
+    ups+="${load}%"
     if [ "$battery" -lt 100 ]; then
         if [ "$battery" -ge 80 ]; then
             ups+="  $battery%"
@@ -26,14 +25,14 @@ else
         fi
     fi
 
-    if [ "$pwrstate" != "Normal" ]; then
-        remaining=$(echo "$pwrstat" | grep -oP "Remaining Runtime\.* \K.*")
+    if [ "$upsstatus" != "OL" ]; then
+        remaining="$(upsc cyberpower@tyr battery.runtime)"
         ups+=" ($remaining)"
         state="Critical"
     fi
 fi
 
-if [ $load -ge 800 ]; then
+if [ $load -ge 90 ]; then
     state="Critical"
 fi
 
