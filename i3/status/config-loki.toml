@@ -51,6 +51,15 @@ interval = 5
 error_format = ""
 
 [[block]]
+block = "toggle" # backlight night mode
+format = "   $icon "
+icon_on = "weather_sun"
+icon_off = "weather_moon"
+command_state = "~/.config/i3/status/backlight.sh"
+command_on = "~/.config/i3/status/backlight.sh 70"
+command_off = "~/.config/i3/status/backlight.sh 30"
+
+[[block]]
 block = "music"
 format = " $icon {$volume $combo.str(max_w:20) $prev $next |}"
 format_alt = " $icon {$volume $combo $prev $next |}"
