@@ -212,7 +212,7 @@ bindsym $mod+r mode "$resize"
 set $display_layout : [a], [h] ( ↾), [j] (↾?), [k] ( ↾), [l] ( ↾), [m]  , [s] 
 mode "$display_layout" {
     bindsym a     mode "default" exec $set_monitors       && i3-msg restart
-    bindsym m     mode "default" exec $set_monitors movie && i3-msg restart
+    bindsym m     mode "default" exec $set_monitors meet  && i3-msg restart
 
     bindsym h     mode "default" exec $set_monitors left  && i3-msg restart
     bindsym Left  mode "default" exec $set_monitors left  && i3-msg restart
