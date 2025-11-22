@@ -10,5 +10,5 @@ else
 
     ddcutil --model "PL3466WQ" setvcp 10 $value
     ddcutil --model "LG ULTRAWIDE" setvcp 10 $value
-    ddcutil --model "PLE2483H" setvcp 10 $(($value-20))
+    ddcutil --model "PLE2483H" setvcp 10 $((value>20 ? value-20 : value))
 fi
