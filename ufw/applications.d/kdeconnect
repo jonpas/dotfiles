@@ -1,4 +1,0 @@
-[KDEConnect]
-title=KDEConnect
-description=A project that enables all your devices to communicate with each other.
-ports=1714:1764/udp|1714:1764/tcp
