@@ -93,4 +93,4 @@ if [ $(hostname) = "loki" ]; then
 fi
 
 # Wallpaper
-feh --no-fehbg --bg-fill '/home/jonpas/Pictures/current_wallpaper'
+feh --no-fehbg --bg-fill '/usr/share/backgrounds/current_wallpaper.jpg'

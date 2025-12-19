@@ -64,6 +64,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - bluetooth/*
     - bumblebee/* (GPU)
     - default/*(-hostname) (~VFIO)
+    - lightdm/* (copied due to permissions)
     - modprobe.d/* (~VFIO)
     - samba/*(-hostname) (~VFIO/SRV)
     - sane.d/*
@@ -73,7 +74,6 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - ufw/applications.d/*
     - fonts/*
     - fstab(-hostname)
-    - issue(-hostname)
     - locale.conf
     - looking-glass.conf (VFIO)
     - mkinitcpio.conf (VFIO)

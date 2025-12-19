@@ -32,6 +32,7 @@ fi
 # Auto-start programs
 i3-sensible-terminal --title "Terminal: htop" htop &
 i3-sensible-terminal --title 'Terminal: VM' &
+kdeconnect-indicator &
 
 if [ $(hostname) = "loki" ]; then
     firefox &
@@ -45,8 +46,9 @@ if [ $(hostname) = "loki" ]; then
 
     # Background
     evolution &
-    kdeconnect-indicator &
 elif [ $(hostname) = "odin" ]; then
+    light-locker &
+
     i3-sensible-terminal --title "Terminal: sensors" watch -t "sensors coretemp-isa-0000 -A | grep °C" &
     i3-sensible-terminal &
 fi

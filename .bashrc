@@ -1,13 +1,10 @@
-# Start WM/DE on correct user (notroot, eg. during restore)
-if [[ -z $DISPLAY ]] && [[ "$(whoami)" = "jonpas" ]]; then
-    echo "no display and jonpas"
-    if [[ "$(tty)" = "/dev/tty1" ]]; then
-        # i3 on X11
-        startx && exit
-    elif [[ "$(tty)" = "/dev/tty2" ]] && [[ "$(hostname)" = "odin" ]]; then
-        # KDE Plasma on Wayland
-        /usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland && exit
-    fi
+# Start WM/DE on correct user (not root, eg. during restore, only on loki as odin uses SDDM)
+if [[ -z $DISPLAY ]] && [[ "$(hostname)" = "loki" ]] && [[ "$(whoami)" = "jonpas" ]] && [["$(tty)" = "/dev/tty1" ]]; then
+    # i3 on X11
+    startx && exit
+
+    # KDE Plasma on Wayland
+    #/usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland && exit
 fi
 
 export TERMINAL=kitty

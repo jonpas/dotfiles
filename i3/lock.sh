@@ -26,7 +26,11 @@ if [ $(hostname) = "odin" ]; then
     fi
 fi
 
-i3lock -i /tmp/screenshotblur.png --nofork # no fork waits for unlock to continue executing
+if [ $(hostname) = "odin" ]; then
+    light-locker-command -l # LightDM-compatible locker (avoid double lock with LightDM+i3lock)
+else
+    i3lock -i /tmp/screenshotblur.png --nofork # no fork waits for unlock to continue executing
+fi
 
 if [ ! -z $bluetooth_off ]; then
     bluetoothctl power off
