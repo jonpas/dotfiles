@@ -150,6 +150,12 @@ if [[ "$-" =~ "i" ]]; then
     bindkey '^Z' fgswitch
 fi
 
+function unlock-keyring() {
+    read -rs "pass?Password: "
+    export $(echo -n "$pass" | gnome-keyring-daemon --replace --unlock)
+    unset pass
+}
+
 # https://github.com/gujiaxi/ranger-cd/blob/master/ranger-cd.zsh
 function ranger-cd {
     tempfile="$(mktemp -t tmp.XXXXXX)"
