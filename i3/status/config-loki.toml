@@ -57,7 +57,7 @@ icon_on = "weather_sun"
 icon_off = "weather_moon"
 command_state = "~/.config/i3/status/backlight.sh"
 command_on = "~/.config/i3/status/backlight.sh 70"
-command_off = "~/.config/i3/status/backlight.sh 10"
+command_off = "~/.config/i3/status/backlight.sh 5"
 
 [[block]]
 block = "music"
