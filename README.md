@@ -77,7 +77,6 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - locale.conf
     - looking-glass.conf (VFIO)
     - mkinitcpio.conf (VFIO)
-    - vconsole.conf
 None
     - backup (BAK)
     - lib
