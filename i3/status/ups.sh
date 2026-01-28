@@ -25,7 +25,7 @@ else
         fi
     fi
 
-    if [ "$upsstatus" != "OL" ]; then
+    if [ "$upsstatus" != "OL" ] && [ "$upsstatus" != "OL CHRG" ]; then
         remaining="$(upsc cyberpower@tyr battery.runtime)"
         ups+=" ($remaining)"
         state="Critical"
