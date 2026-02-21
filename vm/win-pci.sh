@@ -11,6 +11,7 @@ ENABLE_EVDEV_MOUSE=false
 ENABLE_PASSTHROUGH_GPU=true
 ENABLE_RESIZE_GPU_BAR0=false # works natively with full ReBAR in QEMU 8.2
 ENABLE_QEMU_GPU=true # Integrated QEMU GPU
+ENABLE_QEMU_MONITOR_UNIX_SOCKET=true
 ENABLE_HUGEPAGES=true
 ENABLE_LOOKINGGLASS=true
 ENABLE_NESTED_VIRT=false
@@ -97,6 +98,7 @@ echo "Evdev Mouse: $ENABLE_EVDEV_MOUSE"
 echo "Boot VirtIO: $BOOT_VIRTIO"
 echo "TPM & Secure Boot: $WIN11_INSTALL"
 echo "QEMU GPU: $ENABLE_QEMU_GPU"
+echo "QEMU Monitor Unix Socket: $ENABLE_QEMU_MONITOR_UNIX_SOCKET"
 echo "Nested Virtualization: $ENABLE_NESTED_VIRT"
 echo "Huge-pages: $ENABLE_HUGEPAGES"
 echo "Memory: ${MEMORY}G"
@@ -231,6 +233,26 @@ if [ "$ENABLE_QEMU_GPU" = true ]; then
     OPTS+=(-vga std)
 else
     OPTS+=(-vga none -nographic) # Disable QEMU VGA and graphics
+fi
+
+if [ "$ENABLE_QEMU_MONITOR_UNIX_SOCKET" = true ]; then
+    OPTS+=(-monitor unix:/run/user/1000/qemu-monitor.sock,server,nowait)
+
+    # Set owner of Unix socket file (remove if exists, wait to be created by QEMU, change owner)
+    if [ -S /run/user/1000/qemu-monitor.sock ]; then
+        rm /run/user/1000/qemu-monitor.sock
+    fi
+
+    wait_time=30 &&
+    while [ ! -S /run/user/1000/qemu-monitor.sock ] && [ $wait_time -gt 0 ]; do
+        echo "Waiting for QEMU Monitor socket (timeout: ${wait_time}s)" && wait_time=$(($wait_time-5)) && sleep 5
+    done &&
+        if [ $wait_time -gt 0 ]; then
+            chown jonpas:jonpas /run/user/1000/qemu-monitor.sock &&
+            echo "QEMU Monitor socket owner changed"
+        else
+            echo "[WARNING] QEMU Monitor socket timed out!"
+        fi &
 fi
 
 if [ "$ENABLE_LOOKINGGLASS" = true ]; then
