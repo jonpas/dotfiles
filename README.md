@@ -66,6 +66,9 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - default/*(-hostname) (~VFIO)
     - lightdm/* (copied due to permissions)
     - modprobe.d/* (~VFIO)
+    - nut(-hostname)/! (UPS) _(all permissions `root:root` or `root:nut`)_
+        - sudoers.d/! -> /etc/sudoers.d/ _(use `sudo visudo -f /etc/sudoers.d/*`)_
+        - systemd/! -> /etc/systemd/system/
     - samba/*(-hostname) (~VFIO/SRV)
     - sane.d/*
     - security/*

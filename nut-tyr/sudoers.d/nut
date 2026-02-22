@@ -1,0 +1,3 @@
+## sudoers.d include file
+
+nut ALL=NOPASSWD: /usr/bin/systemctl restart nut-driver@cyberpower

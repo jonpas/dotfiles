@@ -1,0 +1,4 @@
+[NUT]
+title=NUT
+description=Network UPS Tools
+ports=3493/tcp

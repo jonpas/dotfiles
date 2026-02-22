@@ -1,0 +1,8 @@
+[Unit]
+Description=Run UPS quick battery test
+Requires=nut-driver@cyberpower.service
+After=nut-driver@cyberpower.service
+
+[Service]
+ExecStart=/usr/bin/upscmd -u USER -p PASS cyberpower@localhost test.battery.start.quick
+Type=oneshot
