@@ -133,7 +133,7 @@ OPTS+=(-device virtio-scsi-pci,id=scsi0)
 # Create image: qemu-img create -f raw name.img 10G -o preallocation=full (-o cluster_size=16K for qcow2)
 # Convert qcow2 to raw: qemu-img convert -p -O raw source.qcow2 target.img -o preallocation=full
 # Resize image: qemu-img resize -f raw --preallocation=full source.img +5G
-OPTS+=(-drive file=/home/jonpas/images/vm/win-virt.img,format=raw,index=0,media=disk,if=none,aio=native,cache=none,id=drive0)
+OPTS+=(-drive file=/home/jonpas/images/vm/win-virt.img,format=raw,index=0,media=disk,if=none,aio=io_uring,cache=none,id=drive0)
 OPTS+=(-device scsi-hd,drive=drive0,bus=scsi0.0,rotation_rate=1,bootindex=1)
 
 OPTS+=(-drive file=/home/jonpas/images/windows.iso,index=3,media=cdrom)

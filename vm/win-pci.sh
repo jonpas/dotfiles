@@ -171,20 +171,20 @@ OPTS+=(-drive if=pflash,format=raw,file=/home/jonpas/images/vm/OVMF_VARS-win-ovm
 OPTS+=(-device virtio-scsi-pci,id=scsi0)
 
 if [ "$BOOT_VIRTIO" = true ]; then
-    OPTS+=(-drive file=/dev/disk/by-id/ata-Samsung_SSD_860_EVO_500GB_S3Z2NB2KA62661K,format=raw,index=0,if=none,aio=native,cache=none,id=drive0) # 'scsi-block' requires '/by-id/'
+    OPTS+=(-drive file=/dev/disk/by-id/ata-Samsung_SSD_860_EVO_500GB_S3Z2NB2KA62661K,format=raw,index=0,if=none,aio=io_uring,cache=none,id=drive0) # 'scsi-block' requires '/by-id/'
     OPTS+=(-device scsi-block,drive=drive0,bus=scsi0.0,bootindex=1)
 else
     # Windows direct (dual) boot will remove VirtIO driver, use IDE block device
     OPTS+=(-drive format=raw,file="/dev/sda",if=ide,index=0)
 fi
 
-OPTS+=(-drive file=/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_2TB_S4J4NM0R706278T,format=raw,index=1,if=none,aio=native,cache=none,id=drive1) # 'scsi-block' requires '/by-id/'
+OPTS+=(-drive file=/dev/disk/by-id/nvme-Samsung_SSD_970_EVO_Plus_2TB_S4J4NM0R706278T,format=raw,index=1,if=none,aio=io_uring,cache=none,id=drive1) # 'scsi-block' requires '/by-id/'
 OPTS+=(-device scsi-hd,drive=drive1,bus=scsi0.0,rotation_rate=1) # TODO PCI Passthrough
 
 # Create image: qemu-img create -f raw name.img 10G -o preallocation=full (-o cluster_size=16K for qcow2)
 # Convert qcow2 to raw: qemu-img convert -p -O raw source.qcow2 target.img -o preallocation=full
 # Resize image: qemu-img resize -f raw --preallocation=full source.img +5G
-OPTS+=(-drive file=/home/jonpas/images/vm/fast-virt.img,format=raw,index=2,media=disk,if=none,aio=native,cache=none,id=drive2)
+OPTS+=(-drive file=/home/jonpas/images/vm/fast-virt.img,format=raw,index=2,media=disk,if=none,aio=io_uring,cache=none,id=drive2)
 OPTS+=(-device scsi-hd,drive=drive2,bus=scsi0.0,rotation_rate=1)
 
 OPTS+=(-drive file=/home/jonpas/images/windows.iso,index=3,media=cdrom)
