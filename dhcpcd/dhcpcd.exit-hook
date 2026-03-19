@@ -1,0 +1,9 @@
+# Create ipvlan-home@enp2s0 "bridge" interface for container ipvlan/macvlan to be able to access to this host
+new_interface="ipvlan-home"
+new_interface_parent="enp2s0"
+if [ "$reason" = "PREINIT" ] && [ "$interface" = "$new_interface_parent" ]; then
+    echo "$new_interface: creating and routing from container ipvlan (exit-hook)"
+    ip link add $new_interface link $new_interface_parent type ipvlan mode l3
+    ip link set $new_interface up
+    ip route add 192.168.178.4 dev $new_interface
+fi
