@@ -1,4 +1,4 @@
-# Create ipvlan-home@enp2s0 "bridge" interface for container ipvlan/macvlan to be able to access to this host
+# Create ipvlan-home@enp2s0 "bridge" interface for container ipvlan/macvlan to be able to access this host
 new_interface="ipvlan-home"
 new_interface_parent="enp2s0"
 if [ "$reason" = "PREINIT" ] && [ "$interface" = "$new_interface_parent" ]; then
