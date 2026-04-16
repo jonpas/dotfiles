@@ -158,11 +158,16 @@ state_disconnected = "idle"
 merge_with_next = true
 
 [[block]]
-block = "custom" # meshnet
+block = "toggle" # meshnet
 interval = 5
 format = " MESH $icon "
-command = "~/.config/i3/status/meshnet.sh"
-json = true
+command_on = "nordvpn set meshnet on"
+command_off = "nordvpn set meshnet off"
+command_state = "nordvpn settings | grep -i \"Meshnet: enabled\""
+icon_on = "net_wired"
+icon_off = "net_wired"
+state_on = "idle"
+state_off = "critical"
 merge_with_next = true
 
 [[block]]
