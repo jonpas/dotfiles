@@ -403,11 +403,6 @@ if [ "$ENABLE_HUGEPAGES" = true ]; then
     echo 0 > /proc/sys/vm/nr_hugepages
 fi
 
-# Mouse & Keyboard
-if [ "$ENABLE_PASSTHROUGH_MOUSEKEYBOARD" = true ]; then
-    ../i3/keyboard.sh # Keyboard layout gets reset on return from pass-through
-fi
-
 # USB
 if [ "$ENABLE_PASSTHROUGH_USB_PCIE_CARD" = true ]; then
     rebind $PCI_USB_PCIE_CARD xhci_hcd
