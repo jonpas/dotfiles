@@ -313,8 +313,8 @@ if [ "$ENABLE_LOOKINGGLASS" = true ]; then
 
     # Spice Agent (clipboard)
     OPTS+=(-device virtio-serial-pci)
-    OPTS+=(-device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0)
-    OPTS+=(-chardev spicevmc,id=spicechannel0,name=vdagent)
+    OPTS+=(-chardev spicevmc,id=vdagent,name=vdagent)
+    OPTS+=(-device virtserialport,chardev=vdagent,name=com.redhat.spice.0)
 fi
 
 # Mouse & Keyboard (pass one always in case of lock-ups or network issues)
@@ -375,10 +375,10 @@ if [ "$ENABLE_PASSTHROUGH_AUDIO" = true ]; then
     OPTS+=(-device vfio-pci,host=00:0d.0,bus=pci3,addr=00.0)
 else
     if [ "$ENABLE_LOOKINGGLASS" = true ]; then
-        # Spice
-        OPTS+=(-audiodev spice,id=spice)
-        OPTS+=(-device ich9-intel-hda)
-        OPTS+=(-device hda-micro,audiodev=spice)
+        # Spice with USB redirection device
+        OPTS+=(-device qemu-xhci,id=xhci)
+        OPTS+=(-chardev spicevmc,name=usbredir,id=usbredirchar1)
+        OPTS+=(-device usb-redir,chardev=usbredirchar1,id=usbredirdev1,bus=xhci.0)
     else
         # JACK (PipeWire)
         export PIPEWIRE_RUNTIME_DIR=/run/user/1000
