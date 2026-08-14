@@ -45,6 +45,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - dunst*
     - gsimplecal*
     - gtk-3.0/*
+    - gtk-4.0/*
     - i3* (~VFIO)
     - kitty*
     - networkmanager-dmenu*
