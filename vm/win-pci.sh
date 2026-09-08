@@ -126,7 +126,7 @@ OPTS+=(-rtc driftfix=slew)
 
 # x2apic only sensible on VM with 255+ vCPUs, hv_stimer_direct causes boot freeze
 OPTS+=(-cpu host,migratable=off,+invtsc,topoext,svm=$nested,x2apic=off,hv_relaxed,hv_vapic,hv_spinlocks=0x1fff,hv_vpindex,hv_runtime,hv_time,hv_synic,hv_stimer,hv_tlbflush,hv_ipi,hv_frequencies,hv_avic)
-OPTS+=(-smp 16,sockets=1,cores=8,threads=2)
+OPTS+=(-smp 12,sockets=1,cores=6,threads=2) # leave 2 cores (4 threads) to host (prevent resource starvation)
 
 OPTS+=(-global kvm-pit.lost_tick_policy=discard) # required for AVIC (kernel 6.0)
 

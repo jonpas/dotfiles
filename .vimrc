@@ -214,6 +214,7 @@ let g:lightline#colorscheme#default#palette.tabline.tabsel[0] = g:lightline#colo
 let g:fzf_layout = { 'down': '40%' }
 
 " integrate ALE
+let g:ale_enabled = 0
 let g:lightline#ale#indicator_checking = ""
 let g:lightline#ale#indicator_warnings = ""
 let g:lightline#ale#indicator_errors = ""
