@@ -1,5 +1,5 @@
 program_options:
-  file_manager: "/home/jonpas/.config/udiskie/open-with-ranger.sh"
+  file_manager: yazi
 
 quickmenu_actions: [mount, browse, terminal, unlock, detach, delete, unmount]
 
