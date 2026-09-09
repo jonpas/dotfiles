@@ -49,13 +49,13 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - i3* (~VFIO)
     - kitty*
     - networkmanager-dmenu*
-    - ranger/*
     - rgb/*.orp (~/.config/OpenRGB)
     - rofi*
     - udiskie*
     - xdg-desktop-portal*
     - xdg-desktop-portal-termfilechooser*
     - yay*
+    - yazi*
 ~/.local/
     - share/applications/* (proxsign is copied to /usr/share/applications/)
 /boot/

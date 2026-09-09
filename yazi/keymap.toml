@@ -1,0 +1,5 @@
+[mgr]
+prepend_keymap = [
+  { on = ["M","s"], run = "plugin sshfs -- menu", desc = "Open SSHFS options" },
+  { on = ["g","D"], run = "plugin goto-file-dir", desc = "Go to file directory" },
+]

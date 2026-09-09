@@ -1,5 +1,5 @@
 [filechooser]
-cmd=ranger-wrapper.sh
+cmd=yazi-wrapper.sh
 default_dir=$HOME
 ; Uncomment to skip creating destination save files with instructions in them
 ; create_help_file=0
