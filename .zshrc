@@ -1,14 +1,7 @@
-stty stop undef # Disable Ctrl-s to freeze terminal (must be above p10k instant prompt)
+stty stop undef # Disable Ctrl-s to freeze terminal (must be above prompt)
 
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+ZLE_RPROMPT_INDENT=0 # fix alignment with starship
+eval "$(starship init zsh)"
 
 wintitle() { echo -ne "\033];$TERMINAL: $(pwd) \007" }
 precmd_functions+=(wintitle)
@@ -19,20 +12,12 @@ setnamep() { i3-msg focus parent, title_format "$@", focus child }
 setopt autocd
 setopt interactive_comments
 setopt no_auto_remove_slash
+setopt magicequalsubst
 
 # History in cache directory
 HISTSIZE=10000000
 SAVEHIST=10000000
 HISTFILE=~/.cache/zsh/history
-
-# Basic auto/tab complete
-autoload -Uz compinit
-zstyle ':completion:*' menu select
-zmodload zsh/complist
-compinit
-_comp_options+=(globdots) # include hidden files
-
-setopt magicequalsubst
 
 export TERMINAL=kitty
 export EDITOR=vim
@@ -41,21 +26,19 @@ export EDITOR=vim
 bindkey -v
 KEYTIMEOUT=5
 bindkey -v '^?' backward-delete-char # fix backspace deletion after re-entering insert mode
-# hjkl autocomplete menu select
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
-bindkey -M menuselect 'j' vi-down-line-or-history
 
 # Edit line in vim with Ctrl-e
 autoload edit-command-line
 zle -N edit-command-line
 bindkey '^e' edit-command-line
 
-[ -f "/usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh" ] && source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
-
-[ -f "/usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh" ] && source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+source /usr/share/zsh/plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+bindkey '^I' menu-select
+bindkey "$terminfo[kcbt]" menu-select
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^f' autosuggest-accept
+
 
 # fzf
 export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude ".git"' # use with fd instead of find
@@ -95,14 +78,11 @@ alias cleandisk='yay -Sc && paccache -rk1 && sudo trash-empty --all-users'
 alias sysinfo='echo "" && fastfetch'
 alias weather='curl http://wttr.in/Lenart'
 alias vm='sudo ~/dotfiles/vm/win-pci.sh'
-alias ptt='sudo python ~/dotfiles/lib/ptt.py'
 
 alias vcam="sudo modprobe v4l2loopback exclusive_caps=1 card_label='OBS Virtual Camera'"
 alias vcamrm="sudo modprobe -r v4l2loopback"
 
 alias matlab='matlab -desktop -nosplash -useStartupFolderPref'
-
-alias fsmaps='ranger ~/Work/TARGET/Mappings'
 
 # Signal on yay exit (i3block)
 yay() {
@@ -155,18 +135,6 @@ function unlock-keyring() {
     export $(echo -n "$pass" | gnome-keyring-daemon --replace --unlock)
     unset pass
 }
-
-# https://github.com/gujiaxi/ranger-cd/blob/master/ranger-cd.zsh
-function ranger-cd {
-    tempfile="$(mktemp -t tmp.XXXXXX)"
-    /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
-    test -f "$tempfile" &&
-    if [ "$(cat -- "$tempfile")" != "$(echo -n `pwd`)" ]; then
-        cd -- "$(cat "$tempfile")"
-    fi
-    rm -f -- "$tempfile"
-}
-bindkey -s '^O' 'ranger-cd\n'
 
 # Jump to path and synchronization aliases
 __base_school='~/Work/School/FERI-RIT'

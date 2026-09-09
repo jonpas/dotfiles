@@ -10,6 +10,8 @@ fi
 export TERMINAL=kitty
 export EDITOR=vim
 
+eval "$(starship init bash)"
+
 # vi-mode
 set -o vi
 

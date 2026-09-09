@@ -33,7 +33,6 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - .bashrc
     - .drirc (GPU)
     - .gtkrc-2.0
-    - .p10k.zsh
     - .popt
     - .tmux.conf (REMOTE)
     - .urlview
@@ -51,6 +50,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - networkmanager-dmenu*
     - rgb/*.orp (~/.config/OpenRGB)
     - rofi*
+    - starship.toml*
     - udiskie*
     - xdg-desktop-portal*
     - xdg-desktop-portal-termfilechooser*

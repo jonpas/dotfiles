@@ -1,0 +1,6 @@
+add_newline = false
+format = """$username$character"""
+right_format = """$all"""
+
+[username]
+format = '[$user]($style) '
