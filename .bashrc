@@ -17,9 +17,6 @@ if [[ $- == *i* ]]; then
     source /usr/share/blesh/ble.sh --attach=none
     eval "$(starship init bash)"
 
-    export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude ".git"' # use with fd instead of find
-    eval "$(fzf --bash)"
-
     # vi-mode
     set -o vi
 
@@ -111,6 +108,8 @@ function __unlock_keyring() {
     unset pass
 }
 alias unlock-keyring='__unlock_keyring'
+
+export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude ".git"' # use with fd instead of find
 
 if [ -f /usr/share/bash-completion/completions/git ]; then
     . /usr/share/bash-completion/completions/git

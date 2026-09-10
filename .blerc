@@ -19,3 +19,7 @@ ble-bind -m vi_nmap -f 'C-m' 'accept-line syntax'
 ble-bind -m vi_nmap -f 'RET' 'accept-line syntax'
 
 ble-face auto_complete='fg=gray'
+ble-face region_insert='fg=gray'
+
+ble-import -d integration/fzf-completion
+ble-import -d integration/fzf-key-bindings
