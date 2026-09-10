@@ -1,0 +1,21 @@
+bleopt history_share=1
+bleopt color_scheme=base16
+
+bind 'set completion-ignore-case on'
+
+# Ctrl-e edit line in vim
+VISUAL='vim -X'
+ble-bind -m vi_imap -f 'C-e' 'edit-and-execute-command'
+ble-bind -m vi_nmap -f 'C-e' 'vi-command/edit-and-execute-command'
+
+# Ctrl-c always discards line
+ble-bind -m vi_imap -f 'C-c' discard-line
+ble-bind -m vi_nmap -f 'C-c' discard-line
+
+# Backspace/Ctrl-m accepts line if syntax is correct
+ble-bind -m vi_imap -f 'C-m' 'accept-line syntax'
+ble-bind -m vi_imap -f 'RET' 'accept-line syntax'
+ble-bind -m vi_nmap -f 'C-m' 'accept-line syntax'
+ble-bind -m vi_nmap -f 'RET' 'accept-line syntax'
+
+ble-face auto_complete='fg=gray'

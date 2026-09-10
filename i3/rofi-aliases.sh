@@ -1,3 +1,3 @@
 #!/bin/bash
 
-zsh -ic "alias" | sed 's/=/ /' | awk '{print $1}'
+bash -ic "alias" | sed 's/=/ /' | awk '{print $2}'

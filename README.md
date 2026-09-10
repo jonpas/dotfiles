@@ -41,6 +41,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - .zprofile (no root)
     - .zshrc
 ~/.config/
+    - .blerc*
     - dunst*
     - gsimplecal*
     - gtk-3.0/*

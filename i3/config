@@ -52,7 +52,7 @@ bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Shift+q kill
 
 # start rofi (a program launcher)
-bindsym $mod+d exec --no-startup-id rofi -show run -run-list-command ". ~/.config/i3/rofi-aliases.sh" -run-command "/bin/zsh -i -c '{cmd}'"
+bindsym $mod+d exec --no-startup-id rofi -show run -run-list-command ". ~/.config/i3/rofi-aliases.sh" -run-command "/bin/bash -i -c '{cmd}'"
 bindsym $mod+Shift+d exec --no-startup-id rofi -show ssh
 bindsym $mod+b exec --no-startup-id rofi-bluetooth -i
 bindsym $mod+n exec --no-startup-id networkmanager_dmenu

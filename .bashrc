@@ -7,13 +7,25 @@ if [[ -z $DISPLAY ]] && [[ "$(hostname)" = "loki" ]] && [[ "$(whoami)" = "jonpas
     #/usr/lib/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland && exit
 fi
 
+HISTSIZE=10000000
+HISTFILESIZE=10000000
+
 export TERMINAL=kitty
 export EDITOR=vim
 
-eval "$(starship init bash)"
+if [[ $- == *i* ]]; then
+    source /usr/share/blesh/ble.sh --attach=none
+    eval "$(starship init bash)"
 
-# vi-mode
-set -o vi
+    export FZF_DEFAULT_COMMAND='fd --hidden --follow --exclude ".git"' # use with fd instead of find
+    eval "$(fzf --bash)"
+
+    # vi-mode
+    set -o vi
+
+    # Bind fg for switching between vim and terminal (C-z / C-a)
+    bind -x '"\C-a":"fg"'
+fi
 
 alias sudo='sudo ' # check 2nd word for alias as well
 
@@ -32,28 +44,73 @@ alias l='ls -CFv'
 alias fd='fd --hidden'
 alias bc='bc -lq'
 
+alias ssh='TERM=vt100 ssh' # kitty terminfo is different, use vt100 for SSH for maximum compatibility
+alias kssh='kitten ssh' # makes use of TERM=xterm-kitty and automatically copies terminfo files
+alias rsyncnoperm="rsync -azPZ"
+
 alias cleandisk='yay -Sc && paccache -rk1 && sudo trash-empty --all-users'
 
 alias sysinfo='echo "" && fastfetch'
 alias weather='curl http://wttr.in/Lenart'
 alias vm='sudo ~/dotfiles/vm/win-pci.sh'
-alias ptt='sudo python ~/dotfiles/lib/ptt.py'
 
 alias vcam="sudo modprobe v4l2loopback exclusive_caps=1 card_label='OBS Virtual Camera'"
 alias vcamrm="sudo modprobe -r v4l2loopback"
 
 alias matlab='matlab -desktop -nosplash -useStartupFolderPref'
 
-# Bind fg for switching between vim and terminal (C-z / C-a) if interactive shell
-if [[ "$-" =~ "i" ]]; then
-    bind -x '"\C-a":"fg"'
-fi
+function set_win_title() {
+    echo -ne "\033];$TERMINAL: $(pwd) \007"
+}
+starship_precmd_user_func="set_win_title"
+
+function setname() {
+    i3-msg title_format "$@"
+}
+function setnamep() {
+    i3-msg focus parent, title_format "$@", focus child
+}
 
 function __update() {
     yay "$@" &&
     pkill -RTMIN+4 i3status-rs
 }
 alias yay='__update'
+
+function __dri_prime() {
+    DRI_PRIME=1 "$@" # PRIME
+}
+alias gpu='__dri_prime'
+alias obs='vk_pro obs'
+
+function __vnc_server() {
+    display=3 # default 1080p display
+    if [ ! -z "$1" ]; then
+        display=$1
+    fi
+
+    displays=(
+        3440x1440+0+795
+        2560x1080+3440+1080
+        1920x1080+3440+0)
+    echo "Starting x1vnc with -clip ${displays[display]}"
+    x11vnc -display :0 -localhost -clip ${displays[display]}
+}
+alias vnc='__vnc_server'
+
+# Require virtualenv for pip
+export PIP_REQUIRE_VIRTUALENV=true
+function __pip_global() {
+    PIP_REQUIRE_VIRTUALENV=false pip "$@"
+}
+alias pip-global='__pip_global'
+
+function __unlock_keyring() {
+    read -rs "pass?Password: "
+    export $(echo -n "$pass" | gnome-keyring-daemon --replace --unlock)
+    unset pass
+}
+alias unlock-keyring='__unlock_keyring'
 
 if [ -f /usr/share/bash-completion/completions/git ]; then
     . /usr/share/bash-completion/completions/git
@@ -68,25 +125,11 @@ if [ -f /usr/share/nvm/init-nvm.sh ]; then
     alias nvminit='. /usr/share/nvm/init-nvm.sh'
 fi
 
-export PROMPT_COMMAND=__prompt_command
-function __prompt_command() {
-    export ERR=$?
-
-    PS1="[\[\e[1;32m\]$(whoami)\[\e[0m\]@\[\e[1;36m\]$(hostname)\[\e[0m\]] $ "
-
-    # Window title
-    echo -ne "\033]0;$TERMINAL: $(pwd) \007"
-
-    # Python venv/virtualenv
-    if [ -n "$VIRTUAL_ENV" ]; then
-        PS1="\[\033[1;34m\]($(basename $VIRTUAL_ENV))\[\e[0m\] $PS1"
-    fi
-}
-
 # Disable dotnet telemetry
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
-PATH=$PATH:~/.cargo/bin:~/.local/bin
+[ -d "$HOME/.cargo/bin" ] && PATH=$PATH:$HOME/.cargo/bin
+PATH=$PATH:~/.local/bin
 
 # Jump to path and synchronization aliases
 __base_school='~/Work/School/FERI-RIT'
@@ -103,3 +146,5 @@ alias jIDI='cd ~/Work/IDI'
 if [ $(hostname) = "odin" ]; then
     alias vm='sudo ~/dotfiles/vm/win-gvt.sh'
 fi
+
+[[ ${BLE_VERSION-} ]] && ble-attach
