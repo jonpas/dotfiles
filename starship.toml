@@ -4,3 +4,6 @@ right_format = """$all"""
 
 [username]
 format = '[$user]($style) '
+
+[aws]
+disabled = true
