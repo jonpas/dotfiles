@@ -31,6 +31,8 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - .vim*
     - .Xresources
     - .bashrc
+    - .bash_profile
+    - .blerc*
     - .drirc (GPU)
     - .gtkrc-2.0
     - .popt
@@ -41,7 +43,6 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - .zprofile (no root)
     - .zshrc
 ~/.config/
-    - .blerc*
     - dunst*
     - gsimplecal*
     - gtk-3.0/*
