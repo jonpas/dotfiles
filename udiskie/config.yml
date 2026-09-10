@@ -1,5 +1,5 @@
 program_options:
-  file_manager: yazi
+  file_manager: "kitty -e yazi"
 
 quickmenu_actions: [mount, browse, terminal, unlock, detach, delete, unmount]
 
