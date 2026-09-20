@@ -9,10 +9,10 @@ ble-bind -m vi_imap -f 'C-e' 'edit-and-execute-command'
 ble-bind -m vi_nmap -f 'C-e' 'vi-command/edit-and-execute-command'
 
 # Ctrl-c always discards line
-ble-bind -m vi_imap -f 'C-c' discard-line
-ble-bind -m vi_nmap -f 'C-c' discard-line
+ble-bind -m vi_imap -f 'C-c' 'discard-line'
+ble-bind -m vi_nmap -f 'C-c' 'discard-line'
 
-# Backspace/Ctrl-m accepts line if syntax is correct
+# Enter/Ctrl-m accepts line if syntax is correct
 ble-bind -m vi_imap -f 'C-m' 'accept-line syntax'
 ble-bind -m vi_imap -f 'RET' 'accept-line syntax'
 ble-bind -m vi_nmap -f 'C-m' 'accept-line syntax'

@@ -7,3 +7,7 @@ format = '[$user]($style) '
 
 [aws]
 disabled = true
+
+[git_commit]
+only_detached = false
+tag_disabled = false
