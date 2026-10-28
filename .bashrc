@@ -32,8 +32,9 @@ alias l='ls -CFv'
 alias fd='fd --hidden'
 alias bc='bc -lq'
 
+alias vim='nvim'
 alias ssh='TERM=vt100 ssh' # kitty terminfo is different, use vt100 for SSH for maximum compatibility
-alias kssh='kitten ssh' # makes use of TERM=xterm-kitty and automatically copies terminfo files
+alias kssh='kitten ssh'    # makes use of TERM=xterm-kitty and automatically copies terminfo files
 alias rsyncnoperm="rsync -azPZ"
 
 alias cleandisk='yay -Sc && paccache -rk1 && sudo trash-empty --all-users'
@@ -60,8 +61,7 @@ function setnamep() {
 }
 
 function __update() {
-    yay "$@" &&
-    pkill -RTMIN+4 i3status-rs
+    yay "$@" && pkill -RTMIN+4 i3status-rs
 }
 alias yay='__update'
 
