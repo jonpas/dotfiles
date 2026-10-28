@@ -33,6 +33,7 @@ alias fd='fd --hidden'
 alias bc='bc -lq'
 
 alias vim='nvim'
+alias lg='lazygit'
 alias ssh='TERM=vt100 ssh' # kitty terminfo is different, use vt100 for SSH for maximum compatibility
 alias kssh='kitten ssh'    # makes use of TERM=xterm-kitty and automatically copies terminfo files
 alias rsyncnoperm="rsync -azPZ"
@@ -47,6 +48,8 @@ alias vcam="sudo modprobe v4l2loopback exclusive_caps=1 card_label='OBS Virtual 
 alias vcamrm="sudo modprobe -r v4l2loopback"
 
 alias matlab='matlab -desktop -nosplash -useStartupFolderPref'
+
+export SSH_AUTH_SOCK=~/.bitwarden-ssh-agent.sock
 
 function set_win_title() {
     echo -ne "\033];$TERMINAL: $(pwd) \007"
