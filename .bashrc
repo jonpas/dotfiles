@@ -34,8 +34,8 @@ alias bc='bc -lq'
 
 alias vim='nvim'
 alias lg='lazygit'
-alias ssh='TERM=vt100 ssh' # kitty terminfo is different, use vt100 for SSH for maximum compatibility
-alias kssh='kitten ssh'    # makes use of TERM=xterm-kitty and automatically copies terminfo files
+alias sshc='TERM=vt100 \ssh' # kitty terminfo is different, use vt100 for SSH for maximum compatibility
+alias ssh='kitten ssh'       # makes use of TERM=xterm-kitty and automatically copies terminfo files
 alias rsyncnoperm="rsync -azPZ"
 
 alias cleandisk='yay -Sc && paccache -rk1 && sudo trash-empty --all-users'
