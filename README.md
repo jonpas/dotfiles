@@ -49,6 +49,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - gtk-4.0/*
     - i3* (~VFIO)
     - kitty*
+    - lazygit*
     - nvim*
     - networkmanager-dmenu*
     - rgb/profiles* (~/.config/OpenRGB/profiles)

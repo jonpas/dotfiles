@@ -1,0 +1,5 @@
+customCommands:
+  - command: "git push -o ci.skip"
+    context: 'global'
+    description: 'Push with ci.skip'
+    output: 'log'
