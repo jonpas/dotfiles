@@ -32,7 +32,11 @@ fi
 # Auto-start programs
 i3-sensible-terminal --title "Terminal: htop" htop &
 i3-sensible-terminal --title 'Terminal: VM' &
+dunst & # notifications
+lxpolkit & # PolicyKit authentication agent
+udiskie -s & # USB automounter
 kdeconnect-indicator &
+bitwarden-desktop &
 
 if [ $(hostname) = "loki" ]; then
     firefox &
