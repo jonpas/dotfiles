@@ -26,6 +26,8 @@ if [ $(hostname) = "odin" ]; then
     fi
 fi
 
+dbus-send /org/freedesktop/ScreenSaver org.freedesktop.ScreenSaver.ActiveChanged
+
 if [ $(hostname) = "odin" ]; then
     light-locker-command -l # LightDM-compatible locker (avoid double lock with LightDM+i3lock)
 else
