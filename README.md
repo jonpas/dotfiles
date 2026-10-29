@@ -51,7 +51,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - kitty*
     - nvim*
     - networkmanager-dmenu*
-    - rgb/*.orp (~/.config/OpenRGB)
+    - rgb/profiles* (~/.config/OpenRGB/profiles)
     - rofi*
     - starship.toml*
     - udiskie*
