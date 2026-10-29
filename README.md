@@ -68,7 +68,7 @@ _Using [vim-plug](https://github.com/junegunn/vim-plug) in `.vim/plugged`._
     - NetworkManager/dispatcher.d/*
     - X11/* (VFIO)
     - X11/xorg.conf.d/*
-    - bluetooth/*
+    - bluetooth/* (copied due to permissions)
     - bumblebee/* (GPU)
     - default/*(-hostname) (~VFIO)
     - dhcpcd/* (SRV)

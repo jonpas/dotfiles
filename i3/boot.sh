@@ -12,9 +12,6 @@ if [ $(hostname) = "loki" ]; then
 
     # Load OpenRGB profile
     ~/dotfiles/rgb/rgb.sh on
-else
-    # Power off Bluetooth
-    bluetoothctl power off
 fi
 
 # Lock on ACPI events (suspend / hibernate / screen blank)
