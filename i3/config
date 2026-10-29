@@ -325,6 +325,7 @@ for_window [title="Steam Guard" class="Steam"]          floating enable
 for_window [class="TeamSpeak 3"]                        floating enable
 for_window [class="Mumble"]                             floating enable
 for_window [class="KeePass"]                            floating enable
+for_window [class="(?i)bitwarden"]                      floating enable
 for_window [title="Figure*" class="(?i)matplotlib"]     floating enable
 for_window [class="(?i)zoom"]                           floating enable
 for_window [class="(?i)flameshot"]                      floating enable
