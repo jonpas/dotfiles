@@ -308,14 +308,7 @@ bindsym $mod+F1 exec i3-sensible-terminal qalc
 # Mount location
 bindsym $mod+F2 exec i3-sensible-terminal -d "/run/media/$USER"
 
-# Monitor
 exec --no-startup-id ~/.config/i3/boot.sh
-# Notifications
-exec --no-startup-id dunst
-# PolicyKit authentication agent
-exec --no-startup-id lxpolkit
-# USB automounter
-exec --no-startup-id udiskie -s
 
 # Window Settings
 for_window [window_role="About"]                        floating enable
