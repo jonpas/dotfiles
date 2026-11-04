@@ -1,6 +1,7 @@
 .vim/autoload/plug.vim*
 .vim/plugged
 .vim/spell
+nvim/lazy-lock.json
 yazi/package.toml
 yazi/plugins
 yazi/flavors
