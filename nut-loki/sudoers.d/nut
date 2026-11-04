@@ -1,3 +1,4 @@
 ## sudoers.d include file
 
-nut ALL=(jonpas) NOPASSWD:SETENV: /usr/bin/notify-send
+Defaults!/usr/bin/notify-send env_keep += "DBUS_SESSION_BUS_ADDRESS"
+nut ALL=(jonpas) NOPASSWD: /usr/bin/notify-send
