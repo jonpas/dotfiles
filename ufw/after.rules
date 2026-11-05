@@ -31,9 +31,10 @@ COMMIT
 
 
 # BEGIN UFW AND DOCKER
-# Allow forward data for bridge to work (eg. VM)
+# Allow forward data for VM bridge (docker breaks the KVM bridge)
 *filter
 :DOCKER-USER - [0:0]
--A DOCKER-USER -j ACCEPT
+-A ufw-after-forward -m physdev --physdev-is-bridged -i virbr0 -o virbr0 -j ACCEPT
+-A DOCKER-USER -j RETURN
 COMMIT
 # END UFW AND DOCKER
