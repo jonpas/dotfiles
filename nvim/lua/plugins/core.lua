@@ -1,6 +1,6 @@
 return {
-  -- add gruvbox
   { "ellisonleao/gruvbox.nvim" },
+  { "MeanderingProgrammer/render-markdown.nvim" },
 
   -- Configure LazyVim to load gruvbox
   {
